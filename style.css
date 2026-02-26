@@ -1,0 +1,667 @@
+/* ===========================
+   RESET + VARIABLES
+=========================== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+:root{
+  --bg1:#0b1f3a;
+  --bg2:#071427;
+  --text:#f8f4ea;
+  --sub:rgba(248,244,234,.7);
+  --glass:rgba(255,255,255,.05);
+  --border:#8c7a4f;
+  --gold:#ffd700;
+  --popup-bg:rgba(10,20,35,.88);
+}
+
+body.light{
+  --bg1:#eef2f7;
+  --bg2:#dbe4f2;
+  --text:#0a1a35;
+  --sub:rgba(10,26,53,.7);
+  --glass:rgba(255,255,255,.7);
+  --border:rgba(0,0,0,.1);
+  --gold:#c6a643;
+  --popup-bg:rgba(255,255,255,.92);
+}
+
+/* ===========================
+   BODY + LAYOUT
+=========================== */
+body{
+  height:100dvh;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow:hidden;
+  background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2) 70%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:background .4s ease;
+}
+
+.wrapper{
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  perspective:1400px;
+}
+
+/* ===========================
+   PHONE
+=========================== */
+.phone{
+  width:360px;
+  height:700px;
+  border-radius:42px;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  background:linear-gradient(var(--glass),rgba(255,255,255,.02));
+  backdrop-filter:blur(60px) saturate(180%);
+  border:1px solid var(--border);
+  box-shadow:0 35px 70px rgba(0,0,0,.6),
+             inset 0 0 .5px rgba(255,255,255,.2);
+  animation:float 6s ease-in-out infinite alternate;
+  transform-origin:center;
+  opacity:0;
+  position:relative;
+  overflow:hidden;
+}
+
+.phone::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:210px;
+  background:url("assets/fronttop.png") no-repeat center/cover;
+  border-radius:42px 42px 0 0;
+  opacity:.95;
+  pointer-events:none;
+}
+
+.phone::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:42px;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,215,0,.05),transparent 70%);
+  pointer-events:none;
+}
+
+.phone > *{
+  position:relative;
+  z-index:1;
+}
+
+.phone.loaded{
+  animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(.85);}
+  to{opacity:1; transform:scale(1);}
+}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-12px);}
+}
+
+/* ===========================
+   AVATAR + INFO
+=========================== */
+.avatar-wrap{
+  height:183px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  padding-bottom:8px;
+}
+
+.avatar{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 25px 50px rgba(0,0,0,.45);
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+.theme-toggle{
+  margin-top:-10px;
+  display:flex;
+  justify-content:center;
+  cursor:pointer;
+  color:#f8f4ea;
+}
+
+.name{
+  text-align:center;
+  color:var(--text);
+  font-size:20px;
+  font-weight:600;
+  margin-top:1px;
+}
+
+.title{
+  text-align:center;
+  color:var(--gold);
+  font-size:13px;
+  margin-top:4px;
+  text-shadow:0 0 6px rgba(255,215,0,.35);
+}
+
+.company{
+  text-align:center;
+  color:var(--text);
+  font-size:14px;
+  margin-top:6px;
+}
+
+.logo{
+  display:flex;
+  justify-content:center;
+  margin-top:8px;
+}
+
+.logo img{
+  width:48px;
+  filter:drop-shadow(0 0 8px rgba(255,215,0,.4));
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.buttons{
+  margin-top:auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.row{
+  display:flex;
+  gap:8px;
+}
+
+.btn{
+  flex:1;
+  padding:8px 12px;
+  border-radius:24px;
+  font-size:13px;
+  background:var(--glass);
+  backdrop-filter:blur(40px);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-weight:500;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:.25s ease;
+}
+
+.btn:hover{transform:translateY(-3px);}
+.btn:active{transform:scale(.96);}
+.btn i{color:var(--gold);margin-bottom:4px;}
+.subtext{font-size:11px;color:var(--sub);}
+
+/* ===========================
+   POPUP BASE
+=========================== */
+.popup{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:flex;
+  padding-top:20px;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  transition:.4s;
+  z-index:100;
+}
+
+.popup.active{
+  opacity:1;
+  visibility:visible;
+  display:flex;
+}
+
+.popup-content{
+  position:relative;
+  width:320px;
+  padding:20px 20px 20px;
+  justify-content:center;
+  border-radius:25px;
+  background:var(--popup-bg);
+  backdrop-filter:blur(70px) saturate(200%);
+  border:1px solid var(--border);
+  box-shadow:0 0 50px rgba(255,215,0,.25);
+  color:var(--text);
+  text-align:center;
+  overflow:visible;
+  transform:scale(.85);
+  transition:.4s;
+}
+
+/* Chỉ định riêng màu cho giá trị */
+.popup-content .value {
+  color:var(--gold);
+}
+
+/* Chỉ định riêng màu cho giá trị 
+.popup-content .label {
+  color:var(--text);
+}
+*/
+
+.popup-content h3 {
+  color:var(--text);
+  margin-top:20;
+  margin-bottom:0;
+}
+
+/* 🔥 QR POPUP CONFIG (local scope) */
+.qr-popup{
+  /* popup riêng cho QR */
+  width:320px;
+  padding:14px 16px 10px;
+
+  /* wheel scale theo popup */
+  --wheel-size: 90%;
+}
+
+.qr-popup h3 {
+  margin:20px 0px 6px;       /* trước thường 12–16px */
+  line-height: 1.2;
+  font-size: 16px;
+}
+
+.popup.active .popup-content{
+  transform:scale(1);
+}
+
+/* ===========================
+   WHEEL MASK
+=========================== */
+
+.qr-wheel-mask{
+  overflow:hidden;
+  border-radius:12px;
+  height: 105px;         /* giảm từ ~150–180px */
+  margin: 4px 0px 6px;     /* giảm trống trên & dưới */
+}
+
+/* ===========================
+   QR WHEEL CYLINDER
+=========================== */
+.qr-group-wheel{
+  display:flex;
+  align-items:flex-start;     /* ← căn giữa dọc đúng chỗ */
+  justify-content:center;
+  height:16px;            /* ↓ chiều cao thực */
+  perspective:1000px;
+}
+
+.qr-wheel{
+  position:relative;
+  width:var(--wheel-size);
+  height:30px;
+  transform-style:preserve-3d;
+}
+
+.qr-group{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:auto;
+  height:32px;
+  white-space: nowrap;
+  text-align:center;
+  font-size:14px;
+  transform-style:preserve-3d;
+  backface-visibility: visible; /* rất quan trọng */
+  /* 🔥 bán kính tự tính */
+  transform-origin:
+    center center
+    calc(-1 * var(--wheel-size) / 3);
+
+  opacity:.35;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),
+             opacity .4s,
+             color .4s;
+}
+
+.qr-group span{
+  display:block;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),
+             opacity .4s;
+}
+
+.qr-group.active{
+  position:relative;
+  color:var(--gold);
+  opacity:1;
+  font-weight:600;
+}
+
+.qr-group.back span{
+  padding-top:40;
+  transform:rotateY(180deg);
+  opacity:.8;
+}
+
+.qr-group.active::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-6px;
+  width:20px;
+  height:2px;
+  background:var(--gold);
+  transform:translateX(-50%);
+  border-radius:2px;
+}
+
+/* ===========================
+   QR CONTENT WRAPPER
+=========================== */
+.qr-content{
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:210px; /* tránh giật layout khi chuyển panel */
+}
+
+/* ===========================
+   QR CONTENT
+=========================== */
+.qr-panel{
+  display:none;
+  padding: 2px 0px;
+}
+.qr-panel.active{display:block;}
+
+/* ===========================
+   QR SLIDER (NEW STRUCTURE)
+=========================== */
+
+.qr-slider{
+  position:relative;
+  width:150px;
+  overflow:hidden;
+}
+
+.qr-track{
+  display:flex;
+  transition:transform .35s ease;
+  gap:14px; /* giữ khoảng cách cũ */
+}
+
+.qr-track img{
+  width:150px;
+  height:150px;
+  border-radius:12px;
+  flex-shrink:0;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.qr-track img:hover{
+  transform:scale(1.05);
+}
+
+/* ===========================
+   DYNAMIC QR BOX
+=========================== */
+#qrCode {
+  display: flex;
+  margin:4px;
+}
+
+#qrCode img {
+  width: 145px;
+  height: 145px;
+  border-radius: 12px;
+}
+
+/* ===========================
+   QR INDICATORS
+=========================== */
+
+.qr-indicators{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:8px;
+}
+
+.qr-indicators span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#999;
+  opacity:.4;
+  transition:.3s;
+}
+
+.qr-indicators span.active{
+  background:#fff;
+  opacity:1;
+  transform:scale(1.2);
+}
+
+/* ===========================
+   QR ZOOM
+=========================== */
+.qr-zoom{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  transition:.35s ease;
+  z-index:999;
+}
+
+.qr-zoom.active{
+  opacity:1;
+  visibility:visible;
+}
+
+.qr-zoom img{
+  width:275px;
+  height:275px;
+  transform:scale(.7);
+  transition:transform .35s cubic-bezier(.22,.61,.36,1);
+}
+
+.qr-zoom.active img{
+  transform:scale(1);
+}
+
+/* ===========================
+   ENTERPRISE POPUP EFFECTS
+=========================== */
+#enterprisePopup .popup-content::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:76%;
+  height:76%;
+  background:url("assets/logo.png") no-repeat center/contain;
+  opacity:.12;
+  filter:brightness(1.5) drop-shadow(0 0 40px rgba(255,215,0,.7));
+  animation:glowPulse 4s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+
+@keyframes glowPulse{
+  from{opacity:.1; transform:translate(-50%,-50%) scale(1);}
+  to{opacity:.18; transform:translate(-50%,-50%) scale(1.08);}
+}
+
+.enterprise-stamp{
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  width:70px;
+  height:70px;
+  background:url("assets/stamp.png") no-repeat center/contain;
+  opacity:.65;
+  filter:brightness(1.9) contrast(1.3) saturate(1.4)
+         drop-shadow(0 0 18px rgba(255,215,0,.6));
+  mix-blend-mode:screen;
+  pointer-events:none;
+  z-index:5;
+}
+
+body.light .enterprise-stamp{
+  mix-blend-mode:normal;
+  opacity:.85;
+  filter:brightness(1.4) contrast(1.2) saturate(1.2)
+         drop-shadow(0 0 10px rgba(198,166,67,.4));
+}
+
+/* ===========================
+   SESSION EXPIRED OVERLAY
+=========================== */
+.session-expired::before{
+  content:"Session expired\nPlease rescan QR or NFC card";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  white-space:pre-line;
+  font-size:16px;
+  padding:24px;
+  z-index:9999;
+}
+
+/* ===========================
+   UNLOCK OVERLAY
+=========================== */
+#unlockOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:10000;
+}
+
+.unlock-box{
+  background:#111;
+  border-radius:16px;
+  padding:24px;
+  width:260px;
+  text-align:center;
+  color:#fff;
+  box-shadow:0 0 40px rgba(255,215,0,.25);
+}
+
+.unlock-box h3{
+  margin-bottom:8px;
+}
+
+.unlock-box p{
+  font-size:13px;
+  opacity:.8;
+  margin-bottom:12px;
+}
+
+.unlock-box input{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  font-size:18px;
+  text-align:center;
+  letter-spacing:4px;
+  margin-bottom:12px;
+}
+
+.unlock-box button{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  background:gold;
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.unlock-error{
+  color:#ff6666;
+  font-size:12px;
+  margin-top:8px;
+}
+
+/* ===========================
+   PAGE CLOSED STATE
+=========================== */
+.page-closed{
+  position:fixed;
+  inset:0;
+  background:#000;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:24px;
+  z-index:10000;
+}
+
+.page-closed h3{
+  margin-bottom:8px;
+}
+
+.page-closed p{
+  font-size:14px;
+  opacity:.75;
+}
+
+/* ===========================
+   MISC
+=========================== */
+.close{
+  margin-top:15px;
+  cursor:pointer;
+  opacity:.7;
+}
+.close:hover{opacity:1;}
