@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Chris Pham - Digital Card</title>
+
+  <!-- PWA / THEME -->
+  <meta name="theme-color" content="#0b1f3a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- FONTS & ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ===========================
+       APP WRAPPER
+  ============================ -->
+  <div class="wrapper">
+
+    <!-- ===========================
+         PHONE CARD
+    ============================ -->
+    <div class="phone" id="phone">
+
+      <!-- AVATAR -->
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <img src="assets/CCOPham/avatar.png" alt="Chris Pham">
+        </div>
+      </div>
+
+      <!-- THEME TOGGLE -->
+      <div class="theme-toggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+      </div>
+
+      <!-- BASIC INFO -->
+      <div class="name">CHRIS PHAM</div>
+      <div class="title">Chief Commercial Officer</div>
+      <div class="company">BLH Joint Stock Company</div>
+
+      <!-- LOGO -->
+      <div class="logo">
+        <img src="assets/logo.png" alt="BLH Logo">
+      </div>
+
+      <!-- ===========================
+           ACTION BUTTONS
+      ============================ -->
+      <div class="buttons">
+
+        <!-- CALL / SAVE -->
+        <div class="row">
+          <a href="tel:0909554558" class="btn">
+            <div class="btn-main">
+              <i class="fa-solid fa-phone"></i>
+              <span>Call</span>
+            </div>
+            <div class="subtext">0909554558</div>
+          </a>
+
+          <div class="btn" onclick="downloadVCF()">
+            <div class="btn-main">
+              <i class="fa-solid fa-address-card"></i>
+              <span>Save Contact</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHAT -->
+        <div class="btn" id="btn-chat">
+          <div class="btn-main">
+            <i class="fa-brands fa-facebook-messenger"></i>
+            <span>Chat</span>
+          </div>
+          <div class="subtext">Telegram • WhatsApp • Zalo</div>
+        </div>
+
+        <!-- QR -->
+        <div class="btn" id="btn-qrcode">
+          <div class="btn-main">
+           <i class="fa-solid fa-qrcode"></i>
+           <span>QR Code</span>
+         </div>
+         <div class="subtext">My namecard • My bank • BLH bank</div>
+        </div>
+
+        <!-- ENTERPRISE -->
+        <div class="btn" id="btn-enterprise">
+          <div class="btn-main">
+            <i class="fa-solid fa-building"></i>
+            <span>Enterprise Code / Tax Code</span>
+          </div>
+        </div>
+
+        <!-- WEBSITE / ACHIEVEMENT -->
+        <div class="row">
+          <div class="btn" onclick="openWebsite()">
+            <div class="btn-main">
+              <i class="fa-solid fa-globe"></i>
+              <span>Website</span>
+            </div>
+          </div>
+
+          <div class="btn" onclick="openAchievement()">
+            <div class="btn-main">
+              <i class="fa-solid fa-certificate"></i>
+              <span>Achievement</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /buttons -->
+
+      <!-- ===========================
+           QR POPUP (MOVE INSIDE PHONE)
+      ============================ -->
+      <div class="popup" id="qrPopup">
+        <div class="popup-content qr-popup">
+          <h3>QR CODE<br>swipe - choose - scan</h3>
+
+          <div class="qr-wheel-mask">
+            <div class="qr-group-wheel">
+              <div class="qr-wheel">
+                <div class="qr-group"><span>Namecard</span></div>
+                <div class="qr-group"><span>Personal bank</span></div>
+                <div class="qr-group"><span>BLH payment</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qr-content">
+
+            <div class="qr-panel active">
+              <div id="qrCode"></div>
+            </div>
+
+            <div class="qr-panel">
+              <div class="qr-slider" data-group="personal" data-max="5">
+                <div class="qr-track"></div>
+                <div class="qr-indicators"></div>
+              </div>
+            </div>
+
+            <div class="qr-panel">
+              <div class="qr-slider" data-group="blh" data-max="3">
+                <div class="qr-track"></div>
+                <div class="qr-indicators"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="close">Close</div>
+
+          <div class="qr-zoom" id="qrZoom">
+            <img id="qrZoomImg" alt="QR Zoom">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===========================
+           ENTERPRISE POPUP (MOVE INSIDE PHONE)
+      ============================ -->
+      <div class="popup" id="enterprisePopup">
+        <div class="popup-content">
+
+          <div class="enterprise-stamp"></div>
+
+          <h3>Business Information</h3>
+
+          <p class="company-name">
+            <span class="value">BLH Joint Stock Company</span>
+          </p>
+
+          <p>
+            <span class="label">Enterprise Code / Tax Code:</span>
+            <span class="value">0318787124</span>
+          </p>
+
+          <p>
+            <span class="label">Head Office / Address:</span><br>
+            <span class="value">
+              2224A Đỗ Mười, Trung Mỹ Tây, HCMC, Vietnam
+            </span>
+          </p>
+
+          <p>
+            <span class="label">Representative / CEO:</span>
+            <span class="value">Nguyễn Trung Hiếu</span>
+          </p>
+
+          <div class="close">Close</div>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- /phone -->
+
+  </div>
+  <!-- /wrapper -->
+
+<!-- OVERLAY (BẮT BUỘC CHO POPUP MANAGER) -->
+  <div class="overlay"></div>
+  
+
+<!-- MAIN JS -->
+  <script src="script.js"></script>
+  <script src="qrgenerate.js"></script>
+
+</body>
+</html>
