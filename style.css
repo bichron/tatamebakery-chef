@@ -231,6 +231,33 @@ body{
 .subtext{font-size:11px;color:var(--sub);}
 
 /* ===========================
+   GLOBAL POPUP SYSTEM
+=========================== */
+
+.popup-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:all .35s ease;
+  z-index:9999;
+}
+
+.popup-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.popup-lock{
+  overflow:hidden;
+}
+
+/* ===========================
    POPUP BASE
 =========================== */
 .popup{
