@@ -181,14 +181,13 @@ body{
   margin-top:6px;
 }
 
-.logo{
+.subtitle{
+  text-align:center;
+  color:var(--gold);
+  font-size:13px;
   display:flex;
   justify-content:center;
   margin-top:8px;
-}
-
-.logo img{
-  width:48px;
   filter:drop-shadow(0 0 8px rgba(255,215,0,.4));
 }
 
