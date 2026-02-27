@@ -444,6 +444,10 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
   openPopup('enterprisePopup');
 });
 
+document.getElementById('btn-achievement')?.addEventListener('click', () => {
+    openPopup('achievementPopup');
+});
+
 document.getElementById('btn-qrcode')?.addEventListener('click', () => {
 
   currentIndex = 0;
