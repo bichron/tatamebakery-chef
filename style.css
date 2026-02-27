@@ -131,8 +131,8 @@ body{
 }
 
 .avatar{
-  width:144px;
-  height:144px;
+  width:104px;
+  height:104px;
   border-radius:50%;
   overflow:hidden;
   background:rgba(255,255,255,.08);
