@@ -3,6 +3,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 const phone = document.getElementById("phone");
 const qrPopup = document.getElementById("qrPopup");
 const enterprisePopup = document.getElementById("enterprisePopup");
+const achievementPopup = document.getElementById("achievementPopup");
 const qrState = new Map();
 
 const VIEWER_UNLOCK_CODE = "881909"; // 🔐 code 6 số để unclock nhanh không scan lại
