@@ -504,8 +504,6 @@ window.openQR = () => {
 
 
 window.openWebsite = () => window.open("https://blh.vn","_blank");
-window.openAchievement = () =>
-  window.open("https://blh.vn/profile","_blank");
 
 window.downloadVCF = ()=>{
   const vcf=`BEGIN:VCARD
