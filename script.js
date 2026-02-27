@@ -56,6 +56,50 @@ if(params.has("nfc")){
 }
 
 /* ===========================
+   POPUP MANAGER – GLOBAL
+=========================== */
+
+const PopupManager = {
+  current: null,
+  lockClass: 'popup-lock',
+
+  open(id){
+    if(this.current === id) return;
+
+    this.closeAll();
+
+    const el = document.getElementById(id);
+    if(!el) return;
+
+    el.classList.add('active');
+    document.body.classList.add(this.lockClass);
+
+    this.current = id;
+  },
+
+  close(){
+    if(!this.current) return;
+
+    const el = document.getElementById(this.current);
+    if(el){
+      el.classList.remove('active');
+    }
+
+    document.body.classList.remove(this.lockClass);
+    this.current = null;
+  },
+
+  closeAll(){
+    document.querySelectorAll('.popup-overlay').forEach(p=>{
+      p.classList.remove('active');
+    });
+
+    document.body.classList.remove(this.lockClass);
+    this.current = null;
+  }
+};
+
+/* ===========================
    QR WHEEL CYLINDER
 =========================== */
 const groups = document.querySelectorAll(".qr-group");
