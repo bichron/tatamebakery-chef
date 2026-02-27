@@ -59,7 +59,7 @@ if(params.has("nfc")){
 /* ===========================
    POPUP MANAGER – GLOBAL
 =========================== */
-
+/*
 const PopupManager = {
   current: null,
   lockClass: 'popup-lock',
@@ -99,7 +99,7 @@ const PopupManager = {
     this.current = null;
   }
 };
-
+*/
 /* ===========================
    QR WHEEL CYLINDER
 =========================== */
