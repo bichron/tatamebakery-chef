@@ -139,93 +139,6 @@ if (groups.length && panels.length) {
   updateWheel();
 }
 
-
-/* ===========================
-   ACHIEVEMENT WHEEL
-=========================== */
-
-const achGroups = document.querySelectorAll(".ach-group");
-const achTotal = achGroups.length;
-const achAngleStep = achTotal ? 360 / achTotal : 0;
-let achIndex = 0;
-
-function updateAchWheel(){
-  achGroups.forEach((g,i)=>{
-    const angle = (i - achIndex) * achAngleStep;
-
-    g.style.transform = `
-      translate(-50%, -50%)
-      rotateY(${angle}deg)
-      translateZ(80px)
-    `;
-
-    g.classList.toggle("active", i === achIndex);
-  });
-}
-
-if(achTotal){
-  updateAchWheel();
-}
-
-
-let achStartX = 0;
-const achWheelWrap = document.querySelector(".ach-group-wheel");
-
-if(achWheelWrap){
-  achWheelWrap.addEventListener("touchstart", e=>{
-    achStartX = e.touches[0].clientX;
-  },{passive:true});
-
-  achWheelWrap.addEventListener("touchend", e=>{
-    const diff = e.changedTouches[0].clientX - achStartX;
-    if(Math.abs(diff) < 30) return;
-
-    achIndex =
-      diff < 0
-        ? (achIndex + 1) % achTotal
-        : (achIndex - 1 + achTotal) % achTotal;
-
-    updateAchWheel();
-  });
-}
-
-const achievementData = [
-  {
-    title:"Certificates",
-    img:"assets/achievement/cert.jpg",
-    link:"https://example.com/cert"
-  },
-  {
-    title:"Media",
-    img:"assets/achievement/media.jpg",
-    link:"https://example.com/media"
-  },
-  {
-    title:"Library",
-    img:"assets/achievement/library.jpg",
-    link:"https://example.com/library"
-  },
-  {
-    title:"Awards",
-    img:"assets/achievement/award.jpg",
-    link:"https://example.com/award"
-  }
-];
-
-achGroups.forEach((g,i)=>{
-  g.addEventListener("click",()=>{
-
-    const data = achievementData[i];
-    if(!data) return;
-
-    document.getElementById("achDetailTitle").textContent = data.title;
-    document.getElementById("achDetailImg").src = data.img;
-    document.getElementById("achDetailLink").href = data.link;
-
-    openPopup("achievementDetailPopup");
-  });
-});
-
 /* ===========================
    WHEEL INTERACTION
 =========================== */
@@ -498,6 +411,106 @@ function closeLandingpage(){
   `;
 }
 
+
+/* ===========================
+   ACHIEVEMENT WHEEL (INIT ON OPEN)
+=========================== */
+
+let achIndex = 0;
+
+function initAchievementWheel(){
+
+  const popup = document.getElementById("achievementPopup");
+  if(!popup) return;
+
+  const groups = popup.querySelectorAll(".ach-group");
+  const total = groups.length;
+  if(!total) return;
+
+  const angleStep = 360 / total;
+
+  function update(){
+    groups.forEach((g,i)=>{
+      const angle = (i - achIndex) * angleStep;
+
+      g.style.transform = `
+        translate(-50%, -50%)
+        rotateY(${angle}deg)
+        translateZ(80px)
+      `;
+
+      g.classList.toggle("active", i === achIndex);
+    });
+  }
+
+  update();
+
+  let startX = 0;
+  const wrap = popup.querySelector(".ach-group-wheel");
+
+  wrap?.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
+  },{passive:true});
+
+  wrap?.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - startX;
+    if(Math.abs(diff) < 30) return;
+
+    achIndex =
+      diff < 0
+        ? (achIndex + 1) % total
+        : (achIndex - 1 + total) % total;
+
+    update();
+  });
+
+  groups.forEach((g,i)=>{
+    g.addEventListener("click",()=>{
+      achIndex = i;
+      update();
+    });
+  });
+}
+
+/* == */
+
+const achievementData = [
+  {
+    title:"Certificates",
+    img:"assets/achievement/cert.jpg",
+    link:"https://example.com/cert"
+  },
+  {
+    title:"Media",
+    img:"assets/achievement/media.jpg",
+    link:"https://example.com/media"
+  },
+  {
+    title:"Library",
+    img:"assets/achievement/library.jpg",
+    link:"https://example.com/library"
+  },
+  {
+    title:"Awards",
+    img:"assets/achievement/award.jpg",
+    link:"https://example.com/award"
+  }
+];
+
+achGroups.forEach((g,i)=>{
+  g.addEventListener("click",()=>{
+
+    const data = achievementData[i];
+    if(!data) return;
+
+    document.getElementById("achDetailTitle").textContent = data.title;
+    document.getElementById("achDetailImg").src = data.img;
+    document.getElementById("achDetailLink").href = data.link;
+
+    openPopup("achievementDetailPopup");
+  });
+});
+
 // === POPUP STATE MANAGER ===
 let activePopup = null;
 
@@ -534,6 +547,8 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
 
 document.getElementById('btn-achievement')?.addEventListener('click', () => {
     openPopup('achievementPopup');
+    // ⬇ delay để popup render trước
+    setTimeout(initAchievementWheel, 60);
 });
 
 document.getElementById('btn-qrcode')?.addEventListener('click', () => {
