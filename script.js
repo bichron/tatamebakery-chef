@@ -139,6 +139,93 @@ if (groups.length && panels.length) {
   updateWheel();
 }
 
+
+/* ===========================
+   ACHIEVEMENT WHEEL
+=========================== */
+
+const achGroups = document.querySelectorAll(".ach-group");
+const achTotal = achGroups.length;
+const achAngleStep = achTotal ? 360 / achTotal : 0;
+let achIndex = 0;
+
+function updateAchWheel(){
+  achGroups.forEach((g,i)=>{
+    const angle = (i - achIndex) * achAngleStep;
+
+    g.style.transform = `
+      translate(-50%, -50%)
+      rotateY(${angle}deg)
+      translateZ(80px)
+    `;
+
+    g.classList.toggle("active", i === achIndex);
+  });
+}
+
+if(achTotal){
+  updateAchWheel();
+}
+
+
+let achStartX = 0;
+const achWheelWrap = document.querySelector(".ach-group-wheel");
+
+if(achWheelWrap){
+  achWheelWrap.addEventListener("touchstart", e=>{
+    achStartX = e.touches[0].clientX;
+  },{passive:true});
+
+  achWheelWrap.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - achStartX;
+    if(Math.abs(diff) < 30) return;
+
+    achIndex =
+      diff < 0
+        ? (achIndex + 1) % achTotal
+        : (achIndex - 1 + achTotal) % achTotal;
+
+    updateAchWheel();
+  });
+}
+
+const achievementData = [
+  {
+    title:"Certificates",
+    img:"assets/achievement/cert.jpg",
+    link:"https://example.com/cert"
+  },
+  {
+    title:"Media",
+    img:"assets/achievement/media.jpg",
+    link:"https://example.com/media"
+  },
+  {
+    title:"Library",
+    img:"assets/achievement/library.jpg",
+    link:"https://example.com/library"
+  },
+  {
+    title:"Awards",
+    img:"assets/achievement/award.jpg",
+    link:"https://example.com/award"
+  }
+];
+
+achGroups.forEach((g,i)=>{
+  g.addEventListener("click",()=>{
+
+    const data = achievementData[i];
+    if(!data) return;
+
+    document.getElementById("achDetailTitle").textContent = data.title;
+    document.getElementById("achDetailImg").src = data.img;
+    document.getElementById("achDetailLink").href = data.link;
+
+    openPopup("achievementDetailPopup");
+  });
+});
+
 /* ===========================
    WHEEL INTERACTION
 =========================== */
