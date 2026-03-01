@@ -590,6 +590,50 @@ body.light .enterprise-stamp{
 }
 
 /* ===========================
+   ACHIEVEMENT WHEEL
+=========================== */
+
+.ach-wheel-mask{
+  overflow:hidden;
+  border-radius:12px;
+  height:100px;
+  margin:10px 0;
+}
+
+.ach-group-wheel{
+  display:flex;
+  justify-content:center;
+  perspective:1000px;
+  height:20px;
+}
+
+.ach-wheel{
+  position:relative;
+  width:90%;
+  height:30px;
+  transform-style:preserve-3d;
+}
+
+.ach-group{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform-origin:center center -80px;
+  transform-style:preserve-3d;
+  transition:transform .6s ease, opacity .4s;
+  font-size:14px;
+  opacity:.35;
+  color:var(--text);
+}
+
+.ach-group.active{
+  opacity:1;
+  color:var(--gold);
+  font-weight:600;
+}
+
+
+/* ===========================
    SESSION EXPIRED OVERLAY
 =========================== */
 .session-expired::before{
