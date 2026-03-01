@@ -323,7 +323,17 @@ function updateProductView(){
   });
 }
 
+currentGroupIndex++;
+if(currentGroupIndex >= achievementGroups.length){
+  currentGroupIndex = 0;
+}
+updateAchievementWheel();
 
+function openAchievement(){
+  currentGroupIndex = 0;
+  initAchievementWheel();
+  updateProductView();
+}
 
 
 /* ===========================
