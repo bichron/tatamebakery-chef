@@ -57,50 +57,6 @@ if(params.has("nfc")){
 }
 
 /* ===========================
-   POPUP MANAGER – GLOBAL
-=========================== */
-/*
-const PopupManager = {
-  current: null,
-  lockClass: 'popup-lock',
-
-  open(id){
-    if(this.current === id) return;
-
-    this.closeAll();
-
-    const el = document.getElementById(id);
-    if(!el) return;
-
-    el.classList.add('active');
-    document.body.classList.add(this.lockClass);
-
-    this.current = id;
-  },
-
-  close(){
-    if(!this.current) return;
-
-    const el = document.getElementById(this.current);
-    if(el){
-      el.classList.remove('active');
-    }
-
-    document.body.classList.remove(this.lockClass);
-    this.current = null;
-  },
-
-  closeAll(){
-    document.querySelectorAll('.popup-overlay').forEach(p=>{
-      p.classList.remove('active');
-    });
-
-    document.body.classList.remove(this.lockClass);
-    this.current = null;
-  }
-};
-*/
-/* ===========================
    QR WHEEL CYLINDER
 =========================== */
 const groups = document.querySelectorAll(".qr-group");
@@ -283,6 +239,92 @@ function updateQR(slider){
   dots.forEach(d => d.classList.remove("active"));
   if(dots[index]) dots[index].classList.add("active");
 }
+
+/* ===========================
+   ACHIEVEMENT BUILD 20:10 SUN 1 MAR
+=========================== */
+
+const achievementGroups = [
+  {
+    name:"Bread",
+    products:[
+      "img/bread1.jpg",
+      "img/bread2.jpg"
+    ]
+  },
+  {
+    name:"Cake",
+    products:[
+      "img/cake1.jpg",
+      "img/cake2.jpg"
+    ]
+  },
+  {
+    name:"Drink",
+    products:[
+      "img/drink1.jpg"
+    ]
+  }
+];
+
+const wheel = document.getElementById("achievementWheel");
+let currentGroupIndex = 0;
+
+function initAchievementWheel(){
+  const total = achievementGroups.length;
+  const angleStep = 360 / total;
+
+  wheel.innerHTML = "";
+
+  achievementGroups.forEach((group,i)=>{
+    const div = document.createElement("div");
+    div.className = "wheel-item";
+    div.innerText = group.name;
+
+    const angle = i * angleStep;
+    div.style.transform = `
+      rotateY(${angle}deg)
+      translateZ(var(--wheel-size))
+    `;
+
+    wheel.appendChild(div);
+  });
+
+  updateAchievementWheel();
+}
+
+function updateAchievementWheel(){
+  const angleStep = 360 / achievementGroups.length;
+  const rotate = currentGroupIndex * -angleStep;
+
+  wheel.style.transform = `rotateY(${rotate}deg)`;
+
+  updateProductView();
+}
+
+function updateProductView(){
+  const slider = document.getElementById("productSlider");
+  const indicators = document.getElementById("productIndicators");
+
+  slider.innerHTML="";
+  indicators.innerHTML="";
+
+  const products = achievementGroups[currentGroupIndex].products;
+
+  products.forEach((src,i)=>{
+    const img = document.createElement("img");
+    img.src = src;
+    slider.appendChild(img);
+
+    const dot = document.createElement("div");
+    dot.className="indicator";
+    if(i===0) dot.classList.add("active");
+    indicators.appendChild(dot);
+  });
+}
+
+
+
 
 /* ===========================
    QR ZOOM
