@@ -1,90 +1,63 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-
-  <!-- =====================================================
-       1. META + PWA CONFIG
-  ====================================================== -->
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Tatame - Digital Card</title>
 
+  <!-- PWA / THEME -->
   <meta name="theme-color" content="#0b1f3a">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="assets/logo.png">
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
-        rel="stylesheet">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- FONTS & ICONS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Main CSS -->
+  <!-- MAIN CSS -->
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<!-- =====================================================
-     2. APP ROOT
-====================================================== -->
-<div class="app">
-
-  <!-- =====================================================
-       3. VIEWPORT WRAPPER (3D CONTEXT)
-  ====================================================== -->
+  <!-- ===========================
+       APP WRAPPER
+  ============================ -->
   <div class="wrapper">
 
-    <!-- =====================================================
-         4. PHONE CARD (CORE COMPONENT)
-    ====================================================== -->
-    <main class="phone" id="phone">
+    <!-- ===========================
+         PHONE CARD
+    ============================ -->
+    <div class="phone" id="phone">
 
-      <!-- =============================
-           PROFILE MODULE
-      ============================== -->
-      <section class="profile">
-
-        <div class="avatar-wrap">
-          <div class="avatar">
-            <img src="assets/avatar.png" alt="Phuong Pham">
-          </div>
+      <!-- AVATAR -->
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <img src="assets/avatar.png" alt="Phuong Pham">
         </div>
+      </div>
 
-        <button class="theme-toggle"
-                id="btn-theme"
-                aria-label="Toggle theme">
-          <i class="fa-solid fa-circle-half-stroke"></i>
-        </button>
+      <!-- THEME TOGGLE -->
+      <div class="theme-toggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+      </div>
 
-        <h1 class="name">NAM PHƯƠNG</h1>
-        <h2 class="title">Founder & Executive Chef</h2>
-
-        <div class="company">
-          A FAMILY-RUN ARTISAN<br>
-          Tiệm bánh thủ công do gia đình vận hành
-        </div>
-
-        <div class="subtitle">SINCE 2019</div>
-
-      </section>
-      <!-- /profile -->
+      <!-- BASIC INFO -->
+      <div class="name">NAM PHƯƠNG</div>
+      <div class="title">Founder & Executive Chef</div>
+      <div class="company">A FAMILY-RUN ARTISAN<br>Tiệm bánh thủ công do gia đình vận hành</div>
+      <div class="subtitle">SINCE 2019</div>
 
 
-      <!-- =============================
-           ACTION MODULE
-      ============================== -->
-      <section class="actions">
+      <!-- ===========================
+           ACTION BUTTONS
+      ============================ -->
+      <div class="buttons">
 
         <!-- CALL / SAVE -->
         <div class="row">
-          <a href="tel:0937771981"
-             class="btn"
-             data-action="call">
+          <a href="tel:0937771981" class="btn">
             <div class="btn-main">
               <i class="fa-solid fa-phone"></i>
               <span>Call</span>
@@ -92,133 +65,92 @@
             <div class="subtext">0937771981</div>
           </a>
 
-          <button class="btn"
-                  data-action="save-contact">
+          <div class="btn" onclick="downloadVCF()">
             <div class="btn-main">
               <i class="fa-solid fa-address-card"></i>
               <span>Save Contact</span>
             </div>
-          </button>
+          </div>
         </div>
 
         <!-- CHAT -->
-        <button class="btn"
-                data-action="chat">
+        <div class="btn" id="btn-chat">
           <div class="btn-main">
             <i class="fa-brands fa-facebook-messenger"></i>
             <span>Chat</span>
           </div>
-          <div class="subtext">
-            Zalo • Viber • WhatsApp • Telegram
-          </div>
-        </button>
+          <div class="subtext">Zalo • Viber • WhatsApp • Telegram</div>
+        </div>
 
         <!-- QR -->
-        <button class="btn"
-                data-popup="qrPopup">
+        <div class="btn" id="btn-qrcode">
           <div class="btn-main">
-            <i class="fa-solid fa-qrcode"></i>
-            <span>QR Code</span>
-          </div>
-          <div class="subtext">
-            My namecard • Pay me • My bank
-          </div>
-        </button>
+           <i class="fa-solid fa-qrcode"></i>
+           <span>QR Code</span>
+         </div>
+         <div class="subtext">My namecard • Pay me • My bank</div>
+        </div>
 
         <!-- ENTERPRISE -->
-        <button class="btn"
-                data-popup="enterprisePopup">
+        <div class="btn" id="btn-enterprise">
           <div class="btn-main">
             <i class="fa-solid fa-building"></i>
             <span>Enterprise Code / Tax Code</span>
           </div>
-        </button>
+        </div>
 
         <!-- WEBSITE / ACHIEVEMENT -->
         <div class="row">
-          <button class="btn"
-                  data-action="website">
+          <div class="btn" onclick="openWebsite()">
             <div class="btn-main">
               <i class="fa-solid fa-globe"></i>
               <span>Website</span>
             </div>
-          </button>
+          </div>
 
-          <button class="btn"
-                  data-popup="achievementPopup">
+          <div class="btn" id="btn-achievement">
             <div class="btn-main">
               <i class="fa-solid fa-certificate"></i>
               <span>Achievement</span>
             </div>
-          </button>
+          </div>
         </div>
 
-      </section>
-      <!-- /actions -->
+      </div>
+      <!-- /buttons -->
 
-
-      <!-- =====================================================
-           5. POPUP SYSTEM (INSIDE PHONE SCOPE)
-      ====================================================== -->
-
-      <!-- QR POPUP -->
-      <section class="popup"
-               id="qrPopup"
-               data-popup-root>
-
+      <!-- ===========================
+           QR POPUP (MOVE INSIDE PHONE)
+      ============================ -->
+      <div class="popup" id="qrPopup">
         <div class="popup-content qr-popup">
+          <h3>QR CODE<br>swipe - choose - scan</h3>
 
-          <header>
-            <h3>QR CODE<br>swipe - choose - scan</h3>
-          </header>
-
-          <!-- WHEEL -->
           <div class="qr-wheel-mask">
             <div class="qr-group-wheel">
               <div class="qr-wheel">
-
-                <div class="qr-group active">
-                  <span>Namecard</span>
-                </div>
-
-                <div class="qr-group">
-                  <span>Personal bank</span>
-                </div>
-
-                <div class="qr-group">
-                  <span>BLH payment</span>
-                </div>
-
+                <div class="qr-group"><span>Namecard</span></div>
+                <div class="qr-group"><span>Personal bank</span></div>
+                <div class="qr-group"><span>BLH payment</span></div>
               </div>
             </div>
           </div>
 
-          <!-- PANELS -->
           <div class="qr-content">
 
-            <!-- Dynamic QR -->
-            <div class="qr-panel active"
-                 data-panel="namecard">
+            <div class="qr-panel active">
               <div id="qrCode"></div>
             </div>
 
-            <!-- Personal -->
-            <div class="qr-panel"
-                 data-panel="personal">
-              <div class="qr-slider"
-                   data-group="personal"
-                   data-max="5">
+            <div class="qr-panel">
+              <div class="qr-slider" data-group="personal" data-max="5">
                 <div class="qr-track"></div>
                 <div class="qr-indicators"></div>
               </div>
             </div>
 
-            <!-- BLH -->
-            <div class="qr-panel"
-                 data-panel="blh">
-              <div class="qr-slider"
-                   data-group="blh"
-                   data-max="3">
+            <div class="qr-panel">
+              <div class="qr-slider" data-group="blh" data-max="3">
                 <div class="qr-track"></div>
                 <div class="qr-indicators"></div>
               </div>
@@ -226,108 +158,71 @@
 
           </div>
 
-          <button class="close"
-                  data-close>
-            Close
-          </button>
+          <div class="close">Close</div>
 
-          <!-- ZOOM -->
-          <div class="qr-zoom"
-               id="qrZoom">
-            <img id="qrZoomImg"
-                 alt="QR Zoom">
+          <div class="qr-zoom" id="qrZoom">
+            <img id="qrZoomImg" alt="QR Zoom">
           </div>
 
         </div>
-      </section>
+      </div>
 
-
-      <!-- ACHIEVEMENT POPUP -->
-      <section class="popup"
-               id="achievementPopup"
-               data-popup-root>
+      <!-- ===========================
+           ACHIEVEMENT POPUP (MOVE INSIDE PHONE)
+      ============================ -->
+      <div class="popup" id="achievementPopup">
         <div class="popup-content">
           <h3>ACHIEVEMENT & LIBRARY</h3>
-          <button class="close" data-close>Close</button>
         </div>
-      </section>
+      </div>
 
-
-      <!-- ENTERPRISE POPUP -->
-      <section class="popup"
-               id="enterprisePopup"
-               data-popup-root>
-
+      <!-- ===========================
+           ENTERPRISE POPUP (MOVE INSIDE PHONE)
+      ============================ -->
+      <div class="popup" id="enterprisePopup">
         <div class="popup-content">
 
           <h3>Business Information</h3>
 
           <p class="company-name">
+            <span class="value">BLH Joint Stock Company</span>
+          </p>
+
+          <p>
+            <span class="label">Enterprise Code / Tax Code:</span>
+            <span class="value">0318787124</span>
+          </p>
+
+          <p>
+            <span class="label">Head Office / Address:</span><br>
             <span class="value">
-              BLH Joint Stock Company
+              2224A Đỗ Mười, Trung Mỹ Tây, HCMC, Vietnam
             </span>
           </p>
 
           <p>
-            <span class="label">
-              Enterprise Code / Tax Code:
-            </span>
-            <span class="value">
-              0318787124
-            </span>
+            <span class="label">Representative / CEO:</span>
+            <span class="value">Nguyễn Trung Hiếu</span>
           </p>
-
-          <p>
-            <span class="label">
-              Head Office / Address:
-            </span><br>
-            <span class="value">
-              2224A Đỗ Mười,
-              Trung Mỹ Tây,
-              HCMC, Vietnam
-            </span>
-          </p>
-
-          <p>
-            <span class="label">
-              Representative / CEO:
-            </span>
-            <span class="value">
-              Nguyễn Trung Hiếu
-            </span>
-          </p>
-
           <div class="enterprise-stamp"></div>
-
-          <button class="close"
-                  data-close>
-            Close
-          </button>
+          <div class="close">Close</div>
 
         </div>
-      </section>
+      </div>
 
-    </main>
+    </div>
     <!-- /phone -->
 
   </div>
   <!-- /wrapper -->
 
-</div>
-<!-- /app -->
+<!-- OVERLAY (BẮT BUỘC CHO POPUP MANAGER) -->
+  <div class="overlay"></div>
+  
 
-
-<!-- =====================================================
-     6. GLOBAL OVERLAY (Popup Manager Required)
-====================================================== -->
-<div class="popup-overlay" id="globalOverlay"></div>
-
-
-<!-- =====================================================
-     7. SCRIPTS
-====================================================== -->
-<script src="script.js"></script>
-<script src="qrgenerate.js"></script>
+<!-- MAIN JS -->
+  <script src="script.js"></script>
+  <script src="qrgenerate.js"></script>
 
 </body>
 </html>
