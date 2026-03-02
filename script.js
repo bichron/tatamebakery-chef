@@ -13,7 +13,8 @@ const VIEWER_UNLOCK_CODE = "881909"; // 🔐 code 6 số để unclock nhanh kh�
 =========================== */
 function scaleCard(){
   const scale = Math.min(innerWidth/360, innerHeight/700);
-  phone.style.transform = `scale(${scale})`;
+/*  phone.style.transform = `scale(${scale})`;*/
+  phone.style.transform = `scale(${scale}) rotateX(${-y}deg) rotateY(${x}deg)`;
 }
 scaleCard();
 phone.classList.add("loaded");
@@ -306,6 +307,11 @@ function updateAchievementWheel(){
   const rotate = currentGroupIndex * -angleStep;
 
   wheel.style.transform = `rotateY(${rotate}deg)`;
+  const items = wheel.querySelectorAll(".wheel-item");
+
+  items.forEach((item,i)=>{
+    item.classList.toggle("active", i === currentGroupIndex);
+  });
 
   updateProductView();
 }
@@ -338,33 +344,6 @@ function openAchievement(){
   currentGroupIndex = 0;
   initAchievementWheel();
   updateProductView();
-}
-
-function bindAchievementSwipe(){
-
-  const wrap = document.querySelector("#achievementPopup .wheel-mask");
-  if(!wrap) return;
-
-  if(wrap.dataset.swipeBound) return;   // 🔒 tránh bind nhiều lần
-  wrap.dataset.swipeBound = "1";
-
-  let startX = 0;
-
-  wrap.addEventListener("touchstart", e=>{
-    startX = e.touches[0].clientX;
-  }, { passive:true });
-
-  wrap.addEventListener("touchend", e=>{
-    const diff = e.changedTouches[0].clientX - startX;
-    if(Math.abs(diff) < 30) return;
-
-    currentGroupIndex =
-      diff < 0
-        ? (currentGroupIndex + 1) % achievementGroups.length
-        : (currentGroupIndex - 1 + achievementGroups.length) % achievementGroups.length;
-
-    updateAchievementWheel();
-  });
 }
 
 function bindAchievementSwipe(){
