@@ -294,10 +294,14 @@ function initAchievementWheel(){
     wheel.appendChild(div);
   });
 
+  bindAchievementSwipe();   // 🔥 bind tại đây
   updateAchievementWheel();
 }
 
 function updateAchievementWheel(){
+
+  if(!wheel) return;   // 🔥 guard bắt buộc
+
   const angleStep = 360 / achievementGroups.length;
   const rotate = currentGroupIndex * -angleStep;
 
@@ -336,18 +340,49 @@ function openAchievement(){
   updateProductView();
 }
 
-const achievementWrap = document.querySelector("#achievementPopup .wheel-mask");
-let achStartX = 0;
+function bindAchievementSwipe(){
 
-if(achievementWrap){
+  const wrap = document.querySelector("#achievementPopup .wheel-mask");
+  if(!wrap) return;
 
-  achievementWrap.addEventListener("touchstart", e=>{
-    achStartX = e.touches[0].clientX;
+  if(wrap.dataset.swipeBound) return;   // 🔒 tránh bind nhiều lần
+  wrap.dataset.swipeBound = "1";
+
+  let startX = 0;
+
+  wrap.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
   }, { passive:true });
 
-  achievementWrap.addEventListener("touchend", e=>{
-    const diff = e.changedTouches[0].clientX - achStartX;
+  wrap.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - startX;
+    if(Math.abs(diff) < 30) return;
 
+    currentGroupIndex =
+      diff < 0
+        ? (currentGroupIndex + 1) % achievementGroups.length
+        : (currentGroupIndex - 1 + achievementGroups.length) % achievementGroups.length;
+
+    updateAchievementWheel();
+  });
+}
+
+function bindAchievementSwipe(){
+
+  const wrap = document.querySelector("#achievementPopup .wheel-mask");
+  if(!wrap) return;
+
+  if(wrap.dataset.swipeBound) return;   // 🔒 tránh bind nhiều lần
+  wrap.dataset.swipeBound = "1";
+
+  let startX = 0;
+
+  wrap.addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
+  }, { passive:true });
+
+  wrap.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - startX;
     if(Math.abs(diff) < 30) return;
 
     currentGroupIndex =
@@ -375,9 +410,11 @@ document.addEventListener("click", e => {
   zoom.classList.add("active");
 });
 
-zoom.addEventListener("click",()=>{
-  zoom.classList.remove("active");
-});
+if(zoom){
+  zoom.addEventListener("click",()=>{
+    zoom.classList.remove("active");
+  });
+}
 
 /* ===========================
    SESSION EXPIRE + UNLOCK CODE
@@ -521,10 +558,7 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
 });
 
 document.getElementById('btn-achievement')?.addEventListener('click', () => {
-
-  currentGroupIndex = 0;
-  initAchievementWheel();
-
+  openAchievement();
   openPopup('achievementPopup');
 });
 
