@@ -271,6 +271,9 @@ const wheel = document.getElementById("achievementWheel");
 let currentGroupIndex = 0;
 
 function initAchievementWheel(){
+
+  if(!wheel) return;
+
   const total = achievementGroups.length;
   const angleStep = 360 / total;
 
@@ -282,6 +285,7 @@ function initAchievementWheel(){
     div.innerText = group.name;
 
     const angle = i * angleStep;
+
     div.style.transform = `
       rotateY(${angle}deg)
       translateZ(var(--wheel-size))
@@ -303,8 +307,11 @@ function updateAchievementWheel(){
 }
 
 function updateProductView(){
+
   const slider = document.getElementById("productSlider");
   const indicators = document.getElementById("productIndicators");
+
+  if(!slider || !indicators) return;
 
   slider.innerHTML="";
   indicators.innerHTML="";
@@ -323,18 +330,34 @@ function updateProductView(){
   });
 }
 
-currentGroupIndex++;
-if(currentGroupIndex >= achievementGroups.length){
-  currentGroupIndex = 0;
-}
-updateAchievementWheel();
-
 function openAchievement(){
   currentGroupIndex = 0;
   initAchievementWheel();
   updateProductView();
 }
 
+const achievementWrap = document.querySelector("#achievementPopup .wheel-mask");
+let achStartX = 0;
+
+if(achievementWrap){
+
+  achievementWrap.addEventListener("touchstart", e=>{
+    achStartX = e.touches[0].clientX;
+  }, { passive:true });
+
+  achievementWrap.addEventListener("touchend", e=>{
+    const diff = e.changedTouches[0].clientX - achStartX;
+
+    if(Math.abs(diff) < 30) return;
+
+    currentGroupIndex =
+      diff < 0
+        ? (currentGroupIndex + 1) % achievementGroups.length
+        : (currentGroupIndex - 1 + achievementGroups.length) % achievementGroups.length;
+
+    updateAchievementWheel();
+  });
+}
 
 /* ===========================
    QR ZOOM
@@ -498,7 +521,11 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
 });
 
 document.getElementById('btn-achievement')?.addEventListener('click', () => {
-    openPopup('achievementPopup');
+
+  currentGroupIndex = 0;
+  initAchievementWheel();
+
+  openPopup('achievementPopup');
 });
 
 document.getElementById('btn-qrcode')?.addEventListener('click', () => {
