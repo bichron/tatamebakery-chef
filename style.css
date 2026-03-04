@@ -640,6 +640,10 @@ body.light .enterprise-stamp{
          drop-shadow(0 0 10px rgba(198,166,67,.4));
 }
 
+.achievementPopup{
+  --wheel-size:120px;
+}
+
 /* ===========================
    SESSION EXPIRED OVERLAY
 =========================== */
