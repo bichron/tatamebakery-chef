@@ -759,3 +759,68 @@ body.light .enterprise-stamp{
   opacity:.7;
 }
 .close:hover{opacity:1;}
+
+
+/* ===========================
+   ACHIEVEMENT WHEEL
+=========================== */
+
+.achievement-content{
+  --wheel-size: 90%;
+}
+
+.achievement-wheel-mask{
+  overflow:hidden;
+  border-radius:12px;
+  height:105px;
+  margin:6px 0;
+}
+
+.achievement-wheel{
+  position:relative;
+  width:var(--wheel-size);
+  height:30px;
+  transform-style:preserve-3d;
+  margin:auto;
+}
+
+.achievement-group{
+  position:absolute;
+  left:50%;
+  top:50%;
+  white-space:nowrap;
+  font-size:14px;
+  transform-style:preserve-3d;
+  transform-origin:
+    center center
+    calc(-1 * var(--wheel-size) / 3);
+  opacity:.35;
+  transition:transform .6s cubic-bezier(.22,.61,.36,1),
+             opacity .4s,
+             color .4s;
+}
+
+.achievement-group.active{
+  color:var(--gold);
+  opacity:1;
+  font-weight:600;
+}
+
+.achievement-content-view{
+  margin-top:18px;
+}
+
+.achievement-panel{
+  display:none;
+}
+
+.achievement-panel.active{
+  display:block;
+}
+
+.achievement-panel img{
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+}
