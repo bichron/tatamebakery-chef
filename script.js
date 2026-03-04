@@ -13,8 +13,8 @@ const VIEWER_UNLOCK_CODE = "881909"; // 🔐 code 6 số để unclock nhanh kh�
 =========================== */
 function scaleCard(){
   const scale = Math.min(innerWidth/360, innerHeight/700);
-/*  phone.style.transform = `scale(${scale})`;*/
-  phone.style.transform = `scale(${scale}) rotateX(${-y}deg) rotateY(${x}deg)`;
+   phone.style.transform = `scale(${scale})`;
+/*  phone.style.transform = `scale(${scale}) rotateX(${-y}deg) rotateY(${x}deg)`;*/
 }
 scaleCard();
 phone.classList.add("loaded");
