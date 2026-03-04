@@ -97,6 +97,88 @@ if (groups.length && panels.length) {
 }
 
 /* ===========================
+   ACHIEVEMENT WHEEL CYLINDER
+=========================== */
+
+const achievementGroups =
+  document.querySelectorAll(".achievement-group");
+
+const achievementPanels =
+  document.querySelectorAll(".achievement-panel");
+
+const achTotal = achievementGroups.length;
+
+const achAngleStep =
+  achTotal ? 360 / achTotal : 0;
+
+let achIndex = 0;
+
+function updateAchievementWheel(){
+
+  achievementGroups.forEach((g,i)=>{
+
+    const angle = (i - achIndex) * achAngleStep;
+
+    g.style.transform = `
+      translate(-50%,-50%)
+      rotateY(${angle}deg)
+      translateZ(80px)
+    `;
+
+    const rad = angle * Math.PI / 180;
+    const isBack = Math.cos(rad) < 0;
+
+    g.classList.toggle("active", i === achIndex);
+
+    const text = g.querySelector("span");
+
+    if(text){
+      text.style.opacity = isBack ? ".45" : "1";
+    }
+
+    achievementPanels[i].classList.toggle(
+      "active",
+      i === achIndex
+    );
+
+  });
+
+}
+
+/* ===========================
+   ACHIEVEMENT SWIPE
+=========================== */
+
+let achStartX = 0;
+
+const achWrap =
+  document.querySelector(".achievement-wheel-mask");
+
+if(achWrap){
+
+  achWrap.addEventListener("touchstart",e=>{
+    achStartX = e.touches[0].clientX;
+  },{passive:true});
+
+  achWrap.addEventListener("touchend",e=>{
+
+    const diff =
+      e.changedTouches[0].clientX - achStartX;
+
+    if(Math.abs(diff) < 30) return;
+
+    achIndex =
+      diff < 0
+        ? (achIndex + 1) % achTotal
+        : (achIndex - 1 + achTotal) % achTotal;
+
+    updateAchievementWheel();
+
+  });
+
+}
+
+/* ===========================
    WHEEL INTERACTION
 =========================== */
 let startX = 0;
@@ -536,9 +618,14 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
   openPopup('enterprisePopup');
 });
 
-document.getElementById('btn-achievement')?.addEventListener('click', () => {
-  openAchievement();
+document.getElementById('btn-achievement')
+?.addEventListener('click', () => {
+
+  achIndex = 0;
+  updateAchievementWheel();
+
   openPopup('achievementPopup');
+
 });
 
 document.getElementById('btn-qrcode')?.addEventListener('click', () => {
