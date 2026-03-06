@@ -102,7 +102,7 @@ if (achievementGroups.length && achievementPanels.length) {
 
 /* ===========================
    ACHIEVEMENT WHEEL CYLINDER
-=========================== */
+===========================
 
 const achievementGroups =
   document.querySelectorAll(".achievement-group");
@@ -148,7 +148,7 @@ function updateAchievementWheel(){
   });
 
 }
-
+ */
 /* ===========================
    ACHIEVEMENT SWIPE
 =========================== */
