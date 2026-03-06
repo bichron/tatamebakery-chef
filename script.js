@@ -102,7 +102,7 @@ if (groups.length && panels.length) {
 
 /* ===========================
    ACHIEVEMENT WHEEL CYLINDER
-=========================== */
+===========================
 
 const achievementGroups =
   document.querySelectorAll(".achievement-group");
@@ -147,7 +147,7 @@ function updateAchievementWheel(){
 
   });
 
-}
+} */
 
 /* ===========================
    ACHIEVEMENT SWIPE
@@ -329,7 +329,7 @@ function updateQR(slider){
 
 /* ===========================
    ACHIEVEMENT BUILD 20:10 SUN 1 MAR
-===========================
+=========================== */
 
 
 const achievementData = [
@@ -435,7 +435,7 @@ function openAchievement(){
 
 function bindAchievementSwipe(){
 
-  const wrap = document.querySelector("#achievementPopup .wheel-mask");
+const wrap = document.querySelector("#achievementPopup .achievement-wheel-mask");
   if(!wrap) return;
 
   if(wrap.dataset.swipeBound) return;   // 🔒 tránh bind nhiều lần
@@ -458,7 +458,7 @@ function bindAchievementSwipe(){
 
     updateAchievementWheel();
   });
-} */
+}
 
 /* ===========================
    QR ZOOM
@@ -626,9 +626,7 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
 document.getElementById('btn-achievement')
 ?.addEventListener('click', () => {
 
-  achIndex = 0;
-  updateAchievementWheel();
-
+  openAchievement();      // 👈 QUAN TRỌNG
   openPopup('achievementPopup');
 
 });
