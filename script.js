@@ -96,6 +96,10 @@ if (groups.length && panels.length) {
   updateWheel();
 }
 
+if (achievementGroups.length && achievementPanels.length) {
+  updateAchievementWheel();
+}
+
 /* ===========================
    ACHIEVEMENT WHEEL CYLINDER
 =========================== */
@@ -325,9 +329,10 @@ function updateQR(slider){
 
 /* ===========================
    ACHIEVEMENT BUILD 20:10 SUN 1 MAR
-=========================== */
+===========================
 
-const achievementGroups = [
+
+const achievementData = [
   {
     name:"Bread",
     products:[
@@ -357,12 +362,12 @@ function initAchievementWheel(){
 
   if(!wheel) return;
 
-  const total = achievementGroups.length;
+  const total = achievementData.length;
   const angleStep = 360 / total;
 
   wheel.innerHTML = "";
 
-  achievementGroups.forEach((group,i)=>{
+  achievementData.forEach((group,i)=>{
     const div = document.createElement("div");
     div.className = "wheel-item";
     div.innerText = group.name;
@@ -385,7 +390,7 @@ function updateAchievementWheel(){
 
   if(!wheel) return;   // 🔥 guard bắt buộc
 
-  const angleStep = 360 / achievementGroups.length;
+  const angleStep = 360 / achievementData.length;
   const rotate = currentGroupIndex * -angleStep;
 
   wheel.style.transform = `rotateY(${rotate}deg)`;
@@ -408,7 +413,7 @@ function updateProductView(){
   slider.innerHTML="";
   indicators.innerHTML="";
 
-  const products = achievementGroups[currentGroupIndex].products;
+  const products = achievementData[currentGroupIndex].products;
 
   products.forEach((src,i)=>{
     const img = document.createElement("img");
@@ -448,13 +453,13 @@ function bindAchievementSwipe(){
 
     currentGroupIndex =
       diff < 0
-        ? (currentGroupIndex + 1) % achievementGroups.length
-        : (currentGroupIndex - 1 + achievementGroups.length) % achievementGroups.length;
+        ? (currentGroupIndex + 1) % achievementData.length
+        : (currentGroupIndex - 1 + achievementData.length) % achievementData.length;
 
     updateAchievementWheel();
   });
 }
-
+*/
 /* ===========================
    QR ZOOM
 =========================== */
