@@ -96,9 +96,9 @@ if (groups.length && panels.length) {
   updateWheel();
 }
 
-if (achievementGroups.length && achievementPanels.length) {
+/*if (achievementGroups.length && achievementPanels.length) {
   updateAchievementWheel();
-}
+}*/
 
 /* ===========================
    ACHIEVEMENT WHEEL CYLINDER
@@ -329,7 +329,7 @@ function updateQR(slider){
 
 /* ===========================
    ACHIEVEMENT BUILD 20:10 SUN 1 MAR
-===========================*/
+===========================
 
 
 const achievementData = [
@@ -458,7 +458,7 @@ function bindAchievementSwipe(){
 
     updateAchievementWheel();
   });
-}
+} */
 
 /* ===========================
    QR ZOOM
