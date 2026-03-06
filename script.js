@@ -329,7 +329,7 @@ function updateQR(slider){
 
 /* ===========================
    ACHIEVEMENT BUILD 20:10 SUN 1 MAR
-===========================
+===========================*/
 
 
 const achievementData = [
@@ -459,7 +459,7 @@ function bindAchievementSwipe(){
     updateAchievementWheel();
   });
 }
-*/
+
 /* ===========================
    QR ZOOM
 =========================== */
