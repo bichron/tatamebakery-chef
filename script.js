@@ -58,8 +58,39 @@ if(params.has("nfc")){
 }
 
 /* ===========================
-   QR WHEEL CYLINDER
+   QR WHEEL (WheelEngine)
 =========================== */
+
+let qrWheel;
+
+function initQRWheel(){
+
+  qrWheel = new WheelEngine({
+
+    container:".qr-group-wheel",
+    item:".qr-group",
+
+    radius:80,
+
+    startIndex:0,
+
+    onChange:(index)=>{
+
+      document
+        .querySelectorAll(".qr-panel")
+        .forEach((p,i)=>{
+          p.classList.toggle("active", i===index);
+        });
+
+    }
+
+  });
+
+}
+
+/*ĐÓNG TẠM ===========================
+   QR WHEEL CYLINDER
+===========================
 const groups = document.querySelectorAll(".qr-group");
 const panels = document.querySelectorAll(".qr-panel");
 const total = groups.length;
@@ -94,7 +125,7 @@ if(text){
 
 if (groups.length && panels.length) {
   updateWheel();
-}
+} ĐÓNG TẠM*/
 
 /*if (achievementGroups.length && achievementPanels.length) {
   updateAchievementWheel();
@@ -153,7 +184,34 @@ function updateAchievementWheel(){
    ACHIEVEMENT SWIPE
 =========================== */
 
-let achStartX = 0;
+let achievementWheel;
+
+function initAchievementWheel(){
+
+  achievementWheel = new WheelEngine({
+
+    container:".achievement-wheel-mask",
+    item:".achievement-group",
+
+    radius:80,
+
+    startIndex:0,
+
+    onChange:(index)=>{
+
+      document
+        .querySelectorAll(".achievement-panel")
+        .forEach((p,i)=>{
+          p.classList.toggle("active", i===index);
+        });
+
+    }
+
+  });
+
+}
+
+/*ĐÓNG TẠM let achStartX = 0;
 
 const achWrap =
   document.querySelector(".achievement-wheel-mask");
@@ -180,7 +238,7 @@ if(achWrap){
 
   });
 
-}
+} ĐÓNG TẠM */
 
 /* ===========================
    WHEEL INTERACTION
@@ -626,29 +684,30 @@ document.getElementById('btn-enterprise')?.addEventListener('click', () => {
 document.getElementById('btn-achievement')
 ?.addEventListener('click', () => {
 
-  openAchievement();      // 👈 QUAN TRỌNG
+  if(!achievementWheel) initAchievementWheel();
+
+  achievementWheel.go(0);
+
   openPopup('achievementPopup');
 
 });
 
-document.getElementById('btn-qrcode')?.addEventListener('click', () => {
+document.getElementById('btn-qrcode')
+?.addEventListener('click', () => {
 
-  currentIndex = 0;
-  updateWheel();
+  if(!qrWheel) initQRWheel();
 
-/* xoá  panels.forEach((p,i)=>{
-    p.classList.toggle("active", i === 0);
-  }); xoá */
+  qrWheel.go(0);
 
-  document.querySelectorAll(".qr-slider").forEach(slider=>{
-    loadQRSlider(slider);
-  });
+  document.querySelectorAll(".qr-slider")
+  .forEach(loadQRSlider);
 
   openPopup('qrPopup');
 
   if (typeof window.loadDynamicQR === "function") {
     window.loadDynamicQR();
   }
+
 });
 
 document.getElementById('btn-chat')?.addEventListener('click', () => {
