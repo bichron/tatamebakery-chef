@@ -60,33 +60,32 @@ if(params.has("nfc")){
 /* ===========================
    QR WHEEL (WheelEngine)
 =========================== */
-
 let qrWheel;
 
 function initQRWheel(){
 
-  qrWheel = new WheelEngine({
+qrWheel=new WheelEngine({
 
-    container:".qr-group-wheel",
-    item:".qr-group",
+mask:".qr-wheel-mask",
 
-    radius:80,
+radius:80,
 
-    startIndex:0,
+onChange:(index)=>{
 
-    onChange:(index)=>{
-
-      document
-        .querySelectorAll(".qr-panel")
-        .forEach((p,i)=>{
-          p.classList.toggle("active", i===index);
-        });
-
-    }
-
-  });
+document
+.querySelectorAll(".qr-panel")
+.forEach((p,i)=>{
+p.classList.toggle("active",i===index);
+});
 
 }
+
+});
+
+}
+
+
+
 
 /*ĐÓNG TẠM ===========================
    QR WHEEL CYLINDER
@@ -181,35 +180,32 @@ function updateAchievementWheel(){
 } */
 
 /* ===========================
-   ACHIEVEMENT SWIPE
+   ACHIEVEMENT WHEEL
 =========================== */
-
 let achievementWheel;
 
 function initAchievementWheel(){
 
-  achievementWheel = new WheelEngine({
+achievementWheel=new WheelEngine({
 
-    container:".achievement-wheel-mask",
-    item:".achievement-group",
+mask:".achievement-wheel-mask",
 
-    radius:80,
+radius:80,
 
-    startIndex:0,
+onChange:(index)=>{
 
-    onChange:(index)=>{
-
-      document
-        .querySelectorAll(".achievement-panel")
-        .forEach((p,i)=>{
-          p.classList.toggle("active", i===index);
-        });
-
-    }
-
-  });
+document
+.querySelectorAll(".achievement-panel")
+.forEach((p,i)=>{
+p.classList.toggle("active",i===index);
+});
 
 }
+
+});
+
+}
+
 
 /*ĐÓNG TẠM let achStartX = 0;
 
@@ -692,21 +688,14 @@ document.getElementById('btn-achievement')
 
 });
 
-document.getElementById('btn-qrcode')
-?.addEventListener('click', () => {
+document.getElementById("btn-qrcode")
+.addEventListener("click",()=>{
 
-  if(!qrWheel) initQRWheel();
+if(!qrWheel) initQRWheel();
 
-  qrWheel.go(0);
+qrWheel.go(0);
 
-  document.querySelectorAll(".qr-slider")
-  .forEach(loadQRSlider);
-
-  openPopup('qrPopup');
-
-  if (typeof window.loadDynamicQR === "function") {
-    window.loadDynamicQR();
-  }
+openPopup("qrPopup");
 
 });
 
