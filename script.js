@@ -66,7 +66,7 @@ function initQRWheel(){
 
 qrWheel=new WheelEngine({
 
-mask:".qr-wheel-mask",
+mask:".wheel-mask",
 
 radius:80,
 
@@ -84,100 +84,6 @@ p.classList.toggle("active",i===index);
 
 }
 
-
-
-
-/*ĐÓNG TẠM ===========================
-   QR WHEEL CYLINDER
-===========================
-const groups = document.querySelectorAll(".qr-group");
-const panels = document.querySelectorAll(".qr-panel");
-const total = groups.length;
-const angleStep = total ? 360 / total : 0;
-let currentIndex = 0;
-function updateWheel(){
-  groups.forEach((g, i) => {
-  const angle = (i - currentIndex) * angleStep;
-
-  g.style.transform = `
-    translate(-50%, -50%)
-    rotateY(${angle}deg)
-    translateZ(80px)
-  `;
-
-  const rad = angle * Math.PI / 180;
-  const isBack = Math.cos(rad) < 0;
-
-  g.classList.toggle("active", i === currentIndex);
-
-  // 🔥 KHÔNG COUNTER ROTATE
-const text = g.querySelector("span");
-
-  // chỉ giảm opacity phía sau cho tự nhiên
-if(text){
-  text.style.opacity = isBack ? "0.5" : "1";
-}
-
-  panels[i].classList.toggle("active", i === currentIndex);
-});
-}
-
-if (groups.length && panels.length) {
-  updateWheel();
-} ĐÓNG TẠM*/
-
-/*if (achievementGroups.length && achievementPanels.length) {
-  updateAchievementWheel();
-}*/
-
-/* ===========================
-   ACHIEVEMENT WHEEL CYLINDER
-===========================
-
-const achievementGroups =
-  document.querySelectorAll(".achievement-group");
-
-const achievementPanels =
-  document.querySelectorAll(".achievement-panel");
-
-const achTotal = achievementGroups.length;
-
-const achAngleStep =
-  achTotal ? 360 / achTotal : 0;
-
-let achIndex = 0;
-
-function updateAchievementWheel(){
-
-  achievementGroups.forEach((g,i)=>{
-
-    const angle = (i - achIndex) * achAngleStep;
-
-    g.style.transform = `
-      translate(-50%,-50%)
-      rotateY(${angle}deg)
-      translateZ(80px)
-    `;
-
-    const rad = angle * Math.PI / 180;
-    const isBack = Math.cos(rad) < 0;
-
-    g.classList.toggle("active", i === achIndex);
-
-    const text = g.querySelector("span");
-
-    if(text){
-      text.style.opacity = isBack ? ".45" : "1";
-    }
-
-    achievementPanels[i].classList.toggle(
-      "active",
-      i === achIndex
-    );
-
-  });
-
-} */
 
 /* ===========================
    ACHIEVEMENT WHEEL
@@ -207,65 +113,6 @@ p.classList.toggle("active",i===index);
 }
 
 
-/*ĐÓNG TẠM let achStartX = 0;
-
-const achWrap =
-  document.querySelector(".achievement-wheel-mask");
-
-if(achWrap){
-
-  achWrap.addEventListener("touchstart",e=>{
-    achStartX = e.touches[0].clientX;
-  },{passive:true});
-
-  achWrap.addEventListener("touchend",e=>{
-
-    const diff =
-      e.changedTouches[0].clientX - achStartX;
-
-    if(Math.abs(diff) < 30) return;
-
-    achIndex =
-      diff < 0
-        ? (achIndex + 1) % achTotal
-        : (achIndex - 1 + achTotal) % achTotal;
-
-    updateAchievementWheel();
-
-  });
-
-} ĐÓNG TẠM */
-
-/* ===========================
-   WHEEL INTERACTION
-=========================== */
-let startX = 0;
-const wheelWrap = document.querySelector(".qr-group-wheel");
-
-if(wheelWrap){
-  wheelWrap.addEventListener("touchstart", e=>{
-    startX = e.touches[0].clientX;
-  },{passive:true});
-
-  wheelWrap.addEventListener("touchend", e=>{
-    const diff = e.changedTouches[0].clientX - startX;
-    if(Math.abs(diff) < 30) return;
-
-    currentIndex =
-      diff < 0
-        ? (currentIndex + 1) % total
-        : (currentIndex - 1 + total) % total;
-
-    updateWheel();
-  });
-}
-
-groups.forEach((g,i)=>{
-  g.addEventListener("click",()=>{
-    currentIndex = i;
-    updateWheel();
-  });
-});
 
 /* ĐOẠN THÊM VỀ QR-SLIDER SẼ XẾP LẠI */
 
@@ -409,34 +256,6 @@ const achievementData = [
   }
 ];
 
-const wheel = document.getElementById("achievementWheel");
-let currentGroupIndex = 0;
-
-function initAchievementWheel(){
-
-  if(!wheel) return;
-
-  const total = achievementData.length;
-  const angleStep = 360 / total;
-
-  wheel.innerHTML = "";
-
-  achievementData.forEach((group,i)=>{
-    const div = document.createElement("div");
-    div.className = "wheel-item";
-    div.innerText = group.name;
-
-    const angle = i * angleStep;
-
-    div.style.transform = `
-      rotateY(${angle}deg)
-      translateZ(var(--wheel-size))
-    `;
-
-    wheel.appendChild(div);
-  });
-
-  bindAchievementSwipe();   // 🔥 bind tại đây
   updateAchievementWheel();
 }
 
