@@ -338,12 +338,52 @@ body{
    WHEEL MASK
 =========================== */
 
-.qr-wheel-mask{
-  overflow:hidden;
-  border-radius:12px;
-  height: 105px;         /* giảm từ ~150–180px */
-  margin: 4px 0px 6px;     /* giảm trống trên & dưới */
+.wheel-mask{
+ overflow:hidden;
+ height:105px;
+ border-radius:12px;
 }
+
+.wheel-container{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ perspective:1000px;
+}
+
+.wheel{
+ position:relative;
+ transform-style:preserve-3d;
+ height:30px;
+}
+
+.wheel-item{
+ position:absolute;
+ left:50%;
+ top:50%;
+ transform-style:preserve-3d;
+
+ transform-origin:
+   center center
+   -80px;
+
+ white-space:nowrap;
+ font-size:14px;
+
+ opacity:.35;
+ transition:
+ transform .6s cubic-bezier(.22,.61,.36,1),
+ opacity .35s,
+ color .35s;
+}
+
+.wheel-item.active{
+ opacity:1;
+ color:var(--gold);
+ font-weight:600;
+}
+
+
 
 /* ===========================
    QR WHEEL CYLINDER
