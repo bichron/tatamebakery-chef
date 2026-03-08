@@ -234,7 +234,7 @@ body{
    GLOBAL POPUP SYSTEM
 =========================== */
 
-.popup-overlay{
+.overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.55);
@@ -248,7 +248,7 @@ body{
   z-index:9999;
 }
 
-.popup-overlay.active{
+.overlay.active{
   opacity:1;
   pointer-events:auto;
 }
@@ -381,80 +381,6 @@ body{
  opacity:1;
  color:var(--gold);
  font-weight:600;
-}
-
-
-
-/* ===========================
-   QR WHEEL CYLINDER
-=========================== */
-.qr-group-wheel{
-  display:flex;
-  align-items:flex-start;     /* ← căn giữa dọc đúng chỗ */
-  justify-content:center;
-  height:16px;            /* ↓ chiều cao thực */
-  perspective:1000px;
-}
-
-.qr-wheel{
-  position:relative;
-  width:var(--wheel-size);
-  height:30px;
-  transform-style:preserve-3d;
-}
-
-.qr-group{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:auto;
-  height:32px;
-  white-space: nowrap;
-  text-align:center;
-  font-size:14px;
-  transform-style:preserve-3d;
-  backface-visibility: visible; /* rất quan trọng */
-  /* 🔥 bán kính tự tính */
-  transform-origin:
-    center center
-    calc(-1 * var(--wheel-size) / 3);
-
-  opacity:.35;
-  transition:transform .6s cubic-bezier(.22,.61,.36,1),
-             opacity .4s,
-             color .4s;
-}
-
-.qr-group span{
-  display:block;
-  transform-style:preserve-3d;
-  transition:transform .6s cubic-bezier(.22,.61,.36,1),
-             opacity .4s;
-}
-
-.qr-group.active{
-  position:relative;
-  color:var(--gold);
-  opacity:1;
-  font-weight:600;
-}
-
-.qr-group.back span{
-  padding-top:40;
-  transform:rotateY(180deg);
-  opacity:.8;
-}
-
-.qr-group.active::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-6px;
-  width:20px;
-  height:2px;
-  background:var(--gold);
-  transform:translateX(-50%);
-  border-radius:2px;
 }
 
 /* ===========================
