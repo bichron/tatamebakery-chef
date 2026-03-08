@@ -1,105 +1,151 @@
 /* =====================================
-   WHEEL ENGINE v1.0
-   reusable 3D cylinder wheel
+   WHEEL ENGINE v2
+   Apple-style cylinder wheel
 ===================================== */
 
 class WheelEngine{
 
-  constructor(config){
+constructor(cfg){
 
-    this.container = document.querySelector(config.container);
-    this.items = this.container?.querySelectorAll(config.item) || [];
+this.mask=document.querySelector(cfg.mask);
+this.container=this.mask?.querySelector(".wheel-container");
+this.wheel=this.mask?.querySelector(".wheel");
+this.items=this.mask?.querySelectorAll(".wheel-item");
 
-    this.onChange = config.onChange || null;
+if(!this.mask || !this.items.length) return;
 
-    this.index = config.startIndex || 0;
+this.index=cfg.startIndex||0;
+this.radius=cfg.radius||80;
+this.onChange=cfg.onChange||null;
 
-    this.total = this.items.length;
-    this.angleStep = this.total ? 360 / this.total : 0;
+this.total=this.items.length;
+this.angleStep=360/this.total;
 
-    this.radius = config.radius || 80;
+this.velocity=0;
+this.startX=0;
 
-    this.swipe = config.swipe ?? true;
+this.init();
 
-    if(!this.container || !this.items.length) return;
+}
 
-    this.init();
-  }
+init(){
 
-  init(){
+this.layout();
+this.update();
+this.bind();
 
-    this.update();
+}
 
-    if(this.swipe) this.bindSwipe();
+layout(){
 
-    this.items.forEach((el,i)=>{
-      el.addEventListener("click",()=>{
-        this.index = i;
-        this.update();
-      });
-    });
+this.items.forEach((el,i)=>{
 
-  }
+const angle=i*this.angleStep;
 
-  update(){
+el.style.transform=`
+translate(-50%,-50%)
+rotateY(${angle}deg)
+translateZ(${this.radius}px)
+`;
 
-    this.items.forEach((el,i)=>{
+});
 
-      const angle = (i - this.index) * this.angleStep;
+}
 
-      el.style.transform = `
-        translate(-50%,-50%)
-        rotateY(${angle}deg)
-        translateZ(${this.radius}px)
-      `;
+update(){
 
-      const rad = angle * Math.PI / 180;
-      const isBack = Math.cos(rad) < 0;
+this.items.forEach((el,i)=>{
 
-      const text = el.querySelector("span");
+const angle=(i-this.index)*this.angleStep;
 
-      if(text){
-        text.style.opacity = isBack ? ".45" : "1";
-      }
+el.style.transform=`
+translate(-50%,-50%)
+rotateY(${angle}deg)
+translateZ(${this.radius}px)
+`;
 
-      el.classList.toggle("active", i === this.index);
+const rad=angle*Math.PI/180;
+const isBack=Math.cos(rad)<0;
 
-    });
+const text=el.querySelector("span");
 
-    if(this.onChange){
-      this.onChange(this.index);
-    }
+if(text) text.style.opacity=isBack?".45":"1";
 
-  }
+el.classList.toggle("active",i===this.index);
 
-  bindSwipe(){
+});
 
-    let startX = 0;
+if(this.onChange) this.onChange(this.index);
 
-    this.container.addEventListener("touchstart",e=>{
-      startX = e.touches[0].clientX;
-    },{passive:true});
+}
 
-    this.container.addEventListener("touchend",e=>{
+bind(){
 
-      const diff = e.changedTouches[0].clientX - startX;
+let startX=0;
+let startTime=0;
 
-      if(Math.abs(diff) < 30) return;
+this.mask.addEventListener("touchstart",e=>{
 
-      this.index =
-        diff < 0
-          ? (this.index + 1) % this.total
-          : (this.index - 1 + this.total) % this.total;
+startX=e.touches[0].clientX;
+startTime=Date.now();
 
-      this.update();
+},{passive:true});
 
-    });
+this.mask.addEventListener("touchend",e=>{
 
-  }
+const dx=e.changedTouches[0].clientX-startX;
+const dt=Date.now()-startTime;
 
-  go(i){
-    this.index = i;
-    this.update();
-  }
+if(Math.abs(dx)<25) return;
+
+const speed=dx/dt;
+
+this.velocity=speed*8;
+
+this.spin();
+
+});
+
+this.items.forEach((el,i)=>{
+
+el.addEventListener("click",()=>{
+
+this.index=i;
+this.update();
+
+});
+
+});
+
+}
+
+spin(){
+
+if(Math.abs(this.velocity)<0.01) return;
+
+if(this.velocity>0){
+
+this.index=(this.index-1+this.total)%this.total;
+
+}else{
+
+this.index=(this.index+1)%this.total;
+
+}
+
+this.update();
+
+this.velocity*=0.75;
+
+requestAnimationFrame(()=>this.spin());
+
+}
+
+go(i){
+
+this.index=i;
+this.update();
+
+}
 
 }
