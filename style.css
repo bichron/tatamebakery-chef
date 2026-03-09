@@ -330,15 +330,15 @@ body{
   position:fixed;
   inset:0;
 
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.55);
 
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  opacity:0.2;
+  opacity:0;
   pointer-events:none;
 
   transition:all .35s ease;
