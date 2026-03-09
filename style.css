@@ -272,6 +272,7 @@ body{
   visibility:hidden;
   transition:.4s;
   z-index:100;
+  background:transparent;   /* sửa */
 }
 
 .popup.active{
@@ -340,7 +341,7 @@ body{
 
 .wheel-mask{
  overflow:hidden;
- height:105px;
+ height:120px;
  border-radius:12px;
 }
 
@@ -349,6 +350,7 @@ body{
  justify-content:center;
  align-items:center;
  perspective:1000px;
+ height:100%;
 }
 
 .wheel{
@@ -720,30 +722,6 @@ body.light .enterprise-stamp{
   border-radius:12px;
   height:105px;
   margin:6px 0;
-}
-
-.achievement-wheel{
-  position:relative;
-  width:var(--wheel-size);
-  height:30px;
-  transform-style:preserve-3d;
-  margin:auto;
-}
-
-.achievement-group{
-  position:absolute;
-  left:50%;
-  top:50%;
-  white-space:nowrap;
-  font-size:14px;
-  transform-style:preserve-3d;
-  transform-origin:
-    center center
-    calc(-1 * var(--wheel-size) / 3);
-  opacity:.35;
-  transition:transform .6s cubic-bezier(.22,.61,.36,1),
-             opacity .4s,
-             color .4s;
 }
 
 .achievement-group.active{
