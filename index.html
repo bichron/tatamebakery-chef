@@ -21,201 +21,209 @@
 
 <body>
 
+<!-- ===========================
+     APP WRAPPER
+=========================== -->
+<div class="wrapper">
+
   <!-- ===========================
-       APP WRAPPER
-  ============================ -->
-  <div class="wrapper">
+       PHONE CARD
+  =========================== -->
+  <div class="phone" id="phone">
+
+    <!-- AVATAR -->
+    <div class="avatar-wrap">
+      <div class="avatar">
+        <img src="assets/avatar.png" alt="Phuong Pham">
+      </div>
+    </div>
+
+    <!-- THEME TOGGLE -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+      <i class="fa-solid fa-circle-half-stroke"></i>
+    </div>
+
+    <!-- BASIC INFO -->
+    <div class="name">NAM PHƯƠNG</div>
+    <div class="title">Founder & Executive Chef</div>
+    <div class="company">
+      A FAMILY-RUN ARTISAN<br>
+      Tiệm bánh thủ công do gia đình vận hành
+    </div>
+    <div class="subtitle">SINCE 2019</div>
 
     <!-- ===========================
-         PHONE CARD
-    ============================ -->
-    <div class="phone" id="phone">
+         ACTION BUTTONS
+    =========================== -->
+    <div class="buttons">
 
-      <!-- AVATAR -->
-      <div class="avatar-wrap">
-        <div class="avatar">
-          <img src="assets/avatar.png" alt="Phuong Pham">
+      <!-- CALL / SAVE -->
+      <div class="row">
+
+        <a href="tel:0937771981" class="btn">
+          <div class="btn-main">
+            <i class="fa-solid fa-phone"></i>
+            <span>Call</span>
+          </div>
+          <div class="subtext">0937771981</div>
+        </a>
+
+        <div class="btn" onclick="downloadVCF()">
+          <div class="btn-main">
+            <i class="fa-solid fa-address-card"></i>
+            <span>Save Contact</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CHAT -->
+      <div class="btn" id="btn-chat">
+        <div class="btn-main">
+          <i class="fa-brands fa-facebook-messenger"></i>
+          <span>Chat</span>
+        </div>
+        <div class="subtext">Zalo • Viber • WhatsApp • Telegram</div>
+      </div>
+
+      <!-- QR -->
+      <div class="btn" id="btn-qrcode">
+        <div class="btn-main">
+          <i class="fa-solid fa-qrcode"></i>
+          <span>QR Code</span>
+        </div>
+        <div class="subtext">My namecard • Pay me • My bank</div>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="btn" id="btn-enterprise">
+        <div class="btn-main">
+          <i class="fa-solid fa-building"></i>
+          <span>Enterprise Code / Tax Code</span>
         </div>
       </div>
 
-      <!-- THEME TOGGLE -->
-      <div class="theme-toggle" onclick="toggleTheme()">
-        <i class="fa-solid fa-circle-half-stroke"></i>
+      <!-- WEBSITE / ACHIEVEMENT -->
+      <div class="row">
+
+        <div class="btn" onclick="openWebsite()">
+          <div class="btn-main">
+            <i class="fa-solid fa-globe"></i>
+            <span>Website</span>
+          </div>
+        </div>
+
+        <div class="btn" id="btn-achievement">
+          <div class="btn-main">
+            <i class="fa-solid fa-certificate"></i>
+            <span>Achievement</span>
+          </div>
+        </div>
+
       </div>
-
-      <!-- BASIC INFO -->
-      <div class="name">NAM PHƯƠNG</div>
-      <div class="title">Founder & Executive Chef</div>
-      <div class="company">A FAMILY-RUN ARTISAN<br>Tiệm bánh thủ công do gia đình vận hành</div>
-      <div class="subtitle">SINCE 2019</div>
-
-
-      <!-- ===========================
-           ACTION BUTTONS
-      ============================ -->
-      <div class="buttons">
-
-        <!-- CALL / SAVE -->
-        <div class="row">
-          <a href="tel:0937771981" class="btn">
-            <div class="btn-main">
-              <i class="fa-solid fa-phone"></i>
-              <span>Call</span>
-            </div>
-            <div class="subtext">0937771981</div>
-          </a>
-
-          <div class="btn" onclick="downloadVCF()">
-            <div class="btn-main">
-              <i class="fa-solid fa-address-card"></i>
-              <span>Save Contact</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CHAT -->
-        <div class="btn" id="btn-chat">
-          <div class="btn-main">
-            <i class="fa-brands fa-facebook-messenger"></i>
-            <span>Chat</span>
-          </div>
-          <div class="subtext">Zalo • Viber • WhatsApp • Telegram</div>
-        </div>
-
-        <!-- QR -->
-        <div class="btn" id="btn-qrcode">
-          <div class="btn-main">
-           <i class="fa-solid fa-qrcode"></i>
-           <span>QR Code</span>
-         </div>
-         <div class="subtext">My namecard • Pay me • My bank</div>
-        </div>
-
-        <!-- ENTERPRISE -->
-        <div class="btn" id="btn-enterprise">
-          <div class="btn-main">
-            <i class="fa-solid fa-building"></i>
-            <span>Enterprise Code / Tax Code</span>
-          </div>
-        </div>
-
-        <!-- WEBSITE / ACHIEVEMENT -->
-        <div class="row">
-          <div class="btn" onclick="openWebsite()">
-            <div class="btn-main">
-              <i class="fa-solid fa-globe"></i>
-              <span>Website</span>
-            </div>
-          </div>
-
-          <div class="btn" id="btn-achievement">
-            <div class="btn-main">
-              <i class="fa-solid fa-certificate"></i>
-              <span>Achievement</span>
-            </div>
-          </div>
-        </div>
-
- </div>
-      <!-- /buttons -->
 
     </div>
-    <!-- /phone -->
+    <!-- /buttons -->
 
   </div>
-  <!-- /wrapper -->
+  <!-- /phone -->
 
-  
-<!-- OVERLAY (BẮT BUỘC CHO POPUP MANAGER) -->
-  <div class="overlay"></div>
-  
+</div>
+<!-- /wrapper -->
 
-      <!-- ===========================
-           QR POPUP (MOVE INSIDE PHONE)
-      ============================ -->
-      <div class="popup" id="qrPopup">
-        <div class="popup-content qr-popup">
-          <h3>QR CODE<br>swipe - choose - scan</h3>
 
-<div class="wheel-mask">
+<!-- OVERLAY -->
+<div class="overlay"></div>
 
-  <div class="wheel-container">
 
-    <div class="wheel">
+<!-- ===========================
+     QR POPUP
+=========================== -->
+<div class="popup" id="qrPopup">
 
-      <div class="wheel-item">
-        <span>Namecard</span>
+  <div class="popup-content qr-popup">
+
+    <h3>QR CODE<br>swipe - choose - scan</h3>
+
+    <div class="wheel-mask">
+
+      <div class="wheel-container">
+
+        <div class="wheel">
+
+          <div class="wheel-item">
+            <span>Namecard</span>
+          </div>
+
+          <div class="wheel-item">
+            <span>Personal bank</span>
+          </div>
+
+          <div class="wheel-item">
+            <span>BLH payment</span>
+          </div>
+
+        </div>
+
       </div>
 
-      <div class="wheel-item">
-        <span>Personal bank</span>
+    </div>
+
+    <div class="qr-content">
+
+      <div class="qr-panel active">
+        <div id="qrCode"></div>
       </div>
 
-      <div class="wheel-item">
-        <span>BLH payment</span>
+      <div class="qr-panel">
+        <div class="qr-slider" data-group="personal" data-max="5">
+          <div class="qr-track"></div>
+          <div class="qr-indicators"></div>
+        </div>
       </div>
 
+      <div class="qr-panel">
+        <div class="qr-slider" data-group="blh" data-max="3">
+          <div class="qr-track"></div>
+          <div class="qr-indicators"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="close">Close</div>
+
+    <div class="qr-zoom" id="qrZoom">
+      <img id="qrZoomImg" alt="QR Zoom">
     </div>
 
   </div>
 
 </div>
-      
-      
 
-          <div class="qr-content">
-            <div class="qr-panel active">
-              <div id="qrCode"></div>
-            </div>
-          
 
-            <div class="qr-panel">
-              <div class="qr-slider" data-group="personal" data-max="5">
-                <div class="qr-track"></div>
-                <div class="qr-indicators"></div>
-              </div>
-            </div>
-
-            <div class="qr-panel">
-              <div class="qr-slider" data-group="blh" data-max="3">
-                <div class="qr-track"></div>
-                <div class="qr-indicators"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="close">Close</div>
-
-          <div class="qr-zoom" id="qrZoom">
-            <img id="qrZoomImg" alt="QR Zoom">
-          </div>
-
-        </div>
-      </div>
-
-      <!-- ===========================
-           ACHIEVEMENT POPUP (MOVE INSIDE PHONE)
-      ============================ -->
-
-<!-- --- 20:10 SUN 1 MAR --- -->
+<!-- ===========================
+     ACHIEVEMENT POPUP
+=========================== -->
 <div class="popup achievementPopup" id="achievementPopup">
 
   <div class="popup-content achievement-content">
 
     <h3>ACHIEVEMENT & LIBRARY</h3>
 
+    <div class="wheel-mask achievement-wheel-mask">
 
-<div class="wheel-mask achievement-wheel-mask">
-  <div class="wheel-container">
-    <div class="wheel">
-      <div class="wheel-item"><span>Bread</span></div>
-      <div class="wheel-item"><span>Cake</span></div>
-      <div class="wheel-item"><span>Drink</span></div>
+      <div class="wheel-container">
+
+        <div class="wheel">
+          <div class="wheel-item"><span>Bread</span></div>
+          <div class="wheel-item"><span>Cake</span></div>
+          <div class="wheel-item"><span>Drink</span></div>
+        </div>
+
+      </div>
+
     </div>
-  </div>
-</div>
-
 
     <div class="achievement-content-view">
 
@@ -238,57 +246,51 @@
   </div>
 
 </div>
-<!-- --- 20:10 SUN 1 MAR --- -->
-<!-- <div class="product-view">
 
-  <div id="productSlider" class="product-slider"></div>
 
-  <div id="productIndicators" class="product-indicators"></div>
+<!-- ===========================
+     ENTERPRISE POPUP
+=========================== -->
+<div class="popup" id="enterprisePopup">
 
-</div> -->
+  <div class="popup-content">
 
-      <!-- ===========================
-           ENTERPRISE POPUP (MOVE INSIDE PHONE)
-      ============================ -->
-      <div class="popup" id="enterprisePopup">
-        <div class="popup-content">
+    <h3>Business Information</h3>
 
-          <h3>Business Information</h3>
+    <p class="company-name">
+      <span class="value">BLH Joint Stock Company</span>
+    </p>
 
-          <p class="company-name">
-            <span class="value">BLH Joint Stock Company</span>
-          </p>
+    <p>
+      <span class="label">Enterprise Code / Tax Code:</span>
+      <span class="value">0318787124</span>
+    </p>
 
-          <p>
-            <span class="label">Enterprise Code / Tax Code:</span>
-            <span class="value">0318787124</span>
-          </p>
+    <p>
+      <span class="label">Head Office / Address:</span><br>
+      <span class="value">
+        2224A Đỗ Mười, Trung Mỹ Tây, HCMC, Vietnam
+      </span>
+    </p>
 
-          <p>
-            <span class="label">Head Office / Address:</span><br>
-            <span class="value">
-              2224A Đỗ Mười, Trung Mỹ Tây, HCMC, Vietnam
-            </span>
-          </p>
+    <p>
+      <span class="label">Representative / CEO:</span>
+      <span class="value">Nguyễn Trung Hiếu</span>
+    </p>
 
-          <p>
-            <span class="label">Representative / CEO:</span>
-            <span class="value">Nguyễn Trung Hiếu</span>
-          </p>
-          <div class="enterprise-stamp"></div>
-          <div class="close">Close</div>
+    <div class="enterprise-stamp"></div>
 
-        </div>
-      </div>
+    <div class="close">Close</div>
 
-    </div>
-    <!-- /phone -->
+  </div>
 
-      
+</div>
+
+
 <!-- MAIN JS -->
-  <script src="wheelengine.js"></script>
-  <script src="script.js"></script>
-  <script src="qrgenerate.js"></script>
+<script src="wheelengine.js"></script>
+<script src="script.js"></script>
+<script src="qrgenerate.js"></script>
 
 </body>
 </html>
