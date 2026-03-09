@@ -709,6 +709,49 @@ body{
   font-weight:600;
 }
 
+/* ===========================
+   ACHIEVEMENT GALLERY
+=========================== */
+
+.achievement-slider{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  padding:10px 0 25px;
+}
+
+.achievement-track{
+  display:flex;
+  gap:14px;
+  transition:transform .35s ease;
+}
+
+.achievement-track img{
+  width:150px;
+  height:150px;
+  border-radius:14px;
+  object-fit:cover;
+  flex-shrink:0;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+}
+
+.achievement-indicators{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:10px;
+}
+
+.achievement-indicators span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.3);
+}
+
+.achievement-indicators span.active{
+  background:white;
+}
 
 /* ===========================
    ENTERPRISE POPUP
