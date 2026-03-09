@@ -6,19 +6,33 @@ window.addEventListener("DOMContentLoaded",()=>{
 
 const phone = document.getElementById("phone");
 const qrPopup = document.getElementById("qrPopup");
+
+const zoom = document.getElementById("qrZoom");
+const zoomImg = document.getElementById("qrZoomImg");
+
 const VIEWER_UNLOCK_CODE = "881909";
+
 const qrState = new Map();
 
 let qrWheel;
 let achievementWheel;
+
+let activePopup=null;
+
+let sessionTimer=null;
+let wrongAttempts=0;
+
 
 /* ===========================
    SCALE CARD
 =========================== */
 
 function scaleCard(){
+
   const scale = Math.min(innerWidth/360, innerHeight/700);
+
   phone.style.transform = `scale(${scale})`;
+
 }
 
 scaleCard();
@@ -28,6 +42,7 @@ window.addEventListener(
   "resize",
   ()=>requestAnimationFrame(scaleCard)
 );
+
 
 /* ===========================
    THEME
@@ -52,6 +67,7 @@ if(localStorage.getItem("theme")==="light"){
   document.body.classList.add("light");
 }
 
+
 /* ===========================
    DEVICE ORIENTATION
 =========================== */
@@ -69,6 +85,7 @@ if(window.DeviceOrientationEvent){
 
 }
 
+
 /* ===========================
    NFC ANIMATION
 =========================== */
@@ -83,6 +100,7 @@ if(params.has("nfc")){
   );
 
 }
+
 
 /* ===========================
    QR WHEEL
@@ -112,6 +130,7 @@ function initQRWheel(){
 
 }
 
+
 /* ===========================
    ACHIEVEMENT WHEEL
 =========================== */
@@ -140,6 +159,7 @@ function initAchievementWheel(){
 
 }
 
+
 /* ===========================
    QR SLIDER
 =========================== */
@@ -166,9 +186,11 @@ function loadQRSlider(slider){
     img.src = `assets/qr/${group}/${index}.png`;
 
     img.onload = ()=>{
+
       images.push(img.src);
       index++;
       tryLoad();
+
     };
 
     img.onerror = build;
@@ -180,8 +202,10 @@ function loadQRSlider(slider){
     const count = Math.min(maxAllowed, images.length);
 
     if(count===0){
+
       track.innerHTML = "<div class='qr-empty'>No QR</div>";
       return;
+
     }
 
     for(let i=0;i<count;i++){
@@ -191,12 +215,15 @@ function loadQRSlider(slider){
       track.appendChild(el);
 
       const dot = document.createElement("span");
+
       if(i===0) dot.classList.add("active");
+
       indicatorBox.appendChild(dot);
 
     }
 
     qrState.set(slider,0);
+
     track.dataset.x = 0;
 
     enableQRSwipe(slider);
@@ -207,6 +234,7 @@ function loadQRSlider(slider){
   tryLoad();
 
 }
+
 
 function enableQRSwipe(slider){
 
@@ -224,6 +252,7 @@ function enableQRSwipe(slider){
   slider.addEventListener("touchstart",e=>{
 
     dragging=true;
+
     startX=e.touches[0].clientX;
 
     track.style.transition="none";
@@ -256,6 +285,7 @@ function enableQRSwipe(slider){
     const total=track.children.length;
 
     let index=Math.round(-currentX/STEP);
+
     index=Math.max(0,Math.min(index,total-1));
 
     const snappedX=-index*STEP;
@@ -269,6 +299,7 @@ function enableQRSwipe(slider){
   });
 
 }
+
 
 function updateQR(slider){
 
@@ -286,22 +317,22 @@ function updateQR(slider){
   track.style.transform=`translateX(${x}px)`;
 
   dots.forEach(d=>d.classList.remove("active"));
+
   if(dots[index]) dots[index].classList.add("active");
 
 }
 
+
 /* ===========================
    QR ZOOM
 =========================== */
-
-const zoom = document.getElementById("qrZoom");
-const zoomImg = document.getElementById("qrZoomImg");
 
 document.addEventListener("click",e=>{
 
   if(!qrPopup?.classList.contains("active")) return;
 
   const img=e.target.closest(".qr-track img");
+
   if(!img) return;
 
   zoomImg.src=img.src;
@@ -316,11 +347,10 @@ zoom?.addEventListener("click",()=>{
 
 });
 
+
 /* ===========================
    POPUP MANAGER
 =========================== */
-
-let activePopup=null;
 
 function closeAllPopups(){
 
@@ -353,6 +383,7 @@ function openPopup(id){
 
 }
 
+
 /* ===========================
    BUTTON EVENTS
 =========================== */
@@ -375,6 +406,7 @@ document
 
 });
 
+
 document
 .getElementById("btn-achievement")
 ?.addEventListener("click",()=>{
@@ -387,6 +419,7 @@ document
 
 });
 
+
 document
 .getElementById("btn-enterprise")
 ?.addEventListener("click",()=>{
@@ -395,9 +428,11 @@ document
 
 });
 
+
 document
 .querySelector(".overlay")
 ?.addEventListener("click",closeAllPopups);
+
 
 document
 .querySelectorAll(".popup .close")
@@ -407,12 +442,12 @@ document
 
 });
 
+
 /* ===========================
    SESSION TIMEOUT
 =========================== */
 
 const SESSION_TIMEOUT = 20*60*1000;
-let sessionTimer=null;
 
 function resetSessionTimer(){
 
@@ -437,6 +472,7 @@ function resetSessionTimer(){
 
 resetSessionTimer();
 
+
 function expireSession(){
 
   closeAllPopups();
@@ -447,11 +483,10 @@ function expireSession(){
 
 }
 
+
 /* ===========================
    UNLOCK OVERLAY
 =========================== */
-
-let wrongAttempts=0;
 
 function showUnlockOverlay(){
 
@@ -513,6 +548,11 @@ function showUnlockOverlay(){
 
 }
 
+
+/* ===========================
+   CLOSE PAGE
+=========================== */
+
 function closeLandingpage(){
 
   document.body.innerHTML=`
@@ -524,11 +564,13 @@ function closeLandingpage(){
 
 }
 
+
 /* ===========================
    UTIL
 =========================== */
 
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
+
 
 window.downloadVCF=()=>{
 
