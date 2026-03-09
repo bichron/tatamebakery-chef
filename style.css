@@ -71,7 +71,7 @@ body{
              inset 0 0 .5px rgba(255,255,255,.2);
   animation:float 6s ease-in-out infinite alternate;
   transform-origin:center;
-  opacity:0;
+  opacity:1;
   position:relative;
   overflow:hidden;
 }
@@ -104,7 +104,7 @@ body{
 }
 
 .phone.loaded{
-  animation:float 6s ease-in-out infinite alternate, fadeIn .6s ease forwards;
+  animation:float 6s ease-in-out infinite alternate;
 }
 
 @keyframes fadeIn{
@@ -271,7 +271,7 @@ body{
   opacity:0;
   visibility:hidden;
   transition:.4s;
-  z-index:100;
+  z-index:10001;
   background:transparent;   /* sửa */
 }
 
@@ -296,6 +296,7 @@ body{
   overflow:visible;
   transform:scale(.85);
   transition:.4s;
+  isolation:isolate;
 }
 
 /* Chỉ định riêng màu cho giá trị */
