@@ -245,7 +245,7 @@ body{
   opacity:0;
   pointer-events:none;
   transition:all .35s ease;
-  z-index:9999;
+  z-index:9000;
 }
 
 .overlay.active{
@@ -261,7 +261,7 @@ body{
    POPUP BASE
 =========================== */
 .popup{
-  position:absolute;
+  position:fixed;
   inset:0;
   background:rgba(0,0,0,.7);
   display:flex;
@@ -271,7 +271,7 @@ body{
   opacity:0;
   visibility:hidden;
   transition:.4s;
-  z-index:10001;
+  z-index:10000;
   background:transparent;   /* sửa */
 }
 
