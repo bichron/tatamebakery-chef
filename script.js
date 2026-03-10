@@ -284,10 +284,12 @@ function enableQRSwipe(slider){
     const baseX=parseFloat(track.dataset.x||0);
     const dx=e.changedTouches[0].clientX-startX;
 
+    const currentX=baseX+dx;
+
     const total=track.children.length;
 
     let index=Math.round(-currentX/STEP);
-
+     
     index=Math.max(0,Math.min(index,total-1));
 
     const snappedX=-index*STEP;
@@ -312,9 +314,9 @@ function updateQR(slider){
     slider.querySelector(".achievement-track") ||
     slider.querySelector(".shop-track");
   
-   const dots = slider.querySelectorAll(
-  ".qr-indicators span, .achievement-indicators span"
-);
+  const dots = slider.querySelectorAll(
+  ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
+  );
 
   const STEP=164;
   const x=-index*STEP;
