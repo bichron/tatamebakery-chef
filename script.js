@@ -434,6 +434,20 @@ function closeShopPopup(){
   document.body.classList.remove("popup-open");
 
 }
+
+let shopWheel;
+
+function initShopWheel(){
+
+  if(shopWheel) return;
+
+  shopWheel = new WheelEngine({
+    wheelId:"shopWheel",
+    panelClass:"wheelPanel",
+    radius:80
+  });
+
+}
    
 /* ===========================
    POPUP MANAGER
