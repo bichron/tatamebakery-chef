@@ -10,7 +10,7 @@ const qrPopup = document.getElementById("qrPopup");
 const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
 
-const VIEWER_UNLOCK_CODE = "881909";
+const VIEWER_UNLOCK_CODE = "093777";
 
 const qrState = new Map();
 
