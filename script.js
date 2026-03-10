@@ -416,7 +416,25 @@ zoom?.addEventListener("click",()=>{
 
 });
 
+/* ===========================
+   SHOP POPUP
+=========================== */
 
+function openShopPopup(){
+
+  document.getElementById("shopPopup").classList.add("show");
+  document.body.classList.add("popup-open");
+
+  initShopWheel();
+}
+
+function closeShopPopup(){
+
+  document.getElementById("shopPopup").classList.remove("show");
+  document.body.classList.remove("popup-open");
+
+}
+   
 /* ===========================
    POPUP MANAGER
 =========================== */
