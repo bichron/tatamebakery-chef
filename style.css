@@ -880,6 +880,31 @@ opacity:.7;
 }
 
 /* ===========================
+   PRODUCT POPUP
+=========================== */
+
+.qty-box{
+
+display:flex;
+justify-content:center;
+gap:10px;
+
+margin:15px 0;
+
+}
+
+.qty-box button{
+
+width:32px;
+height:32px;
+
+border-radius:8px;
+
+border:none;
+
+}
+
+/* ===========================
    ENTERPRISE POPUP
 =========================== */
 
