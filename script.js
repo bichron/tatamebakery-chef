@@ -266,6 +266,8 @@ function enableQRSwipe(slider){
   slider.addEventListener("touchmove",e=>{
 
     if(!dragging) return;
+    
+    e.preventDefault();
 
     const baseX=parseFloat(track.dataset.x||0);
     const dx=e.touches[0].clientX-startX;
@@ -335,6 +337,7 @@ function updateQR(slider){
    LOAD GALLERY
 =========================== */
 function loadAchievementSlider(slider){
+  delete slider.dataset.swipeBound;
 
   const track = slider.querySelector(".achievement-track");
   const indicatorBox = slider.querySelector(".achievement-indicators");
@@ -452,6 +455,7 @@ function initShopWheel(){
 =========================== */
 
 function loadShopSlider(slider){
+  delete slider.dataset.swipeBound;
 
   const track = slider.querySelector(".shop-track");
   const indicatorBox = slider.querySelector(".shop-indicators");
