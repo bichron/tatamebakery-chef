@@ -724,6 +724,7 @@ body{
   display:flex;
   gap:14px;
   transition:transform .35s ease;
+  will-change:transform;
 }
 
 .achievement-track img{
