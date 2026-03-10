@@ -758,61 +758,78 @@ body{
    SHOP POPUP
 =========================== */
 
-.shopWheelContainer{
-  width:100%;
-  height:360px;
-  perspective:1000px;
-  margin-top:20px;
+.shop-content{
+max-width:340px;
 }
 
-.shopSlider{
-  width:100%;
-  overflow:hidden;
+.shop-wheel-mask{
+margin-bottom:20px;
 }
 
-.shopTrack{
-  display:flex;
-  transition:transform .4s ease;
+.shop-panels{
+position:relative;
 }
 
-.shopTrack img{
-  width:150px;
-  height:150px;
-  object-fit:cover;
-  border-radius:14px;
-  margin-right:14px;
+.shop-panel{
+display:none;
 }
 
-.shopIndicator{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin-top:8px;
+.shop-panel.active{
+display:block;
 }
 
-.shopIndicator span{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:rgba(255,255,255,.4);
+
+/* ===========================
+   PRODUCT SLIDER
+=========================== */
+
+.shop-slider{
+overflow:hidden;
+padding:10px 0;
 }
 
-.shopIndicator span.active{
-  background:white;
+.shop-track{
+display:flex;
+gap:14px;
+transition:transform .35s ease;
 }
 
-.shopInfo{
-  text-align:center;
-  margin-top:12px;
+.shop-track img{
+
+width:150px;
+height:150px;
+
+object-fit:cover;
+
+border-radius:14px;
+
+flex-shrink:0;
+
 }
 
-.shopInfo h3{
-  font-size:16px;
+
+.shop-indicators{
+
+display:flex;
+justify-content:center;
+gap:6px;
+margin-top:10px;
+
 }
 
-.shopInfo p{
-  font-size:14px;
-  opacity:.7;
+.shop-indicators span{
+
+width:6px;
+height:6px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.3);
+
+}
+
+.shop-indicators span.active{
+background:white;
 }
 
 /* ===========================
