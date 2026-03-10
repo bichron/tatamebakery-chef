@@ -397,7 +397,7 @@ function loadAchievementSlider(slider){
 
 document.addEventListener("click",e=>{
   const img = e.target.closest(
-    ".qr-track img, .achievement-track img"
+    ".qr-track img, .achievement-track img, .shop-track img"
   );
 
   if(!img) return;
@@ -417,20 +417,97 @@ zoom?.addEventListener("click",()=>{
 });
 
 /* ===========================
-   SHOP POPUP
+   SHOP WHEEL
 =========================== */
-
-let shopWheel;
 
 function initShopWheel(){
 
-  if(shopWheel) return;
-
   shopWheel = new WheelEngine({
-    wheelId:"shopWheel",
-    panelClass:"wheelPanel",
-    radius:80
+
+    mask:"#shopPopup .wheel-mask",
+
+    radius:80,
+
+    onChange:(index)=>{
+
+      document
+      .querySelectorAll("#shopPopup .shop-panel")
+      .forEach((p,i)=>{
+
+        p.classList.toggle("active", i===index);
+
+      });
+
+    }
+
   });
+
+}
+
+/* ===========================
+   SHOP SLIDER
+=========================== */
+
+function loadShopSlider(slider){
+
+  const track = slider.querySelector(".shop-track");
+  const indicatorBox = slider.querySelector(".shop-indicators");
+
+  const group = slider.dataset.group;
+  const maxAllowed = parseInt(slider.dataset.max);
+
+  track.innerHTML="";
+  indicatorBox.innerHTML="";
+
+  let images=[];
+  let index=1;
+
+  function tryLoad(){
+
+    const img=new Image();
+
+    img.src=`assets/shop/${group}/${index}.jpg`;
+
+    img.onload=()=>{
+      images.push(img.src);
+      index++;
+      tryLoad();
+    };
+
+    img.onerror=build;
+
+  }
+
+  function build(){
+
+    const count=Math.min(maxAllowed,images.length);
+
+    for(let i=0;i<count;i++){
+
+      const el=document.createElement("img");
+
+      el.src=images[i];
+
+      track.appendChild(el);
+
+      const dot=document.createElement("span");
+
+      if(i===0) dot.classList.add("active");
+
+      indicatorBox.appendChild(dot);
+
+    }
+
+    qrState.set(slider,0);
+
+    track.dataset.x = 0;
+
+    enableQRSwipe(slider);
+    updateQR(slider);
+
+  }
+
+  tryLoad();
 
 }
    
@@ -479,6 +556,12 @@ document
 ?.addEventListener("click",()=>{
 
   if(!shopWheel) initShopWheel();
+
+  shopWheel.go(0);
+
+  document
+  .querySelectorAll("#shopPopup .shop-slider")
+  .forEach(loadShopSlider);
 
   openPopup("shopPopup");
 
