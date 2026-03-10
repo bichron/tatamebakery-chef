@@ -644,6 +644,65 @@ function loadShopSlider(slider){
   tryLoad();
 
 }
+
+/* ===========================
+   ORDER TEXT GENERATOR
+=========================== */
+
+let orderProduct="";
+let orderPrice=0;
+let orderQty=1;
+
+function openProduct(name,price,img){
+
+orderProduct=name;
+orderPrice=price;
+
+document.getElementById("productName").textContent=name;
+document.getElementById("productPrice").textContent=price+"đ";
+document.getElementById("productImage").src=img;
+
+document.getElementById("qtyValue").textContent=1;
+
+orderQty=1;
+
+openPopup("productPopup");
+
+}
+
+// QUANTITY LOGIC
+document.getElementById("qtyPlus").onclick=()=>{
+
+orderQty++;
+
+document.getElementById("qtyValue").textContent=orderQty;
+
+};
+
+document.getElementById("qtyMinus").onclick=()=>{
+
+orderQty=Math.max(1,orderQty-1);
+
+document.getElementById("qtyValue").textContent=orderQty;
+
+};
+
+// GENERATE ORDER TEXT
+document.getElementById("orderBtn").onclick=()=>{
+
+const text=
+`Tatame Bakery Order
+
+Product: ${orderProduct}
+Qty: ${orderQty}
+
+Thank you!`;
+
+navigator.clipboard.writeText(text);
+
+alert("Order copied. Paste into chat.");
+
+};
    
 /* ===========================
    POPUP MANAGER
