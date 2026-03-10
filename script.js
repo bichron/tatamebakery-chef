@@ -602,12 +602,27 @@ function loadShopSlider(slider){
     const count=Math.min(maxAllowed,images.length);
 
     for(let i=0;i<count;i++){
+      const card=document.createElement("div");
 
-      const el=document.createElement("img");
+      card.className="product-card";
 
-      el.src=images[i];
+      card.innerHTML=`
+      <img src="${images[i]}">
 
-      track.appendChild(el);
+      <div class="product-info">
+
+      <div class="product-name">
+      Product ${i+1}
+      </div>
+
+      <div class="product-price">
+      45.000đ
+      </div>
+
+      </div>
+      `;
+
+      track.appendChild(card);
 
       const dot=document.createElement("span");
 
