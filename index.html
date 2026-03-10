@@ -369,7 +369,7 @@ Close
 
 
 <div class="achievement-panel active">
-<div class="achievement-slider" data-group="cake" data-max="10">
+<div class="achievement-slider" data-group="cake" data-max="12">
 <div class="achievement-track"></div>
 <div class="achievement-indicators"></div>
 </div>
@@ -377,7 +377,7 @@ Close
 
 
 <div class="achievement-panel">
-<div class="achievement-slider" data-group="dessert" data-max="10">
+<div class="achievement-slider" data-group="dessert" data-max="12">
 <div class="achievement-track"></div>
 <div class="achievement-indicators"></div>
 </div>
@@ -385,7 +385,7 @@ Close
 
 
 <div class="achievement-panel">
-<div class="achievement-slider" data-group="bread" data-max="10">
+<div class="achievement-slider" data-group="bread" data-max="12">
 <div class="achievement-track"></div>
 <div class="achievement-indicators"></div>
 </div>
@@ -393,7 +393,7 @@ Close
 
 
 <div class="achievement-panel">
-<div class="achievement-slider" data-group="sweetbread" data-max="10">
+<div class="achievement-slider" data-group="sweetbread" data-max="12">
 <div class="achievement-track"></div>
 <div class="achievement-indicators"></div>
 </div>
@@ -401,7 +401,7 @@ Close
 
 
 <div class="achievement-panel">
-<div class="achievement-slider" data-group="savory" data-max="10">
+<div class="achievement-slider" data-group="savory" data-max="12">
 <div class="achievement-track"></div>
 <div class="achievement-indicators"></div>
 </div>
@@ -409,7 +409,7 @@ Close
 
 
 <div class="achievement-panel">
-<div class="achievement-slider" data-group="snack" data-max="10">
+<div class="achievement-slider" data-group="snack" data-max="12">
 <div class="achievement-track"></div>
 <div class="achievement-indicators"></div>
 </div>
@@ -429,105 +429,102 @@ Close
 </div>
 
 
-<!-- ===========================
+<!-- ======================================================
      SHOP POPUP
+====================================================== -->
+<div class="popup shopPopup" id="shopPopup">
+
+<div class="popup-content shop-content">
+
+<h3>SHOP / PRODUCT</h3>
+
+<!-- ===========================
+     CATEGORY WHEEL
 =========================== -->
+<div class="wheel-mask shop-wheel-mask">
 
-<div class="popup" id="shopPopup">
+<div class="wheel-container">
 
-  <div class="popup-header">
-    <h2>Shop</h2>
-    <button class="close-btn" onclick="closeShopPopup()">✕</button>
-  </div>
+<div class="wheel">
 
-  <div class="popup-content">
+<div class="wheel-item"><span>CAKE</span></div>
+<div class="wheel-item"><span>DESSERT</span></div>
+<div class="wheel-item"><span>BREAD</span></div>
+<div class="wheel-item"><span>SWEET BREAD</span></div>
+<div class="wheel-item"><span>SAVORY</span></div>
+<div class="wheel-item"><span>SNACK</span></div>
 
-    <!-- Wheel Container -->
-    <div class="shopWheelContainer">
+</div>
 
-      <div class="wheelMask">
+</div>
 
-        <div class="wheel" id="shopWheel">
+</div>
 
-          <!-- PRODUCT 1 -->
-          <div class="wheelPanel">
 
-            <div class="shopSlider">
 
-              <div class="shopTrack">
+<!-- ===========================
+     PRODUCT PANELS
+=========================== -->
+<div class="shop-panels">
 
-                <img src="img/shop/product1/1.jpg">
-                <img src="img/shop/product1/2.jpg">
-                <img src="img/shop/product1/3.jpg">
 
-              </div>
+<div class="shop-panel active">
+<div class="shop-slider" data-group="cake" data-max="20">
+<div class="shop-track"></div>
+<div class="shop-indicators"></div>
+</div>
+</div>
 
-              <div class="shopIndicator"></div>
 
-            </div>
+<div class="shop-panel">
+<div class="shop-slider" data-group="dessert" data-max="20">
+<div class="shop-track"></div>
+<div class="shop-indicators"></div>
+</div>
+</div>
 
-            <div class="shopInfo">
-              <h3>Croissant Butter</h3>
-              <p>45.000đ</p>
-            </div>
 
-          </div>
+<div class="shop-panel">
+<div class="shop-slider" data-group="bread" data-max="20">
+<div class="shop-track"></div>
+<div class="shop-indicators"></div>
+</div>
+</div>
 
-          <!-- PRODUCT 2 -->
-          <div class="wheelPanel">
 
-            <div class="shopSlider">
+<div class="shop-panel">
+<div class="shop-slider" data-group="sweetbread" data-max="20">
+<div class="shop-track"></div>
+<div class="shop-indicators"></div>
+</div>
+</div>
 
-              <div class="shopTrack">
 
-                <img src="img/shop/product2/1.jpg">
-                <img src="img/shop/product2/2.jpg">
-                <img src="img/shop/product2/3.jpg">
+<div class="shop-panel">
+<div class="shop-slider" data-group="savory" data-max="20">
+<div class="shop-track"></div>
+<div class="shop-indicators"></div>
+</div>
+</div>
 
-              </div>
 
-              <div class="shopIndicator"></div>
+<div class="shop-panel">
+<div class="shop-slider" data-group="snack" data-max="20">
+<div class="shop-track"></div>
+<div class="shop-indicators"></div>
+</div>
+</div>
 
-            </div>
 
-            <div class="shopInfo">
-              <h3>Tiramisu</h3>
-              <p>65.000đ</p>
-            </div>
+</div>
 
-          </div>
 
-          <!-- PRODUCT 3 -->
-          <div class="wheelPanel">
 
-            <div class="shopSlider">
+<div class="close">
+Close
+</div>
 
-              <div class="shopTrack">
-
-                <img src="img/shop/product3/1.jpg">
-                <img src="img/shop/product3/2.jpg">
-                <img src="img/shop/product3/3.jpg">
-
-              </div>
-
-              <div class="shopIndicator"></div>
-
-            </div>
-
-            <div class="shopInfo">
-              <h3>Matcha Roll</h3>
-              <p>55.000đ</p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </div>
 
