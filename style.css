@@ -639,7 +639,7 @@ body{
 
   transition:.35s ease;
 
-  z-index:10100;
+  z-index:20000;
 }
 
 .qr-zoom.active{
