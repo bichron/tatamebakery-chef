@@ -242,12 +242,14 @@ function enableQRSwipe(slider){
 
   slider.dataset.swipeBound="1";
 
-  const track = slider.querySelector(".qr-track");
+  const track =
+    slider.querySelector(".qr-track") ||
+    slider.querySelector(".achievement-track");
 
   let startX=0;
   let dragging=false;
 
-  const STEP = 164;
+  const STEP = 164; //dùng chung cho QR và achievement
 
   slider.addEventListener("touchstart",e=>{
 
@@ -305,8 +307,12 @@ function updateQR(slider){
 
   const index=qrState.get(slider)??0;
 
-  const track=slider.querySelector(".qr-track");
-  const dots=slider.querySelectorAll(".qr-indicators span");
+  const track =
+    slider.querySelector(".qr-track") ||
+    slider.querySelector(".achievement-track");
+  const dots = slider.querySelectorAll(
+    ".qr-indicators span, .achievement-indicators span"
+   );
 
   const STEP=164;
   const x=-index*STEP;
@@ -372,6 +378,13 @@ function loadAchievementSlider(slider){
 
     }
 
+    qrState.set(slider,0);
+
+    track.dataset.x = 0;
+
+    enableQRSwipe(slider);
+    updateQR(slider);
+
   }
 
   tryLoad();
@@ -379,14 +392,19 @@ function loadAchievementSlider(slider){
 }
    
 /* ===========================
-   QR ZOOM
+   ZOOM IMG
 =========================== */
 
 document.addEventListener("click",e=>{
 
-  if(!qrPopup?.classList.contains("active")) return;
+  if(
+    !qrPopup?.classList.contains("active") &&
+    !document.getElementById("achievementPopup")?.classList.contains("active")
+  ) return;
 
-  const img=e.target.closest(".qr-track img");
+  const img = e.target.closest(
+    ".qr-track img, .achievement-track img"
+  );
 
   if(!img) return;
 
