@@ -515,7 +515,7 @@ function loadAchievementSlider(slider){
 
 document.addEventListener("click",e=>{
   const img = e.target.closest(
-    ".qr-track img, .achievement-track img, .shop-track img"
+    ".qr-track img, .achievement-track img"
   );
 
   if(!img) return;
@@ -534,6 +534,30 @@ zoom?.addEventListener("click",()=>{
 
 });
 
+/* ===========================
+   PRODUCT POPUP
+=========================== */
+
+document.addEventListener("click",e=>{
+
+  const card = e.target.closest(".product-card");
+
+  if(!card) return;
+
+  const img = card.querySelector("img").src;
+  const name = card.querySelector(".product-name").textContent;
+  const price = card.querySelector(".product-price").textContent;
+
+  document.getElementById("productImage").src = img;
+  document.getElementById("productName").textContent = name;
+  document.getElementById("productPrice").textContent = price;
+
+  document.getElementById("qtyValue").textContent = 1;
+
+  openPopup("productPopup");
+
+});
+   
 /* ===========================
    SHOP WHEEL
 =========================== */
