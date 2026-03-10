@@ -16,6 +16,7 @@ const qrState = new Map();
 
 let qrWheel;
 let achievementWheel;
+let shopWheel;
 
 let activePopup=null;
 
@@ -244,7 +245,8 @@ function enableQRSwipe(slider){
 
   const track =
     slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track");
+    slider.querySelector(".achievement-track") ||
+    slider.querySelector(".shop-track");
 
   let startX=0;
   let dragging=false;
@@ -282,8 +284,6 @@ function enableQRSwipe(slider){
     const baseX=parseFloat(track.dataset.x||0);
     const dx=e.changedTouches[0].clientX-startX;
 
-    let currentX=baseX+dx;
-
     const total=track.children.length;
 
     let index=Math.round(-currentX/STEP);
@@ -309,10 +309,12 @@ function updateQR(slider){
 
   const track =
     slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track");
-  const dots = slider.querySelectorAll(
-    ".qr-indicators span, .achievement-indicators span"
-   );
+    slider.querySelector(".achievement-track") ||
+    slider.querySelector(".shop-track");
+  
+   const dots = slider.querySelectorAll(
+  ".qr-indicators span, .achievement-indicators span"
+);
 
   const STEP=164;
   const x=-index*STEP;
