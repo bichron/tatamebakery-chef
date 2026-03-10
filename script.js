@@ -392,21 +392,17 @@ function loadAchievementSlider(slider){
 }
    
 /* ===========================
-   ZOOM IMG
+   GLOBAL IMAGE ZOOM
 =========================== */
 
 document.addEventListener("click",e=>{
-
-  if(
-    !qrPopup?.classList.contains("active") &&
-    !document.getElementById("achievementPopup")?.classList.contains("active")
-  ) return;
-
   const img = e.target.closest(
     ".qr-track img, .achievement-track img"
   );
 
   if(!img) return;
+
+  e.stopPropagation();   // ⭐ QUAN TRỌNG
 
   zoomImg.src=img.src;
 
