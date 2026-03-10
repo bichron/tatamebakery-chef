@@ -275,33 +275,32 @@ function enableQRSwipe(slider){
 
   },{passive:true});
 
-  slider.addEventListener("touchend",e=>{
+slider.addEventListener("touchend",e=>{
 
-    if(!dragging) return;
+  if(!dragging) return;
 
-    dragging=false;
+  dragging=false;
 
-    const baseX=parseFloat(track.dataset.x||0);
-    const dx=e.changedTouches[0].clientX-startX;
+  const baseX=parseFloat(track.dataset.x||0);
+  const dx=e.changedTouches[0].clientX-startX;
 
-    const currentX=baseX+dx;
+  const currentX=baseX+dx;
 
-    const total=track.children.length;
+  const total=track.children.length;
 
-    let index=Math.round(-currentX/STEP);
-     
-    index=Math.max(0,Math.min(index,total-1));
+  let index=Math.round(-currentX/STEP);
 
-    const snappedX=-index*STEP;
+  index=Math.max(0,Math.min(index,total-1));
 
-    track.dataset.x=snappedX;
+  const snappedX=-index*STEP;
 
-    qrState.set(slider,index);
+  track.dataset.x=snappedX;
 
-    updateQR(slider);
+  qrState.set(slider,index);
 
-  });
+  updateQR(slider);
 
+});
 }
 
 
