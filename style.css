@@ -755,6 +755,67 @@ body{
 }
 
 /* ===========================
+   SHOP POPUP
+=========================== */
+
+.shopWheelContainer{
+  width:100%;
+  height:360px;
+  perspective:1000px;
+  margin-top:20px;
+}
+
+.shopSlider{
+  width:100%;
+  overflow:hidden;
+}
+
+.shopTrack{
+  display:flex;
+  transition:transform .4s ease;
+}
+
+.shopTrack img{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:14px;
+  margin-right:14px;
+}
+
+.shopIndicator{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:8px;
+}
+
+.shopIndicator span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:rgba(255,255,255,.4);
+}
+
+.shopIndicator span.active{
+  background:white;
+}
+
+.shopInfo{
+  text-align:center;
+  margin-top:12px;
+}
+
+.shopInfo h3{
+  font-size:16px;
+}
+
+.shopInfo p{
+  font-size:14px;
+  opacity:.7;
+}
+
+/* ===========================
    ENTERPRISE POPUP
 =========================== */
 
