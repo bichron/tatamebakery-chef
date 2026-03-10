@@ -420,21 +420,6 @@ zoom?.addEventListener("click",()=>{
    SHOP POPUP
 =========================== */
 
-function openShopPopup(){
-
-  document.getElementById("shopPopup").classList.add("show");
-  document.body.classList.add("popup-open");
-
-  initShopWheel();
-}
-
-function closeShopPopup(){
-
-  document.getElementById("shopPopup").classList.remove("show");
-  document.body.classList.remove("popup-open");
-
-}
-
 let shopWheel;
 
 function initShopWheel(){
@@ -488,6 +473,17 @@ function openPopup(id){
 /* ===========================
    BUTTON EVENTS
 =========================== */
+
+document
+.getElementById("btn-shop")
+?.addEventListener("click",()=>{
+
+  if(!shopWheel) initShopWheel();
+
+  openPopup("shopPopup");
+
+});
+   
 
 document
 .getElementById("btn-qrcode")
