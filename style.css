@@ -1057,20 +1057,25 @@ font-weight:600;
 
 width:100%;
 
-margin-top:14px;
-padding:12px;
+padding:12px 0;
 
 border:none;
-border-radius:12px;
+
+border-radius:14px;
+
+font-size:16px;
+font-weight:700;
+
+letter-spacing:.6px;
+
+cursor:pointer;
 
 background:var(--gold);
 
-color:white;
+color:#fff;
 
-font-weight:600;
-font-size:14px;
-
-cursor:pointer;
+box-shadow:
+0 8px 18px rgba(0,0,0,.3);
 
 transition:.25s;
 
@@ -1078,13 +1083,10 @@ transition:.25s;
 
 #copyCartOrder:hover{
 
-filter:brightness(1.1);
+transform:translateY(-2px);
 
-}
-
-#copyCartOrder:active{
-
-transform:scale(.97);
+box-shadow:
+0 12px 22px rgba(0,0,0,.35);
 
 }
 
