@@ -732,20 +732,33 @@ function renderCart(){
 
 const box = document.getElementById("cartItems");
 
-if(!box) return;
+box.innerHTML="";
 
-box.innerHTML = "";
+if(Object.keys(cart).length===0){
 
-Object.keys(cart).forEach(name => {
+box.innerHTML="<div class='cart-empty'>Cart empty</div>";
+return;
+
+}
+
+Object.keys(cart).forEach(name=>{
 
 const qty = cart[name];
 
-const row = document.createElement("div");
+const row=document.createElement("div");
 
-row.className = "cart-item";
+row.className="cart-item";
 
-row.innerHTML = `
-<span>${name} × ${qty}</span>
+row.innerHTML=`
+
+<span class="cart-name">${name}</span>
+
+<span class="cart-qty">×${qty}</span>
+
+<button class="cart-minus" data-name="${name}">
+–
+</button>
+
 `;
 
 box.appendChild(row);
@@ -757,13 +770,20 @@ box.appendChild(row);
 // REMOVE ITEM   
 document.addEventListener("click",e=>{
 
-if(!e.target.matches(".cart-item button")) return;
+if(!e.target.matches(".cart-minus")) return;
 
-const name=e.target.dataset.name;
+const name = e.target.dataset.name;
 
+cart[name]--;
+
+if(cart[name] <= 0){
 delete cart[name];
+}
 
 renderCart();
+updateQtyDisplay();
+
+});
 
 });
 
@@ -908,7 +928,7 @@ document
 
    
 document
-.getElementById("btn-chat")
+.getElementById("btn-cart")
 ?.addEventListener("click",()=>{
 
 let text="Tatame Bakery Order\n\n";
