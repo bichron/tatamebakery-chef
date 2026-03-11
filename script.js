@@ -670,63 +670,86 @@ function loadShopSlider(slider){
 }
 
 /* ===========================
-   ORDER TEXT GENERATOR
+   CART STATE
 =========================== */
 
-let orderProduct="";
-let orderPrice=0;
-let orderQty=1;
+let cart = {};
+let orderQty = 1;
 
-function openProduct(name,price,img){
+// ADD TO CART   
+document.getElementById("orderBtn").onclick=()=>{
 
-orderProduct=name;
-orderPrice=price;
+const name = document.getElementById("productName").textContent;
+const qty = parseInt(document.getElementById("qtyValue").textContent);
 
-document.getElementById("productName").textContent=name;
-document.getElementById("productPrice").textContent=price+"đ";
-document.getElementById("productImage").src=img;
+if(!cart[name]) cart[name]=0;
 
-document.getElementById("qtyValue").textContent=1;
+cart[name]+=qty;
 
-orderQty=1;
+renderCart();
 
-openPopup("productPopup");
+};
+
+// RENDER CART   
+function renderCart(){
+
+const box = document.getElementById("cartItems");
+
+box.innerHTML="";
+
+Object.keys(cart).forEach(name=>{
+
+const qty = cart[name];
+
+const row=document.createElement("div");
+
+row.className="cart-item";
+
+row.innerHTML=`
+<span>${name} x${qty}</span>
+<button data-name="${name}">remove</button>
+`;
+
+box.appendChild(row);
+
+});
 
 }
 
-// QUANTITY LOGIC
-document.getElementById("qtyPlus").onclick=()=>{
+// REMOVE ITEM   
+document.addEventListener("click",e=>{
 
-orderQty++;
+if(!e.target.matches(".cart-item button")) return;
 
-document.getElementById("qtyValue").textContent=orderQty;
+const name=e.target.dataset.name;
 
-};
+delete cart[name];
 
-document.getElementById("qtyMinus").onclick=()=>{
+renderCart();
 
-orderQty=Math.max(1,orderQty-1);
+});
 
-document.getElementById("qtyValue").textContent=orderQty;
+// GENERATE ORDER TEXT   
+function generateOrder(){
 
-};
+let text="Tatame Bakery Order\n\n";
 
-// GENERATE ORDER TEXT
-document.getElementById("orderBtn").onclick=()=>{
+Object.keys(cart).forEach(name=>{
 
-const text=
-`Tatame Bakery Order
+text+=`${name} x${cart[name]}\n`;
 
-Product: ${orderProduct}
-Qty: ${orderQty}
+});
 
-Thank you!`;
+text+="\nThank you!";
 
 navigator.clipboard.writeText(text);
 
-alert("Order copied. Paste into chat.");
+alert("Order copied to clipboard");
 
-};
+}
+
+// LỆNH NÚT ORDER   
+document.getElementById("copyOrder").onclick=generateOrder;   
    
 /* ===========================
    POPUP MANAGER
