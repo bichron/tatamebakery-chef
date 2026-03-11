@@ -17,6 +17,8 @@
   --glass:rgba(255,255,255,.05);
   --border:#8c7a4f;
   --gold:#ffd700;
+  --gold-soft:#ffec80;
+  --gold-dark:#caa400;
   --popup-bg:rgba(10,20,35,.88);
 }
 
@@ -31,6 +33,13 @@ body.light{
   --popup-bg:rgba(255,255,255,.92);
 }
 
+/* ===========================
+   UTILITY COLORS
+=========================== */
+
+.text-gold{
+color:var(--gold);
+}
 
 /* ===========================
    BODY + LAYOUT
