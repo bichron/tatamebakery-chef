@@ -767,6 +767,34 @@ box.appendChild(row);
 
 }
 
+// LOGIC COPY   
+document
+.getElementById("copyCartOrder")
+?.addEventListener("click",()=>{
+
+let text="Tatame Bakery Order\n\n";
+
+if(Object.keys(cart).length===0){
+
+alert("Your cart is empty.");
+return;
+
+}
+
+Object.keys(cart).forEach(name=>{
+
+text+=`${name} x${cart[name]}\n`;
+
+});
+
+text+="\nThank you!";
+
+navigator.clipboard.writeText(text);
+
+alert("Order copied. Paste into chat.");
+
+});
+   
 // REMOVE ITEM   
 document.addEventListener("click",e=>{
 
@@ -787,28 +815,6 @@ updateQtyDisplay();
 
 });
 
-// GENERATE ORDER TEXT   
-function generateOrder(){
-
-let text="Tatame Bakery Order\n\n";
-
-Object.keys(cart).forEach(name=>{
-
-text+=`${name} x${cart[name]}\n`;
-
-});
-
-text+="\nThank you!";
-
-navigator.clipboard.writeText(text);
-
-alert("Order copied to clipboard");
-
-}
-
-/* LỆNH NÚT ORDER   --- xem lại có bị thừa hay không ?
-// Nếu cần thì ktra HTML có hay không code: <button id="copyOrder">Copy Order</button>
-document.getElementById("copyOrder").onclick=generateOrder;    ĐÓNG TẠM*/
    
 /* ===========================
    POPUP MANAGER
@@ -926,33 +932,16 @@ document
 });
 
 
-   
 document
 .getElementById("btn-cart")
 ?.addEventListener("click",()=>{
 
-let text="Tatame Bakery Order\n\n";
+renderCart();
 
-if(Object.keys(cart).length===0){
+openPopup("cartPopup");
 
-alert("Your cart is empty.");
-return;
+});   
 
-}
-
-Object.keys(cart).forEach(name=>{
-
-text+=`${name} x${cart[name]}\n`;
-
-});
-
-text+="\nThank you!";
-
-navigator.clipboard.writeText(text);
-
-alert("Order copied. Paste into chat.");
-
-});
    
 /* ===========================
    SESSION TIMEOUT
