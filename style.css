@@ -1064,6 +1064,62 @@ box-shadow:
 
 }
 
+/* ===========================
+   CART
+=========================== */
+
+.cart-box{
+
+margin-top:15px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:12px;
+
+padding:10px;
+
+max-height:120px;
+
+overflow:auto;
+
+}
+
+.cart-box h4{
+
+font-size:13px;
+margin-bottom:6px;
+
+opacity:.7;
+
+}
+
+.cart-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+font-size:13px;
+
+margin-bottom:6px;
+
+}
+
+.cart-item button{
+
+border:none;
+
+background:transparent;
+
+color:#ff9f1c;
+
+cursor:pointer;
+
+font-size:12px;
+
+}
 
 /* ===========================
    POPUP CLOSE BUTTON
