@@ -684,6 +684,24 @@ function loadShopSlider(slider){
 let cart = {};
 let currentProduct = "";
 
+/* FIX CARET POSITION (INPUT QTY) */
+
+const qtyInput = document.getElementById("qtyValue");
+
+qtyInput?.addEventListener("focus", moveCaretToEnd);
+qtyInput?.addEventListener("click", moveCaretToEnd);
+
+function moveCaretToEnd(){
+
+const val = this.value;
+
+this.setSelectionRange(
+val.length,
+val.length
+);
+
+}
+   
 function updateQtyDisplay(){
 
 const qty = cart[currentProduct] || 0;
