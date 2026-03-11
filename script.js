@@ -688,7 +688,7 @@ function updateQtyDisplay(){
 
 const qty = cart[currentProduct] || 0;
 
-document.getElementById("qtyValue").textContent = qty;
+document.getElementById("qtyValue").value = qty;
 
 }   
 
@@ -726,7 +726,31 @@ renderCart();
 
 };   
    
+document
+.getElementById("qtyValue")
+?.addEventListener("change",()=>{
 
+if(!currentProduct) return;
+
+let val = parseInt(
+document.getElementById("qtyValue").value
+);
+
+if(isNaN(val) || val <= 0){
+
+delete cart[currentProduct];
+renderCart();
+updateQtyDisplay();
+return;
+
+}
+
+cart[currentProduct] = val;
+
+renderCart();
+
+});
+   
 // RENDER CART   
 function renderCart(){
 
