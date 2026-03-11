@@ -730,7 +730,14 @@ renderCart();
 // RENDER CART   
 function renderCart(){
 
-const box = document.getElementById("cartItems");
+const boxes = [
+document.getElementById("cartItems"),
+document.getElementById("cartPreview")
+];
+
+boxes.forEach(box=>{
+
+if(!box) return;
 
 box.innerHTML="";
 
@@ -750,18 +757,14 @@ const row=document.createElement("div");
 row.className="cart-item";
 
 row.innerHTML=`
-
 <span class="cart-name">${name}</span>
-
 <span class="cart-qty">×${qty}</span>
-
-<button class="cart-minus" data-name="${name}">
-–
-</button>
-
+<button class="cart-minus" data-name="${name}">–</button>
 `;
 
 box.appendChild(row);
+
+});
 
 });
 
