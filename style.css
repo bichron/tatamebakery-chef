@@ -1017,6 +1017,24 @@ min-width:24px;
 
 }
 
+.qty-box input{
+
+width:60px;
+height:32px;
+
+text-align:center;
+
+border-radius:8px;
+border:none;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+font-size:14px;
+font-weight:600;
+
+}
 
 /* ===========================
    ORDER BUTTON
