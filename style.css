@@ -1063,14 +1063,14 @@ border:none;
 
 border-radius:10px;
 
-font-size:14px;
-font-weight:700;
+font-size:12px;
+font-weight:300;
 
 letter-spacing:.6px;
 
 cursor:pointer;
 
-background:var(--gold);
+background:var(--gold-dark);
 
 color:#fff;
 
