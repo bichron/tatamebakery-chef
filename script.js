@@ -816,8 +816,6 @@ updateQtyDisplay();
 
 });
 
-});
-
    
 /* ===========================
    POPUP MANAGER
