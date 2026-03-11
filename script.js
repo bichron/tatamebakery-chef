@@ -932,7 +932,19 @@ document
 
 });
 
-
+/* == PRODUCT POPUP CLOSE → BACK TO SHOP == */
+document
+.querySelector("#productPopup .close")
+?.addEventListener("click",(e)=>{
+e.stopPropagation();
+document
+.getElementById("productPopup")
+.classList.remove("active");
+document
+.getElementById("shopPopup")
+.classList.add("active");
+});
+   
 document
 .getElementById("btn-cart")
 ?.addEventListener("click",()=>{
