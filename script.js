@@ -693,12 +693,16 @@ qtyInput?.addEventListener("click", moveCaretToEnd);
 
 function moveCaretToEnd(){
 
-const val = this.value;
+setTimeout(()=>{
 
-this.setSelectionRange(
+const val = qtyInput.value;
+
+qtyInput.setSelectionRange(
 val.length,
 val.length
 );
+
+},0);
 
 }
    
