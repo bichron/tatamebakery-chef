@@ -691,7 +691,8 @@ const qty = cart[currentProduct] || 0;
 document.getElementById("qtyValue").textContent = qty;
 
 }   
-   
+
+// ADD TO CART   
 document.getElementById("qtyPlus").onclick = () => {
 
 if(!currentProduct) return;
@@ -725,19 +726,6 @@ renderCart();
 
 };   
    
-// ADD TO CART   
-document.getElementById("orderBtn").onclick=()=>{
-
-const name = document.getElementById("productName").textContent;
-const qty = parseInt(document.getElementById("qtyValue").textContent);
-
-if(!cart[name]) cart[name]=0;
-
-cart[name]+=qty;
-
-renderCart();
-
-};
 
 // RENDER CART   
 function renderCart(){
