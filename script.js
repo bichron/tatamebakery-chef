@@ -748,9 +748,9 @@ alert("Order copied to clipboard");
 
 }
 
-// LỆNH NÚT ORDER   --- xem lại có bị thừa hay không ?
+/* LỆNH NÚT ORDER   --- xem lại có bị thừa hay không ?
 // Nếu cần thì ktra HTML có hay không code: <button id="copyOrder">Copy Order</button>
-document.getElementById("copyOrder").onclick=generateOrder;   
+document.getElementById("copyOrder").onclick=generateOrder;    ĐÓNG TẠM*/
    
 /* ===========================
    POPUP MANAGER
