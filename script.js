@@ -750,7 +750,7 @@ renderCart();
    
 document
 .getElementById("qtyValue")
-?.addEventListener("change",()=>{
+?.addEventListener("input",()=>{
 
 if(!currentProduct) return;
 
@@ -768,6 +768,7 @@ return;
 }
 
 cart[currentProduct] = val;
+updateQtyDisplay();
 
 renderCart();
 
