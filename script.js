@@ -748,7 +748,8 @@ alert("Order copied to clipboard");
 
 }
 
-// LỆNH NÚT ORDER   
+// LỆNH NÚT ORDER   --- xem lại có bị thừa hay không ?
+// Nếu cần thì ktra HTML có hay không code: <button id="copyOrder">Copy Order</button>
 document.getElementById("copyOrder").onclick=generateOrder;   
    
 /* ===========================
@@ -867,6 +868,34 @@ document
 });
 
 
+   
+document
+.getElementById("btn-chat")
+?.addEventListener("click",()=>{
+
+let text="Tatame Bakery Order\n\n";
+
+if(Object.keys(cart).length===0){
+
+alert("Your cart is empty.");
+return;
+
+}
+
+Object.keys(cart).forEach(name=>{
+
+text+=`${name} x${cart[name]}\n`;
+
+});
+
+text+="\nThank you!";
+
+navigator.clipboard.writeText(text);
+
+alert("Order copied. Paste into chat.");
+
+});
+   
 /* ===========================
    SESSION TIMEOUT
 =========================== */
