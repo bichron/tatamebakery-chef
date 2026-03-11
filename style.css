@@ -37,9 +37,13 @@ body.light{
    UTILITY COLORS
 =========================== */
 
-.text-gold{
-color:var(--gold);
-}
+.text-gold{ color:var(--gold); }
+.text-sub{ color:var(--sub); }
+.text-main{ color:var(--text); }
+
+.bg-gold{ background:var(--gold); }
+.border-gold{ border-color:var(--gold); }
+
 
 /* ===========================
    BODY + LAYOUT
