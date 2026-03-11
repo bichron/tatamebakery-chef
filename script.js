@@ -538,6 +538,20 @@ zoom?.addEventListener("click",()=>{
    PRODUCT POPUP
 =========================== */
 
+function openProduct(name,price,img){
+
+currentProduct = name;
+
+document.getElementById("productName").textContent = name;
+document.getElementById("productPrice").textContent = price + "đ";
+document.getElementById("productImage").src = img;
+
+updateQtyDisplay();
+
+openPopup("productPopup");
+
+}
+   
 document.addEventListener("click",e=>{
 
   const card = e.target.closest(".product-card");
@@ -548,13 +562,7 @@ document.addEventListener("click",e=>{
   const name = card.querySelector(".product-name").textContent;
   const price = card.querySelector(".product-price").textContent;
 
-  document.getElementById("productImage").src = img;
-  document.getElementById("productName").textContent = name;
-  document.getElementById("productPrice").textContent = price;
-
-  document.getElementById("qtyValue").textContent = 1;
-
-  openPopup("productPopup");
+  openProduct(name,price,img);
 
 });
    
@@ -674,8 +682,49 @@ function loadShopSlider(slider){
 =========================== */
 
 let cart = {};
-let orderQty = 1;
+let currentProduct = "";
 
+function updateQtyDisplay(){
+
+const qty = cart[currentProduct] || 0;
+
+document.getElementById("qtyValue").textContent = qty;
+
+}   
+   
+document.getElementById("qtyPlus").onclick = () => {
+
+if(!currentProduct) return;
+
+if(!cart[currentProduct]){
+cart[currentProduct] = 0;
+}
+
+cart[currentProduct]++;
+
+updateQtyDisplay();
+renderCart();
+
+};
+
+
+document.getElementById("qtyMinus").onclick = () => {
+
+if(!currentProduct) return;
+
+if(!cart[currentProduct]) return;
+
+cart[currentProduct]--;
+
+if(cart[currentProduct] <= 0){
+delete cart[currentProduct];
+}
+
+updateQtyDisplay();
+renderCart();
+
+};   
+   
 // ADD TO CART   
 document.getElementById("orderBtn").onclick=()=>{
 
@@ -695,19 +744,20 @@ function renderCart(){
 
 const box = document.getElementById("cartItems");
 
-box.innerHTML="";
+if(!box) return;
 
-Object.keys(cart).forEach(name=>{
+box.innerHTML = "";
+
+Object.keys(cart).forEach(name => {
 
 const qty = cart[name];
 
-const row=document.createElement("div");
+const row = document.createElement("div");
 
-row.className="cart-item";
+row.className = "cart-item";
 
-row.innerHTML=`
-<span>${name} x${qty}</span>
-<button data-name="${name}">remove</button>
+row.innerHTML = `
+<span>${name} × ${qty}</span>
 `;
 
 box.appendChild(row);
