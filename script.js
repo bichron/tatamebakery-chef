@@ -583,13 +583,18 @@ function initShopWheel(){
       document
       .querySelectorAll("#shopPopup .shop-panel")
       .forEach((p,i)=>{
-
         p.classList.toggle("active", i===index);
-
       });
 
     }
 
+  });
+
+  // reset panel
+  document
+  .querySelectorAll("#shopPopup .shop-panel")
+  .forEach((p,i)=>{
+    p.classList.toggle("active", i===0);
   });
 
 }
