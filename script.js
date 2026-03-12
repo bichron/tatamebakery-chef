@@ -173,37 +173,44 @@ function getSliderTrack(slider){
  || slider.querySelector(".shop-track");
 
 }
+
+function getSliderDots(slider){
+
+ return slider.querySelectorAll(
+ ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
+ );
+
+}
   
 function SliderEngine(slider){
 
 const track = getSliderTrack(slider);
+if(!track) return;
 
-  const dots = slider.querySelectorAll(
-    ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
-  );
+const dots = getSliderDots(slider);
 
-  const STEP = 164;
+const STEP = 164;
 
-  let startX = 0;
-  let baseX = 0;
-  let dragging = false;
+let startX = 0;
+let baseX = 0;
+let dragging = false;
 
-  function update(index){
+function update(index){
 
-    const x = -index * STEP;
+const x = -index * STEP;
 
-    track.dataset.x = x;
+track.dataset.x = x;
 
-    track.style.transition = "transform .35s ease";
-    track.style.transform = `translateX(${x}px)`;
+track.style.transition = "transform .35s ease";
+track.style.transform = `translateX(${x}px)`;
 
-    qrState.set(slider,index);
+qrState.set(slider,index);
 
-    dots.forEach(d=>d.classList.remove("active"));
+dots.forEach(d=>d.classList.remove("active"));
 
-    if(dots[index]) dots[index].classList.add("active");
+if(dots[index]) dots[index].classList.add("active");
 
-  }
+}
 
   function start(x){
 
@@ -326,10 +333,8 @@ function updateQR(slider){
   const index=qrState.get(slider)??0;
 
   const track = getSliderTrack(slider);
-  
-  const dots = slider.querySelectorAll(
-  ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
-  );
+  if(!track) return;  
+  const dots = getSliderDots(slider);
 
   const STEP=164;
   const x=-index*STEP;
@@ -1125,9 +1130,8 @@ window.addEventListener("keydown",e=>{
    PREVENT DOUBLE CLICK ZOOM
 =========================== */
 
-let lastClick = 0
-document.addEventListener("dblclick", e => e.preventDefault())
-document.addEventListener("click", e=>{
-  if(Date.now()-lastClick<300) e.preventDefault()
-  lastClick = Date.now()
-})
+document.addEventListener("dblclick", e=>{
+  if(e.target.tagName !== "BUTTON"){
+    e.preventDefault()
+  }
+},{passive:false})
