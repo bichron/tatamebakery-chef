@@ -23,6 +23,18 @@
   --popup-bg:rgba(10,20,35,.88);
 }
 
+/* ===========================
+   GLOBAL SCROLL FIX
+=========================== */
+
+html,body{
+  overflow-x:hidden;
+}
+
+#shopSlider{
+  touch-action:pan-y;
+}
+
 body.light{
   --bg1:#eef2f7;
   --bg2:#dbe4f2;
