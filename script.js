@@ -1132,6 +1132,7 @@ window.openWebsite=()=>window.open("https://blh.vn","_blank");
 
 });
 
+
 /* ===========================
    PREVENT BROWSER ZOOM
 =========================== */
@@ -1144,4 +1145,16 @@ window.addEventListener("keydown",e=>{
  if(e.ctrlKey && ["+","-","="].includes(e.key)){
    e.preventDefault()
  }
+})
+
+
+/* ===========================
+   PREVENT DOUBLE CLICK ZOOM
+=========================== */
+
+let lastClick = 0
+document.addEventListener("dblclick", e => e.preventDefault())
+document.addEventListener("click", e=>{
+  if(Date.now()-lastClick<300) e.preventDefault()
+  lastClick = Date.now()
 })
