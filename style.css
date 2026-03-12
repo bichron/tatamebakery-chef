@@ -37,7 +37,7 @@ body.noscroll{
   overflow:hidden;
 }
 
-#shopSlider{
+#shop-slider{
   touch-action:pan-y;
 }
 
