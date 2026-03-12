@@ -31,6 +31,10 @@ html,body{
   overflow-x:hidden;
 }
 
+body{
+  overscroll-behavior:none;
+}
+
 #shopSlider{
   touch-action:pan-y;
 }
