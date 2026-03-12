@@ -891,8 +891,7 @@ function openPopup(id){
 =========================== */
 
 document
-.getElementById("btn-shop")
-?.addEventListener("click",()=>{
+.getElementById("btn-shop")?.addEventListener("click",()=>{
 
   if(!shopWheel){
   initShopWheel();
@@ -912,8 +911,7 @@ if(shopWheel){
    
 
 document
-.getElementById("btn-qrcode")
-?.addEventListener("click",()=>{
+.getElementById("btn-qrcode")?.addEventListener("click",()=>{
 
 if(!qrWheel){
   initQRWheel();
@@ -935,8 +933,7 @@ if(qrWheel){
 
 
 document
-.getElementById("btn-achievement")
-?.addEventListener("click",()=>{
+.getElementById("btn-achievement")?.addEventListener("click",()=>{
 
 if(!achievementWheel){
   initAchievementWheel();
@@ -955,8 +952,7 @@ if(achievementWheel){
 
 
 document
-.getElementById("btn-enterprise")
-?.addEventListener("click",()=>{
+.getElementById("btn-enterprise")?.addEventListener("click",()=>{
 
   openPopup("enterprisePopup");
 
@@ -964,8 +960,7 @@ document
 
 
 document
-.querySelector(".overlay")
-?.addEventListener("click",closeAllPopups);
+.querySelector(".overlay")?.addEventListener("click",closeAllPopups);
 
 
 document
@@ -988,8 +983,7 @@ if(closeBtn){
 }
    
 document
-.getElementById("btn-cart")
-?.addEventListener("click",()=>{
+.getElementById("btn-cart")?.addEventListener("click",()=>{
 
 renderCart();
 
