@@ -1,7 +1,9 @@
 window.addEventListener("DOMContentLoaded", async ()=>{
-
+try{
   await loadProductData();
-
+}catch(e){
+  console.warn("Product load skipped",e);
+}
 /* ===========================
    ELEMENTS
 =========================== */
