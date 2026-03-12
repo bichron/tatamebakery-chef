@@ -311,76 +311,44 @@ function loadQRSlider(slider){
     img.onerror = build;
 
   }
+function build(){
 
-}
+    const count = Math.min(maxAllowed, images.length);
 
+    if(count===0){
 
-function enableQRSwipe(slider){
+      track.innerHTML = "<div class='qr-empty'>No QR</div>";
+      return;
 
-  if(slider.dataset.swipeBound) return;
+    }
 
-  slider.dataset.swipeBound="1";
+    for(let i=0;i<count;i++){
 
-  const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
-    slider.querySelector(".shop-track");
+      const el=document.createElement("img");
+      el.src=images[i];
 
-  let startX=0;
-  let dragging=false;
+      track.appendChild(el);
 
-  const STEP = 164; //dùng chung cho QR và achievement
+      const dot=document.createElement("span");
 
-  slider.addEventListener("touchstart",e=>{
+      if(i===0) dot.classList.add("active");
 
-    dragging=true;
+      indicatorBox.appendChild(dot);
 
-    startX=e.touches[0].clientX;
+    }
 
-    track.style.transition="none";
+    qrState.set(slider,0);
 
-  },{passive:true});
+    track.dataset.x=0;
 
-  slider.addEventListener("touchmove",e=>{
+    new SliderEngine(slider);
 
-    if(!dragging) return;
-    
-    e.preventDefault();
+    updateQR(slider);
 
-    const baseX=parseFloat(track.dataset.x||0);
-    const dx=e.touches[0].clientX-startX;
+  }
 
-    track.style.transform=
-      `translateX(${baseX+dx}px)`;
+  tryLoad();
 
-  },{passive:true});
-
-slider.addEventListener("touchend",e=>{
-
-  if(!dragging) return;
-
-  dragging=false;
-
-  const baseX=parseFloat(track.dataset.x||0);
-  const dx=e.changedTouches[0].clientX-startX;
-
-  const currentX=baseX+dx;
-
-  const total=track.children.length;
-
-  let index=Math.round(-currentX/STEP);
-
-  index=Math.max(0,Math.min(index,total-1));
-
-  const snappedX=-index*STEP;
-
-  track.dataset.x=snappedX;
-
-  qrState.set(slider,index);
-
-  updateQR(slider);
-
-});
 }
 
 
@@ -446,30 +414,39 @@ function loadAchievementSlider(slider){
 
   function build(){
 
-    const count=Math.min(maxAllowed,images.length);
+const count = Math.min(maxAllowed, images.length);
 
-    for(let i=0;i<count;i++){
+if(count===0){
 
-      const el=document.createElement("img");
-      el.src=images[i];
+track.innerHTML = "<div class='qr-empty'>No QR</div>";
+return;
 
-      track.appendChild(el);
+}
 
-      const dot=document.createElement("span");
-      if(i===0) dot.classList.add("active");
+for(let i=0;i<count;i++){
 
-      indicatorBox.appendChild(dot);
+const el=document.createElement("img");
+el.src=images[i];
 
-    }
+track.appendChild(el);
 
-    qrState.set(slider,0);
+const dot=document.createElement("span");
 
-    track.dataset.x = 0;
+if(i===0) dot.classList.add("active");
 
-    new SliderEngine(slider);
-    updateQR(slider);
+indicatorBox.appendChild(dot);
 
-  }
+}
+
+qrState.set(slider,0);
+
+track.dataset.x=0;
+
+new SliderEngine(slider);
+
+updateQR(slider);
+
+}
 
   tryLoad();
 
@@ -644,53 +621,6 @@ function loadShopSlider(slider){
 
 }
 
-  function build(){
-
-    const count=Math.min(maxAllowed,images.length);
-
-    for(let i=0;i<count;i++){
-      const card=document.createElement("div");
-
-      card.className="product-card";
-
-      card.innerHTML=`
-      <img src="${images[i]}">
-
-      <div class="product-info">
-
-      <div class="product-name">
-      Product ${i+1}
-      </div>
-
-      <div class="product-price">
-      45.000đ
-      </div>
-
-      </div>
-      `;
-
-      track.appendChild(card);
-
-      const dot=document.createElement("span");
-
-      if(i===0) dot.classList.add("active");
-
-      indicatorBox.appendChild(dot);
-
-    }
-
-    qrState.set(slider,0);
-
-    track.dataset.x = 0;
-
-    new SliderEngine(slider);
-    updateQR(slider);
-
-  }
-
-  tryLoad();
-
-}
 
 /* ===========================
    CART STATE
@@ -827,10 +757,6 @@ row.innerHTML=`
 <button class="cart-minus" data-name="${id}">–</button>
 `;
 
-<span class="cart-qty">×${qty}</span>
-<button class="cart-minus" data-name="${id}">–</button>
-`;
-
 box.appendChild(row);
 
 });
@@ -853,9 +779,11 @@ return;
 
 }
 
-Object.keys(cart).forEach(name=>{
+Object.keys(cart).forEach(id=>{
 
-text+=`${name} x${cart[name]}\n`;
+const product = shopData.find(p=>p.id===id)
+
+text+=`${product?.name || id} x${cart[id]}\n`
 
 });
 
