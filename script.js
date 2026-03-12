@@ -912,9 +912,24 @@ document
 
   shopWheel.go(0);
 
+  // FIX: force panel reset
+  document
+  .querySelectorAll("#shopPopup .shop-panel")
+  .forEach((p,i)=>{
+    p.classList.toggle("active", i===0);
+  });
+
   document
   .querySelectorAll("#shopPopup .shop-slider")
-  .forEach(loadShopSlider);
+  .forEach(slider=>{
+
+    // FIX: tránh load nhiều lần
+    if(!slider.dataset.loaded){
+      loadShopSlider(slider);
+      slider.dataset.loaded=1;
+    }
+
+  });
 
   openPopup("shopPopup");
 
