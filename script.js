@@ -1,3 +1,7 @@
+let cart = {};
+let shopData = [];
+let currentProduct = "";
+
 /* ===========================
    LOAD PRODUCT DATA
 =========================== */
@@ -28,6 +32,7 @@ try{
 }catch(e){
   console.warn("Product load skipped",e);
 }
+
 /* ===========================
    ELEMENTS
 =========================== */
@@ -186,311 +191,6 @@ function initAchievementWheel(){
 
 }
 
-/* ===========================
-   SLIDER ENGINE V2
-=========================== */
-
-/* == SLIDER UTIL == */
-
-function getSliderTrack(slider){
-
- return slider.querySelector(".qr-track")
- || slider.querySelector(".achievement-track")
- || slider.querySelector(".shop-track");
-
-}
-
-function getSliderDots(slider){
-
- return slider.querySelectorAll(
- ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
- );
-
-}
-  
-function SliderEngine(slider){
-
-const track = getSliderTrack(slider);
-if(!track) return;
-
-const dots = getSliderDots(slider);
-
-const STEP = 164;
-
-let startX = 0;
-let baseX = 0;
-let dragging = false;
-
-function update(index){
-
-const x = -index * STEP;
-
-track.dataset.x = x;
-
-track.style.transition = "transform .35s ease";
-track.style.transform = `translateX(${x}px)`;
-
-qrState.set(slider,index);
-
-dots.forEach(d=>d.classList.remove("active"));
-
-if(dots[index]) dots[index].classList.add("active");
-
-}
-
-  function start(x){
-
-    dragging = true;
-
-    startX = x;
-
-    baseX = parseFloat(track.dataset.x || 0);
-
-    track.style.transition = "none";
-
-  }
-
-  function move(x){
-
-    if(!dragging) return;
-
-    const dx = x - startX;
-
-    track.style.transform =
-      `translateX(${baseX + dx}px)`;
-
-  }
-
-  function end(x){
-
-    if(!dragging) return;
-
-    dragging = false;
-
-    const dx = x - startX;
-
-    const currentX = baseX + dx;
-
-    const total = track.children.length;
-
-    let index = Math.round(-currentX / STEP);
-
-    index = Math.max(0,Math.min(index,total-1));
-
-    update(index);
-
-  }
-
-
-  /* TOUCH */
-
-  slider.addEventListener("touchstart",e=>{
-    start(e.touches[0].clientX);
-  },{passive:true});
-
-  slider.addEventListener("touchmove",e=>{
-    move(e.touches[0].clientX);
-  },{passive:true});
-
-  slider.addEventListener("touchend",e=>{
-    end(e.changedTouches[0].clientX);
-  });
-
-
-  /* MOUSE */
-
-  slider.addEventListener("mousedown",e=>{
-    start(e.clientX);
-  });
-
-  window.addEventListener("mousemove",e=>{
-    move(e.clientX);
-  });
-
-  window.addEventListener("mouseup",e=>{
-    end(e.clientX);
-  });
-
-}   
-
-/* ===========================
-   QR SLIDER
-=========================== */
-
-function loadQRSlider(slider){
-
- const track = slider.querySelector(".qr-track");
- const indicatorBox = slider.querySelector(".qr-indicators");
-
- resetSlider(track, indicatorBox);
- const group = slider.dataset.group;
- const maxAllowed = parseInt(slider.dataset.max,10);
-
-  let images=[];
-  let index=1;
-
-  function tryLoad(){
-
-    const img=new Image();
-    img.src=`assets/qr/${group}/${index}.png`;
-
-    img.onload=()=>{
-      images.push(img.src);
-      index++;
-      tryLoad();
-    };
-
-    img.onerror=()=>{
-
-      buildImageSlider(
-        slider,
-        track,
-        indicatorBox,
-        images,
-        maxAllowed
-      );
-    };
-  }
-  tryLoad();
-}
-
-function updateQR(slider){
-
-  const index=qrState.get(slider)??0;
-
-  const track = getSliderTrack(slider);
-  if(!track) return;  
-  const dots = getSliderDots(slider);
-
-  const STEP=164;
-  const x=-index*STEP;
-
-  track.dataset.x=x;
-
-  track.style.transition="transform .35s ease";
-  track.style.transform=`translateX(${x}px)`;
-
-  dots.forEach(d=>d.classList.remove("active"));
-
-  if(dots[index]) dots[index].classList.add("active");
-
-}
-
-/* ===========================
-   SLIDER RESET
-=========================== */
-
-function resetSlider(track, indicatorBox){
-
-  track.innerHTML="";
-  indicatorBox.innerHTML="";
-
-}
-  
-/* ===========================
-   GENERIC IMAGE SLIDER BUILDER
-=========================== */
-
-function buildImageSlider(slider, track, indicatorBox, images, maxAllowed){
-
-  const count = Math.min(maxAllowed, images.length);
-
-  if(count===0){
-
-    track.innerHTML = "<div class='qr-empty'>No images</div>";
-    return;
-
-  }
-
-  for(let i=0;i<count;i++){
-
-    const el=document.createElement("img");
-    el.src=images[i];
-
-    track.appendChild(el);
-
-    const dot=document.createElement("span");
-
-    if(i===0) dot.classList.add("active");
-
-    indicatorBox.appendChild(dot);
-
-  }
-
-  qrState.set(slider,0);
-
-  track.dataset.x=0;
-
-  new SliderEngine(slider);
-
-  updateQR(slider);
-
-}
-  
-/* ===========================
-   LOAD GALLERY
-=========================== */
-function loadAchievementSlider(slider){
- const track = slider.querySelector(".achievement-track");
- const indicatorBox = slider.querySelector(".achievement-indicators");
-
- resetSlider(track, indicatorBox);
-
-  const group = slider.dataset.group;
-  const maxAllowed = parseInt(slider.dataset.max,10);
-
-  let images=[];
-  let index=1;
-
-  function tryLoad(){
-
-    const img=new Image();
-    img.src=`assets/achievement/${group}/${index}.jpg`;
-
-    img.onload=()=>{
-      images.push(img.src);
-      index++;
-      tryLoad();
-    };
-
-img.onerror = ()=>{
-
-  buildImageSlider(
-    slider,
-    track,
-    indicatorBox,
-    images,
-    maxAllowed
-  );
-};
-  }
-  tryLoad();
-}
-   
-/* ===========================
-   GLOBAL IMAGE ZOOM
-=========================== */
-
-document.addEventListener("click",e=>{
-  const img = e.target.closest(
-    ".qr-track img, .achievement-track img"
-  );
-
-  if(!img) return;
-
-  e.stopPropagation();   // ⭐ QUAN TRỌNG
-
-  zoomImg.src=img.src;
-
-  zoom.classList.add("active");
-
-});
-
-zoom?.addEventListener("click",()=>{
-
-  zoom.classList.remove("active");
-
-});
 
 /* ===========================
    PRODUCT POPUP
@@ -509,7 +209,8 @@ updateQtyDisplay();
 openPopup("productPopup");
 
 }
-   
+
+
 document.addEventListener("click",e=>{
 
   const card = e.target.closest(".product-card");
@@ -528,129 +229,16 @@ document.addEventListener("click",e=>{
   openProduct(product.id, product.name, product.price, product.image);
 
 });
-   
-/* ===========================
-   SHOP WHEEL
-=========================== */
-
-function initShopWheel(){
-
-  shopWheel = new WheelEngine({
-
-    mask:"#shopPopup .wheel-mask",
-
-    radius:80,
-
-    onChange:(index)=>{
-
-      document
-      .querySelectorAll("#shopPopup .shop-panel")
-      .forEach((p,i)=>{
-
-        p.classList.toggle("active", i===index);
-
-      });
-
-    }
-
-  });
-
-}
-
-/* ===========================
-   SHOP SLIDER
-=========================== */
-
-function loadShopSlider(slider){
-
-  const track = slider.querySelector(".shop-track");
-  const indicatorBox = slider.querySelector(".shop-indicators");
-
-  resetSlider(track, indicatorBox);
-
-  const group = slider.dataset.group;
-
-  let products;
-
-  /* TOP PICKS */
-
-  if(group==="top-picks"){
-    products = getTopPicks();
-  }
-  else{
-    products = getProductsByCategory(group);
-  }
-
-  if(!products || products.length===0){
-
-    track.innerHTML="<div class='shop-empty'>No products</div>";
-    return;
-
-  }
-
-  products.forEach((p,i)=>{
-
-    const card=document.createElement("div");
-
-    card.className="product-card";
-
-    card.dataset.id = p.id;
-
-    card.innerHTML=`
-
-    ${p.top_pick ? '<div class="product-badge">TOP PICK</div>' : ''}
-
-    <img src="${p.image}">
-
-    <div class="product-info">
-
-    <div class="product-name">
-    ${p.name}
-    </div>
-
-    <div class="product-price">
-    ${p.price.toLocaleString()}đ
-    </div>
-
-    </div>
-
-    `;
-
-    track.appendChild(card);
-
-    const dot=document.createElement("span");
-
-    if(i===0) dot.classList.add("active");
-
-    indicatorBox.appendChild(dot);
-
-  });
-
-  qrState.set(slider,0);
-
-  track.dataset.x = 0;
-
-  new SliderEngine(slider);
-
-  updateQR(slider);
-
-}
 
 
 /* ===========================
    CART STATE
 =========================== */
 
-let cart = {};
-let shopData = []
-let currentProduct = "";
-
-/* FIX CARET POSITION (INPUT QTY) */
-
 const qtyInput = document.getElementById("qtyValue");
 
-qtyInput?.addEventListener("focus", moveCaretToEnd);
-qtyInput?.addEventListener("click", moveCaretToEnd);
+qtyInput && qtyInput.addEventListener("focus", moveCaretToEnd);
+qtyInput && qtyInput.addEventListener("click", moveCaretToEnd);
 
 function moveCaretToEnd(){
 
@@ -675,181 +263,7 @@ document.getElementById("qtyValue").value = qty;
 
 }   
 
-// ADD TO CART   
-document.getElementById("qtyPlus")?.onclick = () => {
 
-if(!currentProduct) return;
-
-if(!cart[currentProduct]){
-cart[currentProduct] = 0;
-}
-
-cart[currentProduct]++;
-
-updateQtyDisplay();
-renderCart();
-
-};
-
-
-document.getElementById("qtyMinus")?.onclick = () => {
-
-if(!currentProduct) return;
-
-if(!cart[currentProduct]) return;
-
-cart[currentProduct]--;
-
-if(cart[currentProduct] <= 0){
-delete cart[currentProduct];
-}
-
-updateQtyDisplay();
-renderCart();
-
-};   
-   
-document
-.getElementById("qtyValue")
-?.addEventListener("input",()=>{
-
-if(!currentProduct) return;
-
-let val = parseInt(
-document.getElementById("qtyValue").value,
-10
-);
-
-if(isNaN(val) || val <= 0){
-
-delete cart[currentProduct];
-renderCart();
-updateQtyDisplay();
-return;
-
-}
-
-cart[currentProduct] = val;
-updateQtyDisplay();
-
-renderCart();
-
-});
-   
-// RENDER CART   
-function renderCart(){
-
-const boxes = [
-document.getElementById("cartItems"),
-document.getElementById("cartPreview")
-];
-
-boxes.forEach(box=>{
-
-if(!box) return;
-
-box.innerHTML="";
-
-if(Object.keys(cart).length===0){
-
-box.innerHTML="<div class='cart-empty'>Cart empty</div>";
-return;
-
-}
-
-Object.keys(cart).forEach(id=>{
-
-const qty = cart[id];
-
-const row=document.createElement("div");
-
-row.className="cart-item";
-
-const product = shopData.find(p=>p.id===id);
-
-row.innerHTML=`
-<span class="cart-name">${product?.name || id}</span>
-<span class="cart-qty">×${qty}</span>
-<button class="cart-minus" data-name="${id}">–</button>
-`;
-
-box.appendChild(row);
-
-});
-
-});
-
-}
-
-// LOGIC COPY   
-document
-.getElementById("copyCartOrder")
-?.addEventListener("click",()=>{
-
-let text="Tatame Bakery Order\n\n";
-
-if(Object.keys(cart).length===0){
-
-alert("Your cart is empty.");
-return;
-
-}
-
-Object.keys(cart).forEach(id=>{
-
-const product = shopData.find(p=>p.id===id);
-
-const name = product ? product.name : id;
-
-text += `${name} x${cart[id]}\n`;
-
-});
-
-text+="\nThank you!";
-
-navigator.clipboard.writeText(text);
-
-alert("Order copied. Paste into chat.");
-
-});
-   
-// REMOVE ITEM   
-document.addEventListener("click",e=>{
-
-if(!e.target.matches(".cart-minus")) return;
-
-const id = e.target.dataset.name;
-
-cart[id]--;
-
-if(cart[id] <= 0){
-delete cart[id];
-}
-
-renderCart();
-updateQtyDisplay();
-
-});
-
-
-/* ===========================
-   PRODUCT FILTER
-=========================== */
-
-function getProductsByCategory(category){
-
-  return shopData.filter(p => 
-    p.category.includes(category)
-  );
-
-}
-
-function getTopPicks(){
-
-  return shopData.filter(p => p.top_pick);
-
-}
-   
 /* ===========================
    POPUP MANAGER
 =========================== */
@@ -859,8 +273,8 @@ function closeAllPopups(){
   document.querySelectorAll(".popup")
   .forEach(p=>p.classList.remove("active"));
 
-  document.querySelector(".overlay")
-  ?.classList.remove("active");
+  const ov = document.querySelector(".overlay");
+  if(ov) ov.classList.remove("active");
 
   activePopup=null;
 
@@ -878,8 +292,8 @@ function openPopup(id){
 
   popup.classList.add("active");
 
-  document.querySelector(".overlay")
-  ?.classList.add("active");
+  const ov = document.querySelector(".overlay");
+  if(ov) ov.classList.add("active");
 
   activePopup=id;
 
@@ -890,8 +304,9 @@ function openPopup(id){
    BUTTON EVENTS
 =========================== */
 
-document
-.getElementById("btn-shop")?.addEventListener("click",()=>{
+const btnShop = document.getElementById("btn-shop");
+if(btnShop){
+btnShop.addEventListener("click",()=>{
 
   if(!shopWheel){
   initShopWheel();
@@ -908,10 +323,11 @@ if(shopWheel){
   openPopup("shopPopup");
 
 });
-   
+}
 
-document
-.getElementById("btn-qrcode")?.addEventListener("click",()=>{
+const btnQR = document.getElementById("btn-qrcode");
+if(btnQR){
+btnQR.addEventListener("click",()=>{
 
 if(!qrWheel){
   initQRWheel();
@@ -927,13 +343,15 @@ if(qrWheel){
 
   openPopup("qrPopup");
 
-  window.loadDynamicQR?.();
+  if(window.loadDynamicQR) window.loadDynamicQR();
 
 });
+}
 
 
-document
-.getElementById("btn-achievement")?.addEventListener("click",()=>{
+const btnAchievement = document.getElementById("btn-achievement");
+if(btnAchievement){
+btnAchievement.addEventListener("click",()=>{
 
 if(!achievementWheel){
   initAchievementWheel();
@@ -949,18 +367,22 @@ if(achievementWheel){
   openPopup("achievementPopup");
 
 });
+}
 
-
-document
-.getElementById("btn-enterprise")?.addEventListener("click",()=>{
+const btnEnterprise = document.getElementById("btn-enterprise");
+if(btnEnterprise){
+btnEnterprise.addEventListener("click",()=>{
 
   openPopup("enterprisePopup");
 
 });
+}
 
 
-document
-.querySelector(".overlay")?.addEventListener("click",closeAllPopups);
+const overlay = document.querySelector(".overlay");
+if(overlay){
+overlay.addEventListener("click",closeAllPopups);
+}
 
 
 document
@@ -971,147 +393,29 @@ document
 
 });
 
-/* == PRODUCT POPUP CLOSE → BACK TO SHOP == */
-const closeBtn = document.querySelector("#productPopup .close");
 
-if(closeBtn){
-  closeBtn.addEventListener("click",(e)=>{
-    e.stopPropagation();
-    document.getElementById("productPopup").classList.remove("active");
-    document.getElementById("shopPopup").classList.add("active");
-  });
+const productClose = document.querySelector("#productPopup .close");
+if(productClose){
+productClose.addEventListener("click",(e)=>{
+e.stopPropagation();
+document.getElementById("productPopup").classList.remove("active");
+document.getElementById("shopPopup").classList.add("active");
+});
 }
-   
-document
-.getElementById("btn-cart")?.addEventListener("click",()=>{
+
+
+const btnCart = document.getElementById("btn-cart");
+if(btnCart){
+btnCart.addEventListener("click",()=>{
 
 renderCart();
 
 openPopup("cartPopup");
 
-});   
-
-   
-/* ===========================
-   SESSION TIMEOUT
-=========================== */
-
-const SESSION_TIMEOUT = 20*60*1000;
-
-function resetSessionTimer(){
-
-  if(document.body.classList.contains("session-expired")) return;
-
-  clearTimeout(sessionTimer);
-
-  sessionTimer=setTimeout(expireSession,SESSION_TIMEOUT);
-
-}
-
-["click","touchstart","keydown","scroll"]
-.forEach(evt=>{
-
-  document.addEventListener(
-    evt,
-    resetSessionTimer,
-    {passive:true}
-  );
-
 });
-
-resetSessionTimer();
-
-
-function expireSession(){
-
-  closeAllPopups();
-
-  document.body.classList.add("session-expired");
-
-  showUnlockOverlay();
-
 }
 
 
-/* ===========================
-   UNLOCK OVERLAY
-=========================== */
-
-function showUnlockOverlay(){
-
-  if(document.getElementById("unlockOverlay")) return;
-
-  wrongAttempts=0;
-
-  const overlay=document.createElement("div");
-
-  overlay.id="unlockOverlay";
-
-  overlay.innerHTML=`
-  <div class="unlock-box">
-    <h3>Session expired</h3>
-    <p>
-      Enter <b>6-digit code</b> to unlock<br>
-      or enter <b>9</b> to close
-    </p>
-    <input type="password" maxlength="6" inputmode="numeric"/>
-    <button id="unlockBtn">Unlock</button>
-    <div class="unlock-error"></div>
-  </div>
-  `;
-
-  document.body.appendChild(overlay);
-
-  const input=overlay.querySelector("input");
-  const btn=overlay.querySelector("#unlockBtn");
-  const err=overlay.querySelector(".unlock-error");
-
-  input.focus();
-
-  btn.onclick=()=>{
-
-    const value=input.value.trim();
-
-    if(value==="9"){
-      closeLandingpage();
-      return;
-    }
-
-    if(value===VIEWER_UNLOCK_CODE){
-      location.reload();
-      return;
-    }
-
-    wrongAttempts++;
-
-    err.textContent=`Invalid code (${wrongAttempts}/3)`;
-
-    input.value="";
-    input.focus();
-
-    if(wrongAttempts>=3){
-      closeLandingpage();
-    }
-
-  };
-
-}
-
-
-/* ===========================
-   CLOSE PAGE
-=========================== */
-
-function closeLandingpage(){
-
-  document.body.innerHTML=`
-  <div class="page-closed">
-    <h3>Session closed</h3>
-    <p>Please scan QR or NFC again</p>
-  </div>
-  `;
-
-}
 
 /* ===========================
    UTIL
