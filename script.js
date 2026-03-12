@@ -977,17 +977,15 @@ document
 });
 
 /* == PRODUCT POPUP CLOSE → BACK TO SHOP == */
-document
-.querySelector("#productPopup .close")
-?.addEventListener("click",(e)=>{
-e.stopPropagation();
-document
-.getElementById("productPopup")
-.classList.remove("active");
-document
-.getElementById("shopPopup")
-.classList.add("active");
-});
+const closeBtn = document.querySelector("#productPopup .close");
+
+if(closeBtn){
+  closeBtn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    document.getElementById("productPopup").classList.remove("active");
+    document.getElementById("shopPopup").classList.add("active");
+  });
+}
    
 document
 .getElementById("btn-cart")
