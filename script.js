@@ -171,12 +171,12 @@ function SliderEngine(slider){
     slider.querySelector(".achievement-track") ||
     slider.querySelector(".shop-track");
 
-  const dots = slider.querySelectorAll(
-    ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
-  );
+  const dots =
+  slider.querySelectorAll(".qr-indicators span") ||
+  slider.querySelectorAll(".achievement-indicators span") ||
+  slider.querySelectorAll(".shop-indicators span");
 
-  const STEP = 164;
-
+  const STEP = track.children[0]?.offsetWidth + 16 || 164;
   let startX = 0;
   let baseX = 0;
   let dragging = false;
