@@ -126,7 +126,7 @@ body{
       rgba(255,255,255,.02)
     );
 
-  backdrop-filter:blur(60px) saturate(180%);
+  backdrop-filter:blur(18px) saturate(140%);
 
   border:1px solid var(--border);
 
@@ -134,7 +134,7 @@ body{
     0 35px 70px rgba(0,0,0,.6),
     inset 0 0 .5px rgba(255,255,255,.2);
 
-  animation:float 6s ease-in-out infinite alternate;
+  animation:none; /*float 6s ease-in-out infinite alternate */
 
   transform-origin:center;
 
@@ -142,6 +142,10 @@ body{
 
   position:relative;
   overflow:hidden;
+}
+
+.phone-float{
+animation:float 6s ease-in-out infinite alternate;
 }
 
 .phone.loaded{
@@ -378,7 +382,7 @@ body{
 
   transition:all .35s ease;
 
-  z-index:9000;
+  z-index:200;
 }
 
 .overlay.active{
@@ -436,7 +440,7 @@ body{
 
   background:var(--popup-bg);
 
-  backdrop-filter:blur(70px) saturate(200%);
+  backdrop-filter:blur(24px) saturate(160%);
 
   border:1px solid var(--border);
 
@@ -508,7 +512,7 @@ body{
 
 .wheel{
   position:relative;
-
+  will-change:transform;
   width:100%;
   height:100%;
 
@@ -758,6 +762,7 @@ body{
 
 .achievement-track{
   display:flex;
+  will-change:transform;
   gap:14px;
   transition:transform .35s ease;
   will-change:transform;
@@ -845,17 +850,10 @@ display:block;
 }
 
 .shop-products{
-
 flex:1;
-
-overflow:hidden;
-
 position:relative;
-
 padding:10px 16px;
-
 overflow-y:auto;
-
 }
 
 
@@ -870,6 +868,7 @@ padding:10px 0;
 
 .shop-track{
 display:flex;
+will-change:transform;
 gap:14px;
 transition:transform .35s ease;
 }
