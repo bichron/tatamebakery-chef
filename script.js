@@ -176,7 +176,7 @@ function SliderEngine(slider){
   slider.querySelectorAll(".achievement-indicators span") ||
   slider.querySelectorAll(".shop-indicators span");
 
-  const STEP = track.children[0]?.offsetWidth + 16 || 164;
+  const STEP = track.children[0]?.getBoundingClientRect().width + 14 || 164;
   let startX = 0;
   let baseX = 0;
   let dragging = false;
