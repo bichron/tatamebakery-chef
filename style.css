@@ -799,9 +799,8 @@ body{
 position:fixed;
 
 left:0;
-bottom:0;
-
-width:100%;
+bottom:10px;
+width:90%;
 
 height:82vh;   /* chiều cao cố định */
 
@@ -820,19 +819,7 @@ flex-direction:column;
 
 overflow:hidden;
 
-z-index:13000;
-
-}
-
-.shop-header{
-
-flex:0 0 auto;
-
-padding:18px;
-
-text-align:center;
-
-border-bottom:1px solid rgba(255,255,255,.08);
+z-index:200;
 
 }
 
@@ -867,15 +854,6 @@ overflow-y:auto;
 
 }
 
-.shop-footer{
-
-flex:0 0 auto;
-
-padding:16px;
-
-border-top:1px solid rgba(255,255,255,.08);
-
-}
 
 /* ===========================
    PRODUCT SLIDER
