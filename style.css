@@ -24,15 +24,13 @@
 }
 
 /* ===========================
-   GLOBAL SCROLL FIX
+   APP STYLE SCROLL LOCK
 =========================== */
 
 html,body{
-  overflow-x:hidden;
-}
-
-body{
-  overscroll-behavior:none;
+   height:100%;
+   overflow-x:hidden;
+   overscroll-behavior:none;
 }
 
 body.noscroll{
