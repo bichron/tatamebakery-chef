@@ -818,6 +818,7 @@ margin-top:20px;
 
 .shop-panels{
 position:relative;
+display:none;
 }
 
 .shop-panel.active{
