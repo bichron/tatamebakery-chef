@@ -1,1 +1,38 @@
+{
+ "products":[
 
+  {
+   "id":"cake001",
+   "name":"Strawberry Shortcake",
+   "image":"assets/shop/celebration/ts01.jpg",
+   "size":"16cm",
+   "price":420000,
+   "sold":185,
+   "category":["celebration"],
+   "top_pick":true
+  },
+
+  {
+   "id":"cake002",
+   "name":"Chocolate Mousse Cake",
+   "image":"assets/shop/celebration/cmc01.jpg",
+   "size":"18cm",
+   "price":450000,
+   "sold":120,
+   "category":["celebration"],
+   "top_pick":false
+  },
+
+  {
+   "id":"bread001",
+   "name":"Milk Bread",
+   "image":"assets/shop/daily-bread/mb01.jpg",
+   "size":"1 loaf",
+   "price":45000,
+   "sold":410,
+   "category":["daily-bread"],
+   "top_pick":true
+  }
+
+ ]
+}
