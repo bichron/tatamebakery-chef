@@ -888,9 +888,13 @@ document
 .getElementById("btn-shop")
 ?.addEventListener("click",()=>{
 
-  if(!shopWheel) initShopWheel();
+  if(!shopWheel){
+  initShopWheel();
+}
 
+if(shopWheel){
   shopWheel.go(0);
+}
 
   document
   .querySelectorAll("#shopPopup .shop-slider")
@@ -905,9 +909,13 @@ document
 .getElementById("btn-qrcode")
 ?.addEventListener("click",()=>{
 
-  if(!qrWheel) initQRWheel();
+if(!qrWheel){
+  initQRWheel();
+}
 
+if(qrWheel){
   qrWheel.go(0);
+}
 
   document
   .querySelectorAll("#qrPopup .qr-slider")
@@ -924,10 +932,13 @@ document
 .getElementById("btn-achievement")
 ?.addEventListener("click",()=>{
 
-  if(!achievementWheel) initAchievementWheel();
+if(!achievementWheel){
+  initAchievementWheel();
+}
 
+if(achievementWheel){
   achievementWheel.go(0);
-
+}
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
   .forEach(loadAchievementSlider);
