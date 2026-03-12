@@ -1,15 +1,16 @@
-
-/* =====================================================
-   TATAME LANDINGPAGE – SAFE REFACTOR (dev01.06)
-   Behaviour preserved – structure cleaned
-===================================================== */
-
 window.addEventListener("DOMContentLoaded",()=>{
 
+/* ===========================
+   DOM CACHE
+=========================== */
+
 const DOM = {
+
 phone: document.getElementById("phone"),
-qrPopup: document.getElementById("qrPopup"),
 overlay: document.querySelector(".overlay"),
+
+qrPopup: document.getElementById("qrPopup"),
+
 zoom: document.getElementById("qrZoom"),
 zoomImg: document.getElementById("qrZoomImg"),
 
@@ -25,11 +26,16 @@ qtyMinus: document.getElementById("qtyMinus"),
 
 cartItems: document.getElementById("cartItems"),
 cartPreview: document.getElementById("cartPreview")
+
 }
+
+/* ===========================
+   GLOBAL STATE
+=========================== */
 
 const VIEWER_UNLOCK_CODE="093777"
 
-const qrState = new Map()
+const qrState=new Map()
 
 let qrWheel
 let achievementWheel
@@ -42,9 +48,16 @@ let wrongAttempts=0
 let cart={}
 let currentProduct=""
 
+/* ===========================
+   SCALE CARD
+=========================== */
+
 function scaleCard(){
- const scale=Math.min(innerWidth/360,innerHeight/700)
- DOM.phone.style.transform=`scale(${scale})`
+
+const scale=Math.min(innerWidth/360,innerHeight/700)
+
+DOM.phone.style.transform=`scale(${scale})`
+
 }
 
 scaleCard()
@@ -52,428 +65,436 @@ DOM.phone.classList.add("loaded")
 
 window.addEventListener("resize",()=>requestAnimationFrame(scaleCard))
 
+/* ===========================
+   THEME
+=========================== */
+
 function toggleTheme(){
- document.body.classList.toggle("light")
- localStorage.setItem(
-  "theme",
-  document.body.classList.contains("light")?"light":"dark"
- )
+
+document.body.classList.toggle("light")
+
+localStorage.setItem(
+"theme",
+document.body.classList.contains("light")?"light":"dark"
+)
+
 }
 
 window.toggleTheme=toggleTheme
 
 if(localStorage.getItem("theme")==="light"){
- document.body.classList.add("light")
+document.body.classList.add("light")
 }
+
+/* ===========================
+   DEVICE ORIENTATION
+=========================== */
 
 if(window.DeviceOrientationEvent){
 
- window.addEventListener("deviceorientation",e=>{
+window.addEventListener("deviceorientation",e=>{
 
-  const x=e.gamma/40
-  const y=e.beta/40
+const x=e.gamma/40
+const y=e.beta/40
 
-  DOM.phone.style.rotate=`${-y}deg ${x}deg`
+DOM.phone.style.rotate=`${-y}deg ${x}deg`
 
- })
+})
 
 }
+
+/* ===========================
+   NFC ANIMATION
+=========================== */
 
 const params=new URLSearchParams(location.search)
 
 if(params.has("nfc")){
- DOM.phone.animate(
-  [{transform:"scale(.95)"},{transform:"scale(1)"}],
-  {duration:800,easing:"ease-out"}
- )
+
+DOM.phone.animate(
+[{transform:"scale(.95)"},{transform:"scale(1)"}],
+{duration:800,easing:"ease-out"}
+)
+
 }
+
+/* ===========================
+   POPUP MANAGER
+=========================== */
 
 function closeAllPopups(){
 
- document.querySelectorAll(".popup")
- .forEach(p=>p.classList.remove("active"))
+document.querySelectorAll(".popup")
+.forEach(p=>p.classList.remove("active"))
 
- DOM.overlay?.classList.remove("active")
+DOM.overlay?.classList.remove("active")
 
- activePopup=null
+activePopup=null
 
 }
 
 function openPopup(id){
 
- if(activePopup===id) return
+if(activePopup===id) return
 
- closeAllPopups()
+closeAllPopups()
 
- const popup=document.getElementById(id)
- if(!popup) return
+const popup=document.getElementById(id)
 
- popup.classList.add("active")
- DOM.overlay?.classList.add("active")
+if(!popup) return
 
- activePopup=id
+popup.classList.add("active")
+DOM.overlay?.classList.add("active")
+
+activePopup=id
 
 }
 
+/* ===========================
+   WHEEL SYSTEM
+=========================== */
+
 function initQRWheel(){
 
- qrWheel=new WheelEngine({
-  mask:"#qrPopup .wheel-mask",
-  radius:80,
-  onChange:(index)=>{
+qrWheel=new WheelEngine({
+mask:"#qrPopup .wheel-mask",
+radius:80,
+onChange:(index)=>{
 
-   document
-   .querySelectorAll("#qrPopup .qr-panel")
-   .forEach((p,i)=>p.classList.toggle("active",i===index))
+document
+.querySelectorAll("#qrPopup .qr-panel")
+.forEach((p,i)=>p.classList.toggle("active",i===index))
 
-  }
- })
+}
+})
 
 }
 
 function initAchievementWheel(){
 
- achievementWheel=new WheelEngine({
-  mask:"#achievementPopup .wheel-mask",
-  radius:80,
-  onChange:(index)=>{
+achievementWheel=new WheelEngine({
+mask:"#achievementPopup .wheel-mask",
+radius:80,
+onChange:(index)=>{
 
-   document
-   .querySelectorAll("#achievementPopup .achievement-panel")
-   .forEach((p,i)=>p.classList.toggle("active",i===index))
+document
+.querySelectorAll("#achievementPopup .achievement-panel")
+.forEach((p,i)=>p.classList.toggle("active",i===index))
 
-  }
- })
+}
+})
 
 }
 
 function initShopWheel(){
 
- shopWheel=new WheelEngine({
-  mask:"#shopPopup .wheel-mask",
-  radius:80,
-  onChange:(index)=>{
+shopWheel=new WheelEngine({
+mask:"#shopPopup .wheel-mask",
+radius:80,
+onChange:(index)=>{
 
-   document
-   .querySelectorAll("#shopPopup .shop-panel")
-   .forEach((p,i)=>p.classList.toggle("active",i===index))
+document
+.querySelectorAll("#shopPopup .shop-panel")
+.forEach((p,i)=>p.classList.toggle("active",i===index))
 
-  }
- })
+}
+})
 
 }
 
+/* ===========================
+   IMAGE ZOOM
+=========================== */
+
+document.addEventListener("click",e=>{
+
+const img=e.target.closest(
+".qr-track img, .achievement-track img"
+)
+
+if(!img) return
+
+e.stopPropagation()
+
+DOM.zoomImg.src=img.src
+DOM.zoom.classList.add("active")
+
+})
+
+DOM.zoom?.addEventListener("click",()=>{
+
+DOM.zoom.classList.remove("active")
+
+})
+
+/* ===========================
+   PRODUCT POPUP
+=========================== */
+
+function openProduct(name,price,img){
+
+currentProduct=name
+
+document.getElementById("productName").textContent=name
+document.getElementById("productPrice").textContent=price+"đ"
+document.getElementById("productImage").src=img
+
+updateQtyDisplay()
+
+openPopup("productPopup")
+
+}
+
+document.addEventListener("click",e=>{
+
+const card=e.target.closest(".product-card")
+
+if(!card) return
+
+const img=card.querySelector("img").src
+const name=card.querySelector(".product-name").textContent
+const price=card.querySelector(".product-price").textContent
+
+openProduct(name,price,img)
+
+})
+
+/* ===========================
+   CART
+=========================== */
+
 function updateQtyDisplay(){
 
- const qty=cart[currentProduct]||0
- DOM.qtyInput.value=qty
+const qty=cart[currentProduct]||0
+
+DOM.qtyInput.value=qty
 
 }
 
 function renderCart(){
 
- const boxes=[DOM.cartItems,DOM.cartPreview]
+const boxes=[DOM.cartItems,DOM.cartPreview]
 
- boxes.forEach(box=>{
+boxes.forEach(box=>{
 
-  if(!box) return
-  box.innerHTML=""
+if(!box) return
 
-  if(Object.keys(cart).length===0){
-   box.innerHTML="<div class='cart-empty'>Cart empty</div>"
-   return
-  }
+box.innerHTML=""
 
-  Object.keys(cart).forEach(name=>{
+if(Object.keys(cart).length===0){
 
-   const qty=cart[name]
-
-   const row=document.createElement("div")
-   row.className="cart-item"
-
-   row.innerHTML=`
-   <span class="cart-name">${name}</span>
-   <span class="cart-qty">×${qty}</span>
-   <button class="cart-minus" data-name="${name}">–</button>
-   `
-
-   box.appendChild(row)
-
-  })
-
- })
+box.innerHTML="<div class='cart-empty'>Cart empty</div>"
+return
 
 }
 
-DOM.qtyPlus?.addEventListener("click",()=>{
+Object.keys(cart).forEach(name=>{
 
- if(!currentProduct) return
+const qty=cart[name]
 
- cart[currentProduct]=(cart[currentProduct]||0)+1
+const row=document.createElement("div")
 
- updateQtyDisplay()
- renderCart()
+row.className="cart-item"
+
+row.innerHTML=`
+<span class="cart-name">${name}</span>
+<span class="cart-qty">×${qty}</span>
+<button class="cart-minus" data-name="${name}">–</button>
+`
+
+box.appendChild(row)
 
 })
+
+})
+
+}
+
+/* ADD */
+
+DOM.qtyPlus?.addEventListener("click",()=>{
+
+if(!currentProduct) return
+
+cart[currentProduct]=(cart[currentProduct]||0)+1
+
+updateQtyDisplay()
+renderCart()
+
+})
+
+/* REMOVE */
 
 DOM.qtyMinus?.addEventListener("click",()=>{
 
- if(!currentProduct) return
- if(!cart[currentProduct]) return
+if(!currentProduct) return
 
- cart[currentProduct]--
+if(!cart[currentProduct]) return
 
- if(cart[currentProduct]<=0) delete cart[currentProduct]
+cart[currentProduct]--
 
- updateQtyDisplay()
- renderCart()
+if(cart[currentProduct]<=0){
+delete cart[currentProduct]
+}
+
+updateQtyDisplay()
+renderCart()
 
 })
+
+/* INPUT */
 
 DOM.qtyInput?.addEventListener("input",()=>{
 
- if(!currentProduct) return
+if(!currentProduct) return
 
- let val=parseInt(DOM.qtyInput.value)
+let val=parseInt(DOM.qtyInput.value)
 
- if(isNaN(val)||val<=0){
-  delete cart[currentProduct]
-  renderCart()
-  updateQtyDisplay()
-  return
- }
+if(isNaN(val)||val<=0){
 
- cart[currentProduct]=val
+delete cart[currentProduct]
+renderCart()
+updateQtyDisplay()
+return
 
- updateQtyDisplay()
- renderCart()
+}
+
+cart[currentProduct]=val
+
+updateQtyDisplay()
+renderCart()
 
 })
+
+/* REMOVE ITEM */
 
 document.addEventListener("click",e=>{
 
- if(!e.target.matches(".cart-minus")) return
+if(!e.target.matches(".cart-minus")) return
 
- const name=e.target.dataset.name
+const name=e.target.dataset.name
 
- cart[name]--
- if(cart[name]<=0) delete cart[name]
+cart[name]--
 
- renderCart()
- updateQtyDisplay()
+if(cart[name]<=0){
+delete cart[name]
+}
+
+renderCart()
+updateQtyDisplay()
 
 })
 
-document.getElementById("copyCartOrder")
+/* COPY */
+
+document
+.getElementById("copyCartOrder")
 ?.addEventListener("click",()=>{
 
- if(Object.keys(cart).length===0){
-  alert("Your cart is empty.")
-  return
- }
+let text="Tatame Bakery Order\n\n"
 
- let text="Tatame Bakery Order\n\n"
+if(Object.keys(cart).length===0){
 
- Object.keys(cart).forEach(name=>{
-  text+=`${name} x${cart[name]}\n`
- })
+alert("Your cart is empty.")
+return
 
- text+="\nThank you!"
+}
 
- navigator.clipboard.writeText(text)
- alert("Order copied. Paste into chat.")
+Object.keys(cart).forEach(name=>{
+
+text+=`${name} x${cart[name]}\n`
 
 })
+
+text+="\nThank you!"
+
+navigator.clipboard.writeText(text)
+
+alert("Order copied. Paste into chat.")
+
+})
+
+/* ===========================
+   BUTTON EVENTS
+=========================== */
 
 DOM.btnShop?.addEventListener("click",()=>{
 
- if(!shopWheel) initShopWheel()
+if(!shopWheel) initShopWheel()
 
- shopWheel.go(0)
+shopWheel.go(0)
 
- document
- .querySelectorAll("#shopPopup .shop-slider")
- .forEach(slider=>{
+document
+.querySelectorAll("#shopPopup .shop-slider")
+.forEach(slider=>{
 
-  if(!slider.dataset.loaded){
+if(!slider.dataset.loaded){
 
-   loadShopSlider(slider)
+loadShopSlider(slider)
+slider.dataset.loaded=1
 
-   slider.dataset.loaded=1
+}
 
-  }
+})
 
- })
-
- openPopup("shopPopup")
+openPopup("shopPopup")
 
 })
 
 DOM.btnQR?.addEventListener("click",()=>{
 
- if(!qrWheel) initQRWheel()
+if(!qrWheel) initQRWheel()
 
- qrWheel.go(0)
+qrWheel.go(0)
 
- document
- .querySelectorAll("#qrPopup .qr-slider")
- .forEach(loadQRSlider)
+document
+.querySelectorAll("#qrPopup .qr-slider")
+.forEach(loadQRSlider)
 
- openPopup("qrPopup")
+openPopup("qrPopup")
 
- window.loadDynamicQR?.()
+window.loadDynamicQR?.()
 
 })
 
 DOM.btnAchievement?.addEventListener("click",()=>{
 
- if(!achievementWheel) initAchievementWheel()
+if(!achievementWheel) initAchievementWheel()
 
- achievementWheel.go(0)
+achievementWheel.go(0)
 
- document
- .querySelectorAll("#achievementPopup .achievement-slider")
- .forEach(loadAchievementSlider)
+document
+.querySelectorAll("#achievementPopup .achievement-slider")
+.forEach(loadAchievementSlider)
 
- openPopup("achievementPopup")
+openPopup("achievementPopup")
 
 })
 
 DOM.btnEnterprise?.addEventListener("click",()=>{
- openPopup("enterprisePopup")
+
+openPopup("enterprisePopup")
+
 })
 
 DOM.btnCart?.addEventListener("click",()=>{
 
- renderCart()
- openPopup("cartPopup")
+renderCart()
+
+openPopup("cartPopup")
 
 })
 
 DOM.overlay?.addEventListener("click",closeAllPopups)
 
-document.querySelectorAll(".popup .close")
+document
+.querySelectorAll(".popup .close")
 .forEach(btn=>btn.addEventListener("click",closeAllPopups))
 
-const SESSION_TIMEOUT=20*60*1000
-
-function resetSessionTimer(){
-
- if(document.body.classList.contains("session-expired")) return
-
- clearTimeout(sessionTimer)
-
- sessionTimer=setTimeout(expireSession,SESSION_TIMEOUT)
-
-}
-
-["click","touchstart","keydown","scroll"]
-.forEach(evt=>{
-
- document.addEventListener(evt,resetSessionTimer,{passive:true})
-
-})
-
-resetSessionTimer()
-
-function expireSession(){
-
- closeAllPopups()
-
- document.body.classList.add("session-expired")
-
- showUnlockOverlay()
-
-}
-
-function showUnlockOverlay(){
-
- if(document.getElementById("unlockOverlay")) return
-
- wrongAttempts=0
-
- const overlay=document.createElement("div")
- overlay.id="unlockOverlay"
-
- overlay.innerHTML=`
- <div class="unlock-box">
-  <h3>Session expired</h3>
-  <p>Enter <b>6-digit code</b> to unlock<br>or enter <b>9</b> to close</p>
-  <input type="password" maxlength="6" inputmode="numeric"/>
-  <button id="unlockBtn">Unlock</button>
-  <div class="unlock-error"></div>
- </div>
- `
-
- document.body.appendChild(overlay)
-
- const input=overlay.querySelector("input")
- const btn=overlay.querySelector("#unlockBtn")
- const err=overlay.querySelector(".unlock-error")
-
- input.focus()
-
- btn.onclick=()=>{
-
-  const value=input.value.trim()
-
-  if(value==="9"){
-   closeLandingpage()
-   return
-  }
-
-  if(value===VIEWER_UNLOCK_CODE){
-   location.reload()
-   return
-  }
-
-  wrongAttempts++
-  err.textContent=`Invalid code (${wrongAttempts}/3)`
-
-  input.value=""
-  input.focus()
-
-  if(wrongAttempts>=3){
-   closeLandingpage()
-  }
-
- }
-
-}
-
-function closeLandingpage(){
-
- document.body.innerHTML=`
- <div class="page-closed">
-  <h3>Session closed</h3>
-  <p>Please scan QR or NFC again</p>
- </div>
- `
-
-}
+/* ===========================
+   UTIL
+=========================== */
 
 window.openWebsite=()=>window.open("https://blh.vn","_blank")
-
-})
-
-window.addEventListener("wheel",e=>{
- if(e.ctrlKey) e.preventDefault()
-},{passive:false})
-
-window.addEventListener("keydown",e=>{
- if(e.ctrlKey && ["+","-","="].includes(e.key)){
-  e.preventDefault()
- }
-})
-
-let lastClick=0
-
-document.addEventListener("dblclick",e=>e.preventDefault())
-
-document.addEventListener("click",e=>{
-
- if(Date.now()-lastClick<300) e.preventDefault()
-
- lastClick=Date.now()
 
 })
