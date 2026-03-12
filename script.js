@@ -682,6 +682,7 @@ function loadShopSlider(slider){
 =========================== */
 
 let cart = {};
+let shopData = []
 let currentProduct = "";
 
 /* FIX CARET POSITION (INPUT QTY) */
