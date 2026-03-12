@@ -863,6 +863,8 @@ position:relative;
 
 padding:10px 16px;
 
+overflow-y:auto;
+
 }
 
 .shop-footer{
