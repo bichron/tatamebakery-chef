@@ -865,6 +865,16 @@ padding:10px 16px;
 
 }
 
+.shop-footer{
+
+flex:0 0 auto;
+
+padding:16px;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+}
+
 /* ===========================
    PRODUCT SLIDER
 =========================== */
