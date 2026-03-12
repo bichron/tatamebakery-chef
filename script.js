@@ -1124,7 +1124,6 @@ function closeLandingpage(){
 
 }
 
-
 /* ===========================
    UTIL
 =========================== */
@@ -1132,3 +1131,17 @@ function closeLandingpage(){
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
 
 });
+
+/* ===========================
+   PREVENT BROWSER ZOOM
+=========================== */
+
+window.addEventListener("wheel",e=>{
+ if(e.ctrlKey) e.preventDefault()
+},{passive:false})
+
+window.addEventListener("keydown",e=>{
+ if(e.ctrlKey && ["+","-","="].includes(e.key)){
+   e.preventDefault()
+ }
+})
