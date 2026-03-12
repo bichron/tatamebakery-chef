@@ -1,4 +1,6 @@
-window.addEventListener("DOMContentLoaded",()=>{
+window.addEventListener("DOMContentLoaded", async ()=>{
+
+  await loadProductData();
 
 /* ===========================
    ELEMENTS
@@ -864,6 +866,47 @@ updateQtyDisplay();
 
 });
 
+/* ===========================
+   LOAD PRODUCT DATA
+=========================== */
+
+async function loadProductData(){
+
+  try{
+
+    const res = await fetch("data/product.json")
+
+    const data = await res.json()
+
+    shopData = data.products
+
+    console.log("Products loaded:", shopData)
+
+  }catch(err){
+
+    console.error("Product load error:",err)
+
+  }
+
+}
+
+/* ===========================
+   PRODUCT FILTER
+=========================== */
+
+function getProductsByCategory(category){
+
+  return shopData.filter(p => 
+    p.category.includes(category)
+  );
+
+}
+
+function getTopPicks(){
+
+  return shopData.filter(p => p.top_pick);
+
+}
    
 /* ===========================
    POPUP MANAGER
