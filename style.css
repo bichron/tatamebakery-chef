@@ -414,7 +414,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   transition:.4s;
 
-  z-index:10000;
+  z-index:200;
 
   background:transparent;
 }
@@ -679,7 +679,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   transition:.35s ease;
 
-  z-index:20000;
+  z-index:202;
 }
 
 .qr-zoom.active{
@@ -1402,7 +1402,7 @@ body.light .enterprise-stamp{
 
   padding:24px;
 
-  z-index:9999;
+  z-index:999;
 }
 
 
@@ -1420,7 +1420,7 @@ body.light .enterprise-stamp{
   justify-content:center;
   align-items:center;
 
-  z-index:10000;
+  z-index:999;
 }
 
 .unlock-box{
@@ -1515,7 +1515,7 @@ body.light .enterprise-stamp{
 
   padding:24px;
 
-  z-index:10000;
+  z-index:200;
 }
 
 .page-closed h3{
