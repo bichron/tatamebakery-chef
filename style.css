@@ -378,7 +378,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   transition:all .35s ease;
 
-  z-index:200;
+  z-index:198;
 }
 
 .overlay.active{
