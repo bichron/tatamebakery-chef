@@ -288,7 +288,22 @@ document.getElementById("copyCartOrder")
 DOM.btnShop?.addEventListener("click",()=>{
 
  if(!shopWheel) initShopWheel()
+
  shopWheel.go(0)
+
+ document
+ .querySelectorAll("#shopPopup .shop-slider")
+ .forEach(slider=>{
+
+  if(!slider.dataset.loaded){
+
+   loadShopSlider(slider)
+
+   slider.dataset.loaded=1
+
+  }
+
+ })
 
  openPopup("shopPopup")
 
@@ -297,7 +312,12 @@ DOM.btnShop?.addEventListener("click",()=>{
 DOM.btnQR?.addEventListener("click",()=>{
 
  if(!qrWheel) initQRWheel()
+
  qrWheel.go(0)
+
+ document
+ .querySelectorAll("#qrPopup .qr-slider")
+ .forEach(loadQRSlider)
 
  openPopup("qrPopup")
 
@@ -308,7 +328,12 @@ DOM.btnQR?.addEventListener("click",()=>{
 DOM.btnAchievement?.addEventListener("click",()=>{
 
  if(!achievementWheel) initAchievementWheel()
+
  achievementWheel.go(0)
+
+ document
+ .querySelectorAll("#achievementPopup .achievement-slider")
+ .forEach(loadAchievementSlider)
 
  openPopup("achievementPopup")
 
