@@ -540,9 +540,9 @@ zoom?.addEventListener("click",()=>{
    PRODUCT POPUP
 =========================== */
 
-function openProduct(name,price,img){
+function openProduct(id,name,price,img){
 
-currentProduct = name;
+currentProduct = id;
 
 document.getElementById("productName").textContent = name;
 document.getElementById("productPrice").textContent = price + "đ";
@@ -560,11 +560,13 @@ document.addEventListener("click",e=>{
 
   if(!card) return;
 
-  const img = card.querySelector("img").src;
-  const name = card.querySelector(".product-name").textContent;
-  const price = card.querySelector(".product-price").textContent;
+  const id = card.dataset.id;
 
-  openProduct(name,price,img);
+  const product = shopData.find(p=>p.id===id);
+
+  if(!product) return;
+
+  openProduct(product.id, product.name, product.price, product.image);
 
 });
    
@@ -601,35 +603,82 @@ function initShopWheel(){
 =========================== */
 
 function loadShopSlider(slider){
+
   delete slider.dataset.swipeBound;
 
   const track = slider.querySelector(".shop-track");
   const indicatorBox = slider.querySelector(".shop-indicators");
 
   const group = slider.dataset.group;
-  const maxAllowed = parseInt(slider.dataset.max);
 
   track.innerHTML="";
   indicatorBox.innerHTML="";
 
-  let images=[];
-  let index=1;
+  let products;
 
-  function tryLoad(){
+  /* TOP PICKS */
 
-    const img=new Image();
+  if(group==="top-picks"){
+    products = getTopPicks();
+  }
+  else{
+    products = getProductsByCategory(group);
+  }
 
-    img.src=`assets/shop/${group}/${index}.jpg`;
+  if(!products || products.length===0){
 
-    img.onload=()=>{
-      images.push(img.src);
-      index++;
-      tryLoad();
-    };
-
-    img.onerror=build;
+    track.innerHTML="<div class='shop-empty'>No products</div>";
+    return;
 
   }
+
+  products.forEach((p,i)=>{
+
+    const card=document.createElement("div");
+
+    card.className="product-card";
+
+    card.dataset.id = p.id;
+
+    card.innerHTML=`
+
+    ${p.top_pick ? '<div class="product-badge">TOP PICK</div>' : ''}
+
+    <img src="${p.image}">
+
+    <div class="product-info">
+
+    <div class="product-name">
+    ${p.name}
+    </div>
+
+    <div class="product-price">
+    ${p.price.toLocaleString()}đ
+    </div>
+
+    </div>
+
+    `;
+
+    track.appendChild(card);
+
+    const dot=document.createElement("span");
+
+    if(i===0) dot.classList.add("active");
+
+    indicatorBox.appendChild(dot);
+
+  });
+
+  qrState.set(slider,0);
+
+  track.dataset.x = 0;
+
+  new SliderEngine(slider);
+
+  updateQR(slider);
+
+}
 
   function build(){
 
@@ -798,7 +847,7 @@ return;
 
 }
 
-Object.keys(cart).forEach(name=>{
+Object.keys(cart).forEach(id=>{
 
 const qty = cart[name];
 
@@ -807,7 +856,9 @@ const row=document.createElement("div");
 row.className="cart-item";
 
 row.innerHTML=`
-<span class="cart-name">${name}</span>
+const product = shopData.find(p=>p.id===id);
+<span class="cart-name">${product?.name || id}</span>
+
 <span class="cart-qty">×${qty}</span>
 <button class="cart-minus" data-name="${name}">–</button>
 `;
