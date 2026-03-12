@@ -797,9 +797,11 @@ return;
 
 Object.keys(cart).forEach(id=>{
 
-const product = shopData.find(p=>p.id===id)
+const product = shopData.find(p=>p.id===id);
 
-text+=`${product?.name || id} x${cart[id]}\n`
+const name = product ? product.name : id;
+
+text += `${name} x${cart[id]}\n`;
 
 });
 
