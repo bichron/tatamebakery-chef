@@ -7,8 +7,6 @@ window.addEventListener("DOMContentLoaded", async ()=>{
 =========================== */
 
 const phone = document.getElementById("phone");
-const qrPopup = document.getElementById("qrPopup");
-
 const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
 
@@ -166,12 +164,19 @@ function initAchievementWheel(){
    SLIDER ENGINE V2
 =========================== */
 
+/* == SLIDER UTIL == */
+
+function getSliderTrack(slider){
+
+ return slider.querySelector(".qr-track")
+ || slider.querySelector(".achievement-track")
+ || slider.querySelector(".shop-track");
+
+}
+  
 function SliderEngine(slider){
 
-  const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
-    slider.querySelector(".shop-track");
+const track = getSliderTrack(slider);
 
   const dots = slider.querySelectorAll(
     ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
@@ -281,85 +286,46 @@ function SliderEngine(slider){
 
 function loadQRSlider(slider){
 
-  delete slider.dataset.swipeBound;
+ const track = slider.querySelector(".qr-track");
+ const indicatorBox = slider.querySelector(".qr-indicators");
 
-  const track = slider.querySelector(".qr-track");
-  const indicatorBox = slider.querySelector(".qr-indicators");
+ resetSlider(track, indicatorBox);
+ const group = slider.dataset.group;
+ const maxAllowed = parseInt(slider.dataset.max,10);
 
-  const group = slider.dataset.group;
-  const maxAllowed = parseInt(slider.dataset.max);
-
-  track.innerHTML = "";
-  indicatorBox.innerHTML = "";
-
-  let images = [];
-  let index = 1;
+  let images=[];
+  let index=1;
 
   function tryLoad(){
 
-    const img = new Image();
-    img.src = `assets/qr/${group}/${index}.png`;
+    const img=new Image();
+    img.src=`assets/qr/${group}/${index}.png`;
 
-    img.onload = ()=>{
-
+    img.onload=()=>{
       images.push(img.src);
       index++;
       tryLoad();
-
     };
 
-    img.onerror = build;
+    img.onerror=()=>{
 
+      buildImageSlider(
+        slider,
+        track,
+        indicatorBox,
+        images,
+        maxAllowed
+      );
+    };
   }
-function build(){
-
-    const count = Math.min(maxAllowed, images.length);
-
-    if(count===0){
-
-      track.innerHTML = "<div class='qr-empty'>No QR</div>";
-      return;
-
-    }
-
-    for(let i=0;i<count;i++){
-
-      const el=document.createElement("img");
-      el.src=images[i];
-
-      track.appendChild(el);
-
-      const dot=document.createElement("span");
-
-      if(i===0) dot.classList.add("active");
-
-      indicatorBox.appendChild(dot);
-
-    }
-
-    qrState.set(slider,0);
-
-    track.dataset.x=0;
-
-    new SliderEngine(slider);
-
-    updateQR(slider);
-
-  }
-
   tryLoad();
-
 }
-
 
 function updateQR(slider){
 
   const index=qrState.get(slider)??0;
 
-  const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
-    slider.querySelector(".shop-track");
+  const track = getSliderTrack(slider);
   
   const dots = slider.querySelectorAll(
   ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
@@ -380,19 +346,67 @@ function updateQR(slider){
 }
 
 /* ===========================
-   LOAD GALLERY
+   SLIDER RESET
 =========================== */
-function loadAchievementSlider(slider){
-  delete slider.dataset.swipeBound;
 
-  const track = slider.querySelector(".achievement-track");
-  const indicatorBox = slider.querySelector(".achievement-indicators");
-
-  const group = slider.dataset.group;
-  const maxAllowed = parseInt(slider.dataset.max);
+function resetSlider(track, indicatorBox){
 
   track.innerHTML="";
   indicatorBox.innerHTML="";
+
+}
+  
+/* ===========================
+   GENERIC IMAGE SLIDER BUILDER
+=========================== */
+
+function buildImageSlider(slider, track, indicatorBox, images, maxAllowed){
+
+  const count = Math.min(maxAllowed, images.length);
+
+  if(count===0){
+
+    track.innerHTML = "<div class='qr-empty'>No images</div>";
+    return;
+
+  }
+
+  for(let i=0;i<count;i++){
+
+    const el=document.createElement("img");
+    el.src=images[i];
+
+    track.appendChild(el);
+
+    const dot=document.createElement("span");
+
+    if(i===0) dot.classList.add("active");
+
+    indicatorBox.appendChild(dot);
+
+  }
+
+  qrState.set(slider,0);
+
+  track.dataset.x=0;
+
+  new SliderEngine(slider);
+
+  updateQR(slider);
+
+}
+  
+/* ===========================
+   LOAD GALLERY
+=========================== */
+function loadAchievementSlider(slider){
+ const track = slider.querySelector(".achievement-track");
+ const indicatorBox = slider.querySelector(".achievement-indicators");
+
+ resetSlider(track, indicatorBox);
+
+  const group = slider.dataset.group;
+  const maxAllowed = parseInt(slider.dataset.max,10);
 
   let images=[];
   let index=1;
@@ -408,48 +422,18 @@ function loadAchievementSlider(slider){
       tryLoad();
     };
 
-    img.onerror=build;
+img.onerror = ()=>{
 
+  buildImageSlider(
+    slider,
+    track,
+    indicatorBox,
+    images,
+    maxAllowed
+  );
+};
   }
-
-  function build(){
-
-const count = Math.min(maxAllowed, images.length);
-
-if(count===0){
-
-track.innerHTML = "<div class='qr-empty'>No QR</div>";
-return;
-
-}
-
-for(let i=0;i<count;i++){
-
-const el=document.createElement("img");
-el.src=images[i];
-
-track.appendChild(el);
-
-const dot=document.createElement("span");
-
-if(i===0) dot.classList.add("active");
-
-indicatorBox.appendChild(dot);
-
-}
-
-qrState.set(slider,0);
-
-track.dataset.x=0;
-
-new SliderEngine(slider);
-
-updateQR(slider);
-
-}
-
   tryLoad();
-
 }
    
 /* ===========================
@@ -545,15 +529,12 @@ function initShopWheel(){
 
 function loadShopSlider(slider){
 
-  delete slider.dataset.swipeBound;
-
   const track = slider.querySelector(".shop-track");
   const indicatorBox = slider.querySelector(".shop-indicators");
 
-  const group = slider.dataset.group;
+  resetSlider(track, indicatorBox);
 
-  track.innerHTML="";
-  indicatorBox.innerHTML="";
+  const group = slider.dataset.group;
 
   let products;
 
@@ -661,7 +642,7 @@ document.getElementById("qtyValue").value = qty;
 }   
 
 // ADD TO CART   
-document.getElementById("qtyPlus").onclick = () => {
+document.getElementById("qtyPlus")?.onclick = () => {
 
 if(!currentProduct) return;
 
@@ -677,7 +658,7 @@ renderCart();
 };
 
 
-document.getElementById("qtyMinus").onclick = () => {
+document.getElementById("qtyMinus")?.onclick = () => {
 
 if(!currentProduct) return;
 
@@ -701,7 +682,8 @@ document
 if(!currentProduct) return;
 
 let val = parseInt(
-document.getElementById("qtyValue").value
+document.getElementById("qtyValue").value,
+10
 );
 
 if(isNaN(val) || val <= 0){
@@ -800,12 +782,12 @@ document.addEventListener("click",e=>{
 
 if(!e.target.matches(".cart-minus")) return;
 
-const name = e.target.dataset.name;
+const id = e.target.dataset.name;
 
-cart[name]--;
+cart[id]--;
 
-if(cart[name] <= 0){
-delete cart[name];
+if(cart[id] <= 0){
+delete cart[id];
 }
 
 renderCart();
@@ -821,11 +803,11 @@ async function loadProductData(){
 
   try{
 
-    const res = await fetch("data/product.json")
+    const res = await fetch("data/product.json");
 
-    const data = await res.json()
+    const data = await res.json();
 
-    shopData = data.products
+    shopData = data.products;
 
     console.log("Products loaded:", shopData)
 
