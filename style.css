@@ -41,10 +41,6 @@ body.noscroll{
   touch-action: pan-y;
 }
 
-#shopSlider{
-  touch-action:pan-y;
-}
-
 body.light{
   --bg1:#eef2f7;
   --bg2:#dbe4f2;
@@ -148,9 +144,9 @@ body{
 animation:float 6s ease-in-out infinite alternate;
 }
 
-.phone.loaded{
+/* chờ xoá .phone.loaded{
   animation:float 6s ease-in-out infinite alternate;
-}
+} */
 
 .phone > *{
   position:relative;
@@ -762,7 +758,6 @@ animation:float 6s ease-in-out infinite alternate;
 
 .achievement-track{
   display:flex;
-  will-change:transform;
   gap:14px;
   transition:transform .35s ease;
   will-change:transform;
@@ -848,14 +843,6 @@ display:none;
 .shop-panel.active{
 display:block;
 }
-
-.shop-products{
-flex:1;
-position:relative;
-padding:10px 16px;
-overflow-y:auto;
-}
-
 
 /* ===========================
    PRODUCT SLIDER
