@@ -1,3 +1,27 @@
+/* ===========================
+   LOAD PRODUCT DATA
+=========================== */
+
+async function loadProductData(){
+
+  try{
+
+    const res = await fetch("data/product.json");
+
+    const data = await res.json();
+
+    shopData = data.products;
+
+    console.log("Products loaded:", shopData)
+
+  }catch(err){
+
+    console.error("Product load error:",err)
+
+  }
+
+}
+
 window.addEventListener("DOMContentLoaded", async ()=>{
 try{
   await loadProductData();
@@ -802,29 +826,6 @@ updateQtyDisplay();
 
 });
 
-/* ===========================
-   LOAD PRODUCT DATA
-=========================== */
-
-async function loadProductData(){
-
-  try{
-
-    const res = await fetch("data/product.json");
-
-    const data = await res.json();
-
-    shopData = data.products;
-
-    console.log("Products loaded:", shopData)
-
-  }catch(err){
-
-    console.error("Product load error:",err)
-
-  }
-
-}
 
 /* ===========================
    PRODUCT FILTER
