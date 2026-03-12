@@ -518,9 +518,12 @@ document.addEventListener("click",e=>{
 
   const id = card.dataset.id;
 
-  const product = shopData.find(p=>p.id===id);
+ const product = shopData.find(p=>p.id===id);
 
-  if(!product) return;
+  if(!product){
+   console.warn("Product not found:", id);
+   return;
+   }
 
   openProduct(product.id, product.name, product.price, product.image);
 
