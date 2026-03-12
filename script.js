@@ -819,12 +819,16 @@ const row=document.createElement("div");
 
 row.className="cart-item";
 
-row.innerHTML=`
 const product = shopData.find(p=>p.id===id);
+
+row.innerHTML=`
 <span class="cart-name">${product?.name || id}</span>
+<span class="cart-qty">×${qty}</span>
+<button class="cart-minus" data-name="${id}">–</button>
+`;
 
 <span class="cart-qty">×${qty}</span>
-<button class="cart-minus" data-name="${name}">–</button>
+<button class="cart-minus" data-name="${id}">–</button>
 `;
 
 box.appendChild(row);
