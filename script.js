@@ -312,42 +312,6 @@ function loadQRSlider(slider){
 
   }
 
-  function build(){
-
-    const count = Math.min(maxAllowed, images.length);
-
-    if(count===0){
-
-      track.innerHTML = "<div class='qr-empty'>No QR</div>";
-      return;
-
-    }
-
-    for(let i=0;i<count;i++){
-
-      const el = document.createElement("img");
-      el.src = images[i];
-      track.appendChild(el);
-
-      const dot = document.createElement("span");
-
-      if(i===0) dot.classList.add("active");
-
-      indicatorBox.appendChild(dot);
-
-    }
-
-    qrState.set(slider,0);
-
-    track.dataset.x = 0;
-
-    new SliderEngine(slider);
-    updateQR(slider);
-
-  }
-
-  tryLoad();
-
 }
 
 
@@ -849,7 +813,7 @@ return;
 
 Object.keys(cart).forEach(id=>{
 
-const qty = cart[name];
+const qty = cart[id];
 
 const row=document.createElement("div");
 
