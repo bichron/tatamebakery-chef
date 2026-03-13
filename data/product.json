@@ -12,9 +12,9 @@
     {
       "id":"bread-001",
       "group":"top-picks",
-      "code":"BS01",
+      "code":"SB01",
       "name":"Sourdough bread",
-      "image":"assets/shop/top-picks/SB01.jpg",
+      "image":"assets/shop/top-picks/sb01.jpg",
 
       "spec":{
         "size":"12 cm",
@@ -23,7 +23,7 @@
 
       "price":120000,
       "sold":345,
-      "stock":40,
+      "stock":999999,
       "tags":["bestseller"]
     },
 
@@ -32,7 +32,7 @@
       "group":"top-picks",
       "code":"MC01",
       "name":"Macaron",
-      "image":"assets/shop/top-picks/MC01.jpg",
+      "image":"assets/shop/top-picks/mc01.jpg",
 
       "spec":{
         "size":"14 cm",
@@ -41,7 +41,7 @@
 
       "price":150000,
       "sold":210,
-      "stock":35
+      "stock":999999
     },
 
     {
@@ -49,7 +49,7 @@
       "group":"top-picks",
       "code":"MV01",
       "name":"Macaron velved",
-      "image":"assets/shop/top-picks/MV01.jpg",
+      "image":"assets/shop/top-picks/mc01.jpg",
 
       "spec":{
         "size":"14 cm",
@@ -58,15 +58,15 @@
 
       "price":150000,
       "sold":210,
-      "stock":35
+      "stock":999999
     },
     
     {
       "id":"cake-003",
       "group":"celebration",
-      "code":"CB01",
+      "code":"sb02",
       "name":"Strawberry Birthday Cake",
-      "image":"assets/shop/celebration/strawberry.jpg",
+      "image":"assets/shop/celebration/sb02.jpg",
 
       "spec":{
         "size":"18 cm",
@@ -75,15 +75,15 @@
 
       "price":420000,
       "sold":98,
-      "stock":20
+      "stock":999999
     },
-
+    
     {
-      "id":"bread-002",
+      "id":"cake-004",
       "group":"daily-bread",
-      "code":"BG01",
-      "name":"Baguette",
-      "image":"assets/shop/daily-bread/baguette.jpg",
+      "code":"CF01",
+      "name":"Caramel flan",
+      "image":"assets/shop/daily-bread/cf01.jpg",
 
       "spec":{
         "weight":"200 g"
@@ -91,7 +91,37 @@
 
       "price":25000,
       "sold":890,
-      "stock":100
+      "stock":999999
+    }
+    {
+      "id":"cake-004",
+      "group":"daily-bread",
+      "code":"CF01",
+      "name":"Caramel flan",
+      "image":"assets/shop/daily-bread/cf01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+    {
+      "id":"bread-002",
+      "group":"daily-bread",
+      "code":"BG01",
+      "name":"Baguette",
+      "image":"assets/shop/daily-bread/bg01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
     }
 
   ]
