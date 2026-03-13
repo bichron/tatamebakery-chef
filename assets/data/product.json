@@ -1,38 +1,158 @@
 {
- "products":[
+  "groups":[
+    {
+      "id":"top-picks",
+      "name":"Top Picks",
+      "icon":"⭐"
+    },
+    {
+      "id":"celebration",
+      "name":"Celebration",
+      "icon":"🎂"
+    },
+    {
+      "id":"gift-sets",
+      "name":"Gift Sets",
+      "icon":"🎁"
+    },
+    {
+      "id":"daily-bread",
+      "name":"Daily Bread",
+      "icon":"🥖"
+    },
+    {
+      "id":"healthy",
+      "name":"Healthy",
+      "icon":"🌱"
+    }
+  ],
 
-  {
-   "id":"cake001",
-   "name":"Strawberry Shortcake",
-   "image":"assets/shop/celebration/ts01.jpg",
-   "size":"16cm",
-   "price":420000,
-   "sold":185,
-   "category":["celebration"],
-   "top_pick":true
-  },
+  "products":[
 
-  {
-   "id":"cake002",
-   "name":"Chocolate Mousse Cake",
-   "image":"assets/shop/celebration/cmc01.jpg",
-   "size":"18cm",
-   "price":450000,
-   "sold":120,
-   "category":["celebration"],
-   "top_pick":false
-  },
+    {
+      "id":"cake-choco-01",
+      "group":"top-picks",
+      "code":"TC01",
 
-  {
-   "id":"bread001",
-   "name":"Milk Bread",
-   "image":"assets/shop/daily-bread/mb01.jpg",
-   "size":"1 loaf",
-   "price":45000,
-   "sold":410,
-   "category":["daily-bread"],
-   "top_pick":true
-  }
+      "name":"Chocolate Lava Cake",
 
- ]
+      "image":"assets/shop/top-picks/choco-lava.jpg",
+
+      "spec":{
+        "size":"12 cm",
+        "weight":"350 g",
+        "serve":"2-3 people"
+      },
+
+      "price":120000,
+
+      "sold":345
+    },
+
+    {
+      "id":"cake-matcha-02",
+      "group":"top-picks",
+      "code":"TC02",
+
+      "name":"Matcha Cream Cake",
+
+      "image":"assets/shop/top-picks/matcha-cream.jpg",
+
+      "spec":{
+        "size":"14 cm",
+        "weight":"400 g",
+        "serve":"3-4 people"
+      },
+
+      "price":150000,
+
+      "sold":212
+    },
+
+
+
+    {
+      "id":"cake-birthday-01",
+      "group":"celebration",
+      "code":"CB01",
+
+      "name":"Strawberry Birthday Cake",
+
+      "image":"assets/shop/celebration/strawberry-birthday.jpg",
+
+      "spec":{
+        "size":"18 cm",
+        "weight":"900 g",
+        "serve":"8-10 people"
+      },
+
+      "price":420000,
+
+      "sold":98
+    },
+
+
+
+    {
+      "id":"gift-mooncake-set",
+      "group":"gift-sets",
+      "code":"GS01",
+
+      "name":"Premium Mooncake Box",
+
+      "image":"assets/shop/gift-sets/mooncake-box.jpg",
+
+      "spec":{
+        "box":"4 cakes",
+        "weight":"800 g"
+      },
+
+      "price":520000,
+
+      "sold":73
+    },
+
+
+
+    {
+      "id":"bread-baguette",
+      "group":"daily-bread",
+      "code":"DB01",
+
+      "name":"French Baguette",
+
+      "image":"assets/shop/daily-bread/baguette.jpg",
+
+      "spec":{
+        "length":"30 cm",
+        "weight":"200 g"
+      },
+
+      "price":25000,
+
+      "sold":890
+    },
+
+
+
+    {
+      "id":"bread-oatmeal",
+      "group":"healthy",
+      "code":"HL01",
+
+      "name":"Oatmeal Whole Wheat Bread",
+
+      "image":"assets/shop/healthy/oatmeal-bread.jpg",
+
+      "spec":{
+        "weight":"450 g",
+        "fiber":"high"
+      },
+
+      "price":65000,
+
+      "sold":156
+    }
+
+  ]
 }
