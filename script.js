@@ -558,10 +558,8 @@ async function loadProductData(){
 
    shopData = data.products || []
    shopGroups = data.groups || []
-    // sort top picks
-    shopData.sort((a,b)=> (b.sold||0) - (a.sold||0))
-
-    console.log("Products loaded:", shopData)
+   
+   console.log("Products loaded:", shopData)
 
   }catch(err){
 
