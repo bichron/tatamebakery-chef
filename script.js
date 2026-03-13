@@ -579,6 +579,24 @@ product.price.toLocaleString("vi-VN")+"đ";
 
 document.getElementById("productImage").src = product.image;
 
+const specBox = document.getElementById("productSpec")
+
+if(product.spec){
+
+  let html=""
+
+  Object.entries(product.spec).forEach(([k,v])=>{
+    html += `<div>${k}: ${v}</div>`
+  })
+
+  specBox.innerHTML = html
+
+}else{
+
+  specBox.innerHTML=""
+
+}
+  
 updateQtyDisplay();
 
 openPopup("productPopup");
