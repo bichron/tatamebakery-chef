@@ -587,37 +587,28 @@ shopGroups.forEach((g,i)=>{
 /* WHEEL ITEM */
 
 const item=document.createElement("div")
-
 item.className="wheel-item"
 
-item.innerHTML=`
-<span class="wheel-icon">${g.icon||""}</span>
-<span class="wheel-label">${g.name}</span>
-`
+item.innerHTML =
+`<span class="wheel-icon">${g.icon || ""}</span>
+<span class="wheel-label">${g.name}</span>`
 
 wheelBox.appendChild(item)
 
 /* PANEL */
 
 const panel=document.createElement("div")
-
 panel.className="shop-panel"
 
 if(i===0){
 panel.classList.add("active")
 }
 
-panel.innerHTML=`
-
-<div class="shop-slider" data-group="${g.id}">
-
+panel.innerHTML =
+`<div class="shop-slider" data-group="${g.id}">
 <div class="shop-track"></div>
-
 <div class="shop-indicators"></div>
-
-</div>
-
-`
+</div>`
 
 panelBox.appendChild(panel)
 
