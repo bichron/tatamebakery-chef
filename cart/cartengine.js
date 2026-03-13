@@ -3,7 +3,7 @@
    CART ENGINE
 =========================== */
 
-import { AppState } from "./state.js";
+import { AppState } from "../core/state.js";
 
 export const CartEngine = {
 
