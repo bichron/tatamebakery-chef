@@ -1,4 +1,5 @@
-window.addEventListener("DOMContentLoaded",()=>{
+window.addEventListener("DOMContentLoaded", async()=>{
+     await loadProductData()
 
 /* ===========================
    ELEMENTS
@@ -602,8 +603,8 @@ function getProductsByGroup(group){
 
 }
 
-// SOLD SORT for Top Picks
-products.sort((a,b)=> b.sold - a.sold)   
+/* SOLD SORT for Top Picks - đóng tạm
+shopData.sort((a,b)=> b.sold - a.sold)   */
    
 /* ===========================
    SHOP WHEEL
@@ -643,81 +644,67 @@ function initShopWheel(){
 =========================== */
 
 function loadShopSlider(slider){
+
   delete slider.dataset.swipeBound;
 
   const track = slider.querySelector(".shop-track");
   const indicatorBox = slider.querySelector(".shop-indicators");
 
   const group = slider.dataset.group;
-  const maxAllowed = parseInt(slider.dataset.max);
 
   track.innerHTML="";
   indicatorBox.innerHTML="";
 
-  let images=[];
-  let index=1;
+  const products = getProductsByGroup(group);
 
-  function tryLoad(){
+  if(products.length===0){
 
-    const img=new Image();
-
-    img.src=`assets/shop/${group}/${index}.jpg`;
-
-    img.onload=()=>{
-      images.push(img.src);
-      index++;
-      tryLoad();
-    };
-
-    img.onerror=build;
+    track.innerHTML="<div class='shop-empty'>No product</div>";
+    return;
 
   }
 
-  function build(){
+  products.forEach((p,i)=>{
 
-    const count=Math.min(maxAllowed,images.length);
+    const card=document.createElement("div");
 
-    for(let i=0;i<count;i++){
-      const card=document.createElement("div");
+    card.className="product-card";
 
-      card.className="product-card";
+    card.innerHTML=`
 
-      card.innerHTML=`
-      <img src="${images[i]}">
+      <img src="${p.image}">
 
       <div class="product-info">
 
-      <div class="product-name">
-      Product ${i+1}
+        <div class="product-name">
+        ${p.name}
+        </div>
+
+        <div class="product-price">
+        ${p.price.toLocaleString("vi-VN")}đ
+        </div>
+
       </div>
 
-      <div class="product-price">
-      45.000đ
-      </div>
+    `;
 
-      </div>
-      `;
+    track.appendChild(card);
 
-      track.appendChild(card);
+    const dot=document.createElement("span");
 
-      const dot=document.createElement("span");
+    if(i===0) dot.classList.add("active");
 
-      if(i===0) dot.classList.add("active");
+    indicatorBox.appendChild(dot);
 
-      indicatorBox.appendChild(dot);
+  });
 
-    }
+  qrState.set(slider,0);
 
-    qrState.set(slider,0);
+  track.dataset.x = 0;
 
-    track.dataset.x = 0;
+  new SliderEngine(slider);
 
-    new SliderEngine(slider);
-    updateQR(slider);
-
-  }
-
-  tryLoad();
+  updateQR(slider);
 
 }
 
