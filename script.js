@@ -535,9 +535,38 @@ zoom?.addEventListener("click",()=>{
 });
 
 /* ===========================
-   PRODUCT POPUP
+   LOAD PRODUCT JSON
 =========================== */
 
+let shopData = []
+let shopGroups = []
+
+async function loadProductData(){
+
+  try{
+
+    const res = await fetch("data/product.json")
+
+    const data = await res.json()
+
+    shopData = data.products
+    shopGroups = data.groups
+
+    console.log("Products loaded:", shopData)
+
+  }catch(err){
+
+    console.error("Product load error:", err)
+
+  }
+
+}
+
+   
+/* ===========================
+   PRODUCT POPUP
+=========================== */
+// LOAD PRODUCT.JSON
 function openProduct(name,price,img){
 
 currentProduct = name;
@@ -565,6 +594,16 @@ document.addEventListener("click",e=>{
   openProduct(name,price,img);
 
 });
+
+ // WHEEL INFTER
+function getProductsByGroup(group){
+
+  return shopData.filter(p => p.group === group)
+
+}
+
+// SOLD SORT for Top Picks
+products.sort((a,b)=> b.sold - a.sold)   
    
 /* ===========================
    SHOP WHEEL
