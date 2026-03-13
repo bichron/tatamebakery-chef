@@ -695,29 +695,32 @@ function initShopWheel(){
 
   requestAnimationFrame(()=>{
 
-  shopWheel = new WheelEngine({
+    shopWheel = new WheelEngine({
 
-    mask:"#shopPopup .wheel-mask",
+      mask:"#shopPopup .wheel-mask",
+      radius:80,
 
-    radius:80,
+      onChange:(index)=>{
 
-    onChange:(index)=>{
+        document
+        .querySelectorAll("#shopPanels .shop-panel")
+        .forEach((p,i)=>{
+          p.classList.toggle("active", i===index)
+        })
 
-      document
-      .querySelectorAll("#shopPanels .shop-panel")
-      .forEach((p,i)=>{
-        p.classList.toggle("active", i===index)
-      })
-    }
+      }
+
+    })
+
+    /* reset panel */
+    document
+    .querySelectorAll("#shopPanels .shop-panel")
+    .forEach((p,i)=>{
+      p.classList.toggle("active", i===0)
+    })
+
   })
 
-  // reset panel
-  document
-  .querySelectorAll("#shopPopup .shop-panel")
-  .forEach((p,i)=>{
-    p.classList.toggle("active", i===0);
-  });
-}
 }
 
 /* ===========================
