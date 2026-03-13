@@ -28,6 +28,118 @@
     },
 
     {
+      "id":"bread-002",
+      "group":"daily-bread",
+      "code":"BG01",
+      "name":"Baguette",
+      "image":"assets/shop/daily-bread/bg01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+
+    {
+      "id":"bread-003",
+      "group":"daily-bread",
+      "code":"BM01",
+      "name":"Bánh mỳ lạt",
+      "image":"assets/shop/daily-bread/bm01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+
+    {
+      "id":"bread-004",
+      "group":"daily-bread",
+      "code":"BM02",
+      "name":"Bánh mỳ nguyên cám",
+      "image":"assets/shop/daily-bread/bm02.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+
+    {
+      "id":"bread-005",
+      "group":"daily-bread",
+      "code":"BM03",
+      "name":"Bánh mỳ than tre",
+      "image":"assets/shop/daily-bread/bm03.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+
+    {
+      "id":"bread-006",
+      "group":"daily-bread",
+      "code":"BM04",
+      "name":"Bánh mỳ thắt bím",
+      "image":"assets/shop/daily-bread/bm04.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+
+    {
+      "id":"bread-007",
+      "group":"daily-bread",
+      "code":"BM05",
+      "name":"Bánh mỳ xốt dầu trứng",
+      "image":"assets/shop/daily-bread/bm05.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+
+    {
+      "id":"bread-008",
+      "group":"daily-bread",
+      "code":"BM06",
+      "name":"Raisin butter",
+      "image":"assets/shop/daily-bread/bm06.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+    
+    {
       "id":"cake-001",
       "group":"top-picks",
       "code":"MC01",
@@ -93,6 +205,7 @@
       "sold":890,
       "stock":999999
     }
+    
     {
       "id":"cake-004",
       "group":"daily-bread",
@@ -108,12 +221,13 @@
       "sold":890,
       "stock":999999
     }    
+
     {
-      "id":"bread-002",
+      "id":"cake-005",
       "group":"daily-bread",
-      "code":"BG01",
-      "name":"Baguette",
-      "image":"assets/shop/daily-bread/bg01.jpg",
+      "code":"CF02",
+      "name":"Chocoflan cake",
+      "image":"assets/shop/daily-bread/cf02.jpg",
 
       "spec":{
         "weight":"200 g"
@@ -122,7 +236,199 @@
       "price":25000,
       "sold":890,
       "stock":999999
+    }        
+
+    {
+      "id":"cake-006",
+      "group":"daily-bread",
+      "code":"NC01",
+      "name":"NewYork cheese cake",
+      "image":"assets/shop/daily-bread/nc01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+
+    {
+      "id":"cake-007",
+      "group":"daily-bread",
+      "code":"CC01",
+      "name":"Cotton cheese cake JP",
+      "image":"assets/shop/daily-bread/cc01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+
+    {
+      "id":"cake-008",
+      "group":"daily-bread",
+      "code":"TC01",
+      "name":"Tiramisu cup",
+      "image":"assets/shop/daily-bread/tc01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }        
+
+    {
+      "id":"cake-009",
+      "group":"daily-bread",
+      "code":"TB01",
+      "name":"Tiramisu Birthday cake",
+      "image":"assets/shop/daily-bread/tb01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+
+    {
+      "id":"cake-010",
+      "group":"daily-bread",
+      "code":"MC02",
+      "name":"Mousse chanh dây",
+      "image":"assets/shop/daily-bread/mc02.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+
+    {
+      "id":"cake-011",
+      "group":"daily-bread",
+      "code":"MB01",
+      "name":"Mousse chanh dây Birthday",
+      "image":"assets/shop/daily-bread/mb01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+
+    {
+      "id":"cake-012",
+      "group":"healthy",
+      "code":"BH01",
+      "name":"Bánh hạt",
+      "image":"assets/shop/daily-bread/bh01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }   
+
+    {
+      "id":"cake-013",
+      "group":"daily-bread",
+      "code":"BC02",
+      "name":"Bánh chuối nướng không đường",
+      "image":"assets/shop/daily-bread/bc02.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }        
+
+    {
+      "id":"cake-014",
+      "group":"daily-bread",
+      "code":"CK01",
+      "name":"Cookies",
+      "image":"assets/shop/daily-bread/ck01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+      },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }    
+    
+    {
+      "id":"bread-009",
+      "group":"daily-bread",
+      "code":"PT01",
+      "name":"Patechaud",
+      "image":"assets/shop/daily-bread/pt01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
     }
 
+    {
+      "id":"bread-010",
+      "group":"daily-bread",
+      "code":"PP01",
+      "name":"Papparoti",
+      "image":"assets/shop/daily-bread/pp01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+
+    {
+      "id":"bread-011",
+      "group":"daily-bread",
+      "code":"CV01",
+      "name":"Bánh cầu vồng",
+      "image":"assets/shop/daily-bread/cv01.jpg",
+
+      "spec":{
+        "weight":"200 g"
+    },
+
+      "price":25000,
+      "sold":890,
+      "stock":999999
+    }
+    
   ]
 }
