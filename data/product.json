@@ -207,23 +207,9 @@
     },
     
     {
-      "id":"cake-005",
-      "group":"daily-bread",
-      "code":"CF01",
-      "name":"Caramel flan",
-      "image":"assets/shop/daily-bread/cf01.jpg",
-
-      "spec":{
-        "weight":"200 g"
-      },
-
-      "price":25000,
-      "sold":890,
-      "stock":999999
-    },    
 
     {
-      "id":"cake-006",
+      "id":"cake-005",
       "group":"daily-bread",
       "code":"CF02",
       "name":"Chocoflan cake",
@@ -239,7 +225,7 @@
     },        
 
     {
-      "id":"cake-007",
+      "id":"cake-006",
       "group":"daily-bread",
       "code":"NC01",
       "name":"NewYork cheese cake",
@@ -255,7 +241,7 @@
     },    
 
     {
-      "id":"cake-008",
+      "id":"cake-007",
       "group":"daily-bread",
       "code":"CC01",
       "name":"Cotton cheese cake JP",
@@ -271,7 +257,7 @@
     },    
 
     {
-      "id":"cake-009",
+      "id":"cake-008",
       "group":"daily-bread",
       "code":"TC01",
       "name":"Tiramisu cup",
@@ -287,7 +273,7 @@
     },        
 
     {
-      "id":"cake-010",
+      "id":"cake-009",
       "group":"daily-bread",
       "code":"TB01",
       "name":"Tiramisu Birthday cake",
@@ -303,7 +289,7 @@
     },    
 
     {
-      "id":"cake-011",
+      "id":"cake-010",
       "group":"daily-bread",
       "code":"MC02",
       "name":"Mousse chanh dây",
@@ -319,7 +305,7 @@
     },    
 
     {
-      "id":"cake-012",
+      "id":"cake-011",
       "group":"daily-bread",
       "code":"MB01",
       "name":"Mousse chanh dây Birthday",
@@ -335,7 +321,7 @@
     },    
 
     {
-      "id":"cake-013",
+      "id":"cake-012",
       "group":"healthy",
       "code":"BH01",
       "name":"Bánh hạt",
@@ -351,7 +337,7 @@
     }   
 
     {
-      "id":"cake-014",
+      "id":"cake-013",
       "group":"daily-bread",
       "code":"BC02",
       "name":"Bánh chuối nướng không đường",
@@ -367,7 +353,7 @@
     },        
 
     {
-      "id":"cake-015",
+      "id":"cake-014",
       "group":"daily-bread",
       "code":"CK01",
       "name":"Cookies",
