@@ -921,6 +921,17 @@ font-size:13px;
 margin-top:6px;
 }
 
+.product-spec{
+  margin:6px 0 10px;
+  font-size:11px;
+  opacity:.85;
+  text-align:center;
+}
+
+.product-spec div{
+  line-height:1.2;
+}
+
 .product-price{
 font-weight:600;
 color:var(--gold);
