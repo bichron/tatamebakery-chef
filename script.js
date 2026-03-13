@@ -568,13 +568,16 @@ async function loadProductData(){
    PRODUCT POPUP
 =========================== */
 // LOAD PRODUCT.JSON
-function openProduct(name,price,img){
+function openProduct(product){
 
-currentProduct = name;
+currentProduct = product.name;
 
-document.getElementById("productName").textContent = name;
-document.getElementById("productPrice").textContent = price + "đ";
-document.getElementById("productImage").src = img;
+document.getElementById("productName").textContent = product.name;
+
+document.getElementById("productPrice").textContent =
+product.price.toLocaleString("vi-VN")+"đ";
+
+document.getElementById("productImage").src = product.image;
 
 updateQtyDisplay();
 
@@ -588,11 +591,13 @@ document.addEventListener("click",e=>{
 
   if(!card) return;
 
-  const img = card.querySelector("img").src;
-  const name = card.querySelector(".product-name").textContent;
-  const price = card.querySelector(".product-price").textContent;
+  const id = card.dataset.id;
 
-  openProduct(name,price,img);
+  const product = shopData.find(p => p.id === id);
+
+  if(!product) return;
+
+  openProduct(product);
 
 });
 
@@ -669,6 +674,7 @@ function loadShopSlider(slider){
     const card=document.createElement("div");
 
     card.className="product-card";
+    card.dataset.id = p.id;
 
     card.innerHTML=`
 
