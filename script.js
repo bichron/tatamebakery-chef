@@ -2,7 +2,8 @@ let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
   await loadProductData();
-
+  buildShopUI();
+  
 /* ===========================
    ELEMENTS
 =========================== */
@@ -563,10 +564,58 @@ async function loadProductData(){
 
 }
 
-   
+  
 /* ===========================
    PRODUCT POPUP
 =========================== */
+// BUILD SHOP UI
+function buildShopUI(){
+
+const wheelBox = document.getElementById("shopWheelItems")
+const panelBox = document.getElementById("shopPanels")
+
+wheelBox.innerHTML=""
+panelBox.innerHTML=""
+
+shopGroups.forEach((g,i)=>{
+
+/* WHEEL ITEM */
+
+const item=document.createElement("div")
+
+item.className="wheel-item"
+
+item.innerHTML=`
+<span class="wheel-icon">${g.icon||""}</span>
+<span class="wheel-label">${g.name}</span>
+`
+
+wheelBox.appendChild(item)
+
+/* PANEL */
+
+const panel=document.createElement("div")
+
+panel.className="shop-panel"
+
+panel.innerHTML=`
+
+<div class="shop-slider" data-group="${g.id}">
+
+<div class="shop-track"></div>
+
+<div class="shop-indicators"></div>
+
+</div>
+
+`
+
+panelBox.appendChild(panel)
+
+})
+
+}
+  
 // LOAD PRODUCT.JSON
 function openProduct(product){
 
@@ -625,7 +674,10 @@ function getProductsByGroup(group){
   return shopData.filter(p => p.group === group)
 
 }
-   
+
+
+
+  
 /* ===========================
    SHOP WHEEL
 =========================== */
@@ -640,11 +692,13 @@ function initShopWheel(){
 
     onChange:(index)=>{
 
-      document
-      .querySelectorAll("#shopPopup .shop-panel")
-      .forEach((p,i)=>{
-        p.classList.toggle("active", i===index);
-      });
+    document
+    .querySelectorAll("#shopPanels .shop-panel")
+    .forEach((p,i)=>{
+
+    p.classList.toggle("active", i===index)
+
+     })
 
     }
 
@@ -969,7 +1023,7 @@ document
   });
 
   document
-  .querySelectorAll("#shopPopup .shop-slider")
+  .querySelectorAll("#shopPanels .shop-slider")
   .forEach(slider=>{
 
     // FIX: tránh load nhiều lần
