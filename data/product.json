@@ -10,11 +10,11 @@
   "products":[
 
     {
-      "id":"cake-choco-01",
+      "id":"bread-001",
       "group":"top-picks",
-      "code":"TC01",
-      "name":"Chocolate Lava Cake",
-      "image":"assets/shop/top-picks/choco-lava.jpg",
+      "code":"BS01",
+      "name":"Sourdough bread",
+      "image":"assets/shop/top-picks/SB01.jpg",
 
       "spec":{
         "size":"12 cm",
@@ -28,11 +28,11 @@
     },
 
     {
-      "id":"cake-matcha-02",
+      "id":"cake-001",
       "group":"top-picks",
-      "code":"TC02",
-      "name":"Matcha Cream Cake",
-      "image":"assets/shop/top-picks/matcha.jpg",
+      "code":"MC01",
+      "name":"Macaron",
+      "image":"assets/shop/top-picks/MC01.jpg",
 
       "spec":{
         "size":"14 cm",
@@ -45,7 +45,24 @@
     },
 
     {
-      "id":"cake-birthday",
+      "id":"cake-002",
+      "group":"top-picks",
+      "code":"MV01",
+      "name":"Macaron velved",
+      "image":"assets/shop/top-picks/MV01.jpg",
+
+      "spec":{
+        "size":"14 cm",
+        "serve":"3-4 people"
+      },
+
+      "price":150000,
+      "sold":210,
+      "stock":35
+    },
+    
+    {
+      "id":"cake-003",
       "group":"celebration",
       "code":"CB01",
       "name":"Strawberry Birthday Cake",
@@ -62,10 +79,10 @@
     },
 
     {
-      "id":"bread-baguette",
+      "id":"bread-002",
       "group":"daily-bread",
-      "code":"DB01",
-      "name":"French Baguette",
+      "code":"BG01",
+      "name":"Baguette",
       "image":"assets/shop/daily-bread/baguette.jpg",
 
       "spec":{
