@@ -665,67 +665,64 @@ function initShopWheel(){
 
 function loadShopSlider(slider){
 
-  delete slider.dataset.swipeBound;
+  delete slider.dataset.swipeBound
 
-  const track = slider.querySelector(".shop-track");
-  const indicatorBox = slider.querySelector(".shop-indicators");
+  const track = slider.querySelector(".shop-track")
+  const indicatorBox = slider.querySelector(".shop-indicators")
 
-  const group = slider.dataset.group;
+  const group = slider.dataset.group
 
-  track.innerHTML="";
-  indicatorBox.innerHTML="";
+  track.innerHTML=""
+  indicatorBox.innerHTML=""
 
-  const products = getProductsByGroup(group);
+  const products = getProductsByGroup(group)
 
   if(products.length===0){
-
-    track.innerHTML="<div class='shop-empty'>No product</div>";
-    return;
-
+    track.innerHTML="<div class='shop-empty'>No product</div>"
+    return
   }
 
   products.forEach((p,i)=>{
 
-    const card=document.createElement("div");
-
-    card.className="product-card";
-    card.dataset.id = p.id;
+    const card=document.createElement("div")
+    card.className="product-card"
+    card.dataset.id=p.id
 
     card.innerHTML=`
-
       <img src="${p.image}">
-
       <div class="product-info">
-
-        <div class="product-name">
-        ${p.name}
-        </div>
-
+        <div class="product-name">${p.name}</div>
         <div class="product-price">
-        ${p.price.toLocaleString("vi-VN")}đ
+          ${p.price.toLocaleString("vi-VN")}đ
         </div>
-
       </div>
+    `
 
-    `;
+    track.appendChild(card)
 
-    track.appendChild(card);
+  })
 
-    const dot=document.createElement("span");
+  /* BUILD INDICATORS */
 
-    if(i===0) dot.classList.add("active");
+  for(let i=0;i<products.length;i++){
 
-    indicatorBox.appendChild(dot);
+    const dot=document.createElement("span")
 
-  });
+    if(i===0) dot.classList.add("active")
 
-  qrState.set(slider,0);
+    indicatorBox.appendChild(dot)
 
-  track.dataset.x = 0;
+  }
 
-  new SliderEngine(slider);
+  qrState.set(slider,0)
 
-  updateQR(slider);
+  track.dataset.x=0
+
+  /* IMPORTANT */
+  requestAnimationFrame(()=>{
+    new SliderEngine(slider)
+    updateQR(slider)
+  })
 
 }
 
