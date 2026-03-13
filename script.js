@@ -603,6 +603,10 @@ const panel=document.createElement("div")
 
 panel.className="shop-panel"
 
+if(i===0){
+panel.classList.add("active")
+}
+
 panel.innerHTML=`
 
 <div class="shop-slider" data-group="${g.id}">
