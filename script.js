@@ -704,13 +704,8 @@ function initShopWheel(){
       .forEach((p,i)=>{
         p.classList.toggle("active", i===index)
       })
-
     }
-
   })
-
-  })
-}
 
   // reset panel
   document
@@ -718,7 +713,7 @@ function initShopWheel(){
   .forEach((p,i)=>{
     p.classList.toggle("active", i===0);
   });
-
+}
 }
 
 /* ===========================
