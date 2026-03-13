@@ -932,7 +932,16 @@ document
 .getElementById("copyCartOrder")
 ?.addEventListener("click",()=>{
 
-let text="Tatame Bakery Order\n\n";
+let text="/order TatameLanding; ";
+
+const today = new Date();
+
+const date =
+String(today.getDate()).padStart(2,"0") + "-" +
+String(today.getMonth()+1).padStart(2,"0") + "-" +
+today.getFullYear();
+
+text += date + "; ";
 
 if(Object.keys(cart).length===0){
 
@@ -946,11 +955,11 @@ Object.keys(cart).forEach(id=>{
 const product = shopData.find(p=>p.id===id);
 const name = product ? product.name : id;
 
-text+=`${name} x${cart[id]}\n`;
+const qty = String(cart[id]).padStart(2,"0");
+
+text += `${qty} ${name}; `;
 
 });
-
-text+="\nThank you!";
 
 navigator.clipboard.writeText(text);
 
