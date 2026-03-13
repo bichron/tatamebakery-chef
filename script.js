@@ -691,6 +691,8 @@ function getProductsByGroup(group){
 
 function initShopWheel(){
 
+  requestAnimationFrame(()=>{
+
   shopWheel = new WheelEngine({
 
     mask:"#shopPopup .wheel-mask",
@@ -699,17 +701,18 @@ function initShopWheel(){
 
     onChange:(index)=>{
 
-    document
-    .querySelectorAll("#shopPanels .shop-panel")
-    .forEach((p,i)=>{
-
-    p.classList.toggle("active", i===index)
-
-     })
+      document
+      .querySelectorAll("#shopPanels .shop-panel")
+      .forEach((p,i)=>{
+        p.classList.toggle("active", i===index)
+      })
 
     }
 
-  });
+  })
+
+  })
+}
 
   // reset panel
   document
@@ -1033,7 +1036,7 @@ document
 
   // FIX: force panel reset
   document
-  .querySelectorAll("#shopPopup .shop-panel")
+  .querySelectorAll("#shopPanels .shop-panel")
   .forEach((p,i)=>{
     p.classList.toggle("active", i===0);
   });
