@@ -3,7 +3,7 @@
    POPUP ENGINE
 =========================== */
 
-import { AppState } from "./core/state.js";
+import { AppState } from "../core/state.js";
 
 export const Popup = {
 
