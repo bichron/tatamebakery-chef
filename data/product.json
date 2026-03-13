@@ -41,7 +41,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
 
     {
       "id":"bread-003",
@@ -57,7 +57,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
 
     {
       "id":"bread-004",
@@ -73,7 +73,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },
 
     {
       "id":"bread-005",
@@ -89,7 +89,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
 
     {
       "id":"bread-006",
@@ -105,7 +105,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
 
     {
       "id":"bread-007",
@@ -121,7 +121,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
 
     {
       "id":"bread-008",
@@ -137,7 +137,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
     
     {
       "id":"cake-001",
@@ -204,10 +204,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
     
     {
-      "id":"cake-004",
+      "id":"cake-005",
       "group":"daily-bread",
       "code":"CF01",
       "name":"Caramel flan",
@@ -220,10 +220,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },    
 
     {
-      "id":"cake-005",
+      "id":"cake-006",
       "group":"daily-bread",
       "code":"CF02",
       "name":"Chocoflan cake",
@@ -236,10 +236,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }        
+    },        
 
     {
-      "id":"cake-006",
+      "id":"cake-007",
       "group":"daily-bread",
       "code":"NC01",
       "name":"NewYork cheese cake",
@@ -252,10 +252,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },    
 
     {
-      "id":"cake-007",
+      "id":"cake-008",
       "group":"daily-bread",
       "code":"CC01",
       "name":"Cotton cheese cake JP",
@@ -268,10 +268,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },    
 
     {
-      "id":"cake-008",
+      "id":"cake-009",
       "group":"daily-bread",
       "code":"TC01",
       "name":"Tiramisu cup",
@@ -284,10 +284,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }        
+    },        
 
     {
-      "id":"cake-009",
+      "id":"cake-010",
       "group":"daily-bread",
       "code":"TB01",
       "name":"Tiramisu Birthday cake",
@@ -300,10 +300,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },    
 
     {
-      "id":"cake-010",
+      "id":"cake-011",
       "group":"daily-bread",
       "code":"MC02",
       "name":"Mousse chanh dây",
@@ -316,10 +316,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },    
 
     {
-      "id":"cake-011",
+      "id":"cake-012",
       "group":"daily-bread",
       "code":"MB01",
       "name":"Mousse chanh dây Birthday",
@@ -332,10 +332,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },    
 
     {
-      "id":"cake-012",
+      "id":"cake-013",
       "group":"healthy",
       "code":"BH01",
       "name":"Bánh hạt",
@@ -351,7 +351,7 @@
     }   
 
     {
-      "id":"cake-013",
+      "id":"cake-014",
       "group":"daily-bread",
       "code":"BC02",
       "name":"Bánh chuối nướng không đường",
@@ -364,10 +364,10 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }        
+    },        
 
     {
-      "id":"cake-014",
+      "id":"cake-015",
       "group":"daily-bread",
       "code":"CK01",
       "name":"Cookies",
@@ -380,7 +380,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }    
+    },    
     
     {
       "id":"bread-009",
@@ -396,7 +396,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
 
     {
       "id":"bread-010",
@@ -412,7 +412,7 @@
       "price":25000,
       "sold":890,
       "stock":999999
-    }
+    },
 
     {
       "id":"bread-011",
