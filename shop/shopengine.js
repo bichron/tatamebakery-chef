@@ -19,10 +19,11 @@ export const ShopEngine = {
 
       const data = await res.json();
 
-      const list = data.products || [];
+      const products = data.products || [];
+      const groups = data.groups || [];
 
-      AppState.products = list.filter(validateProduct);
-
+      AppState.products = products.filter(validateProduct);
+      AppState.shopGroups = groups;
       console.log("Products loaded:",AppState.products);
 
     }catch(err){
@@ -44,6 +45,11 @@ export const ShopEngine = {
     if(!AppState.shopGroup) return AppState.products;
 
     return AppState.products.filter(p=>p.group === AppState.shopGroup);
+
+  },
+  getGroups(){
+
+    return AppState.shopGroups || [];
 
   }
 
