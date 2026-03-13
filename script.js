@@ -1,7 +1,7 @@
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
-  await loadProductData()
+  await loadProductData();
 
 /* ===========================
    ELEMENTS
@@ -179,7 +179,7 @@ function SliderEngine(slider){
   slider.querySelectorAll(".achievement-indicators span") ||
   slider.querySelectorAll(".shop-indicators span");
 
-  const STEP = track.children[0]?.getBoundingClientRect().width + 14 || 164;
+  const STEP = (track.children[0]?.getBoundingClientRect().width || 150) + 14;
   let startX = 0;
   let baseX = 0;
   let dragging = false;
@@ -548,8 +548,10 @@ async function loadProductData(){
 
     const data = await res.json()
 
-    shopData = data.products
-    shopGroups = data.groups
+   shopData = data.products || []
+   shopGroups = data.groups || []
+    // sort top picks
+    shopData.sort((a,b)=> (b.sold||0) - (a.sold||0))
 
     console.log("Products loaded:", shopData)
 
@@ -568,7 +570,7 @@ async function loadProductData(){
 // LOAD PRODUCT.JSON
 function openProduct(product){
 
-currentProduct = product.name;
+currentProduct = product.id;
 
 document.getElementById("productName").textContent = product.name;
 
@@ -605,9 +607,6 @@ function getProductsByGroup(group){
   return shopData.filter(p => p.group === group)
 
 }
-
-/* SOLD SORT for Top Picks - có thể xem xét đóng tạm */
-shopData.sort((a,b)=> b.sold - a.sold)
    
 /* ===========================
    SHOP WHEEL
@@ -830,9 +829,9 @@ return;
 
 }
 
-Object.keys(cart).forEach(name=>{
+Object.keys(cart).forEach(id=>{
 
-const qty = cart[name];
+const qty = cart[id];
 
 const row=document.createElement("div");
 
