@@ -3,9 +3,9 @@
    SHOP ENGINE
 =========================== */
 
-import { AppState } from "./core/state.js";
+import { AppState } from "../core/state.js";
 import { validateProduct } from "./productvalidator.js";
-import { logError } from "./core/logger.js";
+import { logError } from "../core/logger.js";
 
 export const ShopEngine = {
 
