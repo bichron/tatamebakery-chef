@@ -1,30 +1,10 @@
 {
   "groups":[
-    {
-      "id":"top-picks",
-      "name":"Top Picks",
-      "icon":"⭐"
-    },
-    {
-      "id":"celebration",
-      "name":"Celebration",
-      "icon":"🎂"
-    },
-    {
-      "id":"gift-sets",
-      "name":"Gift Sets",
-      "icon":"🎁"
-    },
-    {
-      "id":"daily-bread",
-      "name":"Daily Bread",
-      "icon":"🥖"
-    },
-    {
-      "id":"healthy",
-      "name":"Healthy",
-      "icon":"🌱"
-    }
+    { "id":"top-picks","name":"Top Picks","icon":"⭐"},
+    { "id":"celebration","name":"Celebration","icon":"🎂"},
+    { "id":"gift-sets","name":"Gift Sets","icon":"🎁"},
+    { "id":"daily-bread","name":"Daily Bread","icon":"🥖"},
+    { "id":"healthy","name":"Healthy","icon":"🌿"}
   ],
 
   "products":[
@@ -33,125 +13,68 @@
       "id":"cake-choco-01",
       "group":"top-picks",
       "code":"TC01",
-
       "name":"Chocolate Lava Cake",
-
       "image":"assets/shop/top-picks/choco-lava.jpg",
 
       "spec":{
         "size":"12 cm",
-        "weight":"350 g",
         "serve":"2-3 people"
       },
 
       "price":120000,
-
-      "sold":345
+      "sold":345,
+      "stock":40,
+      "tags":["bestseller"]
     },
 
     {
       "id":"cake-matcha-02",
       "group":"top-picks",
       "code":"TC02",
-
       "name":"Matcha Cream Cake",
-
-      "image":"assets/shop/top-picks/matcha-cream.jpg",
+      "image":"assets/shop/top-picks/matcha.jpg",
 
       "spec":{
         "size":"14 cm",
-        "weight":"400 g",
         "serve":"3-4 people"
       },
 
       "price":150000,
-
-      "sold":212
+      "sold":210,
+      "stock":35
     },
 
-
-
     {
-      "id":"cake-birthday-01",
+      "id":"cake-birthday",
       "group":"celebration",
       "code":"CB01",
-
       "name":"Strawberry Birthday Cake",
-
-      "image":"assets/shop/celebration/strawberry-birthday.jpg",
+      "image":"assets/shop/celebration/strawberry.jpg",
 
       "spec":{
         "size":"18 cm",
-        "weight":"900 g",
         "serve":"8-10 people"
       },
 
       "price":420000,
-
-      "sold":98
+      "sold":98,
+      "stock":20
     },
-
-
-
-    {
-      "id":"gift-mooncake-set",
-      "group":"gift-sets",
-      "code":"GS01",
-
-      "name":"Premium Mooncake Box",
-
-      "image":"assets/shop/gift-sets/mooncake-box.jpg",
-
-      "spec":{
-        "box":"4 cakes",
-        "weight":"800 g"
-      },
-
-      "price":520000,
-
-      "sold":73
-    },
-
-
 
     {
       "id":"bread-baguette",
       "group":"daily-bread",
       "code":"DB01",
-
       "name":"French Baguette",
-
       "image":"assets/shop/daily-bread/baguette.jpg",
 
       "spec":{
-        "length":"30 cm",
         "weight":"200 g"
       },
 
       "price":25000,
-
-      "sold":890
-    },
-
-
-
-    {
-      "id":"bread-oatmeal",
-      "group":"healthy",
-      "code":"HL01",
-
-      "name":"Oatmeal Whole Wheat Bread",
-
-      "image":"assets/shop/healthy/oatmeal-bread.jpg",
-
-      "spec":{
-        "weight":"450 g",
-        "fiber":"high"
-      },
-
-      "price":65000,
-
-      "sold":156
+      "sold":890,
+      "stock":100
     }
 
   ]
