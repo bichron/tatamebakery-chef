@@ -175,10 +175,17 @@ function SliderEngine(slider){
     slider.querySelector(".achievement-track") ||
     slider.querySelector(".shop-track");
 
-  const dots =
-  slider.querySelectorAll(".qr-indicators span") ||
-  slider.querySelectorAll(".achievement-indicators span") ||
-  slider.querySelectorAll(".shop-indicators span");
+  let dots;
+
+   if(slider.querySelector(".qr-indicators")){
+   dots = slider.querySelectorAll(".qr-indicators span");
+   }
+   else if(slider.querySelector(".achievement-indicators")){
+   dots = slider.querySelectorAll(".achievement-indicators span");
+   }
+   else{
+   dots = slider.querySelectorAll(".shop-indicators span");
+   }
 
   const STEP = (track.children[0]?.getBoundingClientRect().width || 150) + 14;
   let startX = 0;
@@ -791,8 +798,10 @@ let currentProduct = "";
 
 const qtyInput = document.getElementById("qtyValue");
 
-qtyInput?.addEventListener("focus", moveCaretToEnd);
-qtyInput?.addEventListener("click", moveCaretToEnd);
+if(qtyInput){
+qtyInput.addEventListener("focus", moveCaretToEnd);
+qtyInput.addEventListener("click", moveCaretToEnd);
+}
 
 function moveCaretToEnd(){
 
@@ -902,6 +911,10 @@ Object.keys(cart).forEach(id=>{
 
 const qty = cart[id];
 
+const product = shopData.find(p=>p.id===id);
+
+const name = product ? product.name : id;
+
 const row=document.createElement("div");
 
 row.className="cart-item";
@@ -909,7 +922,7 @@ row.className="cart-item";
 row.innerHTML=`
 <span class="cart-name">${name}</span>
 <span class="cart-qty">×${qty}</span>
-<button class="cart-minus" data-name="${name}">–</button>
+<button class="cart-minus" data-id="${id}">–</button>
 `;
 
 box.appendChild(row);
@@ -934,9 +947,12 @@ return;
 
 }
 
-Object.keys(cart).forEach(name=>{
+Object.keys(cart).forEach(id=>{
 
-text+=`${name} x${cart[name]}\n`;
+const product = shopData.find(p=>p.id===id);
+const name = product ? product.name : id;
+
+text+=`${name} x${cart[id]}\n`;
 
 });
 
@@ -953,12 +969,12 @@ document.addEventListener("click",e=>{
 
 if(!e.target.matches(".cart-minus")) return;
 
-const name = e.target.dataset.name;
+const id = e.target.dataset.id;
 
-cart[name]--;
+cart[id]--;
 
-if(cart[name] <= 0){
-delete cart[name];
+if(cart[id] <= 0){
+delete cart[id];
 }
 
 renderCart();
