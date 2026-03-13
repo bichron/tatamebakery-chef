@@ -1,5 +1,7 @@
+let shopData = []
+let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
-     await loadProductData()
+  await loadProductData()
 
 /* ===========================
    ELEMENTS
@@ -538,10 +540,6 @@ zoom?.addEventListener("click",()=>{
 /* ===========================
    LOAD PRODUCT JSON
 =========================== */
-
-let shopData = []
-let shopGroups = []
-
 async function loadProductData(){
 
   try{
@@ -608,8 +606,8 @@ function getProductsByGroup(group){
 
 }
 
-/* SOLD SORT for Top Picks - đóng tạm
-shopData.sort((a,b)=> b.sold - a.sold)   */
+/* SOLD SORT for Top Picks - có thể xem xét đóng tạm */
+shopData.sort((a,b)=> b.sold - a.sold)
    
 /* ===========================
    SHOP WHEEL
