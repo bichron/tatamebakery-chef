@@ -552,8 +552,7 @@ async function loadProductData(){
 
   try{
 
-    const res = await fetch("data/product.json")
-
+    const res = await fetch("data/product.json?v=" + Date.now())
     const data = await res.json()
 
    shopData = data.products || []
