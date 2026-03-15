@@ -1,8 +1,10 @@
 import { initQRWheel, initAchievementWheel, initShopWheel } from "./enginesys/wheelengine.js"
+import { SliderEngine } from "./enginesys/popupengine.js"
 import { SliderEngine } from "./enginesys/sliderengine.js"
 import { QREngine } from "./enginesys/qrengine.js"
 import { AchievEngine } from "./enginesys/achievengine.js"
 import { ShopEngine } from "./enginesys/shopengine.js"
+import { SliderEngine } from "./enginesys/cartengine.js"
 
 
 let shopData = []
