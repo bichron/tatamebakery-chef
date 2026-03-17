@@ -117,7 +117,7 @@ function initQRWheel(){
 
     mask:"#qrPopup .wheel-mask",
 
-    radius:80,
+    radius:110,
 
     onChange:(index)=>{
 
@@ -146,7 +146,7 @@ function initAchievementWheel(){
 
     mask:"#achievementPopup .wheel-mask",
 
-    radius:80,
+    radius:120,
 
     onChange:(index)=>{
 
@@ -688,7 +688,7 @@ function initShopWheel(){
     shopWheel = new WheelEngine({
 
       mask:"#shopPopup .wheel-mask",
-      radius:80,
+      radius:130,
 
       onChange:(index)=>{
 
