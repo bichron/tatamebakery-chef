@@ -424,7 +424,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   width:320px;
 
-  padding:20px;
+  padding:16px;
 
   border-radius:25px;
 
@@ -474,7 +474,7 @@ animation:float 6s ease-in-out infinite alternate;
 }
 
 .qr-popup h3{
-  margin:20px 0 6px;
+  margin:10px 0 4px;
   line-height:1.2;
   font-size:16px;
 }
@@ -488,7 +488,7 @@ animation:float 6s ease-in-out infinite alternate;
   overflow:hidden;
   width:100%;
   max-width:420px;
-  height:140px;
+  height:110px;
   border-radius:12px;
 }
 
@@ -556,13 +556,13 @@ font-size:13px;
 =========================== */
 
 .qr-content{
-  margin-top:20px;
+  margin-top:10px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
 
-  min-height:210px;
+  min-height:160px;
 }
 
 .qr-panel{
