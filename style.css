@@ -368,15 +368,11 @@ animation:float 6s ease-in-out infinite alternate;
 
   background:rgba(0,0,0,0.28);
   backdrop-filter:blur(2px);
-  
-  display:flex;
-  align-items:center;
-  justify-content:center;
 
   opacity:0;
   pointer-events:none;
 
-  transition:all .35s ease;
+  transition:.35s ease;
  
   z-index:198;
 }
@@ -422,7 +418,7 @@ animation:float 6s ease-in-out infinite alternate;
 }
 
 .popup.active .popup-content{
-  transform:scale(1) translateY(-6px);
+  transform:translateY(-16px) scale(1);
 }
 
 .popup-content{
@@ -450,7 +446,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   overflow:visible;
 
-  transform:scale(.85);
+  transform:translateY(-10px) scale(.85);
 
   transition:.4s;
 
