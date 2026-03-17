@@ -535,6 +535,7 @@ animation:float 6s ease-in-out infinite alternate;
   font-size:16px;
 
   opacity:.35;
+  filter:blur(1px);
 
   transition:
     transform .6s cubic-bezier(.22,.61,.36,1),
@@ -550,6 +551,7 @@ font-size:13px;
   opacity:1;
   color:var(--gold);
   font-weight:600;
+  filter:blur(0px);
 }
 
 
