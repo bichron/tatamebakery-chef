@@ -813,7 +813,7 @@ z-index:200;
 position:relative;
 
 width:320px;
-padding:20px;
+padding:16px;
 
 border-radius:25px;
 
@@ -834,11 +834,11 @@ overflow:hidden;
 
 overflow:hidden;
 
-height:105px;
+height:90px;
 
 border-radius:12px;
 
-margin:6px 0;
+margin:4px 0;
 
 }
 
@@ -859,12 +859,12 @@ display:block;
 .shop-slider{
 position:relative;
 overflow:hidden;
-padding:10px 0;
+padding:6px 0 4px;
 }
 
 .shop-track{
 display:flex;
-gap:16px;
+gap:12px;
 
 transition:transform .35s ease;
 will-change:transform;
@@ -916,7 +916,7 @@ background:white;
 flex:0 0 150px;
 background:rgba(255,255,255,.05);
 border-radius:18px;
-padding:10px;
+padding:8px;
 text-align:center;
 backdrop-filter:blur(10px);
 }
