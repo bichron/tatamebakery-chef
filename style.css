@@ -534,7 +534,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   font-size:16px;
 
-  opacity:.35;
+  opacity:.15;
   filter:blur(1px);
 
   transition:
