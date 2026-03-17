@@ -1,10 +1,10 @@
 {
   "groups":[
-    {"id":"top-picks","name":"Top Picks","icon":"⭐"},
-    {"id":"celebration","name":"Celebration","icon":"🎂"},
-    {"id":"gift-sets","name":"Gift & Sets","icon":"🎁"},
-    {"id":"daily-bread","name":"Daily & Bread","icon":"🥖"},
-    {"id":"healthy","name":"Healthy","icon":"🌿"}
+    {"id":"top-picks","name":"TOP PICKs","icon":"⭐"},
+    {"id":"celebration","name":"CELEBRATION","icon":"🎂"},
+    {"id":"gift-sets","name":"GIFT SETs","icon":"🎁"},
+    {"id":"daily-bread","name":"DAILY HOT","icon":"🥖"},
+    {"id":"healthy","name":"HEALTHY","icon":"🌿"}
   ],
 
   "products":[
