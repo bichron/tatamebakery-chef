@@ -532,7 +532,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   white-space:nowrap;
 
-  font-size:14px;
+  font-size:16px;
 
   opacity:.35;
 
@@ -543,7 +543,7 @@ animation:float 6s ease-in-out infinite alternate;
 }
 
 .wheel-icon{
-font-size:18px;
+font-size:13px;
 }
 
 .wheel-item.active{
