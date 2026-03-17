@@ -70,7 +70,13 @@ const isBack = Math.cos(rad) < 0;
 
 const text = el.querySelector("span");
 if(text){
-text.style.opacity = isBack ? ".35" : "1";
+
+  if(i === this.index){
+    text.style.opacity = "1";
+  }else{
+    text.style.opacity = isBack ? ".25" : ".6";
+  }
+
 }
 
 });
