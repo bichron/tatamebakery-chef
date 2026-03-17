@@ -76,7 +76,7 @@ body{
     env(safe-area-inset-bottom)
     env(safe-area-inset-left);
 
-  overflow:hidden;
+  overflow-x:hidden;
 
   background:
     radial-gradient(
