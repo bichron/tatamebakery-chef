@@ -996,6 +996,7 @@ function closeAllPopups(){
 
   document.querySelector(".overlay")
   ?.classList.remove("active");
+  document.body.classList.remove("noscroll");
 
   activePopup=null;
 
@@ -1015,6 +1016,7 @@ function openPopup(id){
 
   document.querySelector(".overlay")
   ?.classList.add("active");
+  document.body.classList.add("noscroll");
 
   activePopup=id;
 
