@@ -530,7 +530,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   font-size:16px;
 
-  opacity:.35;
+  opacity:.25;
   filter:blur(1px);
 
   transition:
@@ -548,8 +548,12 @@ font-size:13px;
   color:var(--gold);
   font-weight:600;
   filter:blur(0px);
+  transform:translate(-50%,-50%) scale(1.08); /* bonus đẹp */
 }
 
+.wheel-item.active span{
+  opacity:1 !important;
+}
 
 /* ===========================
    QR CONTENT
