@@ -308,6 +308,50 @@
       "price":1,
       "sold":890,
       "stock":999999
+    },
+    {
+      "id":"giftset-001",
+      "group":"gift-sets",
+      "code":"GS01",
+      "name":"Cookie and bánh hạt",
+      "image":"assets/shop/gift-sets/gs01.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+    {
+      "id":"giftset-002",
+      "group":"gift-sets",
+      "code":"GS02",
+      "name":"Cookie and bánh hạnh nhân",
+      "image":"assets/shop/gift-sets/gs02.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+    {
+      "id":"giftset-003",
+      "group":"gift-sets",
+      "code":"GS03",
+      "name":"Macaron collection 8 pieces",
+      "image":"assets/shop/gift-sets/gs03.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+    {
+      "id":"giftset-004",
+      "group":"gift-sets",
+      "code":"GS04",
+      "name":"Macaron collection 12 pieces",
+      "image":"assets/shop/gift-sets/gs04.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
     }
 
   ]
