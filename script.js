@@ -31,12 +31,12 @@ let wrongAttempts=0;
 /* ===========================
    SCALE CARD
 =========================== */
-
+const wrapper = document.querySelector(".wrapper");
 function scaleCard(){
 
   const scale = Math.min(innerWidth/360, innerHeight/700);
 
-  phone.style.transform = `scale(${scale})`;
+  wrapper.style.transform = `scale(${scale})`;
 
 }
 
