@@ -714,17 +714,22 @@ font-size:13px;
   --wheel-size:90%;
 }
 
+.achievement-content h3{
+  margin-top:10px;
+  margin-bottom:6px;
+}
+
 .achievement-wheel-mask{
   overflow:hidden;
   border-radius:12px;
 
-  height:105px;
+  height:90px;
 
-  margin:6px 0;
+  margin:4px 0;
 }
 
 .achievement-content-view{
-  margin-top:18px;
+  margin-top:10px;
 }
 
 .achievement-panel{
@@ -758,7 +763,7 @@ font-size:13px;
   position:relative;
   width:100%;
   overflow:hidden;
-  padding:10px 0 25px;
+  padding:6px 0 12px;
 }
 
 .achievement-track{
