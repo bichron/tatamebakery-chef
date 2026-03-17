@@ -834,6 +834,17 @@ overflow:hidden;
 
 }
 
+.shop-content h3 .sub{
+  font-size:12px;
+  font-weight:400;
+  color:var(--gold);
+  opacity:.95;
+  letter-spacing:.4px;
+
+  text-shadow:
+    0 0 6px rgba(255,215,0,.35);
+}
+
 .shop-wheel-mask{
 
 overflow:hidden;
