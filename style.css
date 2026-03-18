@@ -839,6 +839,7 @@ overflow:hidden;
   margin:10px 0 4px;
   line-height:1.2;
   font-size:16px;
+    color:var(--gold);
 }
 
 .shop-content h3 .sub{
