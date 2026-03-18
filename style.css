@@ -721,6 +721,7 @@ font-size:13px;
 .achievement-content h3{
   margin-top:10px;
   margin-bottom:6px;
+  font-size:16px;
 }
 
 .achievement-wheel-mask{
@@ -832,6 +833,12 @@ flex-direction:column;
 
 overflow:hidden;
 
+}
+
+.shop-content h3{
+  margin:10px 0 4px;
+  line-height:1.2;
+  font-size:16px;
 }
 
 .shop-content h3 .sub{
