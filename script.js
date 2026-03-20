@@ -459,8 +459,8 @@ function updateQR(slider){
 }
 
 /* ===========================
-   LOAD GALLERY
-=========================== */
+   LOAD GALLERY --- phải xoá
+===========================
 function loadAchievementSlider(slider){
   delete slider.dataset.swipeBound;
 
@@ -521,7 +521,7 @@ function loadAchievementSlider(slider){
   tryLoad();
 
 }
-   
+ PHẢI XOÁ  */
 /* ===========================
    GLOBAL IMAGE ZOOM
 =========================== */
