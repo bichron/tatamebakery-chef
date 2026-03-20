@@ -16,7 +16,7 @@ this.container = this.mask?.querySelector(".wheel-container");
 this.wheel = this.mask?.querySelector(".wheel");
 this.items = [...this.mask?.querySelectorAll(".wheel-item")];
 
-if(!this.mask || !this.items.length) return;
+if(!this.mask || !this.wheel || !this.items.length) return;
 
 this.index = cfg.startIndex || 0;
 this.radius = cfg.radius || 80;
@@ -136,29 +136,25 @@ this.update();
    WHEEL CONTROLLERS
 ===================================== */
 
-export function initQRWheel(state){
+export function initQRWheel(state, cfg = {}){
+
+if(state.qrWheel) return;
 
 state.qrWheel = new WheelEngine({
 
-mask:"#qrPopup .wheel-mask",
-radius:80,
+mask: cfg.mask || "#qrPopup .wheel-mask",
+radius: cfg.radius || 80,
 
-onChange:(index)=>{
-
-document
-.querySelectorAll("#qrPopup .qr-panel")
-.forEach((p,i)=>{
-
-p.classList.toggle("active", i===index);
-
-});
-
-}
+onChange: cfg.onChange || ((index)=>{
+  document
+    .querySelectorAll("#qrPopup .qr-panel")
+    .forEach((p,i)=>{
+      p.classList.toggle("active", i===index);
+    });
+})
 
 });
-
 }
-
 
 export function initAchievementWheel(state){
 
@@ -187,7 +183,11 @@ p.classList.toggle("active", i===index);
 export function initShopWheel(state){
 
 requestAnimationFrame(()=>{
+   
+const items = document.querySelectorAll("#shopWheelItems .wheel-item");
 
+if(!items.length) return;
+   
 state.shopWheel = new WheelEngine({
 
 mask:"#shopPopup .wheel-mask",
