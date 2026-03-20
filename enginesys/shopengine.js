@@ -1,106 +1,56 @@
-/* =====================================
+
+/* ===========================
    SHOP ENGINE
-===================================== */
+=========================== */
+
+import { AppState } from "../core/state.js";
+import { validateProduct } from "./productvalidator.js";
+import { logError } from "../core/logger.js";
 
 export const ShopEngine = {
 
-loadProductData: async function(){
+  async loadProducts(){
 
-  try{
+    if(AppState.products.length) return;
 
-    const res = await fetch("data/product.json?v=" + Date.now());
-    const data = await res.json();
+    try{
 
-    shopData = data.products || [];
-    shopGroups = data.groups || [];
+      const res = await fetch("data/product.json");
 
-    console.log("Products loaded:", shopData);
+      const data = await res.json();
 
-  }catch(err){
+      const products = data.products || [];
+      const groups = data.groups || [];
 
-    console.error("Product load error:", err);
+      AppState.products = products.filter(validateProduct);
+      AppState.shopGroups = groups;
+      console.log("Products loaded:",AppState.products);
+
+    }catch(err){
+
+      logError("ShopEngine.loadProducts",err);
+
+    }
+
+  },
+
+  setGroup(group){
+
+    AppState.shopGroup = group;
+
+  },
+
+  getProducts(){
+
+    if(!AppState.shopGroup) return AppState.products;
+
+    return AppState.products.filter(p=>p.group === AppState.shopGroup);
+
+  },
+  getGroups(){
+
+    return AppState.shopGroups || [];
 
   }
 
-},
-
-buildShopUI: function(){
-
-const wheelBox = document.getElementById("shopWheelItems");
-const panelBox = document.getElementById("shopPanels");
-
-wheelBox.innerHTML="";
-panelBox.innerHTML="";
-
-shopGroups.forEach((g,i)=>{
-
-const item=document.createElement("div");
-item.className="wheel-item";
-
-item.innerHTML =
-`<span class="wheel-icon">${g.icon || ""}</span>
-<span class="wheel-label">${g.name}</span>`;
-
-wheelBox.appendChild(item);
-
-const panel=document.createElement("div");
-panel.className="shop-panel";
-
-if(i===0){
-panel.classList.add("active");
-}
-
-panel.innerHTML =
-`<div class="shop-slider" data-group="${g.id}">
-<div class="shop-track"></div>
-<div class="shop-indicators"></div>
-</div>`;
-
-panelBox.appendChild(panel);
-
-});
-
-},
-
-getProductsByGroup: function(group){
-
-return shopData.filter(p => p.group === group);
-
-},
-
-openProduct: function(product){
-
-currentProduct = product.id;
-
-document.getElementById("productName").textContent = product.name;
-
-document.getElementById("productPrice").textContent =
-product.price.toLocaleString("vi-VN")+"đ";
-
-document.getElementById("productImage").src = product.image;
-
-const specBox = document.getElementById("productSpec");
-
-if(product.spec){
-
-let html="";
-
-Object.entries(product.spec).forEach(([k,v])=>{
-html += `<div>${k}: ${v}</div>`;
-});
-
-specBox.innerHTML = html;
-
-}else{
-
-specBox.innerHTML="";
-
-}
-
-updateQtyDisplay();
-
-openPopup("productPopup");
-
-}
-
-}
+};
