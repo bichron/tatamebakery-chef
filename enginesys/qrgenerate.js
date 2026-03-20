@@ -86,3 +86,9 @@ async function loadDynamicQR() {
     console.warn("generateQRCode() not found – skipped");
   }
 }
+
+/* ===========================
+   EXPORT GLOBAL
+=========================== */
+window.generateQRCode = generateQRCode;
+window.loadDynamicQR = loadDynamicQR;
