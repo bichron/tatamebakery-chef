@@ -1,88 +1,151 @@
-/* ===========================
-   GENERATE QR CODE (UTILITY)
-=========================== */
-function generateQRCode(text) {
-  const box = document.getElementById("qrCode");
-  if (!box) {
-    console.warn("#qrCode not found");
-    return;
-  }
+/* =====================================
+   WHEEL ENGINE v3
+   Stable cylinder wheel
+===================================== */
 
-  box.innerHTML = "";
+class WheelEngine {
 
-  const img = document.createElement("img");
-  img.alt = "QR Code";
-  img.width = 200;
-  img.height = 200;
+constructor(cfg){
 
-  img.src =
-    "https://api.qrserver.com/v1/create-qr-code/?" +
-    "size=200x200&data=" +
-    encodeURIComponent(text);
+this.mask = document.querySelector(cfg.mask);
+this.container = this.mask?.querySelector(".wheel-container");
+this.wheel = this.mask?.querySelector(".wheel");
+this.items = [...this.mask?.querySelectorAll(".wheel-item")];
 
-  box.appendChild(img);
+if(!this.mask || !this.items.length) return;
+
+this.index = cfg.startIndex || 0;
+this.radius = cfg.radius || 80;
+this.onChange = cfg.onChange || null;
+
+this.total = this.items.length;
+this.angleStep = 360 / this.total;
+
+this.startX = 0;
+
+this.layout();
+this.update();
+this.bind();
+
 }
 
 /* ===========================
-   DYNAMIC QR TOKEN CONFIG
+   LAYOUT (RUN ONCE)
 =========================== */
-const QR_TOKEN_KEY = "dynamicQRToken";
-const QR_EXPIRE_TIME = 10 * 60 * 1000;
-const API_CREATE_TOKEN = "/api/qr/create";
 
-/* Đọc token local */
-function getLocalQRToken() {
-  const raw = localStorage.getItem(QR_TOKEN_KEY);
-  if (!raw) return null;
+layout(){
 
-  const data = JSON.parse(raw);
-  if (Date.now() > data.expiresAt) {
-    localStorage.removeItem(QR_TOKEN_KEY);
-    return null;
-  }
-  return data;
-}
+this.items.forEach((el,i)=>{
 
-/* Gọi server tạo token mới */
-async function createNewQRToken() {
-  try {
-    const res = await fetch(API_CREATE_TOKEN, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ownerId: "chrispham" })
-    });
+const angle = i * this.angleStep;
 
-    if (!res.ok) throw new Error("API error");
+el.style.transform = `
+translate(-50%,-50%)
+rotateY(${angle}deg)
+translateZ(${this.radius}px)
+`;
 
-    const data = await res.json();
-    localStorage.setItem(QR_TOKEN_KEY, JSON.stringify(data));
-    return data;
+});
 
-  } catch (err) {
-    console.warn("QR API failed – fallback used", err);
-
-    // fallback KHÔNG làm treo page
-    return {
-      token: "STATIC-FALLBACK",
-      expiresAt: Date.now() + QR_EXPIRE_TIME
-    };
-  }
 }
 
 /* ===========================
-   LOAD DYNAMIC QR (ENTRY)
+   UPDATE WHEEL ROTATION
 =========================== */
-async function loadDynamicQR() {
-  let tokenData = getLocalQRToken();
-  if (!tokenData) {
-    tokenData = await createNewQRToken();
+
+update(){
+
+const rot = -this.index * this.angleStep;
+
+this.wheel.style.transform = `rotateY(${rot}deg)`;
+
+this.items.forEach((el,i)=>{
+
+el.classList.toggle("active",i===this.index);
+
+const angle = (i-this.index) * this.angleStep;
+const rad = angle * Math.PI / 180;
+
+const isBack = Math.cos(rad) < 0;
+
+const text = el.querySelector("span");
+if(text){
+
+  if(i === this.index){
+    text.style.opacity = "1";
+  }else{
+    text.style.opacity = isBack ? ".25" : ".6";
   }
 
-  const qrUrl = `${location.origin}/t/${tokenData.token}`;
+}
 
-  if (typeof window.generateQRCode === "function") {
-    window.generateQRCode(qrUrl);
-  } else {
-    console.warn("generateQRCode() not found – skipped");
-  }
+});
+
+if(this.onChange) this.onChange(this.index);
+
+}
+
+/* ===========================
+   TOUCH CONTROL
+=========================== */
+
+bind(){
+
+let startX = 0;
+
+this.mask.addEventListener("touchstart",e=>{
+
+startX = e.touches[0].clientX;
+
+},{passive:true});
+
+this.mask.addEventListener("touchend",e=>{
+
+const dx = e.changedTouches[0].clientX - startX;
+
+if(Math.abs(dx) < 25) return;
+
+if(dx > 0){
+this.prev();
+}else{
+this.next();
+}
+
+});
+
+this.items.forEach((el,i)=>{
+
+el.addEventListener("click",()=>{
+this.go(i);
+});
+
+});
+
+}
+
+/* ===========================
+   NAVIGATION
+=========================== */
+
+next(){
+
+this.index = (this.index + 1) % this.total;
+this.update();
+
+}
+
+prev(){
+
+this.index = (this.index - 1 + this.total) % this.total;
+this.update();
+
+}
+
+go(i){
+
+this.index = i;
+this.update();
+
+}
+
 }
