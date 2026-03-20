@@ -254,9 +254,6 @@ My namecard • Pay me • My bank
 <div class="overlay"></div>
 
 
-
-
-
 <!-- ======================================================
      QR POPUP
 ====================================================== -->
@@ -448,7 +445,10 @@ Close
 ====================================================== -->
 <div class="popup" id="shopPopup">
 <div class="popup-content shop-content">
-<h3>BÁNH MỚI - CHẠM ĐỂ TAN CHẢY</h3>
+<h3>Daily Delights - A Touch of Melt
+<br>
+     <span class="sub">• chạm để tan chảy •</span>
+</h3>
 <div class="wheel-mask">
 <div class="wheel" id="shopWheelItems"></div>
 </div>
@@ -597,9 +597,17 @@ Close
 <!-- ======================================================
      SCRIPTS
 ====================================================== -->
-<script type="module" src="enginesys/popupengine.js"></script>
-<script type="module" src="enginesys/qrengine.js"></script>
+<script type="module" src="core/state.js"></script>
+<script type="module" src="core/domcache.js"></script>
+<script type="module" src="core/logger.js"></script>
 
+<script type="module" src="utils/debounce.js"></script>
+
+<script type="module" src="core/popupengine.js"></script>
+
+<script type="module" src="shop/productvalidator.js"></script>
+<script type="module" src="shop/shopengine.js"></script>
+<script type="module" src="cart/cartengine.js"></script>
 
 <script src="wheelengine.js"></script>
 <script src="qrgenerate.js"></script>
