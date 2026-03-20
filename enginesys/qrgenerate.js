@@ -1,7 +1,7 @@
 /* ===========================
    GENERATE QR CODE (UTILITY)
 =========================== */
-function generateQRCode(text) {
+export function generateQRCode(text) {
   const box = document.getElementById("qrCode");
   if (!box) {
     console.warn("#qrCode not found");
@@ -72,7 +72,7 @@ async function createNewQRToken() {
 /* ===========================
    LOAD DYNAMIC QR (ENTRY)
 =========================== */
-async function loadDynamicQR() {
+export async function loadDynamicQR() {
   let tokenData = getLocalQRToken();
   if (!tokenData) {
     tokenData = await createNewQRToken();
@@ -80,15 +80,5 @@ async function loadDynamicQR() {
 
   const qrUrl = `${location.origin}/t/${tokenData.token}`;
 
-  if (typeof window.generateQRCode === "function") {
-    window.generateQRCode(qrUrl);
-  } else {
-    console.warn("generateQRCode() not found – skipped");
-  }
+  generateQRCode(qrUrl);
 }
-
-/* ===========================
-   EXPORT GLOBAL
-=========================== */
-window.generateQRCode = generateQRCode;
-window.loadDynamicQR = loadDynamicQR;
