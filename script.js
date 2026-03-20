@@ -1,5 +1,6 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
 import { generateQRCode } from "./enginesys/qrgenerate.js";
+import { AchievEngine } from "./enginesys/achievengine.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
@@ -1090,7 +1091,14 @@ document
 
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
-  .forEach(loadAchievementSlider);
+  .forEach(slider=>{
+     AchievEngine.loadAchievementSlider(
+      slider,
+      qrState,
+      updateQR,
+      SliderEngine
+     );
+   });
 
   openPopup("achievementPopup");
 
