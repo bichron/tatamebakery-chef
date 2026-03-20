@@ -1,3 +1,5 @@
+import { WheelEngine } from "./enginesys/wheelengine.js";
+import { generateQRCode } from "./enginesys/qrgenerate.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
@@ -772,7 +774,7 @@ function loadShopSlider(slider){
 
   track.dataset.x=0
 
-  /* IMPORTANT */
+  /* ANT */
   requestAnimationFrame(()=>{
     new SliderEngine(slider)
     updateQR(slider)
