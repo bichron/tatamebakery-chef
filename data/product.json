@@ -243,7 +243,7 @@
       "group":"healthy",
       "code":"BH01",
       "name":"Bánh hạt",
-      "image":"assets/shop/daily-bread/cake012.jpg",
+      "image":"assets/shop/healthy/cake012.jpg",
       "spec":{"weight":"200 g"},
       "price":1,
       "sold":890,
