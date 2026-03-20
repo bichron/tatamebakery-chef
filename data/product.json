@@ -1,0 +1,358 @@
+{
+  "groups":[
+    {"id":"top-picks","name":"TOP PICKs","icon":"⭐"},
+    {"id":"celebration","name":"CELEBRATION","icon":"🎂"},
+    {"id":"gift-sets","name":"GIFT SETs","icon":"🎁"},
+    {"id":"daily-bread","name":"DAILY HOT","icon":"🥖"},
+    {"id":"healthy","name":"HEALTHY","icon":"🌿"}
+  ],
+
+  "products":[
+
+    {
+      "id":"bread-001",
+      "group":"top-picks",
+      "code":"SB01",
+      "name":"Sourdough bread",
+      "image":"assets/shop/top-picks/bread001.jpg",
+      "spec":{"size":"12 cm","serve":"2-3 people"},
+      "price":1,
+      "sold":345,
+      "stock":999999,
+      "tags":["bestseller"]
+    },
+
+    {
+      "id":"bread-002",
+      "group":"daily-bread",
+      "code":"BG01",
+      "name":"Baguette",
+      "image":"assets/shop/daily-bread/bread002.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-003",
+      "group":"daily-bread",
+      "code":"BM01",
+      "name":"Bánh mỳ lạt",
+      "image":"assets/shop/daily-bread/bread003.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-004",
+      "group":"daily-bread",
+      "code":"BM02",
+      "name":"Bánh mỳ nguyên cám",
+      "image":"assets/shop/daily-bread/bread004.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-005",
+      "group":"daily-bread",
+      "code":"BM03",
+      "name":"Bánh mỳ than tre",
+      "image":"assets/shop/daily-bread/bread005.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-006",
+      "group":"daily-bread",
+      "code":"BM04",
+      "name":"Bánh mỳ thắt bím",
+      "image":"assets/shop/daily-bread/bread006.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-007",
+      "group":"daily-bread",
+      "code":"BM05",
+      "name":"Bánh mỳ xốt dầu trứng",
+      "image":"assets/shop/daily-bread/bread007.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-008",
+      "group":"daily-bread",
+      "code":"BM06",
+      "name":"Raisin butter",
+      "image":"assets/shop/daily-bread/bread008.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-001",
+      "group":"top-picks",
+      "code":"MC01",
+      "name":"Macaron",
+      "image":"assets/shop/top-picks/cake001.jpg",
+      "spec":{"size":"14 cm","serve":"3-4 people"},
+      "price":1,
+      "sold":210,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-002",
+      "group":"top-picks",
+      "code":"MV01",
+      "name":"Macaron velvet",
+      "image":"assets/shop/top-picks/cake002.jpg",
+      "spec":{"size":"14 cm","serve":"3-4 people"},
+      "price":1,
+      "sold":210,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-003",
+      "group":"celebration",
+      "code":"SB02",
+      "name":"Strawberry Birthday Cake",
+      "image":"assets/shop/celebration/cake003.jpg",
+      "spec":{"size":"18 cm","serve":"8-10 people"},
+      "price":1,
+      "sold":98,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-004",
+      "group":"daily-bread",
+      "code":"CF01",
+      "name":"Caramel flan",
+      "image":"assets/shop/daily-bread/cake004.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-005",
+      "group":"daily-bread",
+      "code":"CF02",
+      "name":"Chocoflan cake",
+      "image":"assets/shop/daily-bread/cake005.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-006",
+      "group":"daily-bread",
+      "code":"NC01",
+      "name":"NewYork cheese cake",
+      "image":"assets/shop/daily-bread/cake006.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-007",
+      "group":"daily-bread",
+      "code":"CC01",
+      "name":"Cotton cheese cake JP",
+      "image":"assets/shop/daily-bread/cake007.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-008",
+      "group":"daily-bread",
+      "code":"TC01",
+      "name":"Tiramisu cup",
+      "image":"assets/shop/daily-bread/cake008.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-009",
+      "group":"daily-bread",
+      "code":"TB01",
+      "name":"Tiramisu Birthday cake",
+      "image":"assets/shop/daily-bread/cake009.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-010",
+      "group":"daily-bread",
+      "code":"MC02",
+      "name":"Mousse chanh dây",
+      "image":"assets/shop/daily-bread/cake010.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-011",
+      "group":"daily-bread",
+      "code":"MB01",
+      "name":"Mousse chanh dây Birthday",
+      "image":"assets/shop/daily-bread/cake011.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-012",
+      "group":"healthy",
+      "code":"BH01",
+      "name":"Bánh hạt",
+      "image":"assets/shop/healthy/cake012.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-013",
+      "group":"daily-bread",
+      "code":"BC02",
+      "name":"Bánh chuối nướng không đường",
+      "image":"assets/shop/daily-bread/cake013.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"cake-014",
+      "group":"daily-bread",
+      "code":"CK01",
+      "name":"Cookies",
+      "image":"assets/shop/daily-bread/cake014.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-009",
+      "group":"daily-bread",
+      "code":"PT01",
+      "name":"Patechaud",
+      "image":"assets/shop/daily-bread/bread009.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-010",
+      "group":"daily-bread",
+      "code":"PP01",
+      "name":"Papparoti",
+      "image":"assets/shop/daily-bread/bread010.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"bread-011",
+      "group":"daily-bread",
+      "code":"CV01",
+      "name":"Bánh cầu vồng",
+      "image":"assets/shop/daily-bread/bread011.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+    {
+      "id":"giftset-001",
+      "group":"gift-sets",
+      "code":"GS01",
+      "name":"Set Cookie",
+      "image":"assets/shop/gift-sets/set001.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+    {
+      "id":"giftset-002",
+      "group":"gift-sets",
+      "code":"GS02",
+      "name":"Set Biscotti",
+      "image":"assets/shop/gift-sets/set002.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+    {
+      "id":"giftset-003",
+      "group":"gift-sets",
+      "code":"GS03",
+      "name":"Set Cookie and Biscotti",
+      "image":"assets/shop/gift-sets/set003.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    },
+    {
+      "id":"giftset-004",
+      "group":"gift-sets",
+      "code":"GS04",
+      "name":"Set Macaron 12 pieces",
+      "image":"assets/shop/gift-sets/set004.jpg",
+      "spec":{"weight":"200 g"},
+      "price":1,
+      "sold":890,
+      "stock":999999
+    }
+
+  ]
+}
