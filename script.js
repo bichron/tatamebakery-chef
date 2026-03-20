@@ -1,4 +1,5 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
+import { QREngine } from "./enginesys/qrengine.js";
 import { generateQRCode } from "./enginesys/qrgenerate.js";
 import { AchievEngine } from "./enginesys/achievengine.js";
 let shopData = []
@@ -288,8 +289,8 @@ function SliderEngine(slider){
 }   
 
 /* ===========================
-   QR SLIDER
-=========================== */
+   QR SLIDER   - phải xoá
+===========================
 
 function loadQRSlider(slider){
 
@@ -458,7 +459,7 @@ function updateQR(slider){
   if(dots[index]) dots[index].classList.add("active");
 
 }
-
+   phải xoá */
 /* ===========================
    LOAD GALLERY --- phải xoá
 ===========================
@@ -1072,7 +1073,14 @@ document
 
   document
   .querySelectorAll("#qrPopup .qr-slider")
-  .forEach(loadQRSlider);
+  .forEach(slider=>{
+    QREngine.loadQRSlider(
+      slider,
+      qrState,
+      updateQR,
+      SliderEngine
+    );
+  });
 
   openPopup("qrPopup");
 
