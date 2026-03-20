@@ -76,7 +76,7 @@ body{
     env(safe-area-inset-bottom)
     env(safe-area-inset-left);
 
-  overflow:hidden;
+  overflow-x:hidden;
 
   background:
     radial-gradient(
@@ -368,16 +368,12 @@ animation:float 6s ease-in-out infinite alternate;
 
   background:rgba(0,0,0,0.28);
   backdrop-filter:blur(2px);
-  
-  display:flex;
-  align-items:center;
-  justify-content:center;
 
   opacity:0;
   pointer-events:none;
 
-  transition:all .35s ease;
-
+  transition:.35s ease;
+ 
   z-index:198;
 }
 
@@ -403,8 +399,6 @@ animation:float 6s ease-in-out infinite alternate;
   justify-content:center;
   align-items:center;
 
-  padding-top:20px;
-
   opacity:0;
   visibility:hidden;
 
@@ -422,7 +416,7 @@ animation:float 6s ease-in-out infinite alternate;
 }
 
 .popup.active .popup-content{
-  transform:scale(1) translateY(-6px);
+  transform:scale(1);
 }
 
 .popup-content{
@@ -430,7 +424,7 @@ animation:float 6s ease-in-out infinite alternate;
 
   width:320px;
 
-  padding:20px;
+  padding:16px;
 
   border-radius:25px;
 
@@ -480,7 +474,7 @@ animation:float 6s ease-in-out infinite alternate;
 }
 
 .qr-popup h3{
-  margin:20px 0 6px;
+  margin:10px 0 4px;
   line-height:1.2;
   font-size:16px;
 }
@@ -492,7 +486,9 @@ animation:float 6s ease-in-out infinite alternate;
 
 .wheel-mask{
   overflow:hidden;
-  height:120px;
+  width:100%;
+  max-width:420px;
+  height:110px;
   border-radius:12px;
 }
 
@@ -501,8 +497,8 @@ animation:float 6s ease-in-out infinite alternate;
   justify-content:center;
   align-items:center;
 
-  perspective:1000px;
-
+  perspective:1600px;
+  width:100%;
   height:100%;
 }
 
@@ -532,9 +528,10 @@ animation:float 6s ease-in-out infinite alternate;
 
   white-space:nowrap;
 
-  font-size:14px;
+  font-size:16px;
 
-  opacity:.35;
+  opacity:.25;
+  filter:blur(1px);
 
   transition:
     transform .6s cubic-bezier(.22,.61,.36,1),
@@ -543,28 +540,33 @@ animation:float 6s ease-in-out infinite alternate;
 }
 
 .wheel-icon{
-font-size:18px;
+font-size:13px;
 }
 
 .wheel-item.active{
   opacity:1;
   color:var(--gold);
   font-weight:600;
+  filter:blur(0px);
+  transform:translate(-50%,-50%) scale(1.08); /* bonus đẹp */
 }
 
+.wheel-item.active span{
+  opacity:1 !important;
+}
 
 /* ===========================
    QR CONTENT
 =========================== */
 
 .qr-content{
-  margin-top:20px;
+  margin-top:10px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
 
-  min-height:210px;
+  min-height:160px;
 }
 
 .qr-panel{
@@ -716,17 +718,23 @@ font-size:18px;
   --wheel-size:90%;
 }
 
+.achievement-content h3{
+  margin-top:10px;
+  margin-bottom:6px;
+  font-size:16px;
+}
+
 .achievement-wheel-mask{
   overflow:hidden;
   border-radius:12px;
 
-  height:105px;
+  height:90px;
 
-  margin:6px 0;
+  margin:4px 0;
 }
 
 .achievement-content-view{
-  margin-top:18px;
+  margin-top:10px;
 }
 
 .achievement-panel{
@@ -760,7 +768,7 @@ font-size:18px;
   position:relative;
   width:100%;
   overflow:hidden;
-  padding:10px 0 25px;
+  padding:6px 0 12px;
 }
 
 .achievement-track{
@@ -810,7 +818,7 @@ z-index:200;
 position:relative;
 
 width:320px;
-padding:20px;
+padding:16px;
 
 border-radius:25px;
 
@@ -827,15 +835,33 @@ overflow:hidden;
 
 }
 
+.shop-content h3{
+  margin:10px 0 4px;
+  line-height:1.2;
+  font-size:16px;
+    color:var(--gold);
+}
+
+.shop-content h3 .sub{
+  font-size:12px;
+  font-weight:400;
+  color:var(--gold);
+  opacity:.95;
+  letter-spacing:.4px;
+
+  text-shadow:
+    0 0 6px rgba(255,215,0,.35);
+}
+
 .shop-wheel-mask{
 
 overflow:hidden;
 
-height:105px;
+height:90px;
 
 border-radius:12px;
 
-margin:6px 0;
+margin:4px 0;
 
 }
 
@@ -856,12 +882,12 @@ display:block;
 .shop-slider{
 position:relative;
 overflow:hidden;
-padding:10px 0;
+padding:6px 0 4px;
 }
 
 .shop-track{
 display:flex;
-gap:16px;
+gap:12px;
 
 transition:transform .35s ease;
 will-change:transform;
@@ -913,7 +939,7 @@ background:white;
 flex:0 0 150px;
 background:rgba(255,255,255,.05);
 border-radius:18px;
-padding:10px;
+padding:8px;
 text-align:center;
 backdrop-filter:blur(10px);
 }
