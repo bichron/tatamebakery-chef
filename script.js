@@ -20,7 +20,7 @@ const zoomImg = document.getElementById("qrZoomImg");
 
 const VIEWER_UNLOCK_CODE = "093777";
 
-const qrState = new Map();
+const sliderState = new Map();
 
 let qrWheel;
 let achievementWheel;
@@ -207,7 +207,7 @@ function SliderEngine(slider){
     track.style.transition = "transform .35s ease";
     track.style.transform = `translateX(${x}px)`;
 
-    qrState.set(slider,index);
+    sliderState.set(slider,index);
 
     dots.forEach(d=>d.classList.remove("active"));
 
@@ -352,7 +352,7 @@ function loadQRSlider(slider){
 
     }
 
-    qrState.set(slider,0);
+    sliderState.set(slider,0);
 
     track.dataset.x = 0;
 
@@ -427,7 +427,7 @@ slider.addEventListener("touchend",e=>{
 
   track.dataset.x=snappedX;
 
-  qrState.set(slider,index);
+  sliderState.set(slider,index);
 
   updateSLD(slider);
 
@@ -439,7 +439,7 @@ phải xoá  */
 //// function updateQR(slider) nên gọi thành tên chung updateSLD
 function updateSLD(slider){
 
-  const index=qrState.get(slider)??0;
+  const index=sliderState.get(slider)??0;
 
   const track =
     slider.querySelector(".qr-track") ||
@@ -519,7 +519,7 @@ function loadAchievementSlider(slider){
 
     }
 
-    qrState.set(slider,0);
+    sliderState.set(slider,0);
 
     track.dataset.x = 0;
 
@@ -780,7 +780,7 @@ function loadShopSlider(slider){
 
   }
 
-  qrState.set(slider,0)
+  sliderState.set(slider,0)
 
   track.dataset.x=0
 
@@ -1084,7 +1084,7 @@ document
   .forEach(slider=>{
     QREngine.loadQRSlider(
       slider,
-      qrState,
+      sliderState,
       updateSLD,
       SliderEngine
     );
@@ -1110,7 +1110,7 @@ document
   .forEach(slider=>{
      AchievEngine.loadAchievementSlider(
       slider,
-      qrState,
+      sliderState,
       updateSLD,
       SliderEngine
      );
