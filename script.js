@@ -1,5 +1,5 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
-import { QREngine } from "./enginesys/qrengine.js";
+import { QRGallery } from "./enginesys/qrengine.js";
 import { generateQRCode } from "./enginesys/qrgenerate.js";
 import { AchievEngine } from "./enginesys/achievengine.js";
 let shopData = []
