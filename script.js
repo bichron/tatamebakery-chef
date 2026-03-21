@@ -175,8 +175,7 @@ function initAchievementWheel(){
 function SliderEngine(slider){
 
   const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
+    slider.querySelector(".slider-track") ||
     slider.querySelector(".shop-track");
   
   if(!track) return; // ⭐ FIX QUAN TRỌNG
