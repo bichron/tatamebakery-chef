@@ -87,11 +87,7 @@ export const GalleryEngine = {
       const firstImg = track.querySelector("img");
 
       function initSlider(){
-        // 🔒 tránh bind nhiều lần
-        if(slider.dataset.bound) return;
-        slider.dataset.bound = "1";
-
-        // đảm bảo layout đã render
+             // đảm bảo layout đã render
         requestAnimationFrame(()=>{
           new SliderEngine(slider);
           update(slider);
