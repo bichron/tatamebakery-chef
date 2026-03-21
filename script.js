@@ -1082,7 +1082,7 @@ document
   document
   .querySelectorAll("#qrPopup .qr-slider")
   .forEach(slider=>{
-    QREngine.loadQRSlider(
+    QRGallery.loadQRSlider(
       slider,
       sliderState,
       updateSLD,
