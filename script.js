@@ -1,7 +1,6 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
-import { QRGallery } from "./enginesys/qrengine.js";
+import { GalleryEngine } from "./enginesys/galleryengine.js";
 import { generateQRCode } from "./enginesys/qrgenerate.js";
-import { AchievEngine } from "./enginesys/achievengine.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
@@ -288,16 +287,16 @@ function SliderEngine(slider){
 
 function updateSLD(slider){
 
-  const index=sliderState.get(slider)??0;
+  const index = sliderState.get(slider) ?? 0;
 
   const track =
-  slider.querySelector(".slider-track") ||
-  slider.querySelector(".shop-track");
+    slider.querySelector(".slider-track") ||
+    slider.querySelector(".shop-track");
 
   if(!track) return;
-  
+
   const dots = slider.querySelectorAll(
-  ".slider-indicators span, .shop-indicators span"
+    ".slider-indicators span, .shop-indicators span"
   );
 
   const STEP =
@@ -305,15 +304,13 @@ function updateSLD(slider){
 
   const x = -index * STEP;
 
-  track.dataset.x=x;
+  track.dataset.x = x;
 
-  track.style.transition="transform .35s ease";
-  track.style.transform=`translateX(${x}px)`;
+  track.style.transition = "transform .35s ease";
+  track.style.transform = `translateX(${x}px)`;
 
   dots.forEach(d=>d.classList.remove("active"));
-
   if(dots[index]) dots[index].classList.add("active");
-
 }
    
 
@@ -861,24 +858,24 @@ document
 ?.addEventListener("click",()=>{
 
   if(!qrWheel) initQRWheel();
-
   qrWheel.go(0);
 
   document
   .querySelectorAll("#qrPopup .qr-slider")
   .forEach(slider=>{
-    QRGallery.loadQRSlider(
+    GalleryEngine.load({
       slider,
-      sliderState,
-      updateSLD,
-      SliderEngine
-    );
+      state: sliderState,
+      update: updateSLD,
+      SliderEngine,
+      path: "assets/qr/",
+      ext: "png",
+      max: 10
+    });
   });
 
   openPopup("qrPopup");
-
   window.loadDynamicQR?.();
-
 });
 
 
@@ -887,22 +884,23 @@ document
 ?.addEventListener("click",()=>{
 
   if(!achievementWheel) initAchievementWheel();
-
   achievementWheel.go(0);
 
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
   .forEach(slider=>{
-     AchievEngine.loadAchievementSlider(
+    GalleryEngine.load({
       slider,
-      sliderState,
-      updateSLD,
-      SliderEngine
-     );
-   });
+      state: sliderState,
+      update: updateSLD,
+      SliderEngine,
+      path: "assets/achievement/",
+      ext: "jpg",
+      max: 12
+    });
+  });
 
   openPopup("achievementPopup");
-
 });
 
 
