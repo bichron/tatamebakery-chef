@@ -66,7 +66,7 @@ loadQRSlider(slider, qrState, updateQR, SliderEngine){
 
     track.dataset.x = 0;
 
-    new SliderEngine(slider, qrState, updateQR);
+    new SliderEngine(slider);
 
     updateQR(slider);
 
@@ -76,6 +76,8 @@ loadQRSlider(slider, qrState, updateQR, SliderEngine){
 
 },
 
+/* XOÁ TOÀN BỘ - LỖI TRÙNG 2 SWIPE   
+   
 enableQRSwipe(slider, qrState, updateQR){
 
   if(slider.dataset.swipeBound) return;
@@ -140,6 +142,8 @@ slider.addEventListener("touchend",e=>{
 
 });
 
-}
+}  block chờ xoá */
 
-}
+   
+
+}   //END CODE MARK HERE
