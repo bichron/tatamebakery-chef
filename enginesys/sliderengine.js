@@ -2,7 +2,7 @@
    SLIDER ENGINE v2
 ===================================== */
 
-export function SliderEngine(slider, qrState, updateQR){
+export function SliderEngine(slider, qrState, updateSLD){
 
   const track =
     slider.querySelector(".qr-track") ||
