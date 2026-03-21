@@ -52,6 +52,16 @@ body.light{
   --popup-bg:rgba(255,255,255,.92);
 }
 
+.slider-track {
+  display: flex;
+  gap: 14px;
+}
+
+.slider-track img {
+  width: 150px;
+  flex-shrink: 0;
+}
+
 /* ===========================
    UTILITY COLORS
 =========================== */
