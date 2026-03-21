@@ -173,6 +173,9 @@ function initAchievementWheel(){
 
 function SliderEngine(slider){
 
+  if(slider.dataset.bound) return;
+  slider.dataset.bound = "1";
+  
   const track =
     slider.querySelector(".slider-track") ||
     slider.querySelector(".shop-track");
@@ -320,7 +323,7 @@ function updateSLD(slider){
 
 document.addEventListener("click",e=>{
   const img = e.target.closest(
-    ".qr-track img, .achievement-track img"
+  ".slider-track img"
   );
 
   if(!img) return;
