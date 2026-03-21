@@ -178,7 +178,9 @@ function SliderEngine(slider){
     slider.querySelector(".qr-track") ||
     slider.querySelector(".achievement-track") ||
     slider.querySelector(".shop-track");
-
+  
+  if(!track) return; // ⭐ FIX QUAN TRỌNG
+  
   let dots;
 
    if(slider.querySelector(".qr-indicators")){
@@ -355,7 +357,7 @@ function loadQRSlider(slider){
     track.dataset.x = 0;
 
     new SliderEngine(slider);
-    updateQR(slider);
+    updateSLD(slider);
 
   }
 
@@ -427,15 +429,15 @@ slider.addEventListener("touchend",e=>{
 
   qrState.set(slider,index);
 
-  updateQR(slider);
+  updateSLD(slider);
 
 });
 }
 phải xoá  */
 
   
-//// function updateQR(slider) nên gọi thành tên chung
-function updateQR(slider){
+//// function updateQR(slider) nên gọi thành tên chung updateSLD
+function updateSLD(slider){
 
   const index=qrState.get(slider)??0;
 
@@ -443,6 +445,8 @@ function updateQR(slider){
     slider.querySelector(".qr-track") ||
     slider.querySelector(".achievement-track") ||
     slider.querySelector(".shop-track");
+
+  if(!track) return;
   
   const dots = slider.querySelectorAll(
   ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
@@ -520,7 +524,7 @@ function loadAchievementSlider(slider){
     track.dataset.x = 0;
 
     new SliderEngine(slider);
-    updateQR(slider);
+    updateSLD(slider);
 
   }
 
@@ -783,7 +787,7 @@ function loadShopSlider(slider){
   /* ANT */
   requestAnimationFrame(()=>{
     new SliderEngine(slider)
-    updateQR(slider)
+    updateSLD(slider)
   })
 
 }
@@ -1081,7 +1085,7 @@ document
     QREngine.loadQRSlider(
       slider,
       qrState,
-      updateQR,
+      updateSLD,
       SliderEngine
     );
   });
@@ -1107,7 +1111,7 @@ document
      AchievEngine.loadAchievementSlider(
       slider,
       qrState,
-      updateQR,
+      updateSLD,
       SliderEngine
      );
    });
