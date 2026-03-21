@@ -431,8 +431,10 @@ slider.addEventListener("touchend",e=>{
 
 });
 }
+phải xoá  */
 
-
+  
+//// function updateQR(slider) nên gọi thành tên chung
 function updateQR(slider){
 
   const index=qrState.get(slider)??0;
@@ -446,8 +448,10 @@ function updateQR(slider){
   ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
   );
 
-  const STEP=164;
-  const x=-index*STEP;
+  const STEP =
+    (track.children[0]?.getBoundingClientRect().width || 150) + 14;
+
+  const x = -index * STEP;
 
   track.dataset.x=x;
 
@@ -459,7 +463,7 @@ function updateQR(slider){
   if(dots[index]) dots[index].classList.add("active");
 
 }
-   phải xoá */
+   
 /* ===========================
    LOAD GALLERY --- phải xoá
 ===========================
