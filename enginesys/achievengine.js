@@ -4,7 +4,7 @@
 
 export const AchievEngine = {
 
-loadAchievementSlider(slider, qrState, updateSLD, SliderEngine){
+loadAchievementSlider(slider, sliderState, updateSLD, SliderEngine){
 
   delete slider.dataset.swipeBound;
 
@@ -55,11 +55,11 @@ loadAchievementSlider(slider, qrState, updateSLD, SliderEngine){
 
     }
 
-    qrState.set(slider,0);
+    sliderState.set(slider,0);
 
     track.dataset.x = 0;
 
-    new SliderEngine(slider, qrState, updateSLD);
+    new SliderEngine(slider, sliderState, updateSLD);
 
     updateSLD(slider);
 
