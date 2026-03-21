@@ -182,11 +182,8 @@ function SliderEngine(slider){
   
   let dots;
 
-   if(slider.querySelector(".qr-indicators")){
-   dots = slider.querySelectorAll(".qr-indicators span");
-   }
-   else if(slider.querySelector(".achievement-indicators")){
-   dots = slider.querySelectorAll(".achievement-indicators span");
+   if(slider.querySelector(".slider-indicators")){
+   dots = slider.querySelectorAll(".slider-indicators span");
    }
    else{
    dots = slider.querySelectorAll(".shop-indicators span");
@@ -441,14 +438,13 @@ function updateSLD(slider){
   const index=sliderState.get(slider)??0;
 
   const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
-    slider.querySelector(".shop-track");
+  slider.querySelector(".slider-track") ||
+  slider.querySelector(".shop-track");
 
   if(!track) return;
   
   const dots = slider.querySelectorAll(
-  ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
+  ".slider-indicators span, .shop-indicators span"
   );
 
   const STEP =
