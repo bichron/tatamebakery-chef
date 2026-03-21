@@ -264,8 +264,10 @@ function SliderEngine(slider){
   },{passive:true});
 
   slider.addEventListener("touchmove",e=>{
-    move(e.touches[0].clientX);
-  },{passive:true});
+  if(!dragging) return;
+  e.preventDefault();
+  move(e.touches[0].clientX);
+  },{passive:false});
 
   slider.addEventListener("touchend",e=>{
     end(e.changedTouches[0].clientX);
@@ -279,7 +281,8 @@ function SliderEngine(slider){
   });
 
   window.addEventListener("mousemove",e=>{
-    move(e.clientX);
+  if(!dragging) return;
+  move(e.clientX);
   });
 
   window.addEventListener("mouseup",e=>{
