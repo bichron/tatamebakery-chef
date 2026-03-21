@@ -4,7 +4,7 @@
 
 export const QREngine = {
 
-loadQRSlider(slider, qrState, updateQR, SliderEngine){
+loadQRSlider(slider, qrState, updateSLD, SliderEngine){
 
   delete slider.dataset.swipeBound;
 
@@ -68,7 +68,7 @@ loadQRSlider(slider, qrState, updateQR, SliderEngine){
 
     new SliderEngine(slider);
 
-    updateQR(slider);
+    updateSLD(slider);
 
   }
 
@@ -78,7 +78,7 @@ loadQRSlider(slider, qrState, updateQR, SliderEngine){
 
 /* XOÁ TOÀN BỘ - LỖI TRÙNG 2 SWIPE   
    
-enableQRSwipe(slider, qrState, updateQR){
+enableQRSwipe(slider, qrState, updateSLD){
 
   if(slider.dataset.swipeBound) return;
 
@@ -138,7 +138,7 @@ slider.addEventListener("touchend",e=>{
 
   qrState.set(slider,index);
 
-  updateQR(slider);
+  updateSLD(slider);
 
 });
 
