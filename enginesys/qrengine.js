@@ -2,7 +2,7 @@
    QR ENGINE
 ===================================== */
 
-export const QREngine = {
+export const QRGallery = {
 
 loadQRSlider(slider, sliderState, updateSLD, SliderEngine){
 
