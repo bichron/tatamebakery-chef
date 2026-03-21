@@ -1,5 +1,7 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
+import { QRGallery } from "./enginesys/qrengine.js";
 import { generateQRCode } from "./enginesys/qrgenerate.js";
+import { AchievEngine } from "./enginesys/achievengine.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
@@ -18,7 +20,7 @@ const zoomImg = document.getElementById("qrZoomImg");
 
 const VIEWER_UNLOCK_CODE = "093777";
 
-const qrState = new Map();
+const sliderState = new Map();
 
 let qrWheel;
 let achievementWheel;
@@ -176,7 +178,9 @@ function SliderEngine(slider){
     slider.querySelector(".qr-track") ||
     slider.querySelector(".achievement-track") ||
     slider.querySelector(".shop-track");
-
+  
+  if(!track) return; // ⭐ FIX QUAN TRỌNG
+  
   let dots;
 
    if(slider.querySelector(".qr-indicators")){
@@ -203,7 +207,7 @@ function SliderEngine(slider){
     track.style.transition = "transform .35s ease";
     track.style.transform = `translateX(${x}px)`;
 
-    qrState.set(slider,index);
+    sliderState.set(slider,index);
 
     dots.forEach(d=>d.classList.remove("active"));
 
@@ -287,8 +291,8 @@ function SliderEngine(slider){
 }   
 
 /* ===========================
-   QR SLIDER
-=========================== */
+   QR SLIDER   - phải xoá
+===========================
 
 function loadQRSlider(slider){
 
@@ -348,12 +352,12 @@ function loadQRSlider(slider){
 
     }
 
-    qrState.set(slider,0);
+    sliderState.set(slider,0);
 
     track.dataset.x = 0;
 
     new SliderEngine(slider);
-    updateQR(slider);
+    updateSLD(slider);
 
   }
 
@@ -423,29 +427,35 @@ slider.addEventListener("touchend",e=>{
 
   track.dataset.x=snappedX;
 
-  qrState.set(slider,index);
+  sliderState.set(slider,index);
 
-  updateQR(slider);
+  updateSLD(slider);
 
 });
 }
+phải xoá  */
 
+  
+//// function updateQR(slider) nên gọi thành tên chung updateSLD
+function updateSLD(slider){
 
-function updateQR(slider){
-
-  const index=qrState.get(slider)??0;
+  const index=sliderState.get(slider)??0;
 
   const track =
     slider.querySelector(".qr-track") ||
     slider.querySelector(".achievement-track") ||
     slider.querySelector(".shop-track");
+
+  if(!track) return;
   
   const dots = slider.querySelectorAll(
   ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
   );
 
-  const STEP=164;
-  const x=-index*STEP;
+  const STEP =
+    (track.children[0]?.getBoundingClientRect().width || 150) + 14;
+
+  const x = -index * STEP;
 
   track.dataset.x=x;
 
@@ -457,10 +467,10 @@ function updateQR(slider){
   if(dots[index]) dots[index].classList.add("active");
 
 }
-
+   
 /* ===========================
-   LOAD GALLERY
-=========================== */
+   LOAD GALLERY --- phải xoá
+===========================
 function loadAchievementSlider(slider){
   delete slider.dataset.swipeBound;
 
@@ -509,19 +519,19 @@ function loadAchievementSlider(slider){
 
     }
 
-    qrState.set(slider,0);
+    sliderState.set(slider,0);
 
     track.dataset.x = 0;
 
     new SliderEngine(slider);
-    updateQR(slider);
+    updateSLD(slider);
 
   }
 
   tryLoad();
 
 }
-   
+ PHẢI XOÁ  */
 /* ===========================
    GLOBAL IMAGE ZOOM
 =========================== */
@@ -770,14 +780,14 @@ function loadShopSlider(slider){
 
   }
 
-  qrState.set(slider,0)
+  sliderState.set(slider,0)
 
   track.dataset.x=0
 
   /* ANT */
   requestAnimationFrame(()=>{
     new SliderEngine(slider)
-    updateQR(slider)
+    updateSLD(slider)
   })
 
 }
@@ -1071,7 +1081,14 @@ document
 
   document
   .querySelectorAll("#qrPopup .qr-slider")
-  .forEach(loadQRSlider);
+  .forEach(slider=>{
+    QRGallery.loadQRSlider(
+      slider,
+      sliderState,
+      updateSLD,
+      SliderEngine
+    );
+  });
 
   openPopup("qrPopup");
 
@@ -1090,7 +1107,14 @@ document
 
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
-  .forEach(loadAchievementSlider);
+  .forEach(slider=>{
+     AchievEngine.loadAchievementSlider(
+      slider,
+      sliderState,
+      updateSLD,
+      SliderEngine
+     );
+   });
 
   openPopup("achievementPopup");
 

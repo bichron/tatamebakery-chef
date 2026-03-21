@@ -2,7 +2,7 @@
    SLIDER ENGINE v2
 ===================================== */
 
-export function SliderEngine(slider, qrState, updateQR){
+export function SliderEngine(slider, sliderState, updateSLD){
 
   const track =
     slider.querySelector(".qr-track") ||
@@ -36,7 +36,7 @@ export function SliderEngine(slider, qrState, updateQR){
     track.style.transition = "transform .35s ease";
     track.style.transform = `translateX(${x}px)`;
 
-    qrState.set(slider,index);
+    sliderState.set(slider,index);
 
     dots.forEach(d=>d.classList.remove("active"));
 

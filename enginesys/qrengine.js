@@ -2,9 +2,9 @@
    QR ENGINE
 ===================================== */
 
-export const QREngine = {
+export const QRGallery = {
 
-loadQRSlider(slider, qrState, updateQR, SliderEngine){
+loadQRSlider(slider, sliderState, updateSLD, SliderEngine){
 
   delete slider.dataset.swipeBound;
 
@@ -62,13 +62,13 @@ loadQRSlider(slider, qrState, updateQR, SliderEngine){
 
     }
 
-    qrState.set(slider,0);
+    sliderState.set(slider,0);
 
     track.dataset.x = 0;
 
-    new SliderEngine(slider, qrState, updateQR);
+    new SliderEngine(slider);
 
-    updateQR(slider);
+    updateSLD(slider);
 
   }
 
@@ -76,7 +76,9 @@ loadQRSlider(slider, qrState, updateQR, SliderEngine){
 
 },
 
-enableQRSwipe(slider, qrState, updateQR){
+/* XOÁ TOÀN BỘ - LỖI TRÙNG 2 SWIPE   
+   
+enableQRSwipe(slider, sliderState, updateSLD){
 
   if(slider.dataset.swipeBound) return;
 
@@ -134,12 +136,14 @@ slider.addEventListener("touchend",e=>{
 
   track.dataset.x=snappedX;
 
-  qrState.set(slider,index);
+  sliderState.set(slider,index);
 
-  updateQR(slider);
+  updateSLD(slider);
 
 });
 
-}
+}  block chờ xoá */
 
-}
+   
+
+}   //END CODE MARK HERE
