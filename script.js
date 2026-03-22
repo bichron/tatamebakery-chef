@@ -4,7 +4,11 @@ import { generateQRCode } from "./enginesys/qrgenerate.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
-  await loadProductData();
+// load lần đầu group đầu tiên
+   const firstGroup = shopGroups[0]?.id;
+   if(firstGroup){
+   await loadAndRenderGroup(firstGroup);
+   }
   buildShopUI();
   
 /* ===========================
@@ -543,7 +547,8 @@ function loadShopSlider(slider){
     card.dataset.id=p.id
 
     card.innerHTML=`
-      <img src="${p.image}">
+      <img data-src="${p.image}" 
+           class="lazy-img">
       <div class="product-info">
         <div class="product-name">${p.name}</div>
         <div class="product-price">
@@ -576,6 +581,7 @@ function loadShopSlider(slider){
   requestAnimationFrame(()=>{
     new SliderEngine(slider)
     updateSLD(slider)
+    initLazyImages();    
   })
 
 }
@@ -1085,6 +1091,24 @@ window.openWebsite=()=>window.open("https://blh.vn","_blank");
 
 });
 
+/* ===========================
+   LAZY LOAD IMAGE
+=========================== */
+const lazyObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const img = entry.target;
+      img.src = img.dataset.src;
+      lazyObserver.unobserve(img);
+    }
+  });
+});
+
+function initLazyImages(){
+  document.querySelectorAll(".lazy-img").forEach(img=>{
+    lazyObserver.observe(img);
+  });
+}
 
 /* ===========================
    PREVENT BROWSER ZOOM
