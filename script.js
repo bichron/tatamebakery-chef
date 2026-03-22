@@ -884,7 +884,9 @@ document
       max: 10
     });
   });
-
+    requestAnimationFrame(()=>{
+    initLazyImages();
+    });
   openPopup("qrPopup");
   window.loadDynamicQR?.();
 });
@@ -911,6 +913,10 @@ document
     });
   });
 
+    requestAnimationFrame(()=>{
+    initLazyImages();
+    });
+  
   openPopup("achievementPopup");
 });
 
@@ -1095,15 +1101,22 @@ window.openWebsite=()=>window.open("https://blh.vn","_blank");
 =========================== */
 const lazyObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const img = entry.target;
-// 👇 preload ảnh kế bên
-    const next = img.nextElementSibling;
-    if(next && next.dataset?.src){
+  if(entry.isIntersecting){
+  const img = entry.target;
+
+  // 👉 load ảnh chính
+  if(!img.src){
+    img.src = img.dataset.src;
+  }
+
+  // 👉 preload ảnh kế bên
+  const next = img.nextElementSibling;
+  if(next && next.dataset?.src && !next.src){
     next.src = next.dataset.src;
-    }
-    lazyObserver.unobserve(img);
-    }
+  }
+
+  lazyObserver.unobserve(img);
+  }
   });
 });
 
