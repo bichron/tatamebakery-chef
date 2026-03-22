@@ -19,7 +19,6 @@ export const GalleryEngine = {
 
     if(!track || !indicatorBox) return;
 
-    // reset
     track.innerHTML = "";
     indicatorBox.innerHTML = "";
 
@@ -31,69 +30,65 @@ export const GalleryEngine = {
     /* ===========================
        LOAD IMAGE (RECURSIVE)
     ============================ */
-function tryLoad(){
-  if(index > max){
-    build();
-  return;
-  }
+    function tryLoad(){
 
-  const img = new Image();
-    img.src = `${path}${group}/${index}.${ext}`;
+      if(index > max){
+        build();
+        return;
+      }
 
-  img.onload = ()=>{
-  items.push(img.src);
-  index++;
-  tryLoad();
-  };
+      const img = new Image();
+      img.src = `${path}${group}/${index}.${ext}`;
 
-  img.onerror = build;
-}
+      img.onload = ()=>{
+        items.push(img.src);
+        index++;
+        tryLoad();
+      };
+
+      img.onerror = build;
+    }
 
     /* ===========================
        BUILD SLIDER (LAZY)
     ============================ */
-function build(){
-   const count = Math.min(max, items.length);
-   if(count === 0){
-   track.innerHTML = "<div class='slider-empty'>No data</div>";
-   return;
-   }
+    function build(){
 
-// render images + dots
-   for(let i=0;i<count;i++){
+      const count = Math.min(max, items.length);
 
-     const el = document.createElement("img");
+      if(count === 0){
+        track.innerHTML = "<div class='slider-empty'>No data</div>";
+        return;
+      }
 
-// 👉 lazy load
-     el.dataset.src = items[i];
-     el.classList.add("lazy-img");
+      for(let i=0;i<count;i++){
 
-// ✅ load ảnh đầu tiên ngay (fix layout + swipe)
-     if(i === 0){
-       el.src = items[i];
-     }
+        const el = document.createElement("img");
 
-     track.appendChild(el);
-     const dot = document.createElement("span");
-     if(i  === 0) dot.classList.add("active");
-       indicatorBox.appendChild(dot);
-   }
+        el.dataset.src = items[i];
+        el.classList.add("lazy-img");
 
-//  👉 preload ảnh thứ 2 (fix kẹt)
-   const imgs = track.querySelectorAll("img");
+        if(i === 0){
+          el.src = items[i];
+        }
 
-   if(imgs[1] && imgs[1].dataset?.src && !imgs[1].src){
-   imgs[1].src = imgs[1].dataset.src;
-   }
-   }
+        track.appendChild(el);
 
-// init state
-   state.set(slider, 0);
-   track.dataset.x = 0;
+        const dot = document.createElement("span");
+        if(i === 0) dot.classList.add("active");
+        indicatorBox.appendChild(dot);
+      }
 
-      /* ===========================
-         SAFE INIT (NO WAIT IMAGE)
-      ============================ */
+      // 👉 preload ảnh thứ 2
+      const imgs = track.querySelectorAll("img");
+
+      if(imgs[1] && imgs[1].dataset?.src){
+        imgs[1].src = imgs[1].dataset.src;
+      }
+
+      state.set(slider, 0);
+      track.dataset.x = 0;
+
       function initSlider(){
         requestAnimationFrame(()=>{
           new SliderEngine(slider);
@@ -101,7 +96,6 @@ function build(){
         });
       }
 
-      // 👉 luôn init ngay (không đợi image)
       initSlider();
     }
 
