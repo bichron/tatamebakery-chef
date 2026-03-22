@@ -1,3 +1,7 @@
+/*
+  EXPERIMENTAL - NOT IN USE
+  Lazy data loading (future upgrade)
+*/
 const groupCache = new Map();
 
 export async function loadGroupData(groupId){
