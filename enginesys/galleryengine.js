@@ -1,5 +1,5 @@
 /* =====================================
-   GALLERY ENGINE (UNIFIED)
+   GALLERY ENGINE (UNIFIED - LAZY LOAD)
 ===================================== */
 
 export const GalleryEngine = {
@@ -19,7 +19,6 @@ export const GalleryEngine = {
 
     if(!track || !indicatorBox) return;
 
-    // reset
     track.innerHTML = "";
     indicatorBox.innerHTML = "";
 
@@ -33,7 +32,6 @@ export const GalleryEngine = {
     ============================ */
     function tryLoad(){
 
-      // 🔒 tránh loop vô hạn
       if(index > max){
         build();
         return;
@@ -52,7 +50,7 @@ export const GalleryEngine = {
     }
 
     /* ===========================
-       BUILD SLIDER
+       BUILD SLIDER (LAZY)
     ============================ */
     function build(){
 
@@ -63,49 +61,42 @@ export const GalleryEngine = {
         return;
       }
 
-      // render images + dots
       for(let i=0;i<count;i++){
 
         const el = document.createElement("img");
-        el.src = items[i];
+
+        el.dataset.src = items[i];
+        el.classList.add("lazy-img");
+
+        if(i === 0){
+          el.src = items[i];
+        }
+
         track.appendChild(el);
 
         const dot = document.createElement("span");
         if(i === 0) dot.classList.add("active");
-
         indicatorBox.appendChild(dot);
       }
 
-      // init state
+      // 👉 preload ảnh thứ 2
+      const imgs = track.querySelectorAll("img");
+
+      if(imgs[1] && imgs[1].dataset?.src){
+        imgs[1].src = imgs[1].dataset.src;
+      }
+
       state.set(slider, 0);
       track.dataset.x = 0;
 
-      /* ===========================
-         SAFE INIT (FIX STEP BUG)
-      ============================ */
-
-      const firstImg = track.querySelector("img");
-
       function initSlider(){
-             // đảm bảo layout đã render
         requestAnimationFrame(()=>{
           new SliderEngine(slider);
           update(slider);
         });
       }
 
-      if(firstImg){
-
-        // ✅ FIX: ảnh cache
-        if(firstImg.complete){
-          initSlider();
-        }else{
-          firstImg.onload = initSlider;
-        }
-
-      }else{
-        initSlider();
-      }
+      initSlider();
     }
 
     tryLoad();

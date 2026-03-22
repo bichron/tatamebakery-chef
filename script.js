@@ -211,6 +211,20 @@ function SliderEngine(slider){
 
     if(dots[index]) dots[index].classList.add("active");
 
+// 👉 LAZY LOAD THEO INDEX
+    const imgs = track.querySelectorAll("img");
+
+    const current = imgs[index];
+    const next = imgs[index + 1];
+    const prev = imgs[index - 1];
+
+    [current, next, prev].forEach(img=>{
+      if(img && img.dataset?.src && !img.src){
+         img.src = img.dataset.src;
+         img.dataset.loaded = "1";
+    }
+    });
+    
   }
 
   function start(x){
@@ -319,7 +333,25 @@ function updateSLD(slider){
   if(dots[index]) dots[index].classList.add("active");
 }
    
+function preloadFirstTwo(selector){
 
+  const sliders = document.querySelectorAll(selector);
+
+  sliders.forEach(slider=>{
+    const imgs = slider.querySelectorAll("img");
+
+    [imgs[0], imgs[1]].forEach(img=>{
+      if(img && img.dataset?.src && !img.src){
+        img.src = img.dataset.src;
+        img.dataset.loaded = "1";
+      }
+    });
+
+  });
+
+}
+
+  
 /* ===========================
    GLOBAL IMAGE ZOOM
 =========================== */
@@ -543,7 +575,8 @@ function loadShopSlider(slider){
     card.dataset.id=p.id
 
     card.innerHTML=`
-      <img src="${p.image}">
+      <img data-src="${p.image}" 
+           class="lazy-img">
       <div class="product-info">
         <div class="product-name">${p.name}</div>
         <div class="product-price">
@@ -574,8 +607,22 @@ function loadShopSlider(slider){
 
   /* ANT */
   requestAnimationFrame(()=>{
+  if(!slider.dataset.init){
     new SliderEngine(slider)
-    updateSLD(slider)
+    slider.dataset.init = "1"
+  }
+
+  updateSLD(slider)
+
+  // 👉 LOAD 2 ẢNH ĐẦU
+  const imgs = slider.querySelectorAll("img");
+
+  [imgs[0], imgs[1]].forEach(img=>{
+    if(img && img.dataset?.src && !img.src){
+      img.src = img.dataset.src;
+      img.dataset.loaded = "1";
+    }
+  });
   })
 
 }
@@ -880,6 +927,10 @@ document
     });
   });
 
+  requestAnimationFrame(()=>{
+  preloadFirstTwo("#qrPopup .qr-slider");
+  });
+  
   openPopup("qrPopup");
   window.loadDynamicQR?.();
 });
@@ -906,6 +957,10 @@ document
     });
   });
 
+  requestAnimationFrame(()=>{
+  preloadFirstTwo("#achievementPopup .achievement-slider");
+  });
+  
   openPopup("achievementPopup");
 });
 
@@ -1084,7 +1139,6 @@ function closeLandingpage(){
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
 
 });
-
 
 /* ===========================
    PREVENT BROWSER ZOOM
