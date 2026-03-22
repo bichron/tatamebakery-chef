@@ -4,11 +4,7 @@ import { generateQRCode } from "./enginesys/qrgenerate.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
-// load lần đầu group đầu tiên
-   const firstGroup = shopGroups[0]?.id;
-   if(firstGroup){
-   await loadAndRenderGroup(firstGroup);
-   }
+  await loadProductData();
   buildShopUI();
   
 /* ===========================
@@ -1101,12 +1097,12 @@ const lazyObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       const img = entry.target;
-
-      if(!img.src){ // tránh load lại
-        img.src = img.dataset.src;
-      }
-
-      lazyObserver.unobserve(img);
+// 👇 preload ảnh kế bên
+    const next = img.nextElementSibling;
+    if(next && next.dataset?.src){
+    next.src = next.dataset.src;
+    }
+    lazyObserver.unobserve(img);
     }
   });
 });
