@@ -31,62 +31,64 @@ export const GalleryEngine = {
     /* ===========================
        LOAD IMAGE (RECURSIVE)
     ============================ */
-    function tryLoad(){
+function tryLoad(){
+  if(index > max){
+    build();
+  return;
+  }
 
-      if(index > max){
-        build();
-        return;
-      }
+  const img = new Image();
+    img.src = `${path}${group}/${index}.${ext}`;
 
-      const img = new Image();
-      img.src = `${path}${group}/${index}.${ext}`;
+  img.onload = ()=>{
+  items.push(img.src);
+  index++;
+  tryLoad();
+  };
 
-      img.onload = ()=>{
-        items.push(img.src);
-        index++;
-        tryLoad();
-      };
-
-      img.onerror = build;
-    }
+  img.onerror = build;
+}
 
     /* ===========================
        BUILD SLIDER (LAZY)
     ============================ */
-    function build(){
+function build(){
+   const count = Math.min(max, items.length);
+   if(count === 0){
+   track.innerHTML = "<div class='slider-empty'>No data</div>";
+   return;
+   }
 
-      const count = Math.min(max, items.length);
+// render images + dots
+   for(let i=0;i<count;i++){
 
-      if(count === 0){
-        track.innerHTML = "<div class='slider-empty'>No data</div>";
-        return;
-      }
+     const el = document.createElement("img");
 
-      // render images + dots
-      for(let i=0;i<count;i++){
+// 👉 lazy load
+     el.dataset.src = items[i];
+     el.classList.add("lazy-img");
 
-        const el = document.createElement("img");
+// ✅ load ảnh đầu tiên ngay (fix layout + swipe)
+     if(i === 0){
+       el.src = items[i];
+     }
 
-        // 👉 lazy load
-        el.dataset.src = items[i];
-        el.classList.add("lazy-img");
+     track.appendChild(el);
+     const dot = document.createElement("span");
+     if(i  === 0) dot.classList.add("active");
+       indicatorBox.appendChild(dot);
+   }
 
-        // ✅ load ảnh đầu tiên ngay (fix layout + swipe)
-        if(i === 0){
-          el.src = items[i];
-        }
+//  👉 preload ảnh thứ 2 (fix kẹt)
+   const imgs = track.querySelectorAll("img");
 
-        track.appendChild(el);
+   if(imgs[1] && imgs[1].dataset?.src){
+      imgs[1].src = imgs[1].dataset.src;
+   }
 
-        const dot = document.createElement("span");
-        if(i === 0) dot.classList.add("active");
-
-        indicatorBox.appendChild(dot);
-      }
-
-      // init state
-      state.set(slider, 0);
-      track.dataset.x = 0;
+// init state
+   state.set(slider, 0);
+   track.dataset.x = 0;
 
       /* ===========================
          SAFE INIT (NO WAIT IMAGE)
