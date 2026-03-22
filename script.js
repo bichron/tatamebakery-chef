@@ -333,7 +333,25 @@ function updateSLD(slider){
   if(dots[index]) dots[index].classList.add("active");
 }
    
+function preloadFirstTwo(selector){
 
+  const sliders = document.querySelectorAll(selector);
+
+  sliders.forEach(slider=>{
+    const imgs = slider.querySelectorAll("img");
+
+    [imgs[0], imgs[1]].forEach(img=>{
+      if(img && img.dataset?.src && !img.src){
+        img.src = img.dataset.src;
+        img.dataset.loaded = "1";
+      }
+    });
+
+  });
+
+}
+
+  
 /* ===========================
    GLOBAL IMAGE ZOOM
 =========================== */
@@ -908,22 +926,11 @@ document
       max: 10
     });
   });
+
   requestAnimationFrame(()=>{
-
-  const sliders = document.querySelectorAll("#qrPopup .qr-slider");
-
-  sliders.forEach(slider=>{
-    const imgs = slider.querySelectorAll("img");
-
-    [imgs[0], imgs[1]].forEach(img=>{
-      if(img && img.dataset?.src && !img.src){
-        img.src = img.dataset.src;
-      }
-    });
-
-    });
-
-    });
+  preloadFirstTwo("#qrPopup .qr-slider");
+  });
+  
   openPopup("qrPopup");
   window.loadDynamicQR?.();
 });
@@ -951,20 +958,7 @@ document
   });
 
   requestAnimationFrame(()=>{
-
-  const sliders = document.querySelectorAll("#achievementPopup .achievement-slider");
-
-  sliders.forEach(slider=>{
-    const imgs = slider.querySelectorAll("img");
-
-    [imgs[0], imgs[1]].forEach(img=>{
-      if(img && img.dataset?.src && !img.src){
-        img.src = img.dataset.src;
-      }
-    });
-
-    });
-
+  preloadFirstTwo("#achievementPopup .achievement-slider");
   });
   
   openPopup("achievementPopup");
