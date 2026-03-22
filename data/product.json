@@ -16,7 +16,7 @@
       "name":"Sourdough bread",
       "image":"assets/shop/top-picks/bread001.jpg",
       "spec":{"size":"12 cm","serve":"2-3 people"},
-      "price":1,
+      "price":"call",
       "sold":345,
       "stock":999999,
       "tags":["bestseller"]
