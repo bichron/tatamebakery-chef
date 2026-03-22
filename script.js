@@ -1,7 +1,6 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
-import { QRGallery } from "./enginesys/qrengine.js";
+import { GalleryEngine } from "./enginesys/galleryengine.js";
 import { generateQRCode } from "./enginesys/qrgenerate.js";
-import { AchievEngine } from "./enginesys/achievengine.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
@@ -174,20 +173,19 @@ function initAchievementWheel(){
 
 function SliderEngine(slider){
 
+  if(slider.dataset.bound) return;
+  slider.dataset.bound = "1";
+  
   const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
+    slider.querySelector(".slider-track") ||
     slider.querySelector(".shop-track");
   
   if(!track) return; // ⭐ FIX QUAN TRỌNG
   
   let dots;
 
-   if(slider.querySelector(".qr-indicators")){
-   dots = slider.querySelectorAll(".qr-indicators span");
-   }
-   else if(slider.querySelector(".achievement-indicators")){
-   dots = slider.querySelectorAll(".achievement-indicators span");
+   if(slider.querySelector(".slider-indicators")){
+   dots = slider.querySelectorAll(".slider-indicators span");
    }
    else{
    dots = slider.querySelectorAll(".shop-indicators span");
@@ -266,8 +264,10 @@ function SliderEngine(slider){
   },{passive:true});
 
   slider.addEventListener("touchmove",e=>{
-    move(e.touches[0].clientX);
-  },{passive:true});
+  if(!dragging) return;
+  e.preventDefault();
+  move(e.touches[0].clientX);
+  },{passive:false});
 
   slider.addEventListener("touchend",e=>{
     end(e.changedTouches[0].clientX);
@@ -281,7 +281,8 @@ function SliderEngine(slider){
   });
 
   window.addEventListener("mousemove",e=>{
-    move(e.clientX);
+  if(!dragging) return;
+  move(e.clientX);
   });
 
   window.addEventListener("mouseup",e=>{
@@ -290,166 +291,18 @@ function SliderEngine(slider){
 
 }   
 
-/* ===========================
-   QR SLIDER   - phải xoá
-===========================
-
-function loadQRSlider(slider){
-
-  delete slider.dataset.swipeBound;
-
-  const track = slider.querySelector(".qr-track");
-  const indicatorBox = slider.querySelector(".qr-indicators");
-
-  const group = slider.dataset.group;
-  const maxAllowed = parseInt(slider.dataset.max);
-
-  track.innerHTML = "";
-  indicatorBox.innerHTML = "";
-
-  let images = [];
-  let index = 1;
-
-  function tryLoad(){
-
-    const img = new Image();
-    img.src = `assets/qr/${group}/${index}.png`;
-
-    img.onload = ()=>{
-
-      images.push(img.src);
-      index++;
-      tryLoad();
-
-    };
-
-    img.onerror = build;
-
-  }
-
-  function build(){
-
-    const count = Math.min(maxAllowed, images.length);
-
-    if(count===0){
-
-      track.innerHTML = "<div class='qr-empty'>No QR</div>";
-      return;
-
-    }
-
-    for(let i=0;i<count;i++){
-
-      const el = document.createElement("img");
-      el.src = images[i];
-      track.appendChild(el);
-
-      const dot = document.createElement("span");
-
-      if(i===0) dot.classList.add("active");
-
-      indicatorBox.appendChild(dot);
-
-    }
-
-    sliderState.set(slider,0);
-
-    track.dataset.x = 0;
-
-    new SliderEngine(slider);
-    updateSLD(slider);
-
-  }
-
-  tryLoad();
-
-}
-
-
-function enableQRSwipe(slider){
-
-  if(slider.dataset.swipeBound) return;
-
-  slider.dataset.swipeBound="1";
-
-  const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
-    slider.querySelector(".shop-track");
-
-  let startX=0;
-  let dragging=false;
-
-  const STEP = 164; //dùng chung cho QR và achievement
-
-  slider.addEventListener("touchstart",e=>{
-
-    dragging=true;
-
-    startX=e.touches[0].clientX;
-
-    track.style.transition="none";
-
-  },{passive:true});
-
-  slider.addEventListener("touchmove",e=>{
-
-    if(!dragging) return;
-    
-    e.preventDefault();
-
-    const baseX=parseFloat(track.dataset.x||0);
-    const dx=e.touches[0].clientX-startX;
-
-    track.style.transform=
-      `translateX(${baseX+dx}px)`;
-
-  },{passive:true});
-
-slider.addEventListener("touchend",e=>{
-
-  if(!dragging) return;
-
-  dragging=false;
-
-  const baseX=parseFloat(track.dataset.x||0);
-  const dx=e.changedTouches[0].clientX-startX;
-
-  const currentX=baseX+dx;
-
-  const total=track.children.length;
-
-  let index=Math.round(-currentX/STEP);
-
-  index=Math.max(0,Math.min(index,total-1));
-
-  const snappedX=-index*STEP;
-
-  track.dataset.x=snappedX;
-
-  sliderState.set(slider,index);
-
-  updateSLD(slider);
-
-});
-}
-phải xoá  */
-
-  
-//// function updateQR(slider) nên gọi thành tên chung updateSLD
 function updateSLD(slider){
 
-  const index=sliderState.get(slider)??0;
+  const index = sliderState.get(slider) ?? 0;
 
   const track =
-    slider.querySelector(".qr-track") ||
-    slider.querySelector(".achievement-track") ||
+    slider.querySelector(".slider-track") ||
     slider.querySelector(".shop-track");
 
   if(!track) return;
-  
+
   const dots = slider.querySelectorAll(
-  ".qr-indicators span, .achievement-indicators span, .shop-indicators span"
+    ".slider-indicators span, .shop-indicators span"
   );
 
   const STEP =
@@ -457,88 +310,23 @@ function updateSLD(slider){
 
   const x = -index * STEP;
 
-  track.dataset.x=x;
+  track.dataset.x = x;
 
-  track.style.transition="transform .35s ease";
-  track.style.transform=`translateX(${x}px)`;
+  track.style.transition = "transform .35s ease";
+  track.style.transform = `translateX(${x}px)`;
 
   dots.forEach(d=>d.classList.remove("active"));
-
   if(dots[index]) dots[index].classList.add("active");
-
 }
    
-/* ===========================
-   LOAD GALLERY --- phải xoá
-===========================
-function loadAchievementSlider(slider){
-  delete slider.dataset.swipeBound;
 
-  const track = slider.querySelector(".achievement-track");
-  const indicatorBox = slider.querySelector(".achievement-indicators");
-
-  const group = slider.dataset.group;
-  const maxAllowed = parseInt(slider.dataset.max);
-
-  track.innerHTML="";
-  indicatorBox.innerHTML="";
-
-  let images=[];
-  let index=1;
-
-  function tryLoad(){
-
-    const img=new Image();
-    img.src=`assets/achievement/${group}/${index}.jpg`;
-
-    img.onload=()=>{
-      images.push(img.src);
-      index++;
-      tryLoad();
-    };
-
-    img.onerror=build;
-
-  }
-
-  function build(){
-
-    const count=Math.min(maxAllowed,images.length);
-
-    for(let i=0;i<count;i++){
-
-      const el=document.createElement("img");
-      el.src=images[i];
-
-      track.appendChild(el);
-
-      const dot=document.createElement("span");
-      if(i===0) dot.classList.add("active");
-
-      indicatorBox.appendChild(dot);
-
-    }
-
-    sliderState.set(slider,0);
-
-    track.dataset.x = 0;
-
-    new SliderEngine(slider);
-    updateSLD(slider);
-
-  }
-
-  tryLoad();
-
-}
- PHẢI XOÁ  */
 /* ===========================
    GLOBAL IMAGE ZOOM
 =========================== */
 
 document.addEventListener("click",e=>{
   const img = e.target.closest(
-    ".qr-track img, .achievement-track img"
+  ".slider-track img"
   );
 
   if(!img) return;
@@ -1076,24 +864,24 @@ document
 ?.addEventListener("click",()=>{
 
   if(!qrWheel) initQRWheel();
-
   qrWheel.go(0);
 
   document
   .querySelectorAll("#qrPopup .qr-slider")
   .forEach(slider=>{
-    QRGallery.loadQRSlider(
+    GalleryEngine.load({
       slider,
-      sliderState,
-      updateSLD,
-      SliderEngine
-    );
+      state: sliderState,
+      update: updateSLD,
+      SliderEngine,
+      path: "assets/qr/",
+      ext: "png",
+      max: 10
+    });
   });
 
   openPopup("qrPopup");
-
   window.loadDynamicQR?.();
-
 });
 
 
@@ -1102,22 +890,23 @@ document
 ?.addEventListener("click",()=>{
 
   if(!achievementWheel) initAchievementWheel();
-
   achievementWheel.go(0);
 
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
   .forEach(slider=>{
-     AchievEngine.loadAchievementSlider(
+    GalleryEngine.load({
       slider,
-      sliderState,
-      updateSLD,
-      SliderEngine
-     );
-   });
+      state: sliderState,
+      update: updateSLD,
+      SliderEngine,
+      path: "assets/achievement/",
+      ext: "jpg",
+      max: 12
+    });
+  });
 
   openPopup("achievementPopup");
-
 });
 
 
