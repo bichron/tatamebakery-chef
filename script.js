@@ -579,7 +579,10 @@ function loadShopSlider(slider){
 
   /* ANT */
   requestAnimationFrame(()=>{
+    if(!slider.dataset.init){
     new SliderEngine(slider)
+    slider.dataset.init = "1"
+    }
     updateSLD(slider)
     initLazyImages();    
   })
@@ -1098,7 +1101,11 @@ const lazyObserver = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
       const img = entry.target;
-      img.src = img.dataset.src;
+
+      if(!img.src){ // tránh load lại
+        img.src = img.dataset.src;
+      }
+
       lazyObserver.unobserve(img);
     }
   });
