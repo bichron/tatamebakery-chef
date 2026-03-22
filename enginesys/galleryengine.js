@@ -1,5 +1,5 @@
 /* =====================================
-   GALLERY ENGINE (UNIFIED)
+   GALLERY ENGINE (UNIFIED - LAZY LOAD)
 ===================================== */
 
 export const GalleryEngine = {
@@ -33,7 +33,6 @@ export const GalleryEngine = {
     ============================ */
     function tryLoad(){
 
-      // 🔒 tránh loop vô hạn
       if(index > max){
         build();
         return;
@@ -52,7 +51,7 @@ export const GalleryEngine = {
     }
 
     /* ===========================
-       BUILD SLIDER
+       BUILD SLIDER (LAZY)
     ============================ */
     function build(){
 
@@ -67,7 +66,16 @@ export const GalleryEngine = {
       for(let i=0;i<count;i++){
 
         const el = document.createElement("img");
-        el.src = items[i];
+
+        // 👉 lazy load
+        el.dataset.src = items[i];
+        el.classList.add("lazy-img");
+
+        // ✅ load ảnh đầu tiên ngay (fix layout + swipe)
+        if(i === 0){
+          el.src = items[i];
+        }
+
         track.appendChild(el);
 
         const dot = document.createElement("span");
@@ -81,31 +89,17 @@ export const GalleryEngine = {
       track.dataset.x = 0;
 
       /* ===========================
-         SAFE INIT (FIX STEP BUG)
+         SAFE INIT (NO WAIT IMAGE)
       ============================ */
-
-      const firstImg = track.querySelector("img");
-
       function initSlider(){
-             // đảm bảo layout đã render
         requestAnimationFrame(()=>{
           new SliderEngine(slider);
           update(slider);
         });
       }
 
-      if(firstImg){
-
-        // ✅ FIX: ảnh cache
-        if(firstImg.complete){
-          initSlider();
-        }else{
-          firstImg.onload = initSlider;
-        }
-
-      }else{
-        initSlider();
-      }
+      // 👉 luôn init ngay (không đợi image)
+      initSlider();
     }
 
     tryLoad();
