@@ -1107,6 +1107,7 @@ const lazyObserver = new IntersectionObserver((entries)=>{
   // 👉 load ảnh chính
   if(!img.src){
     img.src = img.dataset.src;
+    img.dataset.loaded = "1";
   }
 
   // 👉 preload ảnh kế bên
@@ -1121,9 +1122,17 @@ const lazyObserver = new IntersectionObserver((entries)=>{
 });
 
 function initLazyImages(){
-  document.querySelectorAll(".lazy-img").forEach(img=>{
+
+  const imgs = document.querySelectorAll(".lazy-img");
+
+  imgs.forEach(img=>{
+
+    // 👉 tránh observe lại ảnh đã load
+    if(img.dataset.loaded) return;
+
     lazyObserver.observe(img);
   });
+
 }
 
 /* ===========================
