@@ -211,6 +211,20 @@ function SliderEngine(slider){
 
     if(dots[index]) dots[index].classList.add("active");
 
+// 👉 lazy load theo index (FIX CHÍNH)
+    const imgs = track.querySelectorAll("img");
+
+    const current = imgs[index];
+    const next = imgs[index + 1];
+    const prev = imgs[index - 1];
+
+    [current, next, prev].forEach(img=>{
+    if(img && img.dataset?.src && !img.src){
+      img.src = img.dataset.src;
+      img.dataset.loaded = "1";
+    }
+    });
+    
   }
 
   function start(x){
