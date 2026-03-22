@@ -908,7 +908,21 @@ document
       max: 10
     });
   });
-    requestAnimationFrame(()=>{
+  requestAnimationFrame(()=>{
+
+  const sliders = document.querySelectorAll("#qrPopup .qr-slider");
+
+  sliders.forEach(slider=>{
+    const imgs = slider.querySelectorAll("img");
+
+    [imgs[0], imgs[1]].forEach(img=>{
+      if(img && img.dataset?.src && !img.src){
+        img.src = img.dataset.src;
+      }
+    });
+
+    });
+
     });
   openPopup("qrPopup");
   window.loadDynamicQR?.();
@@ -936,8 +950,22 @@ document
     });
   });
 
-    requestAnimationFrame(()=>{
+  requestAnimationFrame(()=>{
+
+  const sliders = document.querySelectorAll("#achievementPopup .achievement-slider");
+
+  sliders.forEach(slider=>{
+    const imgs = slider.querySelectorAll("img");
+
+    [imgs[0], imgs[1]].forEach(img=>{
+      if(img && img.dataset?.src && !img.src){
+        img.src = img.dataset.src;
+      }
     });
+
+    });
+
+  });
   
   openPopup("achievementPopup");
 });
