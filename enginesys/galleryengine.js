@@ -82,8 +82,9 @@ function build(){
 //  👉 preload ảnh thứ 2 (fix kẹt)
    const imgs = track.querySelectorAll("img");
 
-   if(imgs[1] && imgs[1].dataset?.src){
-      imgs[1].src = imgs[1].dataset.src;
+   if(imgs[1] && imgs[1].dataset?.src && !imgs[1].src){
+   imgs[1].src = imgs[1].dataset.src;
+   }
    }
 
 // init state
