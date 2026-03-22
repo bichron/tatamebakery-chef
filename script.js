@@ -909,7 +909,6 @@ document
     });
   });
     requestAnimationFrame(()=>{
-    initLazyImages();
     });
   openPopup("qrPopup");
   window.loadDynamicQR?.();
@@ -938,7 +937,6 @@ document
   });
 
     requestAnimationFrame(()=>{
-    initLazyImages();
     });
   
   openPopup("achievementPopup");
@@ -1119,45 +1117,6 @@ function closeLandingpage(){
 window.openWebsite=()=>window.open("https://blh.vn","_blank");
 
 });
-
-/* ===========================
-   LAZY LOAD IMAGE
-=========================== */
-const lazyObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-  if(entry.isIntersecting){
-  const img = entry.target;
-
-  // 👉 load ảnh chính
-  if(!img.src){
-    img.src = img.dataset.src;
-    img.dataset.loaded = "1";
-  }
-
-  // 👉 preload ảnh kế bên
-  const next = img.nextElementSibling;
-  if(next && next.dataset?.src && !next.src){
-    next.src = next.dataset.src;
-  }
-
-  lazyObserver.unobserve(img);
-  }
-  });
-});
-
-function initLazyImages(){
-
-  const imgs = document.querySelectorAll(".lazy-img");
-
-  imgs.forEach(img=>{
-
-    // 👉 tránh observe lại ảnh đã load
-    if(img.dataset.loaded) return;
-
-    lazyObserver.observe(img);
-  });
-
-}
 
 /* ===========================
    PREVENT BROWSER ZOOM
