@@ -211,7 +211,7 @@ function SliderEngine(slider){
 
     if(dots[index]) dots[index].classList.add("active");
 
-// 👉 lazy load theo index (FIX CHÍNH)
+// 👉 LAZY LOAD THEO INDEX
     const imgs = track.querySelectorAll("img");
 
     const current = imgs[index];
@@ -219,9 +219,9 @@ function SliderEngine(slider){
     const prev = imgs[index - 1];
 
     [current, next, prev].forEach(img=>{
-    if(img && img.dataset?.src && !img.src){
-      img.src = img.dataset.src;
-      img.dataset.loaded = "1";
+      if(img && img.dataset?.src && !img.src){
+         img.src = img.dataset.src;
+         img.dataset.loaded = "1";
     }
     });
     
@@ -589,12 +589,22 @@ function loadShopSlider(slider){
 
   /* ANT */
   requestAnimationFrame(()=>{
-    if(!slider.dataset.init){
+  if(!slider.dataset.init){
     new SliderEngine(slider)
     slider.dataset.init = "1"
+  }
+
+  updateSLD(slider)
+
+  // 👉 LOAD 2 ẢNH ĐẦU
+  const imgs = slider.querySelectorAll("img");
+
+  [imgs[0], imgs[1]].forEach(img=>{
+    if(img && img.dataset?.src && !img.src){
+      img.src = img.dataset.src;
+      img.dataset.loaded = "1";
     }
-    updateSLD(slider)
-    initLazyImages();    
+  });
   })
 
 }
