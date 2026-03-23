@@ -7,6 +7,17 @@
     {"id":"healthy","name":"HEALTHY","icon":"🌿"}
   ],
 
+  "qr": [
+    { "img": "assets/qr/1.png" },
+    { "img": "assets/qr/2.png" },
+    { "img": "assets/qr/3.png" }
+  ],
+
+  "achievement": [
+    { "img": "assets/achievement/1.jpg" },
+    { "img": "assets/achievement/2.jpg" }
+  ],
+  
   "products":[
 
     {
