@@ -390,6 +390,9 @@ async function loadProductData(){
 
    shopData = data.products || []
    shopGroups = data.groups || []
+
+   window.qrData = data.qr || []
+   window.achievementData = data.achievement || []
    
    console.log("Products loaded:", shopData)
 
@@ -914,13 +917,12 @@ document
   if(!qrWheel) initQRWheel();
   qrWheel.go(0);
   
-  const qrProducts = buildStaticProducts("assets/qr/", 10, "png");
   document
   .querySelectorAll("#qrPopup .qr-slider")
   .forEach(slider=>{
-    GalleryEngine.load({
+  GalleryEngine.load({
     slider,
-    products: qrProducts,
+    products: window.qrData,
     update: updateSLD,
     SliderEngine
    });
@@ -942,13 +944,12 @@ document
   if(!achievementWheel) initAchievementWheel();
   achievementWheel.go(0);
 
-  const achProducts = buildStaticProducts("assets/achievement/", 12, "jpg");
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
   .forEach(slider=>{
-    GalleryEngine.load({
+  GalleryEngine.load({
     slider,
-    products: achProducts,
+    products: window.achievementData,
     update: updateSLD,
     SliderEngine
    });
