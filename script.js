@@ -217,11 +217,12 @@ function SliderEngine(slider){
     const current = imgs[index];
     const next = imgs[index + 1];
     const prev = imgs[index - 1];
+    const next2 = imgs[index + 2]; // 👈 preload xa hơn
+    const prev2 = imgs[index - 2];
 
-    [current, next, prev].forEach(img=>{
+    [current, next, prev, next2, prev2].forEach(img=>{
       if(img && img.dataset?.src && !img.src){
          img.src = img.dataset.src;
-         img.dataset.loaded = "1";
     }
     });
     
