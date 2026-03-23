@@ -16,7 +16,7 @@
       "name":"Sourdough bread",
       "image":"assets/shop/top-picks/bread001.jpg",
       "spec":{"weight":"650 gr","size":"12 cm","serve":"2-3 people"},
-      "price":"call",
+      "price":"...",
       "sold":345,
       "stock":999999,
       "tags":["bestseller"]
@@ -29,7 +29,7 @@
       "name":"Baguette - bánh mỳ tươi",
       "image":"assets/shop/daily-bread/bread002.jpg",
       "spec":{"weight":"70 gr"},
-      "price":"call",
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -41,7 +41,7 @@
       "name":"Baguette - bánh mỳ nguyên cám",
       "image":"assets/shop/daily-bread/bread003.jpg",
       "spec":{"weight":"90 gr"},
-      "price":"call",
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -53,7 +53,7 @@
       "name":"Baguette - Bánh mỳ nguyên ổ",
       "image":"assets/shop/daily-bread/bread004.jpg",
       "spec":{"weight":"600 gr","size":"12 cm","serve":"2-3 people"},
-      "price":"call",
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -65,7 +65,7 @@
       "name":"Baguette - Chà bông sốt dầu trứng",
       "image":"assets/shop/daily-bread/bread005.jpg",
       "spec":{"weight":"100 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -77,7 +77,7 @@
       "name":"Bánh mỳ thắt bím",
       "image":"assets/shop/daily-bread/bread006.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -89,7 +89,7 @@
       "name":"Bánh mỳ xốt dầu trứng",
       "image":"assets/shop/daily-bread/bread007.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -101,7 +101,7 @@
       "name":"Raisin butter",
       "image":"assets/shop/daily-bread/bread008.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -113,7 +113,7 @@
       "name":"Macaron",
       "image":"assets/shop/top-picks/cake001.jpg",
       "spec":{"size":"14 cm","serve":"3-4 people"},
-      "price":1,
+      "price":"...",
       "sold":210,
       "stock":999999
     },
@@ -125,7 +125,7 @@
       "name":"Macaron velvet",
       "image":"assets/shop/top-picks/cake002.jpg",
       "spec":{"size":"14 cm","serve":"3-4 people"},
-      "price":1,
+      "price":"...",
       "sold":210,
       "stock":999999
     },
@@ -137,7 +137,7 @@
       "name":"Strawberry Birthday Cake",
       "image":"assets/shop/celebration/cake003.jpg",
       "spec":{"size":"18 cm","serve":"8-10 people"},
-      "price":1,
+      "price":"...",
       "sold":98,
       "stock":999999
     },
@@ -149,7 +149,7 @@
       "name":"Caramel flan",
       "image":"assets/shop/daily-bread/cake004.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -161,7 +161,7 @@
       "name":"Chocoflan cake",
       "image":"assets/shop/daily-bread/cake005.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -173,7 +173,7 @@
       "name":"NewYork cheese cake",
       "image":"assets/shop/daily-bread/cake006.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -185,7 +185,7 @@
       "name":"Cotton cheese cake JP",
       "image":"assets/shop/daily-bread/cake007.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -197,7 +197,7 @@
       "name":"Tiramisu cup",
       "image":"assets/shop/daily-bread/cake008.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -209,7 +209,7 @@
       "name":"Tiramisu Birthday cake",
       "image":"assets/shop/daily-bread/cake009.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -221,7 +221,7 @@
       "name":"Mousse chanh dây",
       "image":"assets/shop/daily-bread/cake010.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -233,7 +233,7 @@
       "name":"Mousse chanh dây Birthday",
       "image":"assets/shop/daily-bread/cake011.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -245,7 +245,7 @@
       "name":"Bánh hạt",
       "image":"assets/shop/healthy/cake012.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -257,7 +257,7 @@
       "name":"Bánh chuối nướng không đường",
       "image":"assets/shop/daily-bread/cake013.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -269,7 +269,7 @@
       "name":"Cookies",
       "image":"assets/shop/daily-bread/cake014.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -281,7 +281,7 @@
       "name":"Patechaud",
       "image":"assets/shop/daily-bread/bread009.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -293,7 +293,7 @@
       "name":"Papparoti",
       "image":"assets/shop/daily-bread/bread010.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -305,7 +305,7 @@
       "name":"Bánh cầu vồng",
       "image":"assets/shop/daily-bread/bread011.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -316,7 +316,7 @@
       "name":"Set Cookie",
       "image":"assets/shop/gift-sets/set001.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -327,7 +327,7 @@
       "name":"Set Biscotti",
       "image":"assets/shop/gift-sets/set002.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -338,7 +338,7 @@
       "name":"Set Cookie and Biscotti",
       "image":"assets/shop/gift-sets/set003.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     },
@@ -349,7 +349,7 @@
       "name":"Set Macaron 12 pieces",
       "image":"assets/shop/gift-sets/set004.jpg",
       "spec":{"weight":"200 g"},
-      "price":1,
+      "price":"...",
       "sold":890,
       "stock":999999
     }
