@@ -77,7 +77,7 @@
   "products":[
 
     {
-      "id":"bread-001",
+      "id":"F001",
       "group":"top-picks",
       "code":"S01",
       "name":"Sourdough bread",
@@ -97,7 +97,7 @@
     },
 
     {
-      "id":"bread-002",
+      "id":"F002",
       "group":"daily-bread",
       "code":"B05A",
       "name":"Baguette - bánh mỳ tươi",
@@ -109,7 +109,7 @@
     },
 
     {
-      "id":"bread-003",
+      "id":"F003",
       "group":"daily-bread",
       "code":"B05B",
       "name":"Baguette - bánh mỳ nguyên cám",
@@ -121,7 +121,7 @@
     },
 
     {
-      "id":"bread-004",
+      "id":"F004",
       "group":"daily-bread",
       "code":"B05C",
       "name":"Baguette - Bánh mỳ nguyên ổ",
@@ -133,7 +133,7 @@
     },
 
     {
-      "id":"bread-005",
+      "id":"F005",
       "group":"daily-bread",
       "code":"B02",
       "name":"Baguette - Chà bông sốt dầu trứng",
@@ -145,7 +145,7 @@
     },
 
     {
-      "id":"bread-006",
+      "id":F006",
       "group":"daily-bread",
       "code":"B06A",
       "name":"Brioche - Bánh mỳ thắt bím",
@@ -157,7 +157,7 @@
     },
 
     {
-      "id":"bread-007",
+      "id":"F007",
       "group":"daily-bread",
       "code":"B04",
       "name":"Raisin butter",
@@ -169,7 +169,7 @@
     },
 
     {
-      "id":"cake-001",
+      "id":"F008",
       "group":"top-picks",
       "code":"M01A",
       "name":"Macaron",
@@ -181,7 +181,7 @@
     },
 
     {
-      "id":"cake-002",
+      "id":"F009",
       "group":"top-picks",
       "code":"M01B",
       "name":"Macaron velvet",
@@ -193,7 +193,7 @@
     },
 
     {
-      "id":"cake-003",
+      "id":"F010",
       "group":"celebration",
       "code":"C03A",
       "name":"Strawberry Birthday Cake",
@@ -205,7 +205,7 @@
     },
 
     {
-      "id":"cake-004",
+      "id":"F011",
       "group":"daily-bread",
       "code":"F01A",
       "name":"Caramel flan",
@@ -217,7 +217,7 @@
     },
 
     {
-      "id":"cake-005",
+      "id":"F12",
       "group":"daily-bread",
       "code":"F02A",
       "name":"Choco flan",
@@ -229,7 +229,7 @@
     },
 
     {
-      "id":"cake-006",
+      "id":"F13",
       "group":"daily-bread",
       "code":"C02A",
       "name":"NewYork cheese",
@@ -241,7 +241,7 @@
     },
 
     {
-      "id":"cake-007",
+      "id":"F014",
       "group":"daily-bread",
       "code":"C01",
       "name":"Cotton cheese Japan",
@@ -253,7 +253,7 @@
     },
 
     {
-      "id":"cake-008",
+      "id":"F015",
       "group":"daily-bread",
       "code":"T01A",
       "name":"Tiramisu cup",
@@ -265,7 +265,7 @@
     },
 
     {
-      "id":"cake-009",
+      "id":"F016",
       "group":"daily-bread",
       "code":"T01B",
       "name":"Tiramisu Birthday cake",
@@ -277,7 +277,7 @@
     },
 
     {
-      "id":"cake-010",
+      "id":"F017",
       "group":"daily-bread",
       "code":"M02A",
       "name":"Mousse chanh dây cup",
@@ -289,7 +289,7 @@
     },
 
     {
-      "id":"cake-011",
+      "id":"F018",
       "group":"daily-bread",
       "code":"M02B",
       "name":"Mousse chanh dây Birthday",
@@ -301,7 +301,7 @@
     },
 
     {
-      "id":"cake-012",
+      "id":"F019",
       "group":"healthy",
       "code":"K01",
       "name":"Cookie ngũ sắc",
@@ -313,7 +313,7 @@
     },
 
     {
-      "id":"cake-013",
+      "id":"F020",
       "group":"healthy",
       "code":"K02",
       "name":"Cookie dừa",
@@ -325,7 +325,7 @@
     },
   
     {
-      "id":"cake-014",
+      "id":"F021",
       "group":"daily-bread",
       "code":"B03",
       "name":"Bánh chuối nướng không đường",
@@ -337,7 +337,7 @@
     },
 
     {
-      "id":"bread-009",
+      "id":F022",
       "group":"daily-bread",
       "code":"P01",
       "name":"Patechaud",
@@ -349,7 +349,7 @@
     },
 
     {
-      "id":"bread-010",
+      "id":"F23",
       "group":"daily-bread",
       "code":"P02",
       "name":"Papparoti",
@@ -361,7 +361,7 @@
     },
 
     {
-      "id":"bread-011",
+      "id":"F024",
       "group":"daily-bread",
       "code":"B08",
       "name":"Bánh cầu vồng",
@@ -372,7 +372,7 @@
       "stock":999999
     },
     {
-      "id":"giftset-001",
+      "id":F025",
       "group":"gift-sets",
       "code":"GS01",
       "name":"Set Cookies",
@@ -383,7 +383,7 @@
       "stock":999999
     },
     {
-      "id":"giftset-002",
+      "id":F026",
       "group":"gift-sets",
       "code":"GS02",
       "name":"Set Biscotti",
@@ -394,7 +394,7 @@
       "stock":999999
     },
     {
-      "id":"giftset-003",
+      "id":"F027",
       "group":"gift-sets",
       "code":"GS03",
       "name":"Set Cookie and Biscotti",
@@ -405,7 +405,7 @@
       "stock":999999
     },
     {
-      "id":"giftset-004",
+      "id":F028",
       "group":"gift-sets",
       "code":"GS04",
       "name":"Set Macaron 12 pieces",
