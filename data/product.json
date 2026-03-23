@@ -7,17 +7,73 @@
     {"id":"healthy","name":"HEALTHY","icon":"🌿"}
   ],
 
-  "qr": [
-    { "img": "assets/qr/1.png" },
-    { "img": "assets/qr/2.png" },
-    { "img": "assets/qr/3.png" }
-  ],
+  /* ===========================
+     QR SYSTEM (GROUPED)
+  =========================== */
+  "qr": {
+    "groups":[
+      {
+        "id":"default",
+        "path":"assets/qr/default/",
+        "ext":"png",
+        "max":5
+      },
+      {
+        "id":"event",
+        "path":"assets/qr/event/",
+        "ext":"png",
+        "max":5
+      }
+    ]
+  },
 
-  "achievement": [
-    { "img": "assets/achievement/1.jpg" },
-    { "img": "assets/achievement/2.jpg" }
-  ],
-  
+  /* ===========================
+     ACHIEVEMENT SYSTEM (GROUPED)
+  =========================== */
+  "achievement": {
+    "groups":[
+      {
+        "id":"bread",
+        "path":"assets/achievement/bread/",
+        "ext":"jpg",
+        "max":10
+      },
+      {
+        "id":"cake",
+        "path":"assets/achievement/cake/",
+        "ext":"jpg",
+        "max":10
+      },
+      {
+        "id":"dessert",
+        "path":"assets/achievement/dessert/",
+        "ext":"jpg",
+        "max":10
+      },
+      {
+        "id":"savory",
+        "path":"assets/achievement/savory/",
+        "ext":"jpg",
+        "max":10
+      },
+      {
+        "id":"snack",
+        "path":"assets/achievement/snack/",
+        "ext":"jpg",
+        "max":10
+      },
+      {
+        "id":"sweet-bread",
+        "path":"assets/achievement/sweet-bread/",
+        "ext":"jpg",
+        "max":10
+      }
+    ]
+  },
+
+  /* ===========================
+     PRODUCT SYSTEM
+  =========================== */
   "products":[
 
     {
@@ -26,6 +82,13 @@
       "code":"S01",
       "name":"Sourdough bread",
       "image":"assets/shop/bread001.jpg",
+
+      "gallery":{
+        "path":"assets/shop/bread001/",
+        "ext":"jpg",
+        "max":5
+      },
+
       "spec":{"weight":"650 gr","size":"12 cm","serve":"2-3 people"},
       "price":"...",
       "sold":345,
