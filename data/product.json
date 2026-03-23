@@ -12,7 +12,7 @@
     {
       "id":"bread-001",
       "group":"top-picks",
-      "code":"SB01",
+      "code":"SD01",
       "name":"Sourdough bread",
       "image":"assets/shop/top-picks/bread001.jpg",
       "spec":{"weight":"650 gr","size":"12 cm","serve":"2-3 people"},
@@ -37,7 +37,7 @@
     {
       "id":"bread-003",
       "group":"daily-bread",
-      "code":"BM01",
+      "code":"BG02",
       "name":"Baguette - bánh mỳ nguyên cám",
       "image":"assets/shop/daily-bread/bread003.jpg",
       "spec":{"weight":"90 gr"},
@@ -49,7 +49,7 @@
     {
       "id":"bread-004",
       "group":"daily-bread",
-      "code":"BM02",
+      "code":"BG03",
       "name":"Baguette - Bánh mỳ nguyên ổ",
       "image":"assets/shop/daily-bread/bread004.jpg",
       "spec":{"weight":"600 gr","size":"12 cm","serve":"2-3 people"},
@@ -61,7 +61,7 @@
     {
       "id":"bread-005",
       "group":"daily-bread",
-      "code":"BM03",
+      "code":"BG04",
       "name":"Baguette - Chà bông sốt dầu trứng",
       "image":"assets/shop/daily-bread/bread005.jpg",
       "spec":{"weight":"100 g"},
@@ -73,10 +73,10 @@
     {
       "id":"bread-006",
       "group":"daily-bread",
-      "code":"BM04",
-      "name":"Bánh mỳ thắt bím",
+      "code":"BG05",
+      "name":"Brioche - Bánh mỳ thắt bím",
       "image":"assets/shop/daily-bread/bread006.jpg",
-      "spec":{"weight":"200 g"},
+      "spec":{"weight":"300 gr","size":"12 cm","serve":"1-2 people"},
       "price":"...",
       "sold":890,
       "stock":999999
@@ -85,22 +85,10 @@
     {
       "id":"bread-007",
       "group":"daily-bread",
-      "code":"BM05",
-      "name":"Bánh mỳ xốt dầu trứng",
-      "image":"assets/shop/daily-bread/bread007.jpg",
-      "spec":{"weight":"200 g"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"bread-008",
-      "group":"daily-bread",
-      "code":"BM06",
+      "code":"BG06",
       "name":"Raisin butter",
-      "image":"assets/shop/daily-bread/bread008.jpg",
-      "spec":{"weight":"200 g"},
+      "image":"assets/shop/daily-bread/bread007.jpg",
+      "spec":{"weight":"400 gr","size":"12 cm","serve":"2-3 people"},
       "price":"...",
       "sold":890,
       "stock":999999
