@@ -458,7 +458,7 @@ document.getElementById("productName").textContent = product.name;
 document.getElementById("productPrice").textContent =
 product.price.toLocaleString("vi-VN")+"đ";
 
-document.getElementById("productImage").src = product.image;
+document.getElementById("productImage").src = product.img;
 
 const specBox = document.getElementById("productSpec")
 
@@ -576,7 +576,7 @@ function loadShopSlider(slider){
     card.dataset.id=p.id
 
     card.innerHTML=`
-      <img data-src="${p.image}" 
+      <img data-src="${p.img}" 
            class="lazy-img">
       <div class="product-info">
         <div class="product-name">${p.name}</div>
@@ -913,19 +913,17 @@ document
 
   if(!qrWheel) initQRWheel();
   qrWheel.go(0);
-
+  
+  const qrProducts = buildStaticProducts("assets/qr/", 10, "png");
   document
   .querySelectorAll("#qrPopup .qr-slider")
   .forEach(slider=>{
     GalleryEngine.load({
-      slider,
-      state: sliderState,
-      update: updateSLD,
-      SliderEngine,
-      path: "assets/qr/",
-      ext: "png",
-      max: 10
-    });
+    slider,
+    products: qrProducts,
+    update: updateSLD,
+    SliderEngine
+   });
   });
 
   requestAnimationFrame(()=>{
@@ -944,18 +942,16 @@ document
   if(!achievementWheel) initAchievementWheel();
   achievementWheel.go(0);
 
+  const achProducts = buildStaticProducts("assets/achievement/", 12, "jpg");
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
   .forEach(slider=>{
     GalleryEngine.load({
-      slider,
-      state: sliderState,
-      update: updateSLD,
-      SliderEngine,
-      path: "assets/achievement/",
-      ext: "jpg",
-      max: 12
-    });
+    slider,
+    products: achProducts,
+    update: updateSLD,
+    SliderEngine
+   });
   });
 
   requestAnimationFrame(()=>{
