@@ -145,7 +145,7 @@
     },
 
     {
-      "id":F006",
+      "id":"F006",
       "group":"daily-bread",
       "code":"B06A",
       "name":"Brioche - Bánh mỳ thắt bím",
@@ -217,7 +217,7 @@
     },
 
     {
-      "id":"F12",
+      "id":"F012",
       "group":"daily-bread",
       "code":"F02A",
       "name":"Choco flan",
@@ -229,7 +229,7 @@
     },
 
     {
-      "id":"F13",
+      "id":"F013",
       "group":"daily-bread",
       "code":"C02A",
       "name":"NewYork cheese",
@@ -337,7 +337,7 @@
     },
 
     {
-      "id":F022",
+      "id":"F022",
       "group":"daily-bread",
       "code":"P01",
       "name":"Patechaud",
@@ -349,7 +349,7 @@
     },
 
     {
-      "id":"F23",
+      "id":"F023",
       "group":"daily-bread",
       "code":"P02",
       "name":"Papparoti",
@@ -383,7 +383,7 @@
       "stock":999999
     },
     {
-      "id":F026",
+      "id":"F026",
       "group":"gift-sets",
       "code":"GS02",
       "name":"Set Biscotti",
@@ -405,7 +405,7 @@
       "stock":999999
     },
     {
-      "id":F028",
+      "id":"F028",
       "group":"gift-sets",
       "code":"GS04",
       "name":"Set Macaron 12 pieces",
