@@ -193,6 +193,30 @@
     },
 
     {
+      "id":"F009",
+      "group":"top-picks",
+      "code":"P01",
+      "name":"Patechaud",
+      "image":"assets/shop/p01.jpg",
+      "spec":{"color":"red"},
+      "price":"...",
+      "sold":210,
+      "stock":999999
+    },
+
+    {
+      "id":"F009",
+      "group":"top-picks",
+      "code":"P02",
+      "name":"Paparoti",
+      "image":"assets/shop/p02.jpg",
+      "spec":{"color":"red"},
+      "price":"...",
+      "sold":210,
+      "stock":999999
+    },
+
+    {
       "id":"F011",
       "group":"daily-bread",
       "code":"F01A",
