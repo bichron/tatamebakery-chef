@@ -201,7 +201,7 @@ function initAchievementWheel(){
 =========================== */
 
 function SliderEngine(slider){
-
+window.SliderEngine = SliderEngine;
   if(slider.dataset.bound) return;
   slider.dataset.bound = "1";
   
