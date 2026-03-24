@@ -97,6 +97,42 @@
     },
 
     {
+      "id":"T002",
+      "group":"top-picks",
+      "code":"M01B",
+      "name":"Macaron velvet",
+      "image":"assets/shop/m01b.jpg",
+      "spec":{"color":"red"},
+      "price":"...",
+      "sold":210,
+      "stock":999999
+    },
+
+    {
+      "id":"T003",
+      "group":"top-picks",
+      "code":"P01",
+      "name":"Patechaud",
+      "image":"assets/shop/p01.jpg",
+      "spec":{"color":"red"},
+      "price":"...",
+      "sold":210,
+      "stock":999999
+    },
+
+    {
+      "id":"T004",
+      "group":"top-picks",
+      "code":"P02",
+      "name":"Paparoti",
+      "image":"assets/shop/p02.jpg",
+      "spec":{"color":"red"},
+      "price":"...",
+      "sold":210,
+      "stock":999999
+    },
+    
+    {
       "id":"D001",
       "group":"daily-bread",
       "code":"B05A",
@@ -181,42 +217,6 @@
     },
 
     {
-      "id":"T002",
-      "group":"top-picks",
-      "code":"M01B",
-      "name":"Macaron velvet",
-      "image":"assets/shop/m01b.jpg",
-      "spec":{"color":"red"},
-      "price":"...",
-      "sold":210,
-      "stock":999999
-    },
-
-    {
-      "id":"T003",
-      "group":"top-picks",
-      "code":"P01",
-      "name":"Patechaud",
-      "image":"assets/shop/p01.jpg",
-      "spec":{"color":"red"},
-      "price":"...",
-      "sold":210,
-      "stock":999999
-    },
-
-    {
-      "id":"T004",
-      "group":"top-picks",
-      "code":"P02",
-      "name":"Paparoti",
-      "image":"assets/shop/p02.jpg",
-      "spec":{"color":"red"},
-      "price":"...",
-      "sold":210,
-      "stock":999999
-    },
-
-    {
       "id":"D008",
       "group":"daily-bread",
       "code":"F01A",
@@ -276,6 +276,102 @@
       "stock":999999
     },
 
+    {
+      "id":"D013",
+      "group":"daily-bread",
+      "code":"M02A",
+      "name":"Mousse chanh dây cup",
+      "image":"assets/shop/cake010.jpg",
+      "spec":{"weight":"100 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"D014",
+      "group":"daily-bread",
+      "code":"M02B",
+      "name":"Mousse chanh dây Birthday",
+      "image":"assets/shop/cake011.jpg",
+      "spec":{"weight":"500 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+  
+    {
+      "id":"D015",
+      "group":"daily-bread",
+      "code":"B03",
+      "name":"Bánh chuối nướng không đường",
+      "image":"assets/shop/cake014.jpg",
+      "spec":{"weight":"600 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"D016",
+      "group":"daily-bread",
+      "code":"P01",
+      "name":"Patechaud",
+      "image":"assets/shop/p01.jpg",
+      "spec":{"weight":"60 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"D017",
+      "group":"daily-bread",
+      "code":"P02",
+      "name":"Papparoti",
+      "image":"assets/shop/p02.jpg",
+      "spec":{"weight":"90 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"D018",
+      "group":"daily-bread",
+      "code":"B08",
+      "name":"Bánh cầu vồng",
+      "image":"assets/shop/bread011.jpg",
+      "spec":{"weight":"100 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"H001",
+      "group":"healthy",
+      "code":"K01",
+      "name":"Cookie ngũ sắc",
+      "image":"assets/shop/cake012.jpg",
+      "spec":{"weight":"18 gr","net box": "780 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"H002",
+      "group":"healthy",
+      "code":"K02",
+      "name":"Cookie dừa",
+      "image":"assets/shop/cake013.jpg",
+      "spec":{"weight":"18 gr","net box": "780 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+    
     {
       "id":"C001",
       "group":"celebration",
@@ -397,101 +493,6 @@
     },
 
     {
-      "id":"D013",
-      "group":"daily-bread",
-      "code":"M02A",
-      "name":"Mousse chanh dây cup",
-      "image":"assets/shop/cake010.jpg",
-      "spec":{"weight":"100 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"D014",
-      "group":"daily-bread",
-      "code":"M02B",
-      "name":"Mousse chanh dây Birthday",
-      "image":"assets/shop/cake011.jpg",
-      "spec":{"weight":"500 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"H001",
-      "group":"healthy",
-      "code":"K01",
-      "name":"Cookie ngũ sắc",
-      "image":"assets/shop/cake012.jpg",
-      "spec":{"weight":"18 gr","net box": "780 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"H002",
-      "group":"healthy",
-      "code":"K02",
-      "name":"Cookie dừa",
-      "image":"assets/shop/cake013.jpg",
-      "spec":{"weight":"18 gr","net box": "780 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-  
-    {
-      "id":"D015",
-      "group":"daily-bread",
-      "code":"B03",
-      "name":"Bánh chuối nướng không đường",
-      "image":"assets/shop/cake014.jpg",
-      "spec":{"weight":"600 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"D016",
-      "group":"daily-bread",
-      "code":"P01",
-      "name":"Patechaud",
-      "image":"assets/shop/p01.jpg",
-      "spec":{"weight":"60 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"D017",
-      "group":"daily-bread",
-      "code":"P02",
-      "name":"Papparoti",
-      "image":"assets/shop/p02.jpg",
-      "spec":{"weight":"90 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"D018",
-      "group":"daily-bread",
-      "code":"B08",
-      "name":"Bánh cầu vồng",
-      "image":"assets/shop/bread011.jpg",
-      "spec":{"weight":"100 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
-    {
       "id":"G001",
       "group":"gift-sets",
       "code":"GS01",
@@ -502,6 +503,7 @@
       "sold":890,
       "stock":999999
     },
+    
     {
       "id":"G002",
       "group":"gift-sets",
