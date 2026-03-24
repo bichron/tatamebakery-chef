@@ -901,20 +901,27 @@ document
   if(!qrWheel) initQRWheel();
   qrWheel.go(0);
 
-  const group = window.qrGroups[0];
+  const group = window.qrGroups?.[0];
+  if(!group){
+    console.warn("QR group not found");
+    return;
+  }
+
   document
   .querySelectorAll("#qrPopup .qr-slider")
   .forEach(slider=>{
-  GalleryEngine.load({
-    slider,
-    path: group.path,
-    ext: group.ext,
-    max: group.max,
-    update: updateSLD,
-    SliderEngine
+
+    GalleryEngine.load({
+      slider,
+      path: group.path,
+      ext: group.ext,
+      max: group.max,
+      update: updateSLD,
+      SliderEngine
+    });
+
   });
-  });
-   
+
   openPopup("qrPopup");
   window.loadDynamicQR?.();
 });
@@ -927,20 +934,27 @@ document
   if(!achievementWheel) initAchievementWheel();
   achievementWheel.go(0);
 
-  const group = window.achievementGroups[0];
+  const group = window.achievementGroups?.[0];
+  if(!group){
+    console.warn("Achievement group not found");
+    return;
+  }
+
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
   .forEach(slider=>{
-  GalleryEngine.load({
-    slider,
-    path: group.path,
-    ext: group.ext,
-    max: group.max,
-    update: updateSLD,
-    SliderEngine
+
+    GalleryEngine.load({
+      slider,
+      path: group.path,
+      ext: group.ext,
+      max: group.max,
+      update: updateSLD,
+      SliderEngine
+    });
+
   });
-  });
-   
+
   openPopup("achievementPopup");
 });
 
