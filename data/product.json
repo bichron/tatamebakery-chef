@@ -265,17 +265,53 @@
     },
 
     {
-      "id":"F016",
+      "id":"F090",
       "group":"daily-bread",
-      "code":"T01B",
-      "name":"Tiramisu Birthday cake",
-      "image":"assets/shop/cake009.jpg",
-      "spec":{"weight":"500 gr"},
+      "code":"T02A",
+      "name":"Tiramisu Birthday heart 1",
+      "image":"assets/shop/t02a.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
       "price":"...",
       "sold":890,
       "stock":999999
     },
 
+    {
+      "id":"F091",
+      "group":"daily-bread",
+      "code":"T02A",
+      "name":"Tiramisu Birthday heart 2",
+      "image":"assets/shop/t02b.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"F093",
+      "group":"daily-bread",
+      "code":"T02A",
+      "name":"Tiramisu Birthday heart 3",
+      "image":"assets/shop/t02c.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+    
+    {
+      "id":"F094",
+      "group":"daily-bread",
+      "code":"T02A",
+      "name":"Tiramisu Birthday heart 4",
+      "image":"assets/shop/t02d.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+    
     {
       "id":"F017",
       "group":"daily-bread",
