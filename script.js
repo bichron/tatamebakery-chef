@@ -373,8 +373,8 @@ async function loadProductData(){
    shopData = data.products || []
    shopGroups = data.groups || []
 
-   window.qrData = data.qr || []
-   window.achievementData = data.achievement || []
+   window.qrGroups = data.qr?.groups || []
+   window.achievementGroups = data.achievement?.groups || []
    
    console.log("Products loaded:", shopData)
 
@@ -898,16 +898,19 @@ document
 
   if(!qrWheel) initQRWheel();
   qrWheel.go(0);
-  
+
+  const group = window.qrGroups[0];
   document
   .querySelectorAll("#qrPopup .qr-slider")
   .forEach(slider=>{
   GalleryEngine.load({
     slider,
-    products: window.qrData,
+    path: group.path,
+    ext: group.ext,
+    max: group.max,
     update: updateSLD,
     SliderEngine
-   });
+  });
   });
    
   openPopup("qrPopup");
@@ -922,15 +925,18 @@ document
   if(!achievementWheel) initAchievementWheel();
   achievementWheel.go(0);
 
+  const group = window.achievementGroups[0];
   document
   .querySelectorAll("#achievementPopup .achievement-slider")
   .forEach(slider=>{
   GalleryEngine.load({
     slider,
-    products: window.achievementData,
+    path: group.path,
+    ext: group.ext,
+    max: group.max,
     update: updateSLD,
     SliderEngine
-   });
+  });
   });
    
   openPopup("achievementPopup");
