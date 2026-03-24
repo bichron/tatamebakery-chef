@@ -67,9 +67,15 @@ export const GalleryEngine = {
 
         // tránh bind lại nhiều lần
         if(!slider.dataset.init){
-          new SliderEngine(slider);
-          slider.dataset.init = "1";
-        }
+
+  if(typeof window.SliderEngine === "function"){
+    window.SliderEngine(slider);
+  }else{
+    console.warn("SliderEngine not found");
+  }
+
+  slider.dataset.init = "1";
+}
 
         update?.(slider);
 
