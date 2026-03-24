@@ -266,7 +266,7 @@
 
     {
       "id":"F090",
-      "group":"daily-bread",
+      "group":"celebration",
       "code":"T02A",
       "name":"Tiramisu Birthday heart 1",
       "image":"assets/shop/t02a.jpg",
@@ -278,8 +278,8 @@
 
     {
       "id":"F091",
-      "group":"daily-bread",
-      "code":"T02A",
+      "group":"celebration",
+      "code":"T02B",
       "name":"Tiramisu Birthday heart 2",
       "image":"assets/shop/t02b.jpg",
       "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
@@ -290,8 +290,8 @@
 
     {
       "id":"F093",
-      "group":"daily-bread",
-      "code":"T02A",
+      "group":"celebration",
+      "code":"T02C",
       "name":"Tiramisu Birthday heart 3",
       "image":"assets/shop/t02c.jpg",
       "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
@@ -302,8 +302,8 @@
     
     {
       "id":"F094",
-      "group":"daily-bread",
-      "code":"T02A",
+      "group":"celebration",
+      "code":"T02D",
       "name":"Tiramisu Birthday heart 4",
       "image":"assets/shop/t02d.jpg",
       "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
@@ -311,7 +311,79 @@
       "sold":890,
       "stock":999999
     },
+       
+    {
+      "id":"F095",
+      "group":"celebration",
+      "code":"T02E",
+      "name":"Tiramisu Birthday pie 1",
+      "image":"assets/shop/t02e.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"F096",
+      "group":"celebration",
+      "code":"T02F",
+      "name":"Tiramisu Birthday pie 2",
+      "image":"assets/shop/t02f.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
     
+    {
+      "id":"F097",
+      "group":"celebration",
+      "code":"T02G",
+      "name":"Tiramisu Birthday pie 3",
+      "image":"assets/shop/t02g.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"F098",
+      "group":"celebration",
+      "code":"T02H",
+      "name":"Tiramisu Birthday pie 4",
+      "image":"assets/shop/t02h.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+    
+    {
+      "id":"F099",
+      "group":"celebration",
+      "code":"T02I",
+      "name":"Tiramisu Birthday pie 5",
+      "image":"assets/shop/t02i.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+    
+    {
+      "id":"F100",
+      "group":"celebration",
+      "code":"T02K",
+      "name":"Tiramisu Birthday pie 6",
+      "image":"assets/shop/t02k.jpg",
+      "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
     {
       "id":"F017",
       "group":"daily-bread",
