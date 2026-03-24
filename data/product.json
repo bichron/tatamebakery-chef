@@ -1,9 +1,9 @@
 {
   "groups":[
     {"id":"top-picks","name":"TOP PICKs","icon":"⭐"},
-    {"id":"celebration","name":"CELEBRATION","icon":"🎂"},
-    {"id":"gift-sets","name":"GIFT SETs","icon":"🎁"},
     {"id":"daily-bread","name":"DAILY HOT","icon":"🥖"},
+    {"id":"celebration","name":"CELEBRATION","icon":"🎂"},
+    {"id":"gift-sets","name":"GIFT SETs","icon":"🎁"},   
     {"id":"healthy","name":"HEALTHY","icon":"🌿"}
   ],
 
