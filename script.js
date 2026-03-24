@@ -124,15 +124,29 @@ function initQRWheel(){
 
     onChange:(index)=>{
 
-      document
-      .querySelectorAll("#qrPopup .qr-panel")
-      .forEach((p,i)=>{
+  document
+  .querySelectorAll("#qrPopup .qr-panel")
+  .forEach((p,i)=>{
+    p.classList.toggle("active", i===index);
+  });
 
-        p.classList.toggle("active", i===index);
+  const group = window.qrGroups?.[index];
+  if(!group) return;
 
-      });
+  const sliders = document.querySelectorAll("#qrPopup .qr-slider");
 
-    }
+  sliders.forEach(slider=>{
+    GalleryEngine.load({
+      slider,
+      path: group.path,
+      ext: group.ext,
+      max: group.max,
+      update: updateSLD,
+      SliderEngine
+    });
+  });
+
+}
 
   });
 
@@ -151,17 +165,32 @@ function initAchievementWheel(){
 
     radius:120,
 
-    onChange:(index)=>{
+   onChange:(index)=>{
 
-      document
-      .querySelectorAll("#achievementPopup .achievement-panel")
-      .forEach((p,i)=>{
+  document
+  .querySelectorAll("#achievementPopup .achievement-panel")
+  .forEach((p,i)=>{
+    p.classList.toggle("active", i===index);
+  });
 
-        p.classList.toggle("active", i===index);
+  // 🔥 LOAD ĐÚNG GROUP THEO INDEX
+  const group = window.achievementGroups?.[index];
+  if(!group) return;
 
-      });
+  const sliders = document.querySelectorAll("#achievementPopup .achievement-slider");
 
-    }
+  sliders.forEach(slider=>{
+    GalleryEngine.load({
+      slider,
+      path: group.path,
+      ext: group.ext,
+      max: group.max,
+      update: updateSLD,
+      SliderEngine
+    });
+  });
+
+}
 
   });
 
@@ -901,26 +930,18 @@ document
   if(!qrWheel) initQRWheel();
   qrWheel.go(0);
 
-  const group = window.qrGroups?.[0];
   if(!group){
     console.warn("QR group not found");
     return;
   }
 
   document
-  .querySelectorAll("#qrPopup .qr-slider")
-  .forEach(slider=>{
+.getElementById("btn-qrcode")
+?.addEventListener("click",()=>{
 
-    GalleryEngine.load({
-      slider,
-      path: group.path,
-      ext: group.ext,
-      max: group.max,
-      update: updateSLD,
-      SliderEngine
-    });
+  if(!qrWheel) initQRWheel();
 
-  });
+  qrWheel.go(0); // 👉 trigger onChange → load gallery
 
   openPopup("qrPopup");
   window.loadDynamicQR?.();
@@ -934,28 +955,21 @@ document
   if(!achievementWheel) initAchievementWheel();
   achievementWheel.go(0);
 
-  const group = window.achievementGroups?.[0];
   if(!group){
     console.warn("Achievement group not found");
     return;
   }
 
   document
-  .querySelectorAll("#achievementPopup .achievement-slider")
-  .forEach(slider=>{
+.getElementById("btn-achievement")
+?.addEventListener("click",()=>{
 
-    GalleryEngine.load({
-      slider,
-      path: group.path,
-      ext: group.ext,
-      max: group.max,
-      update: updateSLD,
-      SliderEngine
-    });
+  if(!achievementWheel) initAchievementWheel();
 
-  });
+  achievementWheel.go(0); // 👉 trigger onChange → load gallery
 
   openPopup("achievementPopup");
+
 });
 
 
