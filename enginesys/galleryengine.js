@@ -25,37 +25,37 @@ export const GalleryEngine = {
     ============================ */
     function build(){
 
-      // no data
-      if(!products || products.length === 0){
-        track.innerHTML = "<div class='slider-empty'>No data</div>";
-        return;
-      }
+  // no data
+  if(!path || !max){
+    track.innerHTML = "<div class='slider-empty'>No data</div>";
+    return;
+  }
 
-      products.forEach((product, i)=>{
+  for(let i = 1; i <= max; i++){
 
-        const el = document.createElement("img");
+    const el = document.createElement("img");
 
-        // ✅ FULL JSON PATH (chuẩn hoá toàn hệ thống)
-        const src = product.img;
+    const src = `${path}${i}.${ext || "jpg"}`;
 
-        el.dataset.src = src;
-        el.classList.add("lazy-img");
+    el.dataset.src = src;
+    el.classList.add("lazy-img");
 
-        // load ảnh đầu tiên ngay
-        if(i === 0){
-          el.src = src;
-        }
+    // load ảnh đầu tiên
+    if(i === 1){
+      el.src = src;
+    }
 
-        track.appendChild(el);
+    track.appendChild(el);
 
-        // indicator
-        const dot = document.createElement("span");
-        if(i === 0) dot.classList.add("active");
-        indicatorBox.appendChild(dot);
-      });
+    // indicator
+    const dot = document.createElement("span");
+    if(i === 1) dot.classList.add("active");
+    indicatorBox.appendChild(dot);
+  }
 
-      // reset position
-      track.dataset.x = 0;
+  // reset position
+  track.dataset.x = 0;
+}
 
       /* ===========================
          INIT SLIDER
