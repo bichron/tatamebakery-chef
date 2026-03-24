@@ -922,53 +922,32 @@ document
 
 });
    
-
 document
 .getElementById("btn-qrcode")
 ?.addEventListener("click",()=>{
 
   if(!qrWheel) initQRWheel();
-  qrWheel.go(0);
 
-  if(!group){
-    console.warn("QR group not found");
-    return;
-  }
+  openPopup("qrPopup"); // 👉 mở trước
 
-  document
-.getElementById("btn-qrcode")
-?.addEventListener("click",()=>{
+  requestAnimationFrame(()=>{
+    qrWheel.go(0); // 👉 chạy sau khi DOM ready
+  });
 
-  if(!qrWheel) initQRWheel();
-
-  qrWheel.go(0); // 👉 trigger onChange → load gallery
-
-  openPopup("qrPopup");
   window.loadDynamicQR?.();
 });
 
-
 document
 .getElementById("btn-achievement")
 ?.addEventListener("click",()=>{
 
   if(!achievementWheel) initAchievementWheel();
-  achievementWheel.go(0);
 
-  if(!group){
-    console.warn("Achievement group not found");
-    return;
-  }
+  openPopup("achievementPopup"); // 👉 mở trước
 
-  document
-.getElementById("btn-achievement")
-?.addEventListener("click",()=>{
-
-  if(!achievementWheel) initAchievementWheel();
-
-  achievementWheel.go(0); // 👉 trigger onChange → load gallery
-
-  openPopup("achievementPopup");
+  requestAnimationFrame(()=>{
+    achievementWheel.go(0); // 👉 trigger đúng timing
+  });
 
 });
 
