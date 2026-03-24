@@ -375,7 +375,9 @@ async function loadProductData(){
 
    window.qrGroups = data.qr?.groups || []
    window.achievementGroups = data.achievement?.groups || []
-   
+
+   console.log("QR GROUPS:", window.qrGroups);
+   console.log("ACH GROUPS:", window.achievementGroups); 
    console.log("Products loaded:", shopData)
 
   }catch(err){
@@ -443,7 +445,7 @@ document.getElementById("productName").textContent = product.name;
 document.getElementById("productPrice").textContent =
 product.price.toLocaleString("vi-VN")+"đ";
 
-document.getElementById("productImage").src = product.img;
+document.getElementById("productImage").src = product.image;
 
 const specBox = document.getElementById("productSpec")
 
@@ -561,7 +563,7 @@ function loadShopSlider(slider){
     card.dataset.id=p.id
 
     card.innerHTML=`
-      <img data-src="${p.img}" 
+      <img data-src="${p.image}" 
            class="lazy-img">
       <div class="product-info">
         <div class="product-name">${p.name}</div>
