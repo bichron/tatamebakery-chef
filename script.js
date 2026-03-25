@@ -837,8 +837,11 @@ Object.keys(cart).forEach(id=>{
 
 navigator.clipboard.writeText(text);
 
-alert("Đơn hàng đã được chuyển đổi thành tin nhắn, hãy mở chat để dán tin nhắn đơn hàng.\n(Order copied. Paste into chat.)");
-
+alert(
+  "Đơn hàng đã được chuyển đổi thành tin nhắn.\n" +
+  "Hãy mở CHAT (Zalo, Viber, SMS) để dán đơn hàng gửi đến Phương 0937771981.\n\n" +
+  "(Order copied. Paste into chat.)"
+);
 });
    
 // REMOVE ITEM   
