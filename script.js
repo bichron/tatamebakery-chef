@@ -790,7 +790,25 @@ document
 .getElementById("copyCartOrder")
 ?.addEventListener("click",()=>{
 
-let text="/order TatameLanding; ";
+const phone = document.getElementById("cartPhone")?.value.trim();
+
+// ❗ bắt nhập SĐT
+if(!phone){
+  alert("Vui lòng nhập số điện thoại");
+  return;
+}
+
+// ❗ validate nhẹ
+if(!/^0\d{9}$/.test(phone)){
+  alert("SĐT không hợp lệ");
+  return;
+}
+
+// 👉 lưu lại
+localStorage.setItem("user_phone", phone);
+
+// 👉 THAY TatameLanding = phone
+let text = `/order ${phone}; `;
 
 const today = new Date();
 
@@ -802,26 +820,24 @@ today.getFullYear();
 text += date + "; ";
 
 if(Object.keys(cart).length===0){
-
-alert("Your cart is empty.");
-return;
-
+  alert("Your cart is empty.");
+  return;
 }
 
 Object.keys(cart).forEach(id=>{
 
-const product = shopData.find(p=>p.id===id);
-const name = product ? product.name : id;
+  const product = shopData.find(p=>p.id===id);
+  const name = product ? product.name : id;
 
-const qty = String(cart[id]).padStart(2,"0");
+  const qty = String(cart[id]).padStart(2,"0");
 
-text += `${qty} ${name}; `;
+  text += `${qty} ${name}; `;
 
 });
 
 navigator.clipboard.writeText(text);
 
-alert("Order copied. Paste into chat.");
+alert("Đơn hàng đã được chuyển đổi thành tin nhắn, hãy mở chat để dán đơn hàng. (Order copied. Paste into chat.)");
 
 });
    
@@ -987,7 +1003,11 @@ document
 ?.addEventListener("click",()=>{
 
 renderCart();
-
+const saved = localStorage.getItem("user_phone");
+if(saved){
+  const input = document.getElementById("cartPhone");
+  if(input) input.value = saved;
+}
 openPopup("cartPopup");
 
 });   
