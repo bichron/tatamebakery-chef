@@ -1,6 +1,5 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
 import { GalleryEngine } from "./enginesys/galleryengine.js";
-import { generateQRCode } from "./enginesys/qrgenerate.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
@@ -12,12 +11,9 @@ window.addEventListener("DOMContentLoaded", async()=>{
 =========================== */
 
 const phone = document.getElementById("phone");
-const qrPopup = document.getElementById("qrPopup");
 
 const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
-
-const VIEWER_UNLOCK_CODE = "093777";
 
 const sliderState = new Map();
 
@@ -26,10 +22,6 @@ let achievementWheel;
 let shopWheel;
 
 let activePopup=null;
-
-let sessionTimer=null;
-let wrongAttempts=0;
-
 
 /* ===========================
    SCALE CARD
@@ -44,8 +36,9 @@ function scaleCard(){
 }
 
 scaleCard();
-phone.classList.add("loaded");
-
+if(phone){
+  phone.classList.add("loaded");
+}
 window.addEventListener(
   "resize",
   ()=>requestAnimationFrame(scaleCard)
@@ -87,7 +80,9 @@ if(window.DeviceOrientationEvent){
     const x = e.gamma / 40;
     const y = e.beta / 40;
 
+    if(phone){
     phone.style.rotate = `${-y}deg ${x}deg`;
+    }
 
   });
 
@@ -996,129 +991,7 @@ renderCart();
 openPopup("cartPopup");
 
 });   
-
-   
-/* ===========================
-   SESSION TIMEOUT
-=========================== */
-
-const SESSION_TIMEOUT = 20*60*1000;
-
-function resetSessionTimer(){
-
-  if(document.body.classList.contains("session-expired")) return;
-
-  clearTimeout(sessionTimer);
-
-  sessionTimer=setTimeout(expireSession,SESSION_TIMEOUT);
-
-}
-
-["click","touchstart","keydown","scroll"]
-.forEach(evt=>{
-
-  document.addEventListener(
-    evt,
-    resetSessionTimer,
-    {passive:true}
-  );
-
-});
-
-resetSessionTimer();
-
-
-function expireSession(){
-
-  closeAllPopups();
-
-  document.body.classList.add("session-expired");
-
-  showUnlockOverlay();
-
-}
-
-
-/* ===========================
-   UNLOCK OVERLAY
-=========================== */
-
-function showUnlockOverlay(){
-
-  if(document.getElementById("unlockOverlay")) return;
-
-  wrongAttempts=0;
-
-  const overlay=document.createElement("div");
-
-  overlay.id="unlockOverlay";
-
-  overlay.innerHTML=`
-  <div class="unlock-box">
-    <h3>Session expired</h3>
-    <p>
-      Enter <b>6-digit code</b> to unlock<br>
-      or enter <b>9</b> to close
-    </p>
-    <input type="password" maxlength="6" inputmode="numeric"/>
-    <button id="unlockBtn">Unlock</button>
-    <div class="unlock-error"></div>
-  </div>
-  `;
-
-  document.body.appendChild(overlay);
-
-  const input=overlay.querySelector("input");
-  const btn=overlay.querySelector("#unlockBtn");
-  const err=overlay.querySelector(".unlock-error");
-
-  input.focus();
-
-  btn.onclick=()=>{
-
-    const value=input.value.trim();
-
-    if(value==="9"){
-      closeLandingpage();
-      return;
-    }
-
-    if(value===VIEWER_UNLOCK_CODE){
-      location.reload();
-      return;
-    }
-
-    wrongAttempts++;
-
-    err.textContent=`Invalid code (${wrongAttempts}/3)`;
-
-    input.value="";
-    input.focus();
-
-    if(wrongAttempts>=3){
-      closeLandingpage();
-    }
-
-  };
-
-}
-
-
-/* ===========================
-   CLOSE PAGE
-=========================== */
-
-function closeLandingpage(){
-
-  document.body.innerHTML=`
-  <div class="page-closed">
-    <h3>Session closed</h3>
-    <p>Please scan QR or NFC again</p>
-  </div>
-  `;
-
-}
-
+  
 /* ===========================
    UTIL
 =========================== */
