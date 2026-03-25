@@ -1142,13 +1142,13 @@ font-weight:600;
 =========================== */
 
 .cart-phone{
-  padding:10px;
+  padding:8px;
 }
 
 .cart-phone input{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
+  width:72%;
+  padding:8px;
+  border-radius:6px;
   border:1px solid #ccc;
 }
 
