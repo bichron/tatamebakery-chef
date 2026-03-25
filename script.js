@@ -794,13 +794,13 @@ const phone = document.getElementById("cartPhone")?.value.trim();
 
 // ❗ bắt nhập SĐT
 if(!phone){
-  alert("Vui lòng nhập số điện thoại");
+  alert("Vui lòng nhập số điện thoại để ghi chú đơn hàng");
   return;
 }
 
 // ❗ validate nhẹ
 if(!/^0\d{9}$/.test(phone)){
-  alert("SĐT không hợp lệ");
+  alert("SĐT di động không hợp lệ - không đủ 10 số !");
   return;
 }
 
