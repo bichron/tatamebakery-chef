@@ -375,9 +375,21 @@
     {
       "id":"H003",
       "group":"healthy",
-      "code":"K02",
+      "code":"K03",
       "name":"Cookie dừa & hạt điều",
       "image":"assets/shop/k03.jpg",
+      "spec":{"weight":"18 gr","net box": "780 gr"},
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+    
+    {
+      "id":"H004",
+      "group":"healthy",
+      "code":"K04",
+      "name":"Cookie hạt lục sắc",
+      "image":"assets/shop/k04.jpg",
       "spec":{"weight":"18 gr","net box": "780 gr"},
       "price":"...",
       "sold":890,
