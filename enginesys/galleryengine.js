@@ -1,17 +1,16 @@
 /* =====================================
-   GALLERY ENGINE (UNIFIED - LAZY LOAD)
+   GALLERY ENGINE (UNIFIED - JSON DRIVEN)
 ===================================== */
 
 export const GalleryEngine = {
 
   load({
     slider,
-    state,
-    update,
-    SliderEngine,
     path,
-    ext = "png",
-    max = 10
+    ext = "jpg",
+    max = 10,
+    update,
+    SliderEngine
   }){
 
     const track = slider.querySelector(".slider-track");
@@ -19,87 +18,97 @@ export const GalleryEngine = {
 
     if(!track || !indicatorBox) return;
 
+    // reset UI
     track.innerHTML = "";
     indicatorBox.innerHTML = "";
 
-    const group = slider.dataset.group;
-
-    let items = [];
-    let index = 1;
-
     /* ===========================
-       LOAD IMAGE (RECURSIVE)
-    ============================ */
-    function tryLoad(){
-
-      if(index > max){
-        build();
-        return;
-      }
-
-      const img = new Image();
-      img.src = `${path}${group}/${index}.${ext}`;
-
-      img.onload = ()=>{
-        items.push(img.src);
-        index++;
-        tryLoad();
-      };
-
-      img.onerror = build;
-    }
-
-    /* ===========================
-       BUILD SLIDER (LAZY)
+       BUILD SLIDER (FROM PATH)
     ============================ */
     function build(){
 
-      const count = Math.min(max, items.length);
-
-      if(count === 0){
+      if(!path || !max){
         track.innerHTML = "<div class='slider-empty'>No data</div>";
         return;
       }
 
-      for(let i=0;i<count;i++){
+      for(let i = 1; i <= max; i++){
 
         const el = document.createElement("img");
+        const src = `${path}${i}.${ext}`;
 
-        el.dataset.src = items[i];
+        el.dataset.src = src;
         el.classList.add("lazy-img");
 
-        if(i === 0){
-          el.src = items[i];
+        // load ảnh đầu tiên ngay
+        if(i === 1){
+          el.src = src;
+          el.dataset.loaded = "1";
         }
 
         track.appendChild(el);
 
+        // indicator
         const dot = document.createElement("span");
-        if(i === 0) dot.classList.add("active");
+        if(i === 1) dot.classList.add("active");
         indicatorBox.appendChild(dot);
       }
 
-      // 👉 preload ảnh thứ 2
-      const imgs = track.querySelectorAll("img");
-
-      if(imgs[1] && imgs[1].dataset?.src){
-        imgs[1].src = imgs[1].dataset.src;
-      }
-
-      state.set(slider, 0);
+      // reset position
       track.dataset.x = 0;
-
-      function initSlider(){
-        requestAnimationFrame(()=>{
-          new SliderEngine(slider);
-          update(slider);
-        });
-      }
-
-      initSlider();
     }
 
-    tryLoad();
+    /* ===========================
+       INIT SLIDER
+    ============================ */
+    function initSlider(){
+
+      requestAnimationFrame(()=>{
+
+        // tránh bind lại nhiều lần
+        if(!slider.dataset.init){
+
+  if(typeof window.SliderEngine === "function"){
+    window.SliderEngine(slider);
+  }else{
+    console.warn("SliderEngine not found");
+  }
+
+  slider.dataset.init = "1";
+}
+
+        update?.(slider);
+
+        // 👉 preload ảnh gần (lazy load thông minh)
+        const imgs = track.querySelectorAll("img");
+
+        const preload = (index)=>{
+          const targets = [
+            imgs[index],
+            imgs[index+1],
+            imgs[index-1],
+            imgs[index+2],
+            imgs[index-2]
+          ];
+
+          targets.forEach(img=>{
+            if(img && img.dataset?.src && !img.src){
+              img.src = img.dataset.src;
+              img.dataset.loaded = "1";
+            }
+          });
+        };
+
+        preload(0);
+
+      });
+
+    }
+
+    // run
+    build();
+    initSlider();
+
   }
 
 };

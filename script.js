@@ -1,6 +1,5 @@
 import { WheelEngine } from "./enginesys/wheelengine.js";
 import { GalleryEngine } from "./enginesys/galleryengine.js";
-import { generateQRCode } from "./enginesys/qrgenerate.js";
 let shopData = []
 let shopGroups = []
 window.addEventListener("DOMContentLoaded", async()=>{
@@ -12,12 +11,9 @@ window.addEventListener("DOMContentLoaded", async()=>{
 =========================== */
 
 const phone = document.getElementById("phone");
-const qrPopup = document.getElementById("qrPopup");
 
 const zoom = document.getElementById("qrZoom");
 const zoomImg = document.getElementById("qrZoomImg");
-
-const VIEWER_UNLOCK_CODE = "093777";
 
 const sliderState = new Map();
 
@@ -26,10 +22,6 @@ let achievementWheel;
 let shopWheel;
 
 let activePopup=null;
-
-let sessionTimer=null;
-let wrongAttempts=0;
-
 
 /* ===========================
    SCALE CARD
@@ -44,8 +36,9 @@ function scaleCard(){
 }
 
 scaleCard();
-phone.classList.add("loaded");
-
+if(phone){
+  phone.classList.add("loaded");
+}
 window.addEventListener(
   "resize",
   ()=>requestAnimationFrame(scaleCard)
@@ -87,7 +80,9 @@ if(window.DeviceOrientationEvent){
     const x = e.gamma / 40;
     const y = e.beta / 40;
 
+    if(phone){
     phone.style.rotate = `${-y}deg ${x}deg`;
+    }
 
   });
 
@@ -124,15 +119,29 @@ function initQRWheel(){
 
     onChange:(index)=>{
 
-      document
-      .querySelectorAll("#qrPopup .qr-panel")
-      .forEach((p,i)=>{
+  document
+  .querySelectorAll("#qrPopup .qr-panel")
+  .forEach((p,i)=>{
+    p.classList.toggle("active", i===index);
+  });
 
-        p.classList.toggle("active", i===index);
+  const group = window.qrGroups?.[index];
+  if(!group) return;
 
-      });
+  const sliders = document.querySelectorAll("#qrPopup .qr-slider");
 
-    }
+  sliders.forEach(slider=>{
+    GalleryEngine.load({
+      slider,
+      path: group.path,
+      ext: group.ext,
+      max: group.max,
+      update: updateSLD,
+      SliderEngine
+    });
+  });
+
+}
 
   });
 
@@ -151,17 +160,32 @@ function initAchievementWheel(){
 
     radius:120,
 
-    onChange:(index)=>{
+   onChange:(index)=>{
 
-      document
-      .querySelectorAll("#achievementPopup .achievement-panel")
-      .forEach((p,i)=>{
+  document
+  .querySelectorAll("#achievementPopup .achievement-panel")
+  .forEach((p,i)=>{
+    p.classList.toggle("active", i===index);
+  });
 
-        p.classList.toggle("active", i===index);
+  // 🔥 LOAD ĐÚNG GROUP THEO INDEX
+  const group = window.achievementGroups?.[index];
+  if(!group) return;
 
-      });
+  const sliders = document.querySelectorAll("#achievementPopup .achievement-slider");
 
-    }
+  sliders.forEach(slider=>{
+    GalleryEngine.load({
+      slider,
+      path: group.path,
+      ext: group.ext,
+      max: group.max,
+      update: updateSLD,
+      SliderEngine
+    });
+  });
+
+}
 
   });
 
@@ -172,7 +196,7 @@ function initAchievementWheel(){
 =========================== */
 
 function SliderEngine(slider){
-
+window.SliderEngine = SliderEngine;
   if(slider.dataset.bound) return;
   slider.dataset.bound = "1";
   
@@ -191,8 +215,8 @@ function SliderEngine(slider){
    dots = slider.querySelectorAll(".shop-indicators span");
    }
 
-  const STEP = (track.children[0]?.getBoundingClientRect().width || 150) + 14;
-  let startX = 0;
+  const firstItem = track.children[0];
+  const STEP = (firstItem?.offsetWidth || 150) + 14;  let startX = 0;
   let baseX = 0;
   let dragging = false;
 
@@ -217,11 +241,12 @@ function SliderEngine(slider){
     const current = imgs[index];
     const next = imgs[index + 1];
     const prev = imgs[index - 1];
+    const next2 = imgs[index + 2]; // 👈 preload xa hơn
+    const prev2 = imgs[index - 2];
 
-    [current, next, prev].forEach(img=>{
+    [current, next, prev, next2, prev2].forEach(img=>{
       if(img && img.dataset?.src && !img.src){
          img.src = img.dataset.src;
-         img.dataset.loaded = "1";
     }
     });
     
@@ -332,25 +357,7 @@ function updateSLD(slider){
   dots.forEach(d=>d.classList.remove("active"));
   if(dots[index]) dots[index].classList.add("active");
 }
-   
-function preloadFirstTwo(selector){
-
-  const sliders = document.querySelectorAll(selector);
-
-  sliders.forEach(slider=>{
-    const imgs = slider.querySelectorAll("img");
-
-    [imgs[0], imgs[1]].forEach(img=>{
-      if(img && img.dataset?.src && !img.src){
-        img.src = img.dataset.src;
-        img.dataset.loaded = "1";
-      }
-    });
-
-  });
-
-}
-
+  
   
 /* ===========================
    GLOBAL IMAGE ZOOM
@@ -389,7 +396,12 @@ async function loadProductData(){
 
    shopData = data.products || []
    shopGroups = data.groups || []
-   
+
+   window.qrGroups = data.qr?.groups || []
+   window.achievementGroups = data.achievement?.groups || []
+
+   console.log("QR GROUPS:", window.qrGroups);
+   console.log("ACH GROUPS:", window.achievementGroups); 
    console.log("Products loaded:", shopData)
 
   }catch(err){
@@ -778,7 +790,25 @@ document
 .getElementById("copyCartOrder")
 ?.addEventListener("click",()=>{
 
-let text="/order TatameLanding; ";
+const phone = document.getElementById("cartPhone")?.value.trim();
+
+// ❗ bắt nhập SĐT
+if(!phone){
+  alert("Vui lòng nhập số điện thoại để ghi chú đơn hàng");
+  return;
+}
+
+// ❗ validate nhẹ
+if(!/^0\d{9}$/.test(phone)){
+  alert("SĐT di động không hợp lệ - không đủ 10 số !");
+  return;
+}
+
+// 👉 lưu lại
+localStorage.setItem("user_phone", phone);
+
+// 👉 THAY TatameLanding = phone
+let text = `/order ${phone}; `;
 
 const today = new Date();
 
@@ -790,27 +820,28 @@ today.getFullYear();
 text += date + "; ";
 
 if(Object.keys(cart).length===0){
-
-alert("Your cart is empty.");
-return;
-
+  alert("Your cart is empty.");
+  return;
 }
 
 Object.keys(cart).forEach(id=>{
 
-const product = shopData.find(p=>p.id===id);
-const name = product ? product.name : id;
+  const product = shopData.find(p=>p.id===id);
+  const name = product ? product.name : id;
 
-const qty = String(cart[id]).padStart(2,"0");
+  const qty = String(cart[id]).padStart(2,"0");
 
-text += `${qty} ${name}; `;
+  text += `${qty} ${name}; `;
 
 });
 
 navigator.clipboard.writeText(text);
 
-alert("Order copied. Paste into chat.");
-
+alert(
+  "Đơn hàng đã được chuyển đổi thành tin nhắn.\n" +
+  "Hãy mở CHAT (Zalo, Viber, SMS) để dán đơn hàng gửi đến Phương 0937771981.\n\n" +
+  "(Order copied. Paste into chat.)"
+);
 });
    
 // REMOVE ITEM   
@@ -905,63 +936,33 @@ document
 
 });
    
-
 document
 .getElementById("btn-qrcode")
 ?.addEventListener("click",()=>{
 
   if(!qrWheel) initQRWheel();
-  qrWheel.go(0);
 
-  document
-  .querySelectorAll("#qrPopup .qr-slider")
-  .forEach(slider=>{
-    GalleryEngine.load({
-      slider,
-      state: sliderState,
-      update: updateSLD,
-      SliderEngine,
-      path: "assets/qr/",
-      ext: "png",
-      max: 10
-    });
-  });
+  openPopup("qrPopup"); // 👉 mở trước
 
   requestAnimationFrame(()=>{
-  preloadFirstTwo("#qrPopup .qr-slider");
+    qrWheel.go(0); // 👉 chạy sau khi DOM ready
   });
-  
-  openPopup("qrPopup");
+
   window.loadDynamicQR?.();
 });
-
 
 document
 .getElementById("btn-achievement")
 ?.addEventListener("click",()=>{
 
   if(!achievementWheel) initAchievementWheel();
-  achievementWheel.go(0);
 
-  document
-  .querySelectorAll("#achievementPopup .achievement-slider")
-  .forEach(slider=>{
-    GalleryEngine.load({
-      slider,
-      state: sliderState,
-      update: updateSLD,
-      SliderEngine,
-      path: "assets/achievement/",
-      ext: "jpg",
-      max: 12
-    });
-  });
+  openPopup("achievementPopup"); // 👉 mở trước
 
   requestAnimationFrame(()=>{
-  preloadFirstTwo("#achievementPopup .achievement-slider");
+    achievementWheel.go(0); // 👉 trigger đúng timing
   });
-  
-  openPopup("achievementPopup");
+
 });
 
 
@@ -1005,133 +1006,15 @@ document
 ?.addEventListener("click",()=>{
 
 renderCart();
-
+const saved = localStorage.getItem("user_phone");
+if(saved){
+  const input = document.getElementById("cartPhone");
+  if(input) input.value = saved;
+}
 openPopup("cartPopup");
 
 });   
-
-   
-/* ===========================
-   SESSION TIMEOUT
-=========================== */
-
-const SESSION_TIMEOUT = 20*60*1000;
-
-function resetSessionTimer(){
-
-  if(document.body.classList.contains("session-expired")) return;
-
-  clearTimeout(sessionTimer);
-
-  sessionTimer=setTimeout(expireSession,SESSION_TIMEOUT);
-
-}
-
-["click","touchstart","keydown","scroll"]
-.forEach(evt=>{
-
-  document.addEventListener(
-    evt,
-    resetSessionTimer,
-    {passive:true}
-  );
-
-});
-
-resetSessionTimer();
-
-
-function expireSession(){
-
-  closeAllPopups();
-
-  document.body.classList.add("session-expired");
-
-  showUnlockOverlay();
-
-}
-
-
-/* ===========================
-   UNLOCK OVERLAY
-=========================== */
-
-function showUnlockOverlay(){
-
-  if(document.getElementById("unlockOverlay")) return;
-
-  wrongAttempts=0;
-
-  const overlay=document.createElement("div");
-
-  overlay.id="unlockOverlay";
-
-  overlay.innerHTML=`
-  <div class="unlock-box">
-    <h3>Session expired</h3>
-    <p>
-      Enter <b>6-digit code</b> to unlock<br>
-      or enter <b>9</b> to close
-    </p>
-    <input type="password" maxlength="6" inputmode="numeric"/>
-    <button id="unlockBtn">Unlock</button>
-    <div class="unlock-error"></div>
-  </div>
-  `;
-
-  document.body.appendChild(overlay);
-
-  const input=overlay.querySelector("input");
-  const btn=overlay.querySelector("#unlockBtn");
-  const err=overlay.querySelector(".unlock-error");
-
-  input.focus();
-
-  btn.onclick=()=>{
-
-    const value=input.value.trim();
-
-    if(value==="9"){
-      closeLandingpage();
-      return;
-    }
-
-    if(value===VIEWER_UNLOCK_CODE){
-      location.reload();
-      return;
-    }
-
-    wrongAttempts++;
-
-    err.textContent=`Invalid code (${wrongAttempts}/3)`;
-
-    input.value="";
-    input.focus();
-
-    if(wrongAttempts>=3){
-      closeLandingpage();
-    }
-
-  };
-
-}
-
-
-/* ===========================
-   CLOSE PAGE
-=========================== */
-
-function closeLandingpage(){
-
-  document.body.innerHTML=`
-  <div class="page-closed">
-    <h3>Session closed</h3>
-    <p>Please scan QR or NFC again</p>
-  </div>
-  `;
-
-}
-
+  
 /* ===========================
    UTIL
 =========================== */

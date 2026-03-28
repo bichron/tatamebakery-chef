@@ -976,7 +976,7 @@ margin-top:6px;
 }
 
 .product-price{
-font-weight:600;
+font-size:11px;
 color:var(--gold);
 }
 
@@ -1140,6 +1140,17 @@ font-weight:600;
 /* ===========================
    COPY ORDER BUTTON
 =========================== */
+
+.cart-phone{
+  padding:8px;
+}
+
+.cart-phone input{
+  width:82%;
+  padding:8px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
 
 #copyCartOrder{
 
