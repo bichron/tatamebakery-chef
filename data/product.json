@@ -109,7 +109,19 @@
     },
 
     {
-      "id":"T003",
+    "id":"T003",
+      "group":"top-picks",
+      "code":"M01A",
+      "name":"Macaron",
+      "image":"assets/shop/m01a.jpg",
+      "spec":{"color":"any not velvet"},
+      "price":"...",
+      "sold":210,
+      "stock":999999
+    },
+    
+    {
+      "id":"T004",
       "group":"top-picks",
       "code":"P01",
       "name":"Patechaud",
@@ -121,7 +133,7 @@
     },
 
     {
-      "id":"T004",
+      "id":"T005",
       "group":"top-picks",
       "code":"P02",
       "name":"Paparoti",
@@ -201,18 +213,6 @@
       "spec":{"weight":"400 gr","size":"12 cm","serve":"2-3 people"},
       "price":"...",
       "sold":890,
-      "stock":999999
-    },
-
-    {
-      "id":"D007",
-      "group":"top-picks",
-      "code":"M01A",
-      "name":"Macaron",
-      "image":"assets/shop/m01a.jpg",
-      "spec":{"color":"any not velvet"},
-      "price":"...",
-      "sold":210,
       "stock":999999
     },
 
