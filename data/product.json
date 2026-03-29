@@ -243,22 +243,22 @@
     {
       "id":"D010",
       "group":"daily-bread",
-      "code":"C02A",
-      "name":"NewYork cheese",
-      "image":"assets/shop/cake006.jpg",
-      "spec":{"weight":"200 g"},
+      "code":"C01A",
+      "name":"Cotton cheese Japan",
+      "image":"assets/shop/c01a.jpg",
+      "spec":{"weight":"15 gr"},
       "price":"...",
       "sold":890,
       "stock":999999
     },
 
     {
-      "id":"D011",
+      "id":"D012",
       "group":"daily-bread",
-      "code":"C01",
-      "name":"Cotton cheese Japan",
-      "image":"assets/shop/cake007.jpg",
-      "spec":{"weight":"15 gr"},
+      "code":"C02A",
+      "name":"NewYork cheese",
+      "image":"assets/shop/c02a.jpg",
+      "spec":{"weight":"200 g"},
       "price":"...",
       "sold":890,
       "stock":999999
