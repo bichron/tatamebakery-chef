@@ -20,7 +20,7 @@
       },
       {
         "id":"event",
-        "path":"assets/qr/event/",
+        "path":"assets/qr/personal/",
         "ext":"png",
         "max":5
       }
