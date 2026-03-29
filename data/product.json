@@ -287,18 +287,6 @@
       "sold":890,
       "stock":999999
     },
-
-    {
-      "id":"D014",
-      "group":"daily-bread",
-      "code":"M02B",
-      "name":"Mousse chanh dây Birthday",
-      "image":"assets/shop/m02b.jpg",
-      "spec":{"weight":"500 gr"},
-      "price":"...",
-      "sold":890,
-      "stock":999999
-    },
   
     {
       "id":"D015",
@@ -511,6 +499,18 @@
       "name":"Tiramisu pie 6",
       "image":"assets/shop/t02k.jpg",
       "spec":{"sz-wt.":"16cm - 500gr","sz-wt.":"20cm - 780gr" },
+      "price":"...",
+      "sold":890,
+      "stock":999999
+    },
+
+    {
+      "id":"C011",
+      "group":"daily-bread",
+      "code":"M02B",
+      "name":"Mousse chanh dây Birthday",
+      "image":"assets/shop/m02b.jpg",
+      "spec":{"weight":"500 gr"},
       "price":"...",
       "sold":890,
       "stock":999999
